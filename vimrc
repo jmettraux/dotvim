@@ -1,4 +1,8 @@
 
+"
+" my .vimrc, sorry, nothing fancy here
+"
+
 set nocompatible
 
 set shiftwidth=2
@@ -34,6 +38,7 @@ au InsertLeave * match ExtraWhiteSpace /\s\+$/
   " from http://blog.kamil.dworakowski.name/2009/09/unobtrusive-highlighting-of-trailing.html
 
 autocmd BufRead *.go set filetype=go
+autocmd BufRead *.md set filetype=mkd
 autocmd BufRead *.rad set filetype=radial
 autocmd BufRead *.radial set filetype=radial
 autocmd BufRead *.erb set filetype=eruby
