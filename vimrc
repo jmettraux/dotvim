@@ -116,7 +116,7 @@ function! <SID>DoubleSemiColon()
     buffer #
   endif
 endfunction
-map <silent> <leader> :call <SID>DoubleSemiColon()<CR>
+map <silent> <leader>; :call <SID>DoubleSemiColon()<CR>
 
 map <silent> <leader>n :n<CR>
 map <silent> <leader>c :cclose<CR>
@@ -146,6 +146,9 @@ imap <C-j> <ESC>
 map <silent> T :NERDTreeToggle<CR>
 map <silent> ff :NERDTreeToggle<CR>
 "map <silent> ff :NERDTreeFind<CR>
+
+let NERDTreeMinimalUI=1
+let NERDTreeDirArrows=0
 
 "function TreeOrBufferToggle()
 "  if exists('b:NERDTreeRoot')
