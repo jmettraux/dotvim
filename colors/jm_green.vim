@@ -91,6 +91,7 @@ if &term == 'xterm-256color'
   hi! Type cterm=None ctermfg=136 ctermbg=16
   hi! Special cterm=NONE ctermfg=196 ctermbg=16
     hi! Delimiter cterm=NONE ctermfg=196 ctermbg=16
+  hi! Todo cterm=NONE ctermfg=16 ctermbg=41
 
   " NERDTree
   "

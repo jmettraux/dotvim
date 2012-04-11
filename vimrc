@@ -71,14 +71,27 @@ colorscheme jm_green
 " from http://vimcasts.org/episodes/creating-colorschemes-for-vim/
 "
 function! <SID>SynStack()
+
   if !exists("*synstack")
     return
   endif
+
   for x in map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
-    exe "hi " . x
+    redi => out
+    silent exe "hi" x
+    redi END
+    exe "hi" x
+    let link = matchstr(out, ' links to \zs.*\ze$')
+    if !empty(link)
+      exe "hi" link
+    end
   endfor
+
+  echo '.'
+
 endfunc
-nmap ;s :call <SID>SynStack()<CR>
+
+nmap <silent> ;s :call <SID>SynStack()<CR>
 
 " windows
 "
