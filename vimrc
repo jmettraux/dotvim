@@ -12,6 +12,11 @@ set softtabstop=4
 set showmatch
 set vb
 "set nu
+set showcmd
+"set colorcolumn=80 " vim 7.3
+
+let mapleader=';'
+
 syntax on
 
 set ruler
@@ -74,13 +79,6 @@ function! <SID>SynStack()
   endfor
 endfunc
 nmap ;s :call <SID>SynStack()<CR>
-
-"set colorcolumn=80 " vim 7.3
-
-" my leader is ;
-"
-set showcmd
-let mapleader=';'
 
 " windows
 "
@@ -166,17 +164,15 @@ let NERDTreeDirArrows=0
 "map <silent> ;; :call TreeOrBufferToggle()<CR>
 
 " pgup / pgdown
+"
 map <silent> <space> <C-d>
 "map <silent> , <C-u>
 
-" alternate buffer
-"map <silent> <space> :e #<CR>
-
 " search
+"
 set incsearch
 set hlsearch
 map <silent> _ :nohlsearch<CR>
-"nohlsearch
 
 function! <SID>Grep(regex)
   execute "vimgrep /".a:regex."/j ./**/*.rb"
@@ -199,10 +195,6 @@ map <silent> <C-p> :r ! pbpaste<CR>
 " Copy
 "
 command! -nargs=0 C :silent w ! pbcopy
-
-" Ctrl-n
-"
-"map <silent> <C-n> :set nu<CR>
 
 map <silent> <leader>/ :w<CR>:e ~/scratch.txt<CR>
 
