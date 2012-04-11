@@ -57,8 +57,8 @@ filetype on
 
 " temp
 "
-"map q :%s/    /  /g<ENTER>
-"map t :%s/ *$//<ENTER>
+"nnoremap q :%s/    /  /g<ENTER>
+"nnoremap t :%s/ *$//<ENTER>
 command! -nargs=0 Clean :silent %s/ *$// | nohlsearch
 
 " colors
@@ -91,33 +91,34 @@ function! <SID>SynStack()
 
 endfunc
 
-nmap <silent> ;s :call <SID>SynStack()<CR>
+nnoremap <silent> ;s :call <SID>SynStack()<CR>
 
 " windows
 "
 " horizontal
-map <leader>h <C-w>h
-map <leader>l <C-w>l
+nnoremap <leader>h <C-w>h
+nnoremap <leader>l <C-w>l
 "
 " vertical
-map <leader>j <C-w>j
-map <leader>k <C-w>k
+nnoremap <leader>j <C-w>j
+nnoremap <leader>k <C-w>k
 "
 " split
-map \ :split<CR>
-map @ <C-w>+
-map - <C-w>-
+nnoremap \ :split<CR>
+nnoremap @ <C-w>+
+nnoremap - <C-w>-
 
 " :q and :w
 " there is also ZZ for :q
-map <leader>q :q<CR>
-map <leader>w :w<CR>
+nnoremap <leader>q :q<CR>
+nnoremap <leader>w :w<CR>
 
 " home / end
-"map ;k gg
-"map ;j G
+"nnoremap <leader>k gg
+"nnoremap <leader>j G
 
-"map ;; :e #<CR>
+" replaced by DoubleSemiColon
+"nnoremap <leader>; :e #<CR>
 
 function! <SID>DoubleSemiColon()
   if exists('b:NERDTreeRoot') && winnr() == 1
@@ -127,36 +128,36 @@ function! <SID>DoubleSemiColon()
     buffer #
   endif
 endfunction
-map <silent> <leader>; :call <SID>DoubleSemiColon()<CR>
+nnoremap <silent> <leader>; :call <SID>DoubleSemiColon()<CR>
 
-map <silent> <leader>n :n<CR>
-map <silent> <leader>c :cclose<CR>
+nnoremap <silent> <leader>n :n<CR>
+nnoremap <silent> <leader>c :cclose<CR>
 
-map <silent> <leader>b :buffers<CR>
-"map <silent> <leader>b :buffers<CR>:buffer<Space>
-map <silent> <leader>1 :e #1<CR>
-map <silent> <leader>2 :e #2<CR>
-map <silent> <leader>3 :e #3<CR>
-map <silent> <leader>4 :e #4<CR>
-map <silent> <leader>5 :e #5<CR>
-map <silent> <leader>6 :e #6<CR>
-map <silent> <leader>7 :e #7<CR>
-map <silent> <leader>8 :e #8<CR>
-map <silent> <leader>9 :e #9<CR>
-map <silent> <leader>a 0w
+nnoremap <silent> <leader>b :buffers<CR>
+nnore"map <silent> <leader>b :buffers<CR>:buffer<Space>
+nnoremap <silent> <leader>1 :e #1<CR>
+nnoremap <silent> <leader>2 :e #2<CR>
+nnoremap <silent> <leader>3 :e #3<CR>
+nnoremap <silent> <leader>4 :e #4<CR>
+nnoremap <silent> <leader>5 :e #5<CR>
+nnoremap <silent> <leader>6 :e #6<CR>
+nnoremap <silent> <leader>7 :e #7<CR>
+nnoremap <silent> <leader>8 :e #8<CR>
+nnoremap <silent> <leader>9 :e #9<CR>
+nnoremap <silent> <leader>a 0w
 
-imap <C-j> <ESC>
+inoremap <C-j> <ESC>
 
 " nerd tree
 "
 " alias vit='vim -c ":NERDTreeToggle"'
 "
-"map <silent> <C-n> :NERDTreeToggle<CR>
-"map <silent> <Nul> :NERDTreeToggle<CR>
+"nnoremap <silent> <C-n> :NERDTreeToggle<CR>
+"nnoremap <silent> <Nul> :NERDTreeToggle<CR>
   "<Nul> is control-space
-map <silent> T :NERDTreeToggle<CR>
-map <silent> ff :NERDTreeToggle<CR>
-"map <silent> ff :NERDTreeFind<CR>
+nnoremap <silent> T :NERDTreeToggle<CR>
+nnoremap <silent> ff :NERDTreeToggle<CR>
+"nnoremap <silent> ff :NERDTreeFind<CR>
 
 let NERDTreeMinimalUI=1
 let NERDTreeDirArrows=0
@@ -173,19 +174,19 @@ let NERDTreeDirArrows=0
 "    endif
 "  endif
 "endfunction
-"map <silent> <space> :call TreeOrBufferToggle()<CR>
-"map <silent> ;; :call TreeOrBufferToggle()<CR>
+"nnoremap <silent> <space> :call TreeOrBufferToggle()<CR>
+"nnoremap <silent> ;; :call TreeOrBufferToggle()<CR>
 
 " pgup / pgdown
 "
-map <silent> <space> <C-d>
-"map <silent> , <C-u>
+nnoremap <silent> <space> <C-d>
+"nnoremap <silent> , <C-u>
 
 " search
 "
 set incsearch
 set hlsearch
-map <silent> _ :nohlsearch<CR>
+nnoremap <silent> _ :nohlsearch<CR>
 
 function! <SID>Grep(regex)
   execute "vimgrep /".a:regex."/j ./**/*.rb"
@@ -203,13 +204,13 @@ command! -nargs=1 F :call <SID>Find('<args>')
 
 " Ctrl-Paste
 "
-map <silent> <C-p> :r ! pbpaste<CR>
+nnoremap <silent> <C-p> :r ! pbpaste<CR>
 
 " Copy
 "
 command! -nargs=0 C :silent w ! pbcopy
 
-map <silent> <leader>/ :w<CR>:e ~/scratch.txt<CR>
+nnoremap <silent> <leader>/ :w<CR>:e ~/scratch.txt<CR>
 
 " Status bar
 "
