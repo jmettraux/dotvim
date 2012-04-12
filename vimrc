@@ -146,6 +146,8 @@ nnoremap <silent> <leader>8 :e #8<CR>
 nnoremap <silent> <leader>9 :e #9<CR>
 nnoremap <silent> <leader>a 0w
 
+nnoremap <silent> <leader>u :setlocal number!<CR>
+
 inoremap <C-j> <ESC>
 
 " nerd tree
