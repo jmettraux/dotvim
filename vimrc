@@ -2,7 +2,6 @@
 "
 " my .vimrc, sorry, nothing fancy here
 "
-
 set nocompatible
 
 set shiftwidth=2
@@ -31,6 +30,9 @@ set fenc=utf-8
 
 set smartindent
 set smarttab
+
+" disabling the pulldown autocomplete thinggy
+inoremap <C-n> <nop>
 
 "let ruby_space_errors=1
 "let ruby_fold=1
