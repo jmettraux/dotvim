@@ -228,3 +228,10 @@ set statusline+=\ c%c%V " column
 set statusline+=\ %l/%L " line
 set statusline+=\ %P " file position
 
+" Some Meta
+"
+nnoremap <leader>ev :e $MYVIMRC<ENTER>
+nnoremap <leader>sv :source $MYVIMRC<ENTER>
+nnoremap <leader>ec :e ~/.vim/colors/jm_green.vim<ENTER>
+nnoremap <leader>sc :colorscheme jm_green<ENTER>
+
