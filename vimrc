@@ -42,16 +42,16 @@ au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 au InsertLeave * match ExtraWhiteSpace /\s\+$/
   " from http://blog.kamil.dworakowski.name/2009/09/unobtrusive-highlighting-of-trailing.html
 
-autocmd BufRead *.go set filetype=go
-autocmd BufRead *.md set filetype=mkd
-autocmd BufRead *.rad set filetype=radial
-autocmd BufRead *.radial set filetype=radial
-autocmd BufRead *.erb set filetype=eruby
-autocmd BufRead *.ru set filetype=ruby
-autocmd BufRead *.rake set filetype=ruby
-autocmd BufRead *.rconf set filetype=ruby
+au BufRead *.go set filetype=go
+au BufRead *.md set filetype=mkd
+au BufRead *.rad set filetype=radial
+au BufRead *.radial set filetype=radial
+au BufRead *.erb set filetype=eruby
+au BufRead *.ru set filetype=ruby
+au BufRead *.rake set filetype=ruby
+au BufRead *.rconf set filetype=ruby
 
-autocmd FileType ruby set shiftwidth=2
+au FileType ruby set shiftwidth=2
 "filetype plugin indent on
 filetype on
 
