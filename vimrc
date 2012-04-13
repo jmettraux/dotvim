@@ -34,16 +34,6 @@ set smarttab
 " disabling the pulldown autocomplete thinggy
 inoremap <C-n> <nop>
 
-"let ruby_space_errors=1
-"let ruby_fold=1
-"
-highlight ExtraWhitespace ctermbg=red guibg=red
-au ColorScheme * highlight ExtraWhitespace guibg=red
-au BufEnter * match ExtraWhitespace /\s\+$/
-au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-au InsertLeave * match ExtraWhiteSpace /\s\+$/
-  " from http://blog.kamil.dworakowski.name/2009/09/unobtrusive-highlighting-of-trailing.html
-
 au BufRead *.go set filetype=go
 au BufRead *.md set filetype=mkd
 au BufRead *.rad set filetype=radial
@@ -67,6 +57,18 @@ command! -nargs=0 Clean :silent %s/ *$// | nohlsearch
 "
 colorscheme jm_green
 "colorscheme jm_blue
+
+" trailing white space highlight
+"
+"let ruby_space_errors=1
+"let ruby_fold=1
+"
+highlight ExtraWhitespace ctermbg=red guibg=red
+au ColorScheme * highlight ExtraWhitespace guibg=red
+au BufEnter * match ExtraWhitespace /\s\+$/
+au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+au InsertLeave * match ExtraWhiteSpace /\s\+$/
+  " from http://blog.kamil.dworakowski.name/2009/09/unobtrusive-highlighting-of-trailing.html
 
 " Show syntax highlighting groups for word under cursor
 "
@@ -193,7 +195,7 @@ set hlsearch
 nnoremap <silent> _ :nohlsearch<CR>
 
 function! <SID>Grep(regex)
-  execute "vimgrep /".a:regex."/j ./**/*.rb"
+  exe 'vimgrep /' a:regex '/j ./**/*.rb'
   copen 20
 endfunction
 command! -nargs=1 G :call <SID>Grep('<args>')
@@ -202,7 +204,7 @@ command! -nargs=1 G :call <SID>Grep('<args>')
 "
 function! <SID>Find(fragment)
   let l:result = system("find . -name '*".a:fragment."*' 2> /dev/null | head -1")
-  execute "e ".l:result
+  exe 'e ' l:result
 endfunction
 command! -nargs=1 F :call <SID>Find('<args>')
 

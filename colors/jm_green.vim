@@ -104,9 +104,13 @@ if &term == 'xterm-256color'
   hi! NERDTreeClosable cterm=NONE ctermfg=136 ctermbg=16
   hi! NERDTreeExecFile cterm=NONE ctermfg=136 ctermbg=16
 
-  " Quckfix
+  " Quickfix
   "
   hi! qfLineNr cterm=NONE ctermfg=136 ctermbg=16
+
+  " Search
+  "
+  hi! Search cterm=NONE ctermfg=29 ctermbg=255
 
 else
 
