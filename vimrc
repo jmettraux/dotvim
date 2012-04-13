@@ -241,3 +241,9 @@ nnoremap <leader>sv :source $MYVIMRC<ENTER>
 nnoremap <leader>ec :e ~/.vim/colors/jm_green.vim<ENTER>
 nnoremap <leader>sc :colorscheme jm_green<ENTER>
 
+" Git
+"
+nnoremap <leader>gu :!git status<cr>
+nnoremap <leader>gl :!git log --graph --oneline --abbrev-commit --decorate<cr>
+nnoremap <leader>ti :!tig<cr>
+
