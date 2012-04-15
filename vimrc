@@ -55,7 +55,7 @@ filetype on
 "
 "nnoremap q :%s/    /  /g<ENTER>
 "nnoremap t :%s/ *$//<ENTER>
-command! -nargs=0 Clean :silent %s/ *$// | nohlsearch
+command! -nargs=0 Clean :silent %s/\v\s*$// | nohlsearch
 
 " colors
 "
@@ -139,10 +139,10 @@ endfunction
 nnoremap <silent> <leader>; :call <SID>DoubleSemiColon()<CR>
 
 nnoremap <silent> <leader>n :n<CR>
-nnoremap <silent> <leader>c :cclose<CR>
+
+nnoremap <silent> <leader>c :only!<CR>
 
 nnoremap <silent> <leader>b :buffers<CR>
-nnore"map <silent> <leader>b :buffers<CR>:buffer<Space>
 nnoremap <silent> <leader>1 :e #1<CR>
 nnoremap <silent> <leader>2 :e #2<CR>
 nnoremap <silent> <leader>3 :e #3<CR>
@@ -199,7 +199,7 @@ set hlsearch
 nnoremap <silent> _ :nohlsearch<CR>
 
 function! <SID>Grep(regex)
-  exe 'vimgrep /' a:regex '/j ./**/*.rb'
+  exe 'vimgrep /'.a:regex.'/j ./**/*.rb'
   copen 20
 endfunction
 command! -nargs=1 G :call <SID>Grep('<args>')
@@ -240,14 +240,15 @@ set statusline+=\ %P " file position
 
 " Some Meta
 "
-nnoremap <leader>ev :e $MYVIMRC<ENTER>
-nnoremap <leader>sv :source $MYVIMRC<ENTER>
-nnoremap <leader>ec :e ~/.vim/colors/jm_green.vim<ENTER>
-nnoremap <leader>sc :colorscheme jm_green<ENTER>
+nnoremap <leader>ev :e $MYVIMRC<CR>
+nnoremap <leader>sv :source $MYVIMRC<CR>
+nnoremap <leader>ec :e ~/.vim/colors/jm_green.vim<CR>
+nnoremap <leader>sc :colorscheme jm_green<CR>
+nnoremap <leader>gd :! cd ~/.vim && git diff<CR>
 
 " Git
 "
-nnoremap <leader>gu :!git status<cr>
-nnoremap <leader>gl :!git log --graph --oneline --abbrev-commit --decorate<cr>
-nnoremap <leader>ti :!tig<cr>
+nnoremap <leader>gu :!git status<CR>
+nnoremap <leader>gl :!git log --graph --oneline --abbrev-commit --decorate<CR>
+nnoremap <leader>ti :!tig<CR>
 
