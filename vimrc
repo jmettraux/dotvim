@@ -31,6 +31,10 @@ set fenc=utf-8
 set smartindent
 set smarttab
 
+set history=147
+set cmdwinheight=20
+  " q: q/ q?
+
 " disabling the pulldown autocomplete thinggy
 inoremap <C-n> <nop>
 
