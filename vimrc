@@ -252,3 +252,8 @@ nnoremap <leader>gu :!git status<CR>
 nnoremap <leader>gl :!git log --graph --oneline --abbrev-commit --decorate<CR>
 nnoremap <leader>ti :!tig<CR>
 
+" exrc
+"
+set exrc
+set secure
+
