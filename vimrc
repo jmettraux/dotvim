@@ -39,13 +39,18 @@ set cmdwinheight=20
 inoremap <C-n> <nop>
 
 au BufRead *.go set filetype=go
-au BufRead *.md set filetype=mkd
+"au BufRead *.md set filetype=mkd
 au BufRead *.rad set filetype=radial
 au BufRead *.radial set filetype=radial
 au BufRead *.erb set filetype=eruby
 au BufRead *.ru set filetype=ruby
 au BufRead *.rake set filetype=ruby
 au BufRead *.rconf set filetype=ruby
+
+au BufNewFile,BufRead *.liquid set ft=liquid
+au BufNewFile,BufRead */_layouts/*.html set ft=liquid
+au BufNewFile,BufRead *.html,*.xml,*.md,*.markdown,*.textile
+  \ if getline(1) == '---' | set ft=liquid | endif
 
 au FileType ruby set shiftwidth=2
 "filetype plugin indent on
