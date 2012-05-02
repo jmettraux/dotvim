@@ -72,26 +72,26 @@ if &term == 'xterm-256color'
   set t_Co=256
 
   " general
-  " 
-  hi! LineNr cterm=NONE ctermfg=239 ctermbg=235
+  "
+  hi! LineNr cterm=NONE ctermfg=239 ctermbg=235 " #606060 #323232
   hi! StatusLine cterm=NONE ctermfg=245 ctermbg=235
   hi! StatusLineNC cterm=NONE ctermfg=245 ctermbg=235
 
   " syntax highlight
-  " 
-  hi! Normal cterm=NONE ctermfg=244 ctermbg=16
-  hi! Comment cterm=bold ctermfg=238 ctermbg=16
-  hi! Constant cterm=bold ctermfg=179 ctermbg=16
-    hi! String cterm=bold ctermfg=191 ctermbg=16
-  hi! Identifier cterm=NONE ctermfg=71 ctermbg=16
-    hi! Function cterm=NONE ctermfg=83 ctermbg=16
-  hi! Statement cterm=NONE ctermfg=41 ctermbg=16
-    hi! Keyword cterm=NONE ctermfg=76 ctermbg=16
-  hi! PreProc cterm=NONE ctermfg=29 ctermbg=16
-  hi! Type cterm=None ctermfg=136 ctermbg=16
-  hi! Special cterm=NONE ctermfg=196 ctermbg=16
+  "
+  hi! Normal cterm=NONE ctermfg=244 ctermbg=16 " #929292 black
+  hi! Comment cterm=bold ctermfg=238 ctermbg=16 " #565656
+  hi! Constant cterm=bold ctermfg=179 ctermbg=16 " #DEBA76
+    hi! String cterm=bold ctermfg=191 ctermbg=16 " #DEF979
+  hi! Identifier cterm=NONE ctermfg=71 ctermbg=16 " #73B874
+    hi! Function cterm=NONE ctermfg=83 ctermbg=16 " #75F877
+  hi! Statement cterm=NONE ctermfg=41 ctermbg=16 " #18D875
+    hi! Keyword cterm=NONE ctermfg=76 ctermbg=16 " #74D822
+  hi! PreProc cterm=NONE ctermfg=29 ctermbg=16 " #0D9672
+  hi! Type cterm=None ctermfg=136 ctermbg=16 " #BC961B
+  hi! Special cterm=NONE ctermfg=196 ctermbg=16 " #FD2517
     hi! Delimiter cterm=NONE ctermfg=196 ctermbg=16
-  hi! Todo cterm=NONE ctermfg=16 ctermbg=41
+  hi! Todo cterm=NONE ctermfg=16 ctermbg=41 " black #18D875
 
   " NERDTree
   "
