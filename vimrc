@@ -170,7 +170,6 @@ inoremap <C-j> <ESC>
 "nnoremap <silent> <C-n> :NERDTreeToggle<CR>
 "nnoremap <silent> <Nul> :NERDTreeToggle<CR>
   "<Nul> is control-space
-nnoremap <silent> T :NERDTreeToggle<CR>
 nnoremap <silent> ff :NERDTreeToggle<CR>
 "nnoremap <silent> ff :NERDTreeFind<CR>
 

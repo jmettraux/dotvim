@@ -88,7 +88,7 @@ if &term == 'xterm-256color'
   hi! Statement cterm=NONE ctermfg=41 ctermbg=16 " #18D875
     hi! Keyword cterm=NONE ctermfg=76 ctermbg=16 " #74D822
   hi! PreProc cterm=NONE ctermfg=29 ctermbg=16 " #0D9672
-  hi! Type cterm=None ctermfg=136 ctermbg=16 " #BC961B
+  hi! Type cterm=NONE ctermfg=136 ctermbg=16 " #BC961B
   hi! Special cterm=NONE ctermfg=196 ctermbg=16 " #FD2517
     hi! Delimiter cterm=NONE ctermfg=196 ctermbg=16
   hi! Todo cterm=NONE ctermfg=16 ctermbg=41 " black #18D875
