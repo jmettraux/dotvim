@@ -52,6 +52,8 @@ au BufNewFile,BufRead */_layouts/*.html set ft=liquid
 au BufNewFile,BufRead *.html,*.xml,*.md,*.markdown,*.textile
   \ if getline(1) == '---' | set ft=liquid | endif
 
+au BufNewFile,BufRead Gemfile setlocal ft=ruby
+
 au FileType ruby set shiftwidth=2
 "filetype plugin indent on
 filetype on
@@ -224,7 +226,7 @@ nnoremap <silent> <C-p> :r ! pbpaste<CR>
 "
 command! -nargs=0 C :silent w ! pbcopy
 
-nnoremap <silent> <leader>/ :w<CR>:e ~/scratch.txt<CR>
+nnoremap <silent> <leader>tt :w<CR>:e ~/scratch.txt<CR>
 
 " Status bar
 "
