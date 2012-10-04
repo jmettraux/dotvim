@@ -120,7 +120,7 @@ nnoremap <leader>j <C-w>j
 nnoremap <leader>k <C-w>k
 "
 " split
-nnoremap \ :split<CR>
+"nnoremap \ :split<CR>
 nnoremap @ <C-w>+
 nnoremap - <C-w>-
 
