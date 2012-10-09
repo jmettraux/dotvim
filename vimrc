@@ -39,7 +39,7 @@ set cmdwinheight=20
 inoremap <C-n> <nop>
 
 au BufRead *.go set filetype=go
-"au BufRead *.md set filetype=mkd
+au BufRead *.md set filetype=mkd
 au BufRead *.rad set filetype=radial
 au BufRead *.radial set filetype=radial
 au BufRead *.erb set filetype=eruby
@@ -107,6 +107,7 @@ function! <SID>SynStack()
 endfunc
 
 nnoremap <silent> ;s :call <SID>SynStack()<CR>
+
 
 " windows
 "
@@ -195,7 +196,7 @@ let NERDTreeDirArrows=0
 
 " pgup / pgdown
 "
-nnoremap <silent> <space> <C-d>
+"nnoremap <silent> <space> <C-d>
 "nnoremap <silent> , <C-u>
 
 " search
