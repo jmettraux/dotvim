@@ -59,21 +59,25 @@ syn region mkdLinkTitle matchgroup=mkdDelimiter start=+(+     end=+)+  contained
 
 "define Markdown groups
 syn match  mkdLineContinue ".$" contained
-syn match  mkdRule      /^\s*\*\s\{0,1}\*\s\{0,1}\*$/
-syn match  mkdRule      /^\s*-\s\{0,1}-\s\{0,1}-$/
-syn match  mkdRule      /^\s*_\s\{0,1}_\s\{0,1}_$/
-syn match  mkdRule      /^\s*-\{3,}$/
-syn match  mkdRule      /^\s*\*\{3,5}$/
-syn match  mkdListItem  "^\s*[-*+]\s\+"
-syn match  mkdListItem  "^\s*\d\+\.\s\+"
-syn match  mkdCode      /^\s*\n\(\(\s\{4,}[^ ]\|\t\+[^\t]\).*\n\)\+/
-syn match  mkdLineBreak /  \+$/
-syn region mkdCode      start=/\\\@<!`/                   end=/\\\@<!`/
-syn region mkdCode      start=/\s*``[^`]*/          end=/[^`]*``\s*/
-syn region mkdCode      start=/^```\w*\s*$/          end=/^```\s*$/
-syn region mkdBlockquote start=/^\s*>/              end=/$/                 contains=mkdLineBreak,mkdLineContinue,@Spell
-syn region mkdCode      start="<pre[^>]*>"         end="</pre>"
-syn region mkdCode      start="<code[^>]*>"        end="</code>"
+syn match  mkdRule        /^\s*\*\s\{0,1}\*\s\{0,1}\*$/
+syn match  mkdRule        /^\s*-\s\{0,1}-\s\{0,1}-$/
+syn match  mkdRule        /^\s*_\s\{0,1}_\s\{0,1}_$/
+syn match  mkdRule        /^\s*-\{3,}$/
+syn match  mkdRule        /^\s*\*\{3,5}$/
+syn match  mkdListItem    "^\s*[-*+]\s\+"
+syn match  mkdListItem    "^\s*\d\+\.\s\+"
+syn match  mkdCode        /^\s*\n\(\(\s\{4,}[^ ]\|\t\+[^\t]\).*\n\)\+/
+syn match  mkdLineBreak   /  \+$/
+syn region mkdCode        start=/\\\@<!`/             end=/\\\@<!`/
+syn region mkdCode        start=/\s*``[^`]*/          end=/[^`]*``\s*/
+syn region mkdCode        start=/^```\w*\s*$/         end=/^```\s*$/
+syn region mkdBlockquote  start=/^\s*>/              end=/$/          contains=mkdLineBreak,mkdLineContinue,@Spell
+syn region mkdCode        start="<pre[^>]*>"         end="</pre>"
+syn region mkdCode        start="<code[^>]*>"        end="</code>"
+
+syn region mkdCode        start="{%\s*highlight\s.*%}" end="{%\s*endhighlight\s*%}"
+syn region liquidYamlHead start="\%^---$" end="^---\s*$"
+  " for liquid highlights
 
 "HTML headings
 syn region htmlH1       start="^\s*#"                   end="\($\|#\+\)" contains=@Spell
@@ -108,6 +112,7 @@ syn match  htmlH2       /^.\+\n-\+$/ contains=@Spell
 "highlighting for Markdown groups
 HtmlHiLink mkdString	    String
 HtmlHiLink mkdCode          String
+HtmlHiLink LiquidYamlHead   Special
 HtmlHiLink mkdBlockquote    Comment
 HtmlHiLink mkdLineContinue  Comment
 HtmlHiLink mkdListItem      Identifier
