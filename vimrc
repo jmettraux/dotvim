@@ -206,6 +206,7 @@ let NERDTreeDirArrows=0
 set incsearch
 set hlsearch
 nnoremap <silent> _ :nohlsearch<CR>
+nnoremap <silent> \ :nohlsearch<CR>
 
 function! <SID>Grep(regex)
   exe 'vimgrep /'.a:regex.'/j ./**/*.rb'
