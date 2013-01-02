@@ -152,6 +152,8 @@ nnoremap <silent> <leader>n :n<CR>
 
 nnoremap <silent> <leader>c :only!<CR>
 
+nnoremap <silent> <leader>o :browse old<CR>
+
 nnoremap <silent> <leader>b :buffers<CR>
 nnoremap <silent> <leader>1 :e #1<CR>
 nnoremap <silent> <leader>2 :e #2<CR>
