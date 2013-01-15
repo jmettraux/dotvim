@@ -68,8 +68,8 @@ syn match  mkdListItem    "^\s*[-*+]\s\+"
 syn match  mkdListItem    "^\s*\d\+\.\s\+"
 syn match  mkdCode        /^\s*\n\(\(\s\{4,}[^ ]\|\t\+[^\t]\).*\n\)\+/
 syn match  mkdLineBreak   /  \+$/
-syn match  mkdCode        /```.+?```/
-syn region mkdCode        start=/\\\@<!`/      end=/\\\@<!`/
+syn region  mkdCode        start=/^```/ end=/^```$/
+"syn region mkdCode        start=/\\\@<!`/      end=/\\\@<!`/
 "syn region mkdCode        start=/\s*``[^`]*/   end=/[^`]*``\s*/
 "syn region mkdCode        start=/^```\w*\s*$/  end=/^```\s*$/
 syn region mkdBlockquote  start=/^\s*>/        end=/$/  contains=mkdLineBreak,mkdLineContinue,@Spell
