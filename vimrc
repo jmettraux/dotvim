@@ -168,6 +168,11 @@ nnoremap <silent> <leader>a 0w
 
 nnoremap <silent> <leader>u :setlocal number!<CR>
 
+nnoremap <silent> <leader>m ma
+nnoremap <silent> <leader>g g'a
+nnoremap <silent> <leader>y y'a
+"nnoremap <silent> <leader>d d'a
+
 inoremap <C-j> <ESC>
 
 " nerd tree
