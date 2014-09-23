@@ -56,6 +56,12 @@ au BufNewFile,BufRead *.html,*.xml,*.textile
 
 au BufNewFile,BufRead Gemfile setlocal ft=ruby
 
+au FileType java set shiftwidth=4
+au FileType java set autoindent
+au FileType java set noexpandtab
+au FileType java set tabstop=4
+au FileType java set shiftwidth=4
+
 au FileType ruby set shiftwidth=2
 "filetype plugin indent on
 filetype on
