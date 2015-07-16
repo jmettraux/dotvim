@@ -4,6 +4,9 @@
 "
 set nocompatible
 
+set modeline
+set modelines=2
+
 set shiftwidth=2
 set expandtab
 set tabstop=4
@@ -71,6 +74,7 @@ filetype on
 "nnoremap q :%s/    /  /g<ENTER>
 "nnoremap t :%s/ *$//<ENTER>
 command! -nargs=0 Clean :silent %s/\v\s*$// | nohlsearch
+command! -nargs=0 Mkd :silent :set filetype=mkd
 
 " colors
 "
@@ -171,6 +175,9 @@ nnoremap <silent> <leader>7 :e #7<CR>
 nnoremap <silent> <leader>8 :e #8<CR>
 nnoremap <silent> <leader>9 :e #9<CR>
 nnoremap <silent> <leader>a 0w
+
+nnoremap <silent> <leader>t /TODO<CR>
+" TODO: pop that search when done
 
 nnoremap <silent> <leader>u :setlocal number!<CR>
 
