@@ -160,7 +160,7 @@ nnoremap <silent> <leader>; :call <SID>DoubleSemiColon()<CR>
 
 nnoremap <silent> <leader>n :n<CR>
 
-nnoremap <silent> <leader>c :only!<CR>
+"nnoremap <silent> <leader>c :only!<CR>
 
 nnoremap <silent> <leader>o :browse old<CR>
 
@@ -246,20 +246,23 @@ command! -nargs=1 F :call <SID>Find('<args>')
 "
 if has("win32")
   " cygwin
-  nnoremap <silent> <C-p> :r ! getclip<CR>
-  nnoremap <silent> <leader>v :r ! getclip<CR>
+  nnoremap <silent> <C-p> <ESC>:r ! getclip<CR>
+  nnoremap <silent> <leader>v <ESC>:r ! getclip<CR>
   command! -nargs=0 C :silent w ! putclip
+  vmap <silent> <leader>c <ESC>:'<,'>:w ! putclip<CR><CR>
 else
   if has("unix")
     let s:uname = system("uname")
     if s:uname == "Darwin\n"
-      nnoremap <silent> <C-p> :r ! pbpaste<CR>
-      nnoremap <silent> <leader>v :r ! pbpaste<CR>
+      nnoremap <silent> <C-p> <ESC>:r ! pbpaste<CR>
+      nnoremap <silent> <leader>v <ESC>:r ! pbpaste<CR>
       command! -nargs=0 C :silent w ! pbcopy
+      vmap <silent> <leader>c <ESC>:'<,'>:w ! pbcopy<CR><CR>
     else
-      nnoremap <silent> <C-p> :r ! xclip -o<CR>
-      nnoremap <silent> <leader>v :r ! xclip -o<CR>
+      nnoremap <silent> <C-p> <ESC>:r ! xclip -o<CR>
+      nnoremap <silent> <leader>v <ESC>:r ! xclip -o<CR>
       command! -nargs=0 C :silent w ! xclip -i
+      vmap <silent> <leader>c <ESC>:'<,'>:w ! xclip -i<CR><CR>
     endif
   endif
 endif
