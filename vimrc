@@ -242,17 +242,27 @@ function! <SID>Find(fragment)
 endfunction
 command! -nargs=1 F :call <SID>Find('<args>')
 
-" Ctrl-Paste
+" copying and pasting
 "
-"nnoremap <silent> <C-p> :r ! pbpaste<CR>
-nnoremap <silent> <C-p> :r ! xclip -o<CR>
-nnoremap <silent> <leader>p :r ! xclip -o<CR>
-nnoremap <silent> <leader>v :r ! xclip -o<CR>
-
-" Copy
-"
-"command! -nargs=0 C :silent w ! pbcopy
-command! -nargs=0 C :silent w ! xclip -i
+if has("win32")
+  " cygwin
+  nnoremap <silent> <C-p> :r ! getclip<CR>
+  nnoremap <silent> <leader>v :r ! getclip<CR>
+  command! -nargs=0 C :silent w ! putclip
+else
+  if has("unix")
+    let s:uname = system("uname")
+    if s:uname == "Darwin\n"
+      nnoremap <silent> <C-p> :r ! pbpaste<CR>
+      nnoremap <silent> <leader>v :r ! pbpaste<CR>
+      command! -nargs=0 C :silent w ! pbcopy
+    else
+      nnoremap <silent> <C-p> :r ! xclip -o<CR>
+      nnoremap <silent> <leader>v :r ! xclip -o<CR>
+      command! -nargs=0 C :silent w ! xclip -i
+    endif
+  endif
+endif
 
 nnoremap <silent> <leader>tt :w<CR>:e ~/scratch.txt<CR>
 
