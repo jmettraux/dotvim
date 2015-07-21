@@ -244,11 +244,15 @@ command! -nargs=1 F :call <SID>Find('<args>')
 
 " Ctrl-Paste
 "
-nnoremap <silent> <C-p> :r ! pbpaste<CR>
+"nnoremap <silent> <C-p> :r ! pbpaste<CR>
+nnoremap <silent> <C-p> :r ! xclip -o<CR>
+nnoremap <silent> <leader>p :r ! xclip -o<CR>
+nnoremap <silent> <leader>v :r ! xclip -o<CR>
 
 " Copy
 "
-command! -nargs=0 C :silent w ! pbcopy
+"command! -nargs=0 C :silent w ! pbcopy
+command! -nargs=0 C :silent w ! xclip -i
 
 nnoremap <silent> <leader>tt :w<CR>:e ~/scratch.txt<CR>
 
