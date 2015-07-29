@@ -304,3 +304,7 @@ nnoremap <leader>ti :!tig<CR>
 set exrc
 set secure
 
+" netrw
+"
+"let g:netrw_liststyle=3
+
