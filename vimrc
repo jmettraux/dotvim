@@ -192,14 +192,14 @@ inoremap <C-j> <ESC>
 "
 " alias vit='vim -c ":NERDTreeToggle"'
 "
-"nnoremap <silent> <C-n> :NERDTreeToggle<CR>
-"nnoremap <silent> <Nul> :NERDTreeToggle<CR>
+""nnoremap <silent> <C-n> :NERDTreeToggle<CR>
+""nnoremap <silent> <Nul> :NERDTreeToggle<CR>
   "<Nul> is control-space
-nnoremap <silent> ff :NERDTreeToggle<CR>
-"nnoremap <silent> ff :NERDTreeFind<CR>
+"nnoremap <silent> ff :NERDTreeToggle<CR>
+""nnoremap <silent> ff :NERDTreeFind<CR>
 
-let NERDTreeMinimalUI=1
-let NERDTreeDirArrows=0
+"let NERDTreeMinimalUI=1
+"let NERDTreeDirArrows=0
 
 "function TreeOrBufferToggle()
 "  if exists('b:NERDTreeRoot')
@@ -215,6 +215,47 @@ let NERDTreeDirArrows=0
 "endfunction
 "nnoremap <silent> <space> :call TreeOrBufferToggle()<CR>
 "nnoremap <silent> ;; :call TreeOrBufferToggle()<CR>
+
+" netrw
+"
+" with lots of help from
+" http://stackoverflow.com/questions/5006950/setting-netrw-like-nerdtree
+
+" absolute width of netrw window
+let g:netrw_winsize = -28
+
+" do not display info on the top of window
+let g:netrw_banner = 0
+
+" tree-view
+let g:netrw_liststyle = 3
+
+" sort is affecting only: directories on the top, files below
+let g:netrw_sort_sequence = '[\/]$,*'
+
+" use the previous window to open file
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+
+function! ToggleVExplorer()
+  if exists("t:expl_buf_num")
+      let expl_win_num = bufwinnr(t:expl_buf_num)
+      if expl_win_num != -1
+          let cur_win_nr = winnr()
+          exec expl_win_num . 'wincmd w'
+          close
+          exec cur_win_nr . 'wincmd w'
+          unlet t:expl_buf_num
+      else
+          unlet t:expl_buf_num
+      endif
+  else
+      exec '1wincmd w'
+      Vexplore .
+      let t:expl_buf_num = bufnr("%")
+  endif
+endfunction
+nnoremap <silent> ff :call ToggleVExplorer()<CR>
 
 " pgup / pgdown
 "
@@ -303,8 +344,4 @@ nnoremap <leader>ti :!tig<CR>
 "
 set exrc
 set secure
-
-" netrw
-"
-"let g:netrw_liststyle=3
 
