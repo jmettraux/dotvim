@@ -148,15 +148,16 @@ nnoremap <leader>w :w<CR>
 " replaced by DoubleSemiColon
 "nnoremap <leader>; :e #<CR>
 
-function! <SID>DoubleSemiColon()
-  if exists('b:NERDTreeRoot') && winnr() == 1
-    "call feedkeys("oT")
-    call feedkeys("gg")
-  else
-    buffer #
-  endif
-endfunction
-nnoremap <silent> <leader>; :call <SID>DoubleSemiColon()<CR>
+"function! <SID>DoubleSemiColon()
+"  if exists('b:NERDTreeRoot') && winnr() == 1
+"    "call feedkeys("oT")
+"    call feedkeys("gg")
+"  else
+"    buffer #
+"  endif
+"endfunction
+"nnoremap <silent> <leader>; :call <SID>DoubleSemiColon()<CR>
+nnoremap <silent> <leader>; :buffer #<CR>
 
 nnoremap <silent> <leader>n :n<CR>
 
@@ -256,6 +257,23 @@ function! ToggleVExplorer()
   endif
 endfunction
 nnoremap <silent> ff :call ToggleVExplorer()<CR>
+
+" close explorer if it's not the current buffer
+function! CloseVExplorer()
+  let cbn = bufnr('%')
+  if cbn != t:expl_buf_num
+    let ewn = bufwinnr(t:expl_buf_num)
+    exec ewn . 'wincmd w'
+    close
+    unlet t:expl_buf_num
+  endif
+endfunction
+
+function! NetrwRemap()
+  nmap <buffer> o <CR>
+  nmap <silent><buffer> <leader>; <CR>:call CloseVExplorer()<CR>
+endfunction
+au FileType netrw call NetrwRemap()
 
 " pgup / pgdown
 "
