@@ -301,6 +301,9 @@ function! <SID>Find(fragment)
 endfunction
 command! -nargs=1 F :call <SID>Find('<args>')
 
+command! -nargs=1 Ak :! grep -R -n --exclude-dir=.git <args>
+
+
 " copying and pasting
 "
 if has("win32")
