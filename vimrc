@@ -141,6 +141,9 @@ nnoremap - <C-w>-
 nnoremap <leader>q :q<CR>
 nnoremap <leader>w :w<CR>
 
+nnoremap <leader>g <C-o>
+nnoremap <leader>gg <C-o>
+
 " home / end
 "nnoremap <leader>k gg
 "nnoremap <leader>j G
@@ -182,9 +185,9 @@ nnoremap <silent> <leader>t /TODO<CR>
 
 nnoremap <silent> <leader>u :setlocal number!<CR>
 
-nnoremap <silent> <leader>m ma
-nnoremap <silent> <leader>g g'a
-nnoremap <silent> <leader>y y'a
+"nnoremap <silent> <leader>m ma
+"nnoremap <silent> <leader>g g'a
+"nnoremap <silent> <leader>y y'a
 "nnoremap <silent> <leader>d d'a
 
 inoremap <C-j> <ESC>
