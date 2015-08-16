@@ -144,22 +144,6 @@ nnoremap <leader>w :w<CR>
 nnoremap <leader>g <C-o>
 nnoremap <leader>gg <C-o>
 
-" home / end
-"nnoremap <leader>k gg
-"nnoremap <leader>j G
-
-" replaced by DoubleSemiColon
-"nnoremap <leader>; :e #<CR>
-
-"function! <SID>DoubleSemiColon()
-"  if exists('b:NERDTreeRoot') && winnr() == 1
-"    "call feedkeys("oT")
-"    call feedkeys("gg")
-"  else
-"    buffer #
-"  endif
-"endfunction
-"nnoremap <silent> <leader>; :call <SID>DoubleSemiColon()<CR>
 nnoremap <silent> <leader>; :buffer #<CR>
 
 nnoremap <silent> <leader>n :n<CR>
@@ -180,7 +164,7 @@ nnoremap <silent> <leader>8 :e #8<CR>
 nnoremap <silent> <leader>9 :e #9<CR>
 nnoremap <silent> <leader>a 0w
 
-nnoremap <silent> <leader>t /TODO<CR>
+"nnoremap <silent> <leader>t /TODO<CR>
 " TODO: pop that search when done
 
 nnoremap <silent> <leader>u :setlocal number!<CR>
@@ -352,11 +336,11 @@ set statusline+=\ %P " file position
 
 " Some Meta
 "
-nnoremap <leader>ev :e $MYVIMRC<CR>
-nnoremap <leader>sv :source $MYVIMRC<CR>
-nnoremap <leader>ec :e ~/.vim/colors/jm_green.vim<CR>
-nnoremap <leader>sc :colorscheme jm_green<CR>
-nnoremap <leader>gd :! cd ~/.vim && git diff<CR>
+"nnoremap <leader>ev :e $MYVIMRC<CR>
+"nnoremap <leader>sv :source $MYVIMRC<CR>
+"nnoremap <leader>ec :e ~/.vim/colors/jm_green.vim<CR>
+"nnoremap <leader>sc :colorscheme jm_green<CR>
+"nnoremap <leader>gd :! cd ~/.vim && git diff<CR>
 
 " Git
 "
