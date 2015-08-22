@@ -2,9 +2,9 @@
 " MIT license
 
 " Quit when a (custom) syntax file was already loaded
-if exists("b:current_syntax")
-  finish
-endif
+"if exists("b:current_syntax")
+"  finish
+"endif
 
 "syn case match
 
@@ -16,6 +16,8 @@ endif
 syn match groTitle '^== .\+'
 syn match groFilename '^[^ :]\+:'
 syn match groLineNr '\d\+:'
+
+exe "syn match groPattern '" . g:groPattern . "'"
 
 let b:current_syntax = "greprout"
 

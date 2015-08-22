@@ -243,8 +243,8 @@ function! <SID>Ak(pattern, ...)
   exe 'r! echo ""'
   exe 'r! grep -R -n --exclude-dir=.git ' a:pattern join(a:000, ' ')
   exe 'r! echo ""'
+  let g:groPattern = a:pattern
   setlocal syntax=greprout
-  exe "syn match groPattern '" . a:pattern . "'"
   call feedkeys('4G')
   write
 endfunction
