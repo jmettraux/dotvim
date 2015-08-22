@@ -209,9 +209,9 @@ nnoremap <silent> ff :Explore .<CR>
 function! NetrwRemap()
   nmap <buffer> o <CR>
   nmap <buffer> <space> <CR>
-  "nmap <buffer> <leader>; <CR>
-  nmap <silent><buffer> <leader>; :call <SID>SemiSemi()<CR>
   nmap <silent><buffer> ff :buffer #<CR>
+  "nmap <silent><buffer> <leader>; :call <SID>SemiSemi()<CR>
+  nmap <buffer> <leader>; <CR>
 endfunction
 au FileType netrw call NetrwRemap()
 
