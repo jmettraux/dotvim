@@ -291,19 +291,20 @@ command! -nargs=1 F :call <SID>Find('<args>')
 " inspiration: http://stackoverflow.com/questions/10493452
 "
 function! <SID>Ak(pattern, ...)
-  e .greprout
+  exe 'e ' . tempname() . '.greprout'
   exe '%d'
   exe "r! echo '== :Ak " . a:pattern . " " . join(a:000, ' ') . "'"
   exe "Clean"
   exe 'r! echo ""'
   exe 'r! grep -R -n --exclude-dir=.git ' a:pattern join(a:000, ' ')
   exe 'r! echo ""'
-  write
+  setlocal syntax=greprout
   exe "syn match groPattern '" . a:pattern . "'"
   call feedkeys('4G')
+  write
 endfunction
 
-au BufRead .greprout set filetype=greprout
+au BufRead *.greprout set filetype=greprout
 
 nnoremap <leader>f gF
 
