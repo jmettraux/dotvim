@@ -299,13 +299,14 @@ function! <SID>Ak(pattern, ...)
   exe 'r! grep -R -n --exclude-dir=.git ' a:pattern join(a:000, ' ')
   exe 'r! echo ""'
   write
+  exe "syn match groPattern '" . a:pattern . "'"
   call feedkeys('4G')
 endfunction
 
 au BufRead .greprout set filetype=greprout
 
 "command! -nargs=1 Ak :! grep -R -n --exclude-dir=.git <args>
-command! -nargs=* Ak :call <SID>Ak('<args>')
+command! -nargs=* Ak :call <SID>Ak(<f-args>)
 
 
 " copying and pasting

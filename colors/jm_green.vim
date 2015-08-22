@@ -104,11 +104,12 @@ if &term == 'xterm-256color'
   "hi! NERDTreeClosable cterm=NONE ctermfg=136 ctermbg=16
   "hi! NERDTreeExecFile cterm=NONE ctermfg=136 ctermbg=16
 
-  " filelist.vim
+  " greprout.vim
   "
-  hi! flTitle cterm=NONE ctermfg=darkred ctermbg=16
-  hi! flFilename cterm=NONE ctermfg=blue ctermbg=16
-  hi! flLineNr cterm=NONE ctermfg=darkblue ctermbg=16
+  hi! groTitle cterm=NONE ctermfg=darkred ctermbg=16
+  hi! groFilename cterm=NONE ctermfg=blue ctermbg=16
+  hi! groLineNr cterm=NONE ctermfg=darkblue ctermbg=16
+  hi! groPattern cterm=NONE ctermfg=darkgreen ctermbg=16
 
   " Quickfix
   "
