@@ -144,7 +144,14 @@ nnoremap <leader>w :w<CR>
 nnoremap <leader>g <C-o>
 nnoremap <leader>gg <C-o>
 
-nnoremap <silent> <leader>; :buffer #<CR>
+"nnoremap <silent> <leader>; :buffer #<CR>
+function! <SID>SemiSemi()
+  silent! buffer #
+  if &filetype ==# "netrw"
+    Explore .
+  endif
+endfunction
+nnoremap <silent> <leader>; :call <SID>SemiSemi()<CR>
 
 nnoremap <silent> <leader>n :n<CR>
 
@@ -202,7 +209,8 @@ nnoremap <silent> ff :Explore .<CR>
 function! NetrwRemap()
   nmap <buffer> o <CR>
   nmap <buffer> <space> <CR>
-  nmap <buffer> <leader>; <CR>
+  "nmap <buffer> <leader>; <CR>
+  nmap <silent><buffer> <leader>; :call <SID>SemiSemi()<CR>
   nmap <silent><buffer> ff :buffer #<CR>
 endfunction
 au FileType netrw call NetrwRemap()
