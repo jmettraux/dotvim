@@ -280,7 +280,7 @@ function! <SID>Grep(regex)
 endfunction
 command! -nargs=1 G :call <SID>Grep('<args>')
 
-" inspiration : http://vim.wikia.com/wiki/Find_files_in_subdirectories
+" inspiration: http://vim.wikia.com/wiki/Find_files_in_subdirectories
 "
 function! <SID>Find(fragment)
   let l:result = system("find . -name '*".a:fragment."*' 2> /dev/null | head -1")
@@ -288,7 +288,23 @@ function! <SID>Find(fragment)
 endfunction
 command! -nargs=1 F :call <SID>Find('<args>')
 
-command! -nargs=1 Ak :! grep -R -n --exclude-dir=.git <args>
+" inspiration: http://stackoverflow.com/questions/10493452
+"
+function! <SID>Ak(args)
+  new .greprout
+  exe '%d'
+  exe "r! echo '== :Ak " . a:args . "'"
+  exe 'r! echo ""'
+  exe 'r! grep -R -n --exclude-dir=.git ' a:args
+  exe 'r! echo ""'
+  write
+  call feedkeys('4G')
+endfunction
+
+au BufRead .greprout set filetype=greprout
+
+"command! -nargs=1 Ak :! grep -R -n --exclude-dir=.git <args>
+command! -nargs=* Ak :call <SID>Ak('<args>')
 
 
 " copying and pasting

@@ -53,10 +53,10 @@ hi clear
 if &term == 'xterm-256color'
 
   set t_Co=256
-  
+
   hi! LineNr cterm=NONE ctermfg=241 ctermbg=235
   hi! StatusLine cterm=NONE ctermfg=241 ctermbg=235
-  
+
   hi! Normal cterm=NONE ctermfg=255 ctermbg=16
 
   hi! Comment cterm=bold ctermfg=238 ctermbg=16
