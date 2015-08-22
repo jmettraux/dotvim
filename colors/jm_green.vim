@@ -93,17 +93,6 @@ if &term == 'xterm-256color'
     hi! Delimiter cterm=NONE ctermfg=196 ctermbg=16
   hi! Todo cterm=NONE ctermfg=16 ctermbg=41 " black #18D875
 
-  "" NERDTree
-  ""
-  "hi! NERDTreeHelp cterm=NONE ctermfg=244 ctermbg=16
-  "hi! NERDTreePart cterm=NONE ctermfg=238 ctermbg=16
-  "hi! NERDTreePartFile cterm=NONE ctermfg=238 ctermbg=16
-  ""hi! NERDTreeDir cterm=NONE ctermfg=41 ctermbg=16
-  "hi! Directory cterm=NONE ctermfg=41 ctermbg=16
-  "hi! NERDTreeOpenable cterm=NONE ctermfg=136 ctermbg=16
-  "hi! NERDTreeClosable cterm=NONE ctermfg=136 ctermbg=16
-  "hi! NERDTreeExecFile cterm=NONE ctermfg=136 ctermbg=16
-
   " greprout.vim
   "
   hi! groTitle cterm=NONE ctermfg=darkred ctermbg=16
