@@ -291,7 +291,7 @@ command! -nargs=1 F :call <SID>Find('<args>')
 " inspiration: http://stackoverflow.com/questions/10493452
 "
 function! <SID>Ak(pattern, ...)
-  new .greprout
+  e .greprout
   exe '%d'
   exe "r! echo '== :Ak " . a:pattern . " " . join(a:000, ' ') . "'"
   exe "Clean"
@@ -304,6 +304,8 @@ function! <SID>Ak(pattern, ...)
 endfunction
 
 au BufRead .greprout set filetype=greprout
+
+nnoremap <leader>f gF
 
 "command! -nargs=1 Ak :! grep -R -n --exclude-dir=.git <args>
 command! -nargs=* Ak :call <SID>Ak(<f-args>)
