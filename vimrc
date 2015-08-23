@@ -206,14 +206,13 @@ let g:netrw_sort_sequence = '[\/]$,*'
 
 nnoremap <silent> ff :Explore .<CR>
 
-function! NetrwRemap()
+function! <SID>NetrwRemap()
   nmap <buffer> o <CR>
   nmap <buffer> <space> <CR>
   nmap <silent><buffer> ff :buffer #<CR>
-  "nmap <silent><buffer> <leader>; :call <SID>SemiSemi()<CR>
   nmap <buffer> <leader>; <CR>
 endfunction
-au FileType netrw call NetrwRemap()
+au FileType netrw call <SID>NetrwRemap()
 
 " pgup / pgdown
 "
