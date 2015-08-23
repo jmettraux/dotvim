@@ -210,7 +210,7 @@ function! <SID>NetrwRemap()
   nmap <buffer> o <CR>
   nmap <buffer> <space> <CR>
   nmap <silent><buffer> ff :buffer #<CR>
-  nmap <buffer> <leader>; <CR>
+  "nmap <buffer> <leader>; <CR>
 endfunction
 au FileType netrw call <SID>NetrwRemap()
 
