@@ -136,10 +136,10 @@ nnoremap <leader>k <C-w>k
 nnoremap @ <C-w>+
 nnoremap - <C-w>-
 
-" :q and :w
-" there is also ZZ for :q
-nnoremap <leader>q :q<CR>
-nnoremap <leader>w :w<CR>
+"" :q and :w
+"" there is also ZZ for :q
+"nnoremap <leader>q :q<CR>
+"nnoremap <leader>w :w<CR>
 
 nnoremap <leader>g <C-o>
 nnoremap <leader>gg <C-o>
@@ -271,6 +271,8 @@ nnoremap <leader>f gF
 
 "command! -nargs=1 Ak :! grep -R -n --exclude-dir=.git <args>
 command! -nargs=* Ak :call <SID>Ak(<f-args>)
+
+nnoremap <leader>q "zyw:exe ":call <SID>Ak(\"" . @z . "\")"<CR>
 
 
 " copying and pasting
