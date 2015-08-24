@@ -144,19 +144,22 @@ nnoremap <leader>w :w<CR>
 nnoremap <leader>g <C-o>
 nnoremap <leader>gg <C-o>
 
-"nnoremap <silent> <leader>; :buffer #<CR>
-function! <SID>SemiSemi()
-  silent! buffer #
-  if &filetype ==# "netrw"
-    Explore .
-  endif
+let g:jmAlt = 1
+function! <SID>JmBufLeave()
+  if &filetype !=# 'netrw'
+    let g:jmAlt = bufnr('%')
+  end
 endfunction
-nnoremap <silent> <leader>; :call <SID>SemiSemi()<CR>
+function! <SID>JmBufAlt()
+  exe "buffer " . g:jmAlt
+endfunction
+"
+au BufLeave * :call <SID>JmBufLeave()
+"
+nnoremap <silent> <leader>; :call <SID>JmBufAlt()<CR>
 
 nnoremap <silent> <leader>n :n<CR>
-
 "nnoremap <silent> <leader>c :only!<CR>
-
 nnoremap <silent> <leader>o :browse old<CR>
 
 nnoremap <silent> <leader>b :buffers<CR>
@@ -207,10 +210,11 @@ let g:netrw_sort_sequence = '[\/]$,*'
 nnoremap <silent> ff :Explore .<CR>
 
 function! <SID>NetrwRemap()
+  "nmap <silent><buffer> ff :buffer #<CR>
+  nmap <silent><buffer> ff :call <SID>JmBufAlt()<CR>
   nmap <buffer> o <CR>
   nmap <buffer> <space> <CR>
-  nmap <silent><buffer> ff :buffer #<CR>
-  "nmap <buffer> <leader>; <CR>
+  nmap <buffer> <leader>; <CR>
 endfunction
 au FileType netrw call <SID>NetrwRemap()
 
