@@ -258,6 +258,11 @@ function! <SID>Ak(pattern, ...)
   setlocal syntax=greprout
   call feedkeys('4G')
   write
+  nmap <buffer> o gF
+  nmap <buffer> <space> gF
+  nmap <buffer> <CR> gF
+  "nmap <buffer> <leader>; gF
+    " no, keep it for switching to alternate buffer
 endfunction
 
 au BufRead *.greprout set filetype=greprout
