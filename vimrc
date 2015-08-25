@@ -120,6 +120,8 @@ endfunc
 
 nnoremap <silent> ;s :call <SID>SynStack()<CR>
 
+nnoremap <leader><TAB> i<C-v><TAB><ESC>
+
 
 " windows
 "
