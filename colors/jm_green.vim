@@ -108,6 +108,10 @@ if &term == 'xterm-256color'
   "
   hi! Search cterm=NONE ctermfg=29 ctermbg=255
 
+  " NetRw
+  "
+  hi! Directory cterm=NONE ctermfg=136 ctermbg=16
+
 else
 
   set t_Co=16
