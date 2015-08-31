@@ -247,12 +247,17 @@ command! -nargs=1 F :call <SID>Find('<args>')
 " inspiration: http://stackoverflow.com/questions/10493452
 "
 function! <SID>Ak(pattern, ...)
+
+  let l:azero = join(a:000, ' ')
+  let l:rest = l:azero == '' ? '.' : l:azero
+    " since BSD grep greps stdin by default
+
   exe 'e ' . tempname() . '.greprout'
   exe '%d'
-  exe "r! echo '== :Ak " . a:pattern . " " . join(a:000, ' ') . "'"
+  exe "r! echo '== :Ak " . a:pattern . " " . l:rest . "'"
   exe "Clean"
   exe 'r! echo ""'
-  exe 'r! grep -R -n --exclude-dir=.git ' a:pattern join(a:000, ' ')
+  exe 'r! grep -R -n --exclude-dir=.git ' a:pattern l:rest
   exe 'r! echo ""'
   let g:groPattern = a:pattern
   setlocal syntax=greprout
