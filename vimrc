@@ -207,7 +207,7 @@ let g:netrw_sort_sequence = '[\/]$,*'
 "let g:netrw_browse_split = 4
 "let g:netrw_altv = 1
 
-nnoremap <silent> ff :Explore .<CR>:call NetrwOpenDirs([ 'src', 'lib', 'src', 'spec' ])<CR>
+nnoremap <silent> ff :Explore .<CR>:call NetrwOpenDirs([ 'lib', 'src', 'spec' ])<CR>
 
 function! <SID>NetrwRemap()
   "nmap <silent><buffer> ff :buffer #<CR>
