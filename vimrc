@@ -221,7 +221,7 @@ au FileType netrw call <SID>NetrwRemap()
 
 function! NetrwOpenDirs(dirs)
   for dir in a:dirs
-    call feedkeys('1G:silent! /^| ' . dir . '\/')
+    call feedkeys('2G:silent! /^| ' . dir . '\/')
   endfor
 endfunction
 
