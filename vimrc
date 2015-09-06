@@ -221,8 +221,9 @@ au FileType netrw call <SID>NetrwRemap()
 
 function! NetrwOpenDirs(dirs)
   for dir in a:dirs
-    call feedkeys('2G:silent! /^| ' . dir . '\/:nohlsearch')
+    call feedkeys('1G/^[^.]:silent! /^| ' . dir . '\/')
   endfor
+  call feedkeys(':nohlsearch1G')
 endfunction
 
 
