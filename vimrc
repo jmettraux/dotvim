@@ -218,6 +218,17 @@ function! <SID>NetrwRemap()
 endfunction
 au FileType netrw call <SID>NetrwRemap()
 
+
+function! <SID>VexOpenDir(...)
+  let l:i = 1
+  while l:i <= a:0
+    call feedkeys('1G:silent! /^| ' . a:{l:i} . '\/')
+    let l:i += 1
+  endwhile
+endfunction
+command! -nargs=* Vod :call <SID>VexOpenDir(<f-args>)
+
+
 " pgup / pgdown
 "
 "nnoremap <silent> <space> <C-d>
