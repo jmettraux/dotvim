@@ -271,7 +271,7 @@ function! <SID>Ak(pattern, ...)
   exe "r! echo '== :Ak " . a:pattern . " " . l:rest . "'"
   exe "Clean"
   exe 'r! echo ""'
-  exe 'r! grep -R -n --exclude-dir=.git ' a:pattern l:rest
+  exe 'r! grep -R -n --exclude-dir=.git --exclude-dir=tmp ' a:pattern l:rest
   exe 'r! echo ""'
   let g:groPattern = a:pattern
   setlocal syntax=greprout
