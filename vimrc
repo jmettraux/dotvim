@@ -294,6 +294,16 @@ command! -nargs=* Ak :call <SID>Ak(<f-args>)
 nnoremap <leader>q "zyw:exe ":call <SID>Ak(\"" . @z . "\")"<CR>
 
 
+"function! <SID>Test(...)
+"  let i = 1
+"  while i <= a:0
+"    echo "" . i . ": " . a:{i}
+"    let i += 1
+"  endwhile
+"endfunction
+"command! -nargs=* Te :call <SID>Test('<args>')
+
+
 " copying and pasting
 "
 if has("win32")
