@@ -220,6 +220,10 @@ au FileType netrw call <SID>NetrwRemap()
 
 
 function! NetrwOpenDirs(dirs)
+  if w:_netrw_dir_opened
+    return
+  endif
+  let w:_netrw_dir_opened = 1
   for dir in a:dirs
     call feedkeys('1G/^[^.]:silent! /^| ' . dir . '\/')
   endfor
