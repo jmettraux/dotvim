@@ -207,7 +207,7 @@ let g:netrw_sort_sequence = '[\/]$,*'
 "let g:netrw_browse_split = 4
 "let g:netrw_altv = 1
 
-nnoremap <silent> ff :Explore .<CR>:call NetrwOpenDirs([ 'lib', 'src', 'spec' ])<CR>
+nnoremap <silent> ff :Explore .<CR>:call NetrwOpenDirs([ 'src', 'lib', 'src', 'spec' ])<CR>
 
 function! <SID>NetrwRemap()
   "nmap <silent><buffer> ff :buffer #<CR>
@@ -227,7 +227,8 @@ function! NetrwOpenDirs(dirs)
   for dir in a:dirs
     call feedkeys('1G/^[^.]:silent! /^| ' . dir . '\/')
   endfor
-  call feedkeys(':nohlsearch1G')
+  call feedkeys('1G/^[^.]/^| \(' . join(a:dirs, '\|') . '\/\)')
+  call feedkeys(':nohlsearch')
 endfunction
 
 
