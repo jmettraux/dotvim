@@ -207,7 +207,7 @@ let g:netrw_sort_sequence = '[\/]$,*'
 "let g:netrw_browse_split = 4
 "let g:netrw_altv = 1
 
-nnoremap <silent> ff :Explore .<CR>
+nnoremap <silent> ff :Explore .<CR>:call NetrwOpenDirs([ 'lib', 'src', 'spec' ])<CR>
 
 function! <SID>NetrwRemap()
   "nmap <silent><buffer> ff :buffer #<CR>
@@ -219,14 +219,11 @@ endfunction
 au FileType netrw call <SID>NetrwRemap()
 
 
-function! <SID>VexOpenDir(...)
-  let l:i = 1
-  while l:i <= a:0
-    call feedkeys('1G:silent! /^| ' . a:{l:i} . '\/')
-    let l:i += 1
-  endwhile
+function! NetrwOpenDirs(dirs)
+  for dir in a:dirs
+    call feedkeys('1G:silent! /^| ' . dir . '\/')
+  endfor
 endfunction
-command! -nargs=* Vod :call <SID>VexOpenDir(<f-args>)
 
 
 " pgup / pgdown
