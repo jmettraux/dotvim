@@ -17,7 +17,8 @@ syn match groTitle '^== .\+'
 syn match groFilename '^[^ :]\+:'
 syn match groLineNr '\d\+:'
 
-exe "syn match groPattern '" . g:groPattern . "'"
+"exe "syn match groPattern '" . g:groPattern . "'"
+exe "syn match groPattern " . g:groPattern
 
 let b:current_syntax = "greprout"
 

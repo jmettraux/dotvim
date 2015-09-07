@@ -258,22 +258,55 @@ function! <SID>Find(fragment)
 endfunction
 command! -nargs=1 F :call <SID>Find('<args>')
 
+" with help from http://stackoverflow.com/questions/4478891
+"
+function! <SID>Strip(s)
+
+  return substitute(a:s, '^\s*\(.*\)\s*$', '\1', '')
+endfunction
+
+function! <SID>ExtractPatternAndRest(s)
+
+  let s = <SID>Strip(a:s)
+
+  let patt = ''
+  let rest = ''
+
+  let c = s[0]
+
+  if c == '"'
+    let patt = c . split(s, c)[0] . c
+    let rest = s[strlen(patt) + 1:]
+  elseif c == "'"
+    let patt = c . split(s, c)[0] . c
+    let rest = s[strlen(patt) + 1:]
+  else
+    let patt = split(s, ' ')[0]
+    let rest = s[strlen(patt):]
+  endif
+
+  return [ patt, <SID>Strip(rest) ]
+endfunction
+
 " inspiration: http://stackoverflow.com/questions/10493452
 "
-function! <SID>Ak(pattern, ...)
+function! <SID>Ak(args)
 
-  let l:azero = join(a:000, ' ')
-  let l:rest = l:azero == '' ? '.' : l:azero
-    " since BSD grep greps stdin by default
+  "let l:azero = join(a:000, ' ')
+  "let l:rest = l:azero == '' ? '.' : l:azero
+  "  " since BSD grep greps stdin by default
+
+  let pr = <SID>ExtractPatternAndRest(a:args)
+  let rest = pr[1] == '' ? '.' : pr[1]
 
   exe 'e ' . tempname() . '.greprout'
   exe '%d'
-  exe "r! echo '== :Ak " . a:pattern . " " . l:rest . "'"
+  exe "r! echo '== :Ak " . pr[0] . " " . rest . "'"
   exe "Clean"
   exe 'r! echo ""'
-  exe 'r! grep -R -n --exclude-dir=.git --exclude-dir=tmp ' a:pattern l:rest
+  exe 'r! grep -R -n --exclude-dir=.git --exclude-dir=tmp ' . pr[0] . ' ' . rest
   exe 'r! echo ""'
-  let g:groPattern = a:pattern
+  let g:groPattern = pr[0]
   setlocal syntax=greprout
   call feedkeys('4G')
   write
@@ -289,7 +322,8 @@ au BufRead *.greprout set filetype=greprout
 nnoremap <leader>f gF
 
 "command! -nargs=1 Ak :! grep -R -n --exclude-dir=.git <args>
-command! -nargs=* Ak :call <SID>Ak(<f-args>)
+"command! -nargs=* Ak :call <SID>Ak(<f-args>)
+command! -nargs=* Ak :call <SID>Ak(<q-args>)
 
 nnoremap <leader>q "zyw:exe ":call <SID>Ak(\"" . @z . "\")"<CR>
 
