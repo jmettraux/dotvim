@@ -260,14 +260,14 @@ command! -nargs=1 F :call <SID>Find('<args>')
 
 " with help from http://stackoverflow.com/questions/4478891
 "
-function! <SID>Strip(s)
+function! s:Strip(s)
 
   return substitute(a:s, '^\s*\(.*\)\s*$', '\1', '')
 endfunction
 
-function! <SID>ExtractPatternAndRest(s)
+function! s:ExtractPatternAndRest(s)
 
-  let s = <SID>Strip(a:s)
+  let s = s:Strip(a:s)
 
   let patt = ''
   let rest = ''
@@ -281,22 +281,18 @@ function! <SID>ExtractPatternAndRest(s)
     let patt = c . split(s, c)[0] . c
     let rest = s[strlen(patt) + 1:]
   else
-    let patt = split(s, ' ')[0]
+    let patt = string(split(s, ' ')[0])
     let rest = s[strlen(patt):]
   endif
 
-  return [ patt, <SID>Strip(rest) ]
+  return [ patt, s:Strip(rest) ]
 endfunction
 
 " inspiration: http://stackoverflow.com/questions/10493452
 "
-function! <SID>Ak(args)
+function! s:Ak(args)
 
-  "let l:azero = join(a:000, ' ')
-  "let l:rest = l:azero == '' ? '.' : l:azero
-  "  " since BSD grep greps stdin by default
-
-  let pr = <SID>ExtractPatternAndRest(a:args)
+  let pr = s:ExtractPatternAndRest(a:args)
   let rest = pr[1] == '' ? '.' : pr[1]
 
   exe 'e ' . tempname() . '.greprout'
@@ -325,7 +321,9 @@ nnoremap <leader>f gF
 "command! -nargs=* Ak :call <SID>Ak(<f-args>)
 command! -nargs=* Ak :call <SID>Ak(<q-args>)
 
-nnoremap <leader>q "zyw:exe ":call <SID>Ak(\"" . @z . "\")"<CR>
+"nnoremap <leader>q "zyw:exe ":call <SID>Ak(\"" . @z . "\")"<CR>
+"nnoremap <leader>q "zyw:exe ":echo \"" . @z . "\""<CR>
+nnoremap <leader>q "zyw:exe ":call <SID>Ak(" . string(@z) . ")"<CR>
 
 
 "function! <SID>Test(...)
