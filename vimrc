@@ -292,6 +292,11 @@ endfunction
 "
 function! s:Ak(args)
 
+  if &mod == 1
+    echoerr "Current buffer has unsaved changes. Aborting search."
+    return
+  end
+
   let pr = s:ExtractPatternAndRest(a:args)
   let rest = pr[1] == '' ? '.' : pr[1]
 
