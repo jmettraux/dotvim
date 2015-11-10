@@ -403,3 +403,8 @@ nnoremap <leader>ti :!tig<CR>
 set exrc
 set secure
 
+
+"
+" g CTRL-g to display offsets
+"
+
