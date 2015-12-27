@@ -398,6 +398,10 @@ nnoremap <leader>gu :!git status<CR>
 nnoremap <leader>gl :!git log --graph --oneline --abbrev-commit --decorate<CR>
 nnoremap <leader>ti :!tig<CR>
 
+" make
+"
+nnoremap <leader>m :!make<CR>
+
 " exrc
 "
 set exrc
@@ -407,4 +411,5 @@ set secure
 "
 " g CTRL-g to display offsets
 "
+
 
