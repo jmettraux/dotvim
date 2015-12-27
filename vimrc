@@ -402,6 +402,15 @@ nnoremap <leader>ti :!tig<CR>
 "
 nnoremap <leader>m :!make<CR>
 
+" from http://vim.wikia.com/wiki/Simple_Macros_to_quote_and_unquote_a_word
+"
+" 'quote' a word
+nnoremap qw :silent! normal mpea'<Esc>bi'<Esc>`pl
+" double "quote" a word
+nnoremap qd :silent! normal mpea"<Esc>bi"<Esc>`pl
+" remove quotes from a word
+nnoremap wq :silent! normal mpeld bhd `ph<CR>
+
 " exrc
 "
 set exrc
