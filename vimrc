@@ -172,7 +172,7 @@ nnoremap <silent> <leader>6 :e #6<CR>
 nnoremap <silent> <leader>7 :e #7<CR>
 nnoremap <silent> <leader>8 :e #8<CR>
 nnoremap <silent> <leader>9 :e #9<CR>
-nnoremap <silent> <leader>a 0w
+"nnoremap <silent> <leader>a 0w
 
 "nnoremap <silent> <leader>t /TODO<CR>
 " TODO: pop that search when done
@@ -180,9 +180,9 @@ nnoremap <silent> <leader>a 0w
 nnoremap <silent> <leader>u :setlocal number!<CR>
 
 "nnoremap <silent> <leader>m ma
-"nnoremap <silent> <leader>g g'a
-"nnoremap <silent> <leader>y y'a
-"nnoremap <silent> <leader>d d'a
+nnoremap <silent> <leader>a g'a
+nnoremap <silent> <leader>y y'a
+nnoremap <silent> <leader>d d'a
 
 inoremap <C-j> <ESC>
 
