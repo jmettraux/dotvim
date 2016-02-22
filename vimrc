@@ -357,6 +357,29 @@ nnoremap <silent> <leader>o :call <SID>ListOld()<CR>
 au BufRead *.listold set filetype=listold
 
 
+function! s:ListBuffers()
+  let fn = tempname() . '.listold'
+  silent exe 'e ' . fn
+  exe 'redir @z'
+  exe 'silent buffers'
+  exe 'redir END'
+  silent exe 'put=@z'
+  silent exe 'g/^$/d'
+  silent exe '%s/^  \d\+[^\"]\+\"//'
+  silent exe '%s/" line /:/'
+  silent exe 'g/\.listold:/d'
+  silent write
+  setlocal syntax=listold
+  call feedkeys("1GO== ListBuffersj")
+  call feedkeys(":w")
+  nmap <buffer> o gF
+  nmap <buffer> <space> gF
+  nmap <buffer> <CR> gF
+endfunction
+command! -nargs=0 ListBuffers :call <SID>ListBuffers()
+nnoremap <silent> <leader>b :call <SID>ListBuffers()<CR>
+
+
 "function! <SID>Test(...)
 "  let i = 1
 "  while i <= a:0
