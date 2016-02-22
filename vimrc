@@ -343,7 +343,8 @@ function! s:ListOld()
   exe 'g/^$/d'
   exe 'g/^[^~]/d'
   exe 'g/EDITMSG/d'
-  "setlocal syntax=greprout
+  exe 'g/NetrwTreeListing/d'
+  setlocal syntax=listold
   call feedkeys("1GO== ListOldj")
   call feedkeys(":w")
   nmap <buffer> o gF
