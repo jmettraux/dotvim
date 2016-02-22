@@ -160,7 +160,6 @@ nnoremap <silent> <leader>; :call <SID>JmBufAlt()<CR>
 
 nnoremap <silent> <leader>n :n<CR>
 "nnoremap <silent> <leader>c :only!<CR>
-nnoremap <silent> <leader>o :browse old<CR>
 
 nnoremap <silent> <leader>b :buffers<CR>
 nnoremap <silent> <leader>1 :e #1<CR>
@@ -320,6 +319,7 @@ endfunction
 
 au BufRead *.greprout set filetype=greprout
 
+
 nnoremap <leader>f gF
 
 "command! -nargs=1 Ak :! grep -R -n --exclude-dir=.git <args>
@@ -329,6 +329,29 @@ command! -nargs=* Ak :call <SID>Ak(<q-args>)
 "nnoremap <leader>q "zyw:exe ":call <SID>Ak(\"" . @z . "\")"<CR>
 "nnoremap <leader>q "zyw:exe ":echo \"" . @z . "\""<CR>
 nnoremap <leader>q "zyw:exe ":call <SID>Ak(" . string(@z) . ")"<CR>
+
+
+function! s:ListOld()
+  let fn = tempname() . '.listold'
+  exe 'e ' . fn
+  exe 'redir @z'
+  exe 'silent bro ol'
+  exe 'redir END'
+  exe 'put=@z'
+  exe 'g/^[^0-9]/d'
+  exe '%s/^[0-9]\+: //'
+  exe 'g/^$/d'
+  exe 'g/^[^~]/d'
+  exe 'g/EDITMSG/d'
+  "setlocal syntax=greprout
+  call feedkeys("1GO== ListOldj")
+  call feedkeys(":w")
+  nmap <buffer> o gF
+  nmap <buffer> <space> gF
+  nmap <buffer> <CR> gF
+endfunction
+command! -nargs=0 ListOld :call <SID>ListOld()
+nnoremap <silent> <leader>o :call <SID>ListOld()<CR>
 
 
 "function! <SID>Test(...)
