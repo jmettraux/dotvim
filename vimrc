@@ -354,6 +354,8 @@ endfunction
 command! -nargs=0 ListOld :call <SID>ListOld()
 nnoremap <silent> <leader>o :call <SID>ListOld()<CR>
 
+au BufRead *.listold set filetype=listold
+
 
 "function! <SID>Test(...)
 "  let i = 1
