@@ -331,32 +331,6 @@ command! -nargs=* Ak :call <SID>Ak(<q-args>)
 nnoremap <leader>l "zyw:exe ":call <SID>Ak(" . string(@z) . ")"<CR>
 
 
-function! s:ListOld()
-  let fn = tempname() . '.listold'
-  exe 'e ' . fn
-  exe 'redir @z'
-  exe 'silent bro ol'
-  exe 'redir END'
-  exe 'put=@z'
-  exe 'g/^[^0-9]/d'
-  exe '%s/^[0-9]\+: //'
-  exe 'g/^$/d'
-  exe 'g/^[^~]/d'
-  exe 'g/EDITMSG/d'
-  exe 'g/NetrwTreeListing/d'
-  setlocal syntax=listold
-  call feedkeys("1GO== ListOldj")
-  call feedkeys(":w")
-  nmap <buffer> o gF
-  nmap <buffer> <space> gF
-  nmap <buffer> <CR> gF
-endfunction
-command! -nargs=0 ListOld :call <SID>ListOld()
-nnoremap <silent> <leader>o :call <SID>ListOld()<CR>
-
-au BufRead *.listold set filetype=listold
-
-
 function! s:ListFiles()
 
   exe 'silent bwipeout ==ListFiles'
