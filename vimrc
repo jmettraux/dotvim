@@ -359,10 +359,13 @@ au BufRead *.listold set filetype=listold
 
 function! s:ListFiles()
 
+  exe 'silent bwipeout ==ListFiles'
+    " close previous ListFiles if any
+
   exe 'new | only'
     " | only makes it full window
   exe 'file ==ListFiles'
-    " replace buffer title
+    " replace buffer name
   exe 'setlocal buftype=nofile'
   exe 'setlocal bufhidden=hide'
   exe 'setlocal noswapfile'
