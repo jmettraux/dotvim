@@ -366,9 +366,8 @@ function! s:ListBuffers()
   silent exe 'put=@z'
   silent exe 'g/^$/d'
   silent exe '%s/^  \d\+[^\"]\+\"//'
-  silent exe '%s/" line /:/'
+  silent exe '%s/"\s\+line /:/'
   silent exe 'g/\.listold:/d'
-  silent write
   setlocal syntax=listold
   call feedkeys("1GO== ListBuffersj")
   call feedkeys(":w")
@@ -377,7 +376,43 @@ function! s:ListBuffers()
   nmap <buffer> <CR> gF
 endfunction
 command! -nargs=0 ListBuffers :call <SID>ListBuffers()
-nnoremap <silent> <leader>b :call <SID>ListBuffers()<CR>
+"nnoremap <silent> <leader>b :call <SID>ListBuffers()<CR>
+
+function! s:ListFiles()
+
+  let fn = tempname() . '.listold'
+  silent exe 'e ' . fn
+
+  call feedkeys("o== buffers")
+  exe 'redir @y'
+  exe 'silent buffers'
+  exe 'redir END'
+  call feedkeys('"yp')
+
+  call feedkeys("Go0C== recent")
+  exe 'redir @z'
+  exe 'silent bro ol'
+  exe 'redir END'
+  call feedkeys('"zp')
+
+  call feedkeys(":w")
+
+  "call feedkeys(":%s/^\d\+://") <--- FAIL!
+  call feedkeys(":g/^[^0-9=]/d")
+  call feedkeys(":g/\.listold/d")
+  "exe '%s/^ \d\+://'
+
+  call feedkeys("3G")
+
+  setlocal syntax=listold
+  call feedkeys(":w")
+
+  "nmap <buffer> o gF
+  "nmap <buffer> <space> gF
+  "nmap <buffer> <CR> gF
+endfunction
+command! -nargs=0 ListFiles :call <SID>ListFiles()
+nnoremap <silent> <leader>b :call <SID>ListFiles()<CR>
 
 
 "function! <SID>Test(...)
