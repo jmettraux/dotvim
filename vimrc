@@ -287,6 +287,11 @@ function! s:ExtractPatternAndRest(s)
   return [ patt, s:Strip(rest) ]
 endfunction
 
+function! s:Ntr(s)
+
+  return substitute(a:s, '[^a-zA-Z0-9]', '_', 'g')
+endfunction
+
 " inspiration: http://stackoverflow.com/questions/10493452
 "
 function! s:Ak(args)
@@ -298,8 +303,9 @@ function! s:Ak(args)
 
   let pr = s:ExtractPatternAndRest(a:args)
   let rest = pr[1] == '' ? '.' : pr[1]
+  let fn = tempname() . '--' . s:Ntr(pr[0]) . '--' . s:Ntr(rest) . '.greprout'
 
-  exe 'e ' . tempname() . '.greprout'
+  exe 'e ' . fn
   exe '%d'
   exe "r! echo '== :Ak " . pr[0] . " " . rest . "'"
   exe "Clean"
