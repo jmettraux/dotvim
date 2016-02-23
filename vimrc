@@ -359,8 +359,14 @@ au BufRead *.listold set filetype=listold
 
 function! s:ListFiles()
 
-  let fn = tempname() . 'ListFiles.listold'
-  silent exe 'e ' . fn
+  exe 'new | only'
+    " | only makes it full window
+  exe 'file ==ListFiles'
+    " replace buffer title
+  exe 'setlocal buftype=nofile'
+  exe 'setlocal bufhidden=hide'
+  exe 'setlocal noswapfile'
+  exe 'setlocal nobuflisted'
 
   exe 'redir @z'
   exe 'silent echo "== recent"'
@@ -379,13 +385,12 @@ function! s:ListFiles()
   exe '%s/^  \d\+[^\"]\+\"//'
   exe '%s/"\s\+line /:/'
   exe 'g/^[^0-9=~\/]/d'
-  exe 'g/\.listold/d'
+  exe 'g/COMMIT_EDITMSG/d'
   exe 'silent %s/^[0-9]\+: //'
 
   call feedkeys('1Gjj')
 
   setlocal syntax=listold
-  write
 
   nmap <buffer> o gF
   nmap <buffer> <space> gF
