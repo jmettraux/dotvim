@@ -363,6 +363,7 @@ function! s:ListFiles()
   exe '%s/"\s\+line /:/'
   exe 'g/^[^0-9=~\/]/d'
   exe 'g/COMMIT_EDITMSG/d'
+  exe 'g/NetrwTreeListing/d'
   exe 'silent %s/^[0-9]\+: //'
 
   call feedkeys('1Gjj')
