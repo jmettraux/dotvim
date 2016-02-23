@@ -357,59 +357,39 @@ nnoremap <silent> <leader>o :call <SID>ListOld()<CR>
 au BufRead *.listold set filetype=listold
 
 
-function! s:ListBuffers()
-  let fn = tempname() . '.listold'
+function! s:ListFiles()
+
+  let fn = tempname() . 'ListFiles.listold'
   silent exe 'e ' . fn
+
   exe 'redir @z'
+  exe 'silent echo "== recent"'
+  exe 'silent echo ""'
+  exe 'silent bro ol'
+  exe 'redir END'
+  exe 'silent 0put z'
+
+  exe 'redir @y'
+  exe 'silent echo "== buffers"'
+  exe 'silent echo ""'
   exe 'silent buffers'
   exe 'redir END'
-  silent exe 'put=@z'
-  silent exe 'g/^$/d'
-  silent exe '%s/^  \d\+[^\"]\+\"//'
-  silent exe '%s/"\s\+line /:/'
-  silent exe 'g/\.listold:/d'
+  exe 'silent 0put y'
+
+  exe '%s/^  \d\+[^\"]\+\"//'
+  exe '%s/"\s\+line /:/'
+  exe 'g/^[^0-9=~\/]/d'
+  exe 'g/\.listold/d'
+  exe 'silent %s/^[0-9]\+: //'
+
+  call feedkeys('1Gjj')
+
   setlocal syntax=listold
-  call feedkeys("1GO== ListBuffersj")
-  call feedkeys(":w")
+  write
+
   nmap <buffer> o gF
   nmap <buffer> <space> gF
   nmap <buffer> <CR> gF
-endfunction
-command! -nargs=0 ListBuffers :call <SID>ListBuffers()
-"nnoremap <silent> <leader>b :call <SID>ListBuffers()<CR>
-
-function! s:ListFiles()
-
-  let fn = tempname() . '.listold'
-  silent exe 'e ' . fn
-
-  call feedkeys("o== buffers")
-  exe 'redir @y'
-  exe 'silent buffers'
-  exe 'redir END'
-  call feedkeys('"yp')
-
-  call feedkeys("Go0C== recent")
-  exe 'redir @z'
-  exe 'silent bro ol'
-  exe 'redir END'
-  call feedkeys('"zp')
-
-  call feedkeys(":w")
-
-  "call feedkeys(":%s/^\d\+://") <--- FAIL!
-  call feedkeys(":g/^[^0-9=]/d")
-  call feedkeys(":g/\.listold/d")
-  "exe '%s/^ \d\+://'
-
-  call feedkeys("3G")
-
-  setlocal syntax=listold
-  call feedkeys(":w")
-
-  "nmap <buffer> o gF
-  "nmap <buffer> <space> gF
-  "nmap <buffer> <CR> gF
 endfunction
 command! -nargs=0 ListFiles :call <SID>ListFiles()
 nnoremap <silent> <leader>b :call <SID>ListFiles()<CR>
