@@ -124,8 +124,8 @@ nnoremap <leader><TAB> i<C-v><TAB><ESC>
 " windows
 "
 " horizontal
-nnoremap <leader>h <C-w>h
-nnoremap <leader>l <C-w>l
+"nnoremap <leader>h <C-w>h
+"nnoremap <leader>l <C-w>l
 "
 " vertical
 nnoremap <leader>j <C-w>j
@@ -138,7 +138,7 @@ nnoremap - <C-w>-
 
 "" :q and :w
 "" there is also ZZ for :q
-"nnoremap <leader>q :q<CR>
+nnoremap <leader>q :q<CR>
 "nnoremap <leader>w :w<CR>
 
 nnoremap <leader>g <C-o>
@@ -328,7 +328,7 @@ command! -nargs=* Ak :call <SID>Ak(<q-args>)
 
 "nnoremap <leader>q "zyw:exe ":call <SID>Ak(\"" . @z . "\")"<CR>
 "nnoremap <leader>q "zyw:exe ":echo \"" . @z . "\""<CR>
-nnoremap <leader>q "zyw:exe ":call <SID>Ak(" . string(@z) . ")"<CR>
+nnoremap <leader>l "zyw:exe ":call <SID>Ak(" . string(@z) . ")"<CR>
 
 
 function! s:ListOld()
