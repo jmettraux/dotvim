@@ -224,10 +224,10 @@ function! NetrwOpenDirs(dirs)
   endif
   let w:_netrw_dir_opened = 1
   for dir in a:dirs
-    call feedkeys('1G/^[^.]:silent! /^| ' . dir . '\/')
+    call feedkeys('1G:silent! /^| ' . dir . '\/o')
   endfor
-  call feedkeys('1G/^[^.]/^| \(' . join(a:dirs, '\|') . '\/\)')
   call feedkeys(':nohlsearch')
+  call feedkeys('5G')
 endfunction
 
 
