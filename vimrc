@@ -371,6 +371,7 @@ function! s:ListFiles()
   exe 'g/COMMIT_EDITMSG/d'
   exe 'g/NetrwTreeListing/d'
   exe 'g/bash-fc-/d'
+  exe 'g/\/mutt-/d'
   exe 'silent %s/^[0-9]\+: //'
 
   call feedkeys('1Gjj')
