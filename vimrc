@@ -422,6 +422,13 @@ endif
 
 "nnoremap <silent> <leader>tt :w<CR>:e ~/scratch.txt<CR>
 
+" from http://howivim.com/2016/salvatore-sanfilippo/
+"
+if has("autocmd")
+  autocmd BufReadPost * if line("'\"") | exe "'\"" | endif
+    " open file and go to last cursor position
+endif
+
 
 " Status bar
 "
