@@ -365,7 +365,7 @@ function! s:ListFiles()
   exe 'redir END'
   exe 'silent 0put y'
 
-  exe '%s/^  \d\+[^\"]\+\"//'
+  exe '%s/^\s\+\d\+[^\"]\+"//'
   exe '%s/"\s\+line /:/'
   exe 'g/^Type number and /d'
   exe 'g/COMMIT_EDITMSG/d'
