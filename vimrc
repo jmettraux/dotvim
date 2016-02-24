@@ -420,7 +420,8 @@ else
   endif
 endif
 
-nnoremap <silent> <leader>tt :w<CR>:e ~/scratch.txt<CR>
+"nnoremap <silent> <leader>tt :w<CR>:e ~/scratch.txt<CR>
+
 
 " Status bar
 "
