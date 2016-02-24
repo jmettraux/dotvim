@@ -370,6 +370,7 @@ function! s:ListFiles()
   exe 'g/^Type number and /d'
   exe 'g/COMMIT_EDITMSG/d'
   exe 'g/NetrwTreeListing/d'
+  exe 'g/bash-fc-/d'
   exe 'silent %s/^[0-9]\+: //'
 
   call feedkeys('1Gjj')
