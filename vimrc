@@ -481,6 +481,8 @@ nnoremap wq :silent! normal mpeld bhd `ph<CR>
 
 " exrc
 "
+" accept local .vimrc but check for ownership (secure)
+"
 set exrc
 set secure
 
