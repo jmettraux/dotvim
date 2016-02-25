@@ -369,11 +369,17 @@ function! s:ListFiles()
   exe '%s/^\s\+\d\+[^\"]\+"//'
   exe '%s/"\s\+line /:/'
   exe 'g/^Type number and /d'
+
   exe 'g/COMMIT_EDITMSG/d'
   exe 'g/NetrwTreeListing/d'
   exe 'g/bash-fc-/d'
   exe 'g/\/mutt-/d'
+    " hide a set well known temp files
+
   exe 'silent %s/^[0-9]\+: //'
+
+  exe '%sno#^' . fnamemodify(expand("."), ":~:.") . '/##'
+    " shorten paths if in a current dir subdir
 
   call feedkeys('1Gjj')
 
