@@ -146,7 +146,7 @@ nnoremap <leader>gg <C-o>
 
 let g:jmAlt = 1
 function! <SID>JmBufLeave()
-  if &filetype !=# 'netrw'
+  if &filetype !=# 'netrw' && &filetype !=# 'ListFiles'
     let g:jmAlt = bufnr('%')
   end
 endfunction
@@ -350,6 +350,7 @@ function! s:ListFiles()
   exe 'setlocal bufhidden=hide'
   exe 'setlocal noswapfile'
   exe 'setlocal nobuflisted'
+  exe 'setlocal filetype=ListFiles'
 
   exe 'redir @z'
   exe 'silent echo "== recent"'
