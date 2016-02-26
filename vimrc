@@ -158,7 +158,7 @@ au BufLeave * :call <SID>JmBufLeave()
 "
 nnoremap <silent> <leader>; :call <SID>JmBufAlt()<CR>
 
-nnoremap <silent> <leader>n :n<CR>
+"nnoremap <silent> <leader>n :n<CR>
 "nnoremap <silent> <leader>c :only!<CR>
 
 "nnoremap <silent> <leader>b :buffers<CR>
@@ -485,6 +485,18 @@ nnoremap qw :silent! normal yiwi'<ESC>ea'<ESC>
 nnoremap qd :silent! normal yiwi"<ESC>ea"<ESC>
 " remove quotes from a word
 nnoremap wq :silent! normal mpeld bhd `ph<CR>
+
+
+" note taking
+"
+" enter .notes.md, save after each insertion
+"
+function! s:TakeNotes()
+  exe 'e .notes.md'
+  au InsertLeave <buffer> :w
+endfunction
+nnoremap <silent> <leader>n :call <SID>TakeNotes()<CR>
+
 
 " exrc
 "
