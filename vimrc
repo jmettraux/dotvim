@@ -493,7 +493,7 @@ nnoremap wq :silent! normal mpeld bhd `ph<CR>
 "
 function! s:TakeNotes()
   exe 'e .notes.md'
-  au InsertLeave <buffer> :w
+  au CursorHold,InsertLeave <buffer> :w
 endfunction
 nnoremap <silent> <leader>n :call <SID>TakeNotes()<CR>
 
