@@ -339,7 +339,10 @@ nnoremap <leader>l "zyw:exe ":call <SID>Ak(" . string(@z) . ")"<CR>
 
 function! s:ListFiles()
 
-  exe 'silent bwipeout ==ListFiles'
+  let bn = bufwinnr('==ListFiles')
+  if bn > 0
+    exe 'bwipeout! ==ListFiles'
+  endif
     " close previous ListFiles if any
 
   exe 'new | only'
@@ -352,19 +355,28 @@ function! s:ListFiles()
   exe 'setlocal nobuflisted'
   exe 'setlocal filetype=ListFiles'
 
+  exe 'let @z=""'
   exe 'redir @z'
-  exe 'silent echo "== recent"'
-  exe 'silent echo ""'
-  exe 'silent bro ol'
-  exe 'redir END'
-  exe 'silent 0put z'
-
-  exe 'redir @y'
   exe 'silent echo "== buffers"'
-  exe 'silent echo ""'
   exe 'silent buffers'
   exe 'redir END'
-  exe 'silent 0put y'
+  exe 'silent $put z'
+
+  if filereadable('.errors') && getfsize('.errors') > 0
+    exe 'let @z=""'
+    exe 'redir @z'
+    exe 'silent echo "== .errors"'
+    exe 'redir END'
+    exe 'silent $put z'
+    exe 'r .errors'
+  endif
+
+  exe 'let @z=""'
+  exe 'redir @z'
+  exe 'silent echo "== recent"'
+  exe 'silent bro ol'
+  exe 'redir END'
+  exe 'silent $put z'
 
   exe '%s/^\s\+\d\+[^\"]\+"//'
   exe '%s/"\s\+line /:/'
@@ -373,6 +385,7 @@ function! s:ListFiles()
   exe 'g/COMMIT_EDITMSG/d'
   exe 'g/NetrwTreeListing/d'
   exe 'g/bash-fc-/d'
+  exe 'g/==ListFiles/d'
   exe 'g/\/mutt-/d'
     " hide a set well known temp files
 
@@ -380,6 +393,9 @@ function! s:ListFiles()
 
   exe '%sno#^' . fnamemodify(expand("."), ":~:.") . '/##'
     " shorten paths if in a current dir subdir
+
+  exe 'g/^$/d'
+  exe '%s/^==/==/'
 
   call feedkeys('1Gjj')
 
