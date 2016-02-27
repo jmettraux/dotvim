@@ -339,10 +339,9 @@ nnoremap <leader>l "zyw:exe ":call <SID>Ak(" . string(@z) . ")"<CR>
 
 function! s:ListFiles()
 
-  let bn = bufwinnr('==ListFiles')
-  if bn > 0
+  if bufnr('==ListFiles') > 0
     exe 'bwipeout! ==ListFiles'
-  endif
+  end
     " close previous ListFiles if any
 
   exe 'new | only'
