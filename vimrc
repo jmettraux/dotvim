@@ -339,6 +339,11 @@ nnoremap <leader>l "zyw:exe ":call <SID>Ak(" . string(@z) . ")"<CR>
 
 function! s:ListFiles()
 
+  if &mod == 1
+    echoerr "Current buffer has unsaved changes."
+    return
+  end
+
   if bufnr('==ListFiles') > 0
     exe 'bwipeout! ==ListFiles'
   end
