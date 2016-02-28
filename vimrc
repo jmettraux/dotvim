@@ -375,12 +375,16 @@ function! s:ListFiles()
     exe 'r .errors'
   endif
 
+  let l = line('.') + 1
   exe 'let @z=""'
   exe 'redir @z'
   exe 'silent echo "== recent"'
   exe 'silent bro ol'
   exe 'redir END'
   exe 'silent $put z'
+  "
+  exe '' . l . ',g/greprout/d'
+    " don't show recent .greprout files (they're gone)
 
   exe '%s/^\s\+\d\+[^\"]\+"//'
   exe '%s/"\s\+line /:/'
