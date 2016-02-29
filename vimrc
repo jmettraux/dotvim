@@ -294,7 +294,7 @@ endfunction
 
 " inspiration: http://stackoverflow.com/questions/10493452
 "
-function! s:Ak(args)
+function! s:Vg(args)
 
   if &mod == 1
     echoerr "Current buffer has unsaved changes. Aborting search."
@@ -307,7 +307,7 @@ function! s:Ak(args)
 
   exe 'e ' . fn
   exe '%d'
-  exe "r! echo '== :Ak " . pr[0] . " " . rest . "'"
+  exe "r! echo '== :Vg " . pr[0] . " " . rest . "'"
   exe "Clean"
   exe 'r! echo ""'
   exe 'r! grep -R -n --exclude-dir=.git --exclude-dir=tmp ' . pr[0] . ' ' . rest
@@ -328,13 +328,13 @@ au BufRead *.greprout set filetype=greprout
 
 nnoremap <leader>f gF
 
-"command! -nargs=1 Ak :! grep -R -n --exclude-dir=.git <args>
-"command! -nargs=* Ak :call <SID>Ak(<f-args>)
-command! -nargs=* Ak :call <SID>Ak(<q-args>)
+"command! -nargs=1 Vg :! grep -R -n --exclude-dir=.git <args>
+"command! -nargs=* Vg :call <SID>Vg(<f-args>)
+command! -nargs=* Vg :call <SID>Vg(<q-args>)
 
-"nnoremap <leader>q "zyw:exe ":call <SID>Ak(\"" . @z . "\")"<CR>
+"nnoremap <leader>q "zyw:exe ":call <SID>Vg(\"" . @z . "\")"<CR>
 "nnoremap <leader>q "zyw:exe ":echo \"" . @z . "\""<CR>
-nnoremap <leader>l "zyw:exe ":call <SID>Ak(" . string(@z) . ")"<CR>
+nnoremap <leader>l "zyw:exe ":call <SID>Vg(" . string(@z) . ")"<CR>
 
 
 function! s:ListFiles()
