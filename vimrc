@@ -511,15 +511,14 @@ nnoremap qd :silent! normal yiwi"<ESC>ea"<ESC>
 nnoremap wq :silent! normal mpeld bhd `ph<CR>
 
 
-" note taking
+" note taking / todo management
 "
-" enter .notes.md, save after each insertion
-"
-function! s:TakeNotes()
-  exe 'e .notes.md'
+function! s:OpenScratch(type)
+  exe 'e .' . a:type . '.md'
   au CursorHold,InsertLeave <buffer> :w
 endfunction
-nnoremap <silent> <leader>n :call <SID>TakeNotes()<CR>
+nnoremap <silent> <leader>n :call <SID>OpenScratch('notes')<CR>
+nnoremap <silent> <leader>t :call <SID>OpenScratch('todo')<CR>
 
 
 " exrc
