@@ -390,11 +390,11 @@ function! s:ListFiles()
   exe '%s/"\s\+line /:/'
   exe 'g/^Type number and /d'
 
-  exe 'g/COMMIT_EDITMSG/d'
-  exe 'g/NetrwTreeListing/d'
-  exe 'g/bash-fc-/d'
-  exe 'g/==ListFiles/d'
-  exe 'g/\/mutt-/d'
+  exe 'g/COMMIT_EDITMSG/d_'
+  exe 'g/NetrwTreeListing/d_'
+  exe 'g/bash-fc-/d_'
+  exe 'g/==ListFiles/d_'
+  exe 'g/\/mutt-/d_'
     " hide a set well known temp files
 
   exe 'silent %s/^[0-9]\+: //'
@@ -402,7 +402,7 @@ function! s:ListFiles()
   exe '%sno#^' . fnamemodify(expand("."), ":~:.") . '/##'
     " shorten paths if in a current dir subdir
 
-  exe 'g/^$/d'
+  exe 'g/^$/d_'
   exe '%s/^==/==/'
 
   call feedkeys('1Gjj')
