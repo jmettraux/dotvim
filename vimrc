@@ -111,7 +111,7 @@ function! <SID>SynStack()
     let link = matchstr(out, ' links to \zs.*\ze$')
     if !empty(link)
       exe "hi" link
-    end
+    endif
   endfor
 
   echo '.'
@@ -148,7 +148,7 @@ let g:jmAlt = 1
 function! <SID>JmBufLeave()
   if &filetype !=# 'netrw' && &filetype !=# 'ListFiles'
     let g:jmAlt = bufnr('%')
-  end
+  endif
 endfunction
 function! <SID>JmBufAlt()
   exe "buffer " . g:jmAlt
@@ -299,7 +299,7 @@ function! s:Vg(args)
   if &mod == 1
     echoerr "Current buffer has unsaved changes. Aborting search."
     return
-  end
+  endif
 
   let pr = s:ExtractPatternAndRest(a:args)
   let rest = pr[1] == '' ? '.' : pr[1]
@@ -342,11 +342,11 @@ function! s:ListFiles()
   if &mod == 1
     echoerr "Current buffer has unsaved changes."
     return
-  end
+  endif
 
   if bufnr('==ListFiles') > 0
     exe 'bwipeout! ==ListFiles'
-  end
+  endif
     " close previous ListFiles if any
 
   exe 'new | only'
@@ -518,7 +518,26 @@ function! s:OpenScratch(type)
   au CursorHold,InsertLeave <buffer> :w
 endfunction
 nnoremap <silent> <leader>n :call <SID>OpenScratch('notes')<CR>
-nnoremap <silent> <leader>t :call <SID>OpenScratch('todo')<CR>
+"nnoremap <silent> <leader>t :call <SID>OpenScratch('todo')<CR>
+
+function! s:OpenTodos()
+  exe 'e .todo.md'
+  let src = search('^## src')
+  if src > 0
+    exe 'silent ' . src . ',$d'
+  else
+    exe 'normal Go'
+  endif
+  exe 'normal i## src'
+  let lin = line('.')
+  exe 'silent r! grep -R -n -s TODO src lib spec app'
+  exe 'silent ' . lin . ',$s/^\([^ ]\+\)\(.\+\)$/\1 ```\2```/'
+  exe 'normal o'
+  exe 'normal 1G'
+  write
+  au CursorHold,InsertLeave <buffer> :w
+endfunction
+nnoremap <silent> <leader>t :call <SID>OpenTodos()<CR>
 
 
 " exrc
