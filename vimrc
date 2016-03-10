@@ -306,7 +306,7 @@ function! s:Vg(args)
   let fn = tempname() . '--' . s:Ntr(pr[0]) . '--' . s:Ntr(rest) . '.greprout'
 
   exe 'e ' . fn
-  exe '%d'
+  exe '%d_'
   exe "r! echo '== :Vg " . pr[0] . " " . rest . "'"
   exe "Clean"
   exe 'r! echo ""'
@@ -383,12 +383,12 @@ function! s:ListFiles()
   exe 'redir END'
   exe 'silent $put z'
   "
-  exe '' . l . ',g/greprout/d'
+  exe '' . l . ',g/greprout/d_'
     " don't show recent .greprout files (they're gone)
 
   exe '%s/^\s\+\d\+[^\"]\+"//'
   exe '%s/"\s\+line /:/'
-  exe 'g/^Type number and /d'
+  exe 'g/^Type number and /d_'
 
   exe 'g/COMMIT_EDITMSG/d_'
   exe 'g/NetrwTreeListing/d_'
