@@ -118,7 +118,9 @@ function! <SID>SynStack()
 endfunc
 nnoremap <silent> ;s :call <SID>SynStack()<CR>
 
-nnoremap <leader><TAB> i<C-v><TAB><ESC>
+" http://vim.wikia.com/wiki/Fix_syntax_highlighting
+"
+nnoremap <leader>@ :syntax sync fromstart
 
 
 " windows
@@ -582,4 +584,7 @@ set secure
 "
 " g CTRL-g to display offsets
 "
+
+" inserting a real tab... Makefile...
+nnoremap <leader><TAB> i<C-v><TAB><ESC>
 
