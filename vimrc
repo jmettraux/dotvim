@@ -417,6 +417,37 @@ command! -nargs=0 ListFiles :call <SID>ListFiles()
 nnoremap <silent> <leader>b :call <SID>ListFiles()<CR>
 
 
+" rspec.out
+"
+function! s:OpenRspecOut()
+
+  exe 'e .rspec.out'
+
+  exe 'setlocal buftype=nofile'
+  exe 'setlocal bufhidden=hide'
+  exe 'setlocal noswapfile'
+  exe 'setlocal nobuflisted'
+  "exe 'setlocal ro'
+  exe 'setlocal filetype=.rspec.out'
+
+  exe 'silent %s/\%x1B\[\d\+m//g'
+  exe 'silent %s/\v\s*$//'
+  exe 'normal G'
+
+  setlocal syntax=rspecout
+
+  nmap <buffer> o gF
+  nmap <buffer> <space> gF
+  nmap <buffer> <CR> gF
+
+  "nmap <buffer> n :silent /\.\//<CR>w:nohlsearch<CR>
+  nmap <buffer> b :call search('\.\/', 'b')<CR>
+  nmap <buffer> n :call search('\.\/', '')<CR>
+    " no hl involved :-)
+endfunction
+nnoremap <silent> <leader>r :call <SID>OpenRspecOut()<CR>
+
+
 "function! <SID>Test(...)
 "  let i = 1
 "  while i <= a:0
@@ -551,5 +582,4 @@ set secure
 "
 " g CTRL-g to display offsets
 "
-
 
