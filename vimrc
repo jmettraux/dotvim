@@ -381,7 +381,7 @@ function! s:ListFiles()
   exe 'let @z=""'
   exe 'redir @z'
   exe 'silent echo "== recent"'
-  exe 'silent bro ol'
+  exe 'silent oldfiles'
   exe 'redir END'
   exe 'silent $put z'
   "
@@ -390,7 +390,6 @@ function! s:ListFiles()
 
   exe '%s/^\s\+\d\+[^\"]\+"//'
   exe '%s/"\s\+line /:/'
-  exe 'g/^Type number and /d_'
 
   exe 'g/COMMIT_EDITMSG/d_'
   exe 'g/NetrwTreeListing/d_'
