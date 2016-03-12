@@ -120,7 +120,7 @@ nnoremap <silent> ;s :call <SID>SynStack()<CR>
 
 " http://vim.wikia.com/wiki/Fix_syntax_highlighting
 "
-nnoremap <leader>@ :syntax sync fromstart
+nnoremap <leader>@ :syntax sync fromstart<CR>
 
 
 " windows
@@ -571,6 +571,30 @@ function! s:OpenTodos()
   au CursorHold,InsertLeave <buffer> :w
 endfunction
 nnoremap <silent> <leader>t :call <SID>OpenTodos()<CR>
+
+
+" open previous file for `vp`
+"
+function! s:OpenPrevious()
+  exe 'new | only'
+  exe 'setlocal buftype=nofile'
+  exe 'setlocal bufhidden=hide'
+  exe 'setlocal noswapfile'
+  exe 'setlocal nobuflisted'
+  "exe 'setlocal filetype=ListFiles'
+  exe 'let @z=""'
+  exe 'redir @z'
+  exe 'silent ol'
+  exe 'redir END'
+  exe 'silent 0put z'
+  exe 'g/COMMIT_EDITMSG/d_'
+  exe 'g/NetrwTreeListing/d_'
+  exe 'g/==ListFiles/d_'
+  exe 'normal 2G10lgF'
+  exe 'syntax sync fromstart'
+endfunction
+command! -nargs=0 OpenPrevious :call <SID>OpenPrevious()
+"nnoremap <silent> <leader>p :call <SID>OpenPrevious()<CR>
 
 
 " exrc
