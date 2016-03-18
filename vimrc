@@ -120,7 +120,8 @@ nnoremap <silent> ;s :call <SID>SynStack()<CR>
 
 " http://vim.wikia.com/wiki/Fix_syntax_highlighting
 "
-nnoremap <leader>@ :syntax sync fromstart<CR>
+"nnoremap <leader>@ :syntax sync fromstart<CR>
+  " wrapped in _ from now on
 
 
 " windows
@@ -242,8 +243,8 @@ endfunction
 "
 set incsearch
 set hlsearch
-nnoremap <silent> _ :nohlsearch<CR>
-nnoremap <silent> \ :nohlsearch<CR>
+nnoremap <silent> _ :nohlsearch<CR>:syntax sync fromstart<CR>
+"nnoremap <silent> \ :nohlsearch<CR>
 
 function! <SID>Grep(regex)
   exe 'vimgrep /'.a:regex.'/j ./**/*.rb'
