@@ -66,6 +66,10 @@ au FileType java set tabstop=4
 au FileType java set shiftwidth=4
 
 au FileType ruby set shiftwidth=2
+
+au BufRead COMMIT_EDITMSG call feedkeys('1G')
+  " go to first line of commit messages
+
 "filetype plugin indent on
 filetype on
 
