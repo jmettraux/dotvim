@@ -49,7 +49,11 @@ au BufRead *.ru set filetype=ruby
 au BufRead *.rake set filetype=ruby
 au BufRead *.rconf set filetype=ruby
 
-au BufNewFile,BufRead *.md set filetype=mkd
+function! <SID>GoMkd()
+  set filetype=mkd
+  syntax sync fromstart
+endfunction
+au BufNewFile,BufRead *.md :call <SID>GoMkd()
 
 au BufNewFile,BufRead *.liquid set ft=liquid
 au BufNewFile,BufRead */_layouts/*.html set ft=liquid
@@ -78,7 +82,7 @@ filetype on
 "nnoremap q :%s/    /  /g<ENTER>
 "nnoremap t :%s/ *$//<ENTER>
 command! -nargs=0 Clean :silent %s/\v\s*$// | nohlsearch
-command! -nargs=0 Mkd :silent :set filetype=mkd
+"command! -nargs=0 Mkd :silent :set filetype=mkd
 
 " colors
 "
