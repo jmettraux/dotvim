@@ -14,6 +14,7 @@ syn region radialComment start="#" end="\n"
 
 syn region radialString start=+"+  skip=+\\"+  end=+"+
 syn region radialString	start=+'+  skip=+\\'+  end=+'+
+syn region radialString	start=+/+  skip=+\\/+  end=+/+
 
 hi def link radialHead Keyword
 hi def link radialString String
