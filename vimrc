@@ -42,8 +42,8 @@ set cmdwinheight=20
 inoremap <C-n> <nop>
 
 au BufRead *.go set filetype=go
-au BufRead *.rad set filetype=radial
-au BufRead *.radial set filetype=radial
+au BufRead *.fln set filetype=flon
+au BufRead *.flon set filetype=flon
 au BufRead *.erb set filetype=eruby
 au BufRead *.ru set filetype=ruby
 au BufRead *.rake set filetype=ruby
