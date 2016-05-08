@@ -422,6 +422,8 @@ function! s:ListFiles()
   nmap <buffer> o gF
   nmap <buffer> <space> gF
   nmap <buffer> <CR> gF
+  nmap <buffer> rr :call search('^== \.errors', '')<CR>j
+    " silently go to "== .errors" well... the commands appear downstairs...
 endfunction
 command! -nargs=0 ListFiles :call <SID>ListFiles()
 nnoremap <silent> <leader>b :call <SID>ListFiles()<CR>
