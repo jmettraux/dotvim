@@ -321,6 +321,7 @@ function! s:Vg(args)
   exe "r! echo '== :Vg " . pr[0] . " " . rest . "'"
   exe "Clean"
   exe 'r! echo ""'
+  "exe 'r! grep -R -n --exclude-dir=.git --exclude-dir=tmp --exclude=.viminfo --exclude="*.log" ' . pr[0] . ' ' . rest
   exe 'r! grep -R -n --exclude-dir=.git --exclude-dir=tmp --exclude=.viminfo ' . pr[0] . ' ' . rest
   exe 'r! echo ""'
   let g:groPattern = pr[0]
