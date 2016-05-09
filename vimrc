@@ -415,7 +415,9 @@ function! s:ListFiles()
   exe 'g/^$/d_'
   exe '%s/^==/==/'
 
-  call feedkeys('1Gjj')
+  call feedkeys('1G')
+  call feedkeys(":call search('^[\.\/a-zA-Z0-9]', '')\r")
+    " go to first file
 
   setlocal syntax=listold
 
