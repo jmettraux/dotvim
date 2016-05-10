@@ -346,7 +346,8 @@ command! -nargs=* Vg :call <SID>Vg(<q-args>)
 
 "nnoremap <leader>q "zyw:exe ":call <SID>Vg(\"" . @z . "\")"<CR>
 "nnoremap <leader>q "zyw:exe ":echo \"" . @z . "\""<CR>
-nnoremap <leader>g "zyw:exe ":call <SID>Vg(" . string(@z) . ")"<CR>
+"nnoremap <leader>g "zyw:exe ":call <SID>Vg(" . string(@z) . ")"<CR>
+nnoremap <leader>g "zyw:exe ":call <SID>Vg('" . @z . " lib/ src/')"<CR>
 
 
 function! s:ListFiles()
