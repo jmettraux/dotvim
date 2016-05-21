@@ -267,6 +267,7 @@ function! <SID>Find(fragment)
   exe 'e ' l:result
 endfunction
 command! -nargs=1 F :call <SID>Find('<args>')
+command! -nargs=1 Vf :call <SID>Find('<args>')
 
 " with help from http://stackoverflow.com/questions/4478891
 "
