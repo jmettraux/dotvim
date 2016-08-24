@@ -449,9 +449,10 @@ function! s:ListFiles()
   exe 'g/^$/d_'
   exe '%s/^==/==/'
 
-  call search('== recent')
-  let l = line('.') + 1
-  exe '' . l . ',$sort u'
+  "call search('== recent')
+  "let l = line('.') + 1
+  "exe '' . l . ',$sort u'
+    " sort recent files
 
   call feedkeys('1G')
   call feedkeys(":call search('^[\.\/a-zA-Z0-9]', '')\r")
