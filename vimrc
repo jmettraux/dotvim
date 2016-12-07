@@ -463,10 +463,13 @@ function! s:ListFiles()
   nmap <buffer> o gF
   nmap <buffer> <space> gF
   nmap <buffer> <CR> gF
+
   nmap <buffer> rr :call search('^== \.errors', '')<CR>j
     " silently go to "== .errors" well... the commands appear downstairs...
 
-  " reminder type "}" to go to next blank line...
+  nmap <buffer> gl :call search('^== buffers', '')<CR>}k
+    " silently go to last file in buffer
+    " reminder type "}" to go to next blank line... See also "{", ")" and "("
 endfunction
 command! -nargs=0 ListFiles :call <SID>ListFiles()
 nnoremap <silent> <leader>b :call <SID>ListFiles()<CR>
