@@ -43,6 +43,7 @@ inoremap <C-n> <nop>
 
 au BufRead *.go set filetype=go
 au BufRead *.fln set filetype=flon
+au BufRead *.flo set filetype=flon
 au BufRead *.flon set filetype=flon
 au BufRead *.erb set filetype=eruby
 au BufRead *.ru set filetype=ruby
