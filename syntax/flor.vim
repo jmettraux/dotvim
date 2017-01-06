@@ -1,6 +1,14 @@
 
 " MIT license
 
+
+" in the vimrc file itself:
+"au BufRead *.flo set filetype=flor
+"au BufRead *.flor set filetype=flor
+"au BufRead *.flon set filetype=flor
+"au BufRead *.fln set filetype=flor
+
+
 " Quit when a (custom) syntax file is already loaded
 if exists("b:current_syntax")
   finish
