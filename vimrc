@@ -345,8 +345,20 @@ au BufRead *.greprout set filetype=greprout
 nnoremap <leader>f gF
   " go file
 
-nnoremap <leader>x <ESC>0G:call search(' link: ', '')<CR>7lgF
-  " ;x to go to linked file, if any...
+function! s:GoToLink()
+  let cursor = getpos('.')
+  call setpos('.', [ 0, 0, 0, 0 ])
+  let r = search(' link: ', 'c')
+  if r == 0
+    call setpos('.', cursor)
+    return
+  end
+  normal www
+  let path = expand('<cfile>')
+  call setpos('.', cursor)
+  execute 'edit ' . path
+endfunction
+nnoremap <leader>x <ESC>:call <SID>GoToLink()<CR>
 
 "command! -nargs=1 Vg :! grep -R -n --exclude-dir=.git <args>
 "command! -nargs=* Vg :call <SID>Vg(<f-args>)
