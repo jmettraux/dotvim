@@ -343,6 +343,10 @@ au BufRead *.greprout set filetype=greprout
 
 
 nnoremap <leader>f gF
+  " go file
+
+nnoremap <leader>x <ESC>0G:call search(' link: ', '')<CR>7lgF
+  " ;x to go to linked file, if any...
 
 "command! -nargs=1 Vg :! grep -R -n --exclude-dir=.git <args>
 "command! -nargs=* Vg :call <SID>Vg(<f-args>)
