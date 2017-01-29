@@ -358,7 +358,7 @@ function! s:GoToLink()
   call setpos('.', cursor)
   execute 'edit ' . path
 endfunction
-nnoremap <leader>x <ESC>:call <SID>GoToLink()<CR>
+nnoremap <leader>x :call <SID>GoToLink()<CR>
 
 "command! -nargs=1 Vg :! grep -R -n --exclude-dir=.git <args>
 "command! -nargs=* Vg :call <SID>Vg(<f-args>)
