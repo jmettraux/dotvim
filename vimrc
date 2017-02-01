@@ -690,3 +690,10 @@ set secure
 " inserting a real tab... Makefile...
 nnoremap <leader><TAB> i<C-v><TAB><ESC>
 
+
+" https://github.com/mcantor/no_plugins/blob/master/no_plugins.vim
+"
+set path+=**
+set wildmenu
+"set makeprg=bundle\ exec\ rspec\ -f\ QuickfixFormatter
+
