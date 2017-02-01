@@ -34,7 +34,9 @@ set fenc=utf-8
 set smartindent
 set smarttab
 
-set history=147
+set history=128
+set undolevels=1024
+
 set cmdwinheight=20
   " q: q/ q?
 
@@ -695,5 +697,7 @@ nnoremap <leader><TAB> i<C-v><TAB><ESC>
 "
 set path+=**
 set wildmenu
+set wildignore=*.swp
+
 "set makeprg=bundle\ exec\ rspec\ -f\ QuickfixFormatter
 
