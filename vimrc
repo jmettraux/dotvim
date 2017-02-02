@@ -498,6 +498,29 @@ command! -nargs=0 ListFiles :call <SID>ListFiles()
 nnoremap <silent> <leader>b :call <SID>ListFiles()<CR>
 
 
+function! s:ShowTree(args)
+
+  if &mod == 1
+    echoerr "Current buffer has unsaved changes. Aborting search."
+    return
+  endif
+
+  exe 'new | only'
+    " | only makes it full window
+  exe 'file ==ShowTree'
+    " replace buffer name
+  exe 'setlocal buftype=nofile'
+  exe 'setlocal bufhidden=hide'
+  exe 'setlocal noswapfile'
+  exe 'setlocal nobuflisted'
+  exe 'setlocal filetype=ListFiles'
+
+  exe "r! tree -i -f -F spec"
+
+endfunction "Vg
+command! -nargs=* Vt :call <SID>ShowTree(<f-args>)
+
+
 " rspec.out
 "
 function! s:OpenRspecOut()
