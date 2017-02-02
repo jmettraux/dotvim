@@ -189,6 +189,9 @@ nnoremap <silent> <leader>8 :e #8<CR>
 nnoremap <silent> <leader>9 :e #9<CR>
 "nnoremap <silent> <leader>a 0w
 
+nnoremap <leader>f gF
+  " go file
+
 "nnoremap <silent> <leader>t /TODO<CR>
 " TODO: pop that search when done
 
@@ -332,7 +335,8 @@ function! s:Vg(args)
   exe 'r! echo ""'
   let g:groPattern = pr[0]
   setlocal syntax=greprout
-  call feedkeys('4G')
+  "call feedkeys('4G')
+  normal 4G
   write
   nmap <buffer> o gF
   nmap <buffer> <space> gF
@@ -340,12 +344,36 @@ function! s:Vg(args)
   "nmap <buffer> <leader>; gF
     " no, keep it for switching to alternate buffer
 endfunction
-
 au BufRead *.greprout set filetype=greprout
 
 
-nnoremap <leader>f gF
-  " go file
+function! s:ShowTree(start)
+
+  if &mod == 1
+    echoerr "Current buffer has unsaved changes. Aborting search."
+    return
+  endif
+
+  let fn = tempname() . '--' . s:Ntr(a:start) . '.showtreeout'
+
+  exe 'e ' . fn
+
+  exe 'silent r! tree -i -f -F ' . a:start
+  "exe 'silent g/\/$/d'
+  setlocal syntax=showtreeout
+  normal 1Gdd
+  write
+
+  nmap <buffer> o gF
+  nmap <buffer> <space> gF
+  nmap <buffer> <CR> gF
+
+  nmap <buffer> v /
+
+endfunction "Vg
+command! -nargs=* Vt :call <SID>ShowTree(<f-args>)
+au BufRead *.showtreeout set filetype=showtreeout
+
 
 function! s:GoToLink()
   let cursor = getpos('.')
@@ -450,7 +478,8 @@ function! s:ListFiles()
   exe 'silent $put z'
   "
   exe '' . l . ',g/greprout/d_'
-    " don't show recent .greprout files (they're gone)
+  exe '' . l . ',g/showtreeout/d_'
+    " don't show recent .greprout or .showtreeout files (they're gone)
 
   exe '%s/^\s\+\d\+[^\"]\+"//'
   exe '%s/"\s\+line /:/'
@@ -496,29 +525,6 @@ function! s:ListFiles()
 endfunction
 command! -nargs=0 ListFiles :call <SID>ListFiles()
 nnoremap <silent> <leader>b :call <SID>ListFiles()<CR>
-
-
-function! s:ShowTree(args)
-
-  if &mod == 1
-    echoerr "Current buffer has unsaved changes. Aborting search."
-    return
-  endif
-
-  exe 'new | only'
-    " | only makes it full window
-  exe 'file ==ShowTree'
-    " replace buffer name
-  exe 'setlocal buftype=nofile'
-  exe 'setlocal bufhidden=hide'
-  exe 'setlocal noswapfile'
-  exe 'setlocal nobuflisted'
-  exe 'setlocal filetype=ListFiles'
-
-  exe "r! tree -i -f -F spec"
-
-endfunction "Vg
-command! -nargs=* Vt :call <SID>ShowTree(<f-args>)
 
 
 " rspec.out
