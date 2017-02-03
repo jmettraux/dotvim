@@ -371,7 +371,7 @@ function! s:ShowTree(start)
   nmap <buffer> v /
 
 endfunction "Vg
-command! -nargs=1 -complete=file Vt :call <SID>ShowTree(<f-args>)
+command! -nargs=1 -complete=dir Vt :call <SID>ShowTree(<f-args>)
 au BufRead *.showtreeout set filetype=showtreeout
 
 
