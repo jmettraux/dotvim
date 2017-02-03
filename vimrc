@@ -360,8 +360,8 @@ function! s:ShowTree(start)
 
   exe 'silent r! tree -i -f -F ' . a:start
   "exe 'silent g/\/$/d'
+  normal 1GddA/
   setlocal syntax=showtreeout
-  normal 1Gdd
   write
 
   nmap <buffer> o gF
@@ -371,7 +371,7 @@ function! s:ShowTree(start)
   nmap <buffer> v /
 
 endfunction "Vg
-command! -nargs=* Vt :call <SID>ShowTree(<f-args>)
+command! -nargs=1 -complete=file Vt :call <SID>ShowTree(<f-args>)
 au BufRead *.showtreeout set filetype=showtreeout
 
 
