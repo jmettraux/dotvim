@@ -392,7 +392,7 @@ nnoremap <leader>x :call <SID>GoToLink()<CR>
 
 "command! -nargs=1 Vg :! grep -R -n --exclude-dir=.git <args>
 "command! -nargs=* Vg :call <SID>Vg(<f-args>)
-command! -nargs=* Vg :call <SID>Vg(<q-args>)
+command! -nargs=* -complete=file Vg :call <SID>Vg(<q-args>)
 
 "nnoremap <leader>q "zyw:exe ":call <SID>Vg(\"" . @z . "\")"<CR>
 "nnoremap <leader>q "zyw:exe ":echo \"" . @z . "\""<CR>
