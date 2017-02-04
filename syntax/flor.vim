@@ -14,18 +14,19 @@ if exists("b:current_syntax")
   finish
 endif
 
+
 syn match florSpecial ";"
 syn match florSpecial "\\"
+syn match florSpecial "_"
 syn match florHead /^[ ]*[^ ;#\[\]{}()]\+/
 syn match florHead /;\@<=[ ]*[^ ;#\[\]{}()]\+/
-syn match florKey /\v\zs[^\s]+\ze[\s]*:/
+syn match florKey /\v\zs[^' ]+\ze[ ]*:/
 syn keyword florKey if unless
-
-syn region florComment start="#" end="\n"
 
 syn region florString start=+"+  skip=+\\"+  end=+"+
 syn region florString start=+'+  skip=+\\'+  end=+'+
 syn region florString start=+/+  skip=+\\/+  end=+/+
+syn region florComment start="#" end="\n"
 
 hi def link florHead Keyword
 hi def link florString String
