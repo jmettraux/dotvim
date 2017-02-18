@@ -43,16 +43,17 @@ set cmdwinheight=20
 " disabling the pulldown autocomplete thinggy
 inoremap <C-n> <nop>
 
-au BufRead *.go set filetype=go
 au BufRead *.erb set filetype=eruby
-au BufRead *.ru set filetype=ruby
 au BufRead *.rake set filetype=ruby
 au BufRead *.rconf set filetype=ruby
+au BufNewFile,BufRead *.go set filetype=go
+au BufNewFile,BufRead *.ru set filetype=ruby
 
-au BufRead *.flo set filetype=flor
-au BufRead *.flor set filetype=flor
-au BufRead *.flon set filetype=flor
-au BufRead *.fln set filetype=flor
+au BufNewFile,BufRead *.flo set ft=flor
+au BufNewFile,BufRead *.flor set ft=flor
+au BufNewFile,BufRead *.flon set ft=flor
+au BufNewFile,BufRead *.fln set ft=flor
+au BufNewFile,BufRead *.json set ft=javascript
 
 function! <SID>GoMkd()
   set filetype=mkd
