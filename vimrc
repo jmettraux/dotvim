@@ -518,7 +518,7 @@ function! s:ListFiles()
 
   nmap <buffer> v /
 
-  nmap <buffer> rr :call search('^== \.errors', '')<CR>j
+  nmap <buffer> rr :call search('^== \.errors', '')<CR>jll
     " silently go to "== .errors" well... the commands appear downstairs...
 
   nmap <buffer> gl :call search('^== buffers', '')<CR>}k
