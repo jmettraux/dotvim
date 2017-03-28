@@ -193,6 +193,8 @@ nnoremap <silent> <leader>9 :e #9<CR>
 
 nnoremap <leader>f gF
   " go file
+nnoremap <leader>h :let @" = expand("%") . ':' . line('.')<CR>
+  " 'here'
 
 "nnoremap <silent> <leader>t /TODO<CR>
 " TODO: pop that search when done
