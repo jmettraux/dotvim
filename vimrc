@@ -544,7 +544,7 @@ function! s:OpenRspecOut()
   "exe 'setlocal ro'
   exe 'setlocal filetype=.rspec.out'
 
-  exe 'silent %s/\%x1B\[\d\+m//g'
+  exe 'silent %s/\%x1B\[\d\+\(;\d\+\)\?m//g'
   exe 'silent %s/\v\s*$//'
   exe 'normal G'
 
