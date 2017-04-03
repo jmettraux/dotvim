@@ -196,6 +196,10 @@ nnoremap <leader>f gF
 nnoremap <leader>h :let @" = expand("%") . ':' . line('.')<CR>
   " 'here'
 
+"nnoremap <leader>k 0wDa
+nnoremap <C-k> 0wDa
+inoremap <C-k> <ESC>0wDa
+
 "nnoremap <silent> <leader>t /TODO<CR>
 " TODO: pop that search when done
 
