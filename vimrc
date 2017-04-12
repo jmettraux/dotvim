@@ -324,10 +324,7 @@ endfunction
 "
 function! s:Vg(args)
 
-  if &mod == 1
-    echoerr "Current buffer has unsaved changes. Aborting search."
-    return
-  endif
+  if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
 
   let pr = s:ExtractPatternAndRest(a:args)
   let rest = pr[1] == '' ? '.' : pr[1]
@@ -357,10 +354,7 @@ au BufRead *.greprout set filetype=greprout
 
 function! s:ShowTree(start)
 
-  if &mod == 1
-    echoerr "Current buffer has unsaved changes. Aborting search."
-    return
-  endif
+  if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
 
   let fn = tempname() . '--' . s:Ntr(a:start) . '.showtreeout'
 
@@ -410,10 +404,7 @@ nnoremap <leader>g "zyw:exe ":call <SID>Vg('" . @z . " lib/ src/')"<CR>
 
 function! s:FindFiles(fragment)
 
-  if &mod == 1
-    echoerr "Current buffer has unsaved changes."
-    return
-  endif
+  if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
 
   let fn = tempname() . '--' . s:Ntr(a:fragment) . '.greprout'
 
@@ -441,10 +432,7 @@ command! -nargs=1 VF :call <SID>FindFiles(<f-args>)
 
 function! s:ListFiles()
 
-  if &mod == 1
-    echoerr "Current buffer has unsaved changes."
-    return
-  endif
+  if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
 
   if bufnr('==ListFiles') > 0
     exe 'bwipeout! ==ListFiles'
@@ -671,10 +659,7 @@ nnoremap wq :silent! normal mpeld bhd `ph<CR>
 "
 function! s:OpenScratch(type)
 
-  if &mod == 1
-    echoerr "Current buffer has unsaved changes."
-    return
-  endif
+  if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
 
   exe 'e .' . a:type . '.md'
   au CursorHold,InsertLeave <buffer> :w
@@ -684,10 +669,7 @@ nnoremap <silent> <leader>n :call <SID>OpenScratch('notes')<CR>
 
 function! s:OpenTodos()
 
-  if &mod == 1
-    echoerr "Current buffer has unsaved changes."
-    return
-  endif
+  if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
 
   exe 'e .todo.md'
   let src = search('^## src')
