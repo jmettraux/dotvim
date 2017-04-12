@@ -477,6 +477,13 @@ function! s:ListFiles()
     exe 'r .errors'
   endif
 
+  exe 'let @z=""'
+  exe 'redir @z'
+  exe 'silent echo "== modified"'
+  exe 'redir END'
+  exe 'silent $put z'
+  exe 'r! git diff --name-only'
+
   let l = line('.') + 1
   exe 'let @z=""'
   exe 'redir @z'
