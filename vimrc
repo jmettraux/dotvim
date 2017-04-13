@@ -452,6 +452,9 @@ function! s:OpenGitDiff()
 
   setlocal syntax=gitdiff
 
+  nmap <buffer> <tab> :call search('^.\+ ---+++', '')<CR>0
+    " silently go to next file
+
   nmap <buffer> o gF
   nmap <buffer> <space> gF
   nmap <buffer> <CR> gF
