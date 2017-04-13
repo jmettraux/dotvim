@@ -524,6 +524,7 @@ function! s:ListFiles()
   exe 'g/bash-fc-/d_'
   exe 'g/==ListFiles/d_'
   exe 'g/==GitDiff/d_'
+  exe 'g/\/private\/var\//d_'
   exe 'g/\/mutt-/d_'
     " hide a set well known temp files
 
