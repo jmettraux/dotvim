@@ -455,7 +455,7 @@ function! s:OpenGitDiff()
   nmap <buffer> A :call search('^.\+ ---+++', 'b')<CR>:echo<CR>0
     " silently go to next file
 
-  exe 'normal 1Ga'
+  exe 'normal 1Gdda'
 
   nmap <buffer> o gF
   nmap <buffer> <SPACE> gF
