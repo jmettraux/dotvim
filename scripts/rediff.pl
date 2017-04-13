@@ -12,9 +12,9 @@ while (<>) {
   }
   elsif (/\A(---|\+\+\+) [ab]\//) {}
   elsif (/\Aindex [0-9a-fA-F]+\.\.[0-9a-fA-F]+/) {}
-  elsif (/\A\s+\z/) {} # drop empty lines
   else {
-    print $_;
+    $_ =~ s/\s+$//g;
+    print $_ . "\n";
   }
 }
 
