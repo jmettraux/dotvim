@@ -1,5 +1,5 @@
 
-" MIT license
+" MIT licensed
 
 
 " in the vimrc file itself:

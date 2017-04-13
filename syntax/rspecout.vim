@@ -1,5 +1,5 @@
 
-" MIT license
+" MIT licensed
 
 "hi! rsoFilename cterm=NONE ctermfg=darkgreen ctermbg=16
 hi! rsoLocalFilename cterm=NONE ctermfg=blue ctermbg=16

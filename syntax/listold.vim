@@ -1,5 +1,5 @@
 
-" MIT license
+" MIT licensed
 
 syn match lioTitle '^== .\+'
 "syn match lioPath '^\~.\+'

@@ -1,5 +1,5 @@
 
-" MIT license
+" MIT licensed
 
 " Quit when a (custom) syntax file was already loaded
 "if exists("b:current_syntax")
