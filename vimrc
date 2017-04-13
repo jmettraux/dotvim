@@ -208,7 +208,7 @@ nnoremap <silent> <leader>u :setlocal number!<CR>
 "nnoremap <silent> <leader>m ma
 nnoremap <silent> <leader>a g'a
 nnoremap <silent> <leader>y y'a
-nnoremap <silent> <leader>d d'a
+"nnoremap <silent> <leader>d d'a
 
 inoremap <C-j> <ESC>
 
@@ -430,13 +430,40 @@ command! -nargs=1 FindFiles :call <SID>FindFiles(<f-args>)
 command! -nargs=1 VF :call <SID>FindFiles(<f-args>)
 
 
+function! s:OpenGitDiff()
+
+  if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
+
+  if bufnr('==GitDiff') > 0 | exe 'bwipeout! ==GitDiff' | endif
+    " close previous GitDiff if any
+
+  exe 'new | only'
+    " | only makes it full window
+  exe 'file ==GitDiff'
+    " replace buffer name
+  exe 'setlocal buftype=nofile'
+  exe 'setlocal bufhidden=hide'
+  exe 'setlocal noswapfile'
+  exe 'setlocal nobuflisted'
+  "exe 'setlocal filetype=ListFiles'
+
+  exe 'silent r! git diff | perl ~/.vim/scripts/rediff.pl'
+  exe 'normal 1G'
+
+  setlocal syntax=gitdiff
+
+  nmap <buffer> o gF
+  nmap <buffer> <space> gF
+  nmap <buffer> <CR> gF
+endfunction
+nnoremap <silent> <leader>d :call <SID>OpenGitDiff()<CR>
+
+
 function! s:ListFiles()
 
   if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
 
-  if bufnr('==ListFiles') > 0
-    exe 'bwipeout! ==ListFiles'
-  endif
+  if bufnr('==ListFiles') > 0 | exe 'bwipeout! ==ListFiles' | endif
     " close previous ListFiles if any
 
   exe 'new | only'
