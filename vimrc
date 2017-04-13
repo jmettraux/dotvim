@@ -448,15 +448,17 @@ function! s:OpenGitDiff()
   "exe 'setlocal filetype=ListFiles'
 
   exe 'silent r! git diff | perl ~/.vim/scripts/rediff.pl'
-  exe 'normal 1G'
 
   setlocal syntax=gitdiff
 
-  nmap <buffer> <tab> :call search('^.\+ ---+++', '')<CR>0
+  nmap <buffer> a :call search('^.\+ ---+++', '')<CR>:echo<CR>0
+  nmap <buffer> A :call search('^.\+ ---+++', 'b')<CR>:echo<CR>0
     " silently go to next file
 
+  exe 'normal 1Ga'
+
   nmap <buffer> o gF
-  nmap <buffer> <space> gF
+  nmap <buffer> <SPACE> gF
   nmap <buffer> <CR> gF
 endfunction
 nnoremap <silent> <leader>d :call <SID>OpenGitDiff()<CR>
