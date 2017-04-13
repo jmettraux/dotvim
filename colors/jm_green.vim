@@ -93,19 +93,6 @@ if &term == 'xterm-256color'
     hi! Delimiter cterm=NONE ctermfg=196 ctermbg=16
   hi! Todo cterm=NONE ctermfg=16 ctermbg=41 " black #18D875
 
-  " greprout.vim and listold.vim
-  "
-  hi! groTitle cterm=NONE ctermfg=darkred ctermbg=16
-  hi! groFilename cterm=NONE ctermfg=blue ctermbg=16
-  hi! groLineNr cterm=NONE ctermfg=darkblue ctermbg=16
-  hi! groPattern cterm=NONE ctermfg=darkgreen ctermbg=16
-
-  " listold.vim
-  "
-  hi! lioTitle cterm=NONE ctermfg=darkred ctermbg=16
-  hi! lioPath cterm=NONE ctermfg=darkgreen ctermbg=16
-  hi! lioFilename cterm=NONE ctermfg=green ctermbg=16
-
   " Quickfix
   "
   hi! qfLineNr cterm=NONE ctermfg=136 ctermbg=16

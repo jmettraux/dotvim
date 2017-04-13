@@ -6,7 +6,7 @@
 "  finish
 "endif
 
-"syn case match
+hi! stoFilename cterm=NONE ctermfg=green ctermbg=16
 
 "syn match flBinaryFilename '^Binary file .\+ matches'
 "hi def link flBinaryFilename Special
@@ -17,7 +17,7 @@
 "syn match groFilename '[^\/]\+$'
 "syn match groFilename 'core'
 "syn match groLineNr '\d\+:'
-syn match lioFilename '/[^/]\+$'
+syn match stoFilename '/[^/]\+$'
 
 "echo "syn match groPattern " . g:groPattern
 "exe "syn match groPattern " . g:groPattern

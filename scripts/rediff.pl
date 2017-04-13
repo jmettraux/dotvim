@@ -4,6 +4,7 @@
 my $fname = '(none)';
 
 while (<>) {
+
   if (/\Adiff --git a\/(.+) b\//) {
     $fname = $1;
   }

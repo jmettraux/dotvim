@@ -499,10 +499,10 @@ function! s:ListFiles()
 
   exe 'let @z=""'
   exe 'redir @z'
-  exe 'silent echo "== modified"'
+  exe 'silent echo "== git status"'
   exe 'redir END'
   exe 'silent $put z'
-  exe 'r! git diff --name-only'
+  exe 'r! (echo "`git status`"; echo "`git diff --shortstat`") | perl ~/.vim/scripts/restatus.pl'
 
   let l = line('.') + 1
   exe 'let @z=""'
@@ -541,10 +541,10 @@ function! s:ListFiles()
     " sort recent files
 
   call feedkeys('1G')
-  call feedkeys(":call search('^[\.\/a-zA-Z0-9]', '')\r")
+  call feedkeys(":call search('^[\.\/a-zA-Z0-9]', '')\r:echo\r")
     " go to first file
 
-  setlocal syntax=listold
+  setlocal syntax=listfiles
 
   nmap <buffer> o gF
   nmap <buffer> <space> gF
@@ -552,8 +552,12 @@ function! s:ListFiles()
 
   nmap <buffer> v /
 
-  nmap <buffer> rr :call search('^== \.errors', '')<CR>jll
+  nmap <buffer> rr :call search('^== \.errors', '')<CR>:echo<CR>jll
     " silently go to "== .errors" well... the commands appear downstairs...
+
+  nmap <buffer> a :call search('^== ', '')<CR>:echo<CR>0
+  nmap <buffer> A :call search('^== ', 'b')<CR>:echo<CR>0
+    " silently go to next "== "
 
   nmap <buffer> gl :call search('^== buffers', '')<CR>}k
     " silently go to last file in buffer
