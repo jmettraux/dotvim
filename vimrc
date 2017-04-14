@@ -777,3 +777,7 @@ set wildignore=*.swp
 
 "set makeprg=bundle\ exec\ rspec\ -f\ QuickfixFormatter
 
+
+let &colorcolumn=join(range(81,999),",")
+highlight ColorColumn ctermbg=235 guibg=#2c2d27
+
