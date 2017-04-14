@@ -9,7 +9,7 @@ hi def link lifComment Comment
 syn match lifTitle '^== .\+'
 syn match lifPath '\v^/?([^=# /]+/)+'
 syn match lifFilename '\v/@<=[^ ]+'
-"syn match lifFilename '\v/^[^= /]+'
+syn match lifFilename '\v^[^= /]+$'
 
 "syn region lifFilename start=/[^=#]/ end=/[ \n\(]/
 syn region lifComment start="#" end="\n"
