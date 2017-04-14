@@ -18,7 +18,7 @@ endif
 syn match florSpecial ";"
 syn match florSpecial "|"
 syn match florSpecial "\\"
-syn match florSpecial "_"
+syn match florSpecial "\v\s_"
 syn match florHead /^[ ]*[^ ;#\[\]{}()]\+/
 syn match florHead /;\@<=[ ]*[^ ;#\[\]{}()]\+/
 syn match florKey /\v\zs[^' ]+\ze[ ]*:/
