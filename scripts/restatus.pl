@@ -2,13 +2,13 @@
 # MIT Licensed
 
 while (<>) {
-  if (/\A\s+modified:\s+(.+)\n/) {
-    print $1 . "  (modified)\n"
+  if (/\A\s+new file:\s+(.+)\n/) {
+    print $1 . "  (new file)\n";
   }
-  elsif (/\A\s+new file:\s+(.+)\n/) {
-    print $1 . "  (new file)\n"
+  elsif (/\A ([^\(]+\s+| \d+ [-+]+)\z/) {
+    print $1 . "\n";
   }
-  elsif (/\A \d+ /) {
+  elsif (/\A\s\d+ /) {
     print "#\n#" . $_;
   }
 }

@@ -502,7 +502,7 @@ function! s:ListFiles()
   exe 'silent echo "== git status"'
   exe 'redir END'
   exe 'silent $put z'
-  exe 'r! (echo "`git status`"; echo "`git diff --shortstat`") | perl ~/.vim/scripts/restatus.pl'
+  exe 'r! (echo "`git status`"; echo "`git diff --stat`") | perl ~/.vim/scripts/restatus.pl'
 
   let l = line('.') + 1
   exe 'let @z=""'
