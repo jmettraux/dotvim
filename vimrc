@@ -338,6 +338,7 @@ function! s:Vg(args)
   "exe 'r! grep -R -n --exclude-dir=.git --exclude-dir=tmp --exclude=.viminfo --exclude="*.log" ' . pr[0] . ' ' . rest
   exe 'r! grep -R -n --exclude-dir=.git --exclude-dir=tmp --exclude=.viminfo ' . pr[0] . ' ' . rest
   exe 'r! echo ""'
+  exe 'g/: No such file or directory/d_'
   let g:groPattern = pr[0]
   setlocal syntax=greprout
   "call feedkeys('4G')
@@ -394,12 +395,12 @@ nnoremap <leader>x :call <SID>GoToLink()<CR>
 
 "command! -nargs=1 Vg :! grep -R -n --exclude-dir=.git <args>
 "command! -nargs=* Vg :call <SID>Vg(<f-args>)
-command! -nargs=* -complete=file Vg :call <SID>Vg(<q-args>)
+command! -nargs=* -complete=file Vg :silent! call <SID>Vg(<q-args>)
 
 "nnoremap <leader>q "zyw:exe ":call <SID>Vg(\"" . @z . "\")"<CR>
 "nnoremap <leader>q "zyw:exe ":echo \"" . @z . "\""<CR>
 "nnoremap <leader>g "zyw:exe ":call <SID>Vg(" . string(@z) . ")"<CR>
-nnoremap <leader>g "zyw:exe ":call <SID>Vg('" . @z . " lib/ src/')"<CR>
+nnoremap <leader>g "zyw:exe ":silent! call <SID>Vg('" . @z . " lib/ src/')"<CR>
 
 
 function! s:FindFiles(fragment)
@@ -581,8 +582,11 @@ function! s:OpenRspecOut()
   "exe 'setlocal ro'
   exe 'setlocal filetype=.rspec.out'
 
-  exe 'silent %s/\%x1B\[\d\+\(;\d\+\)\?m//g'
+  exe 'silent! %s/\%x1B\[\d\+\(;\d\+\)\?m//g'
   exe 'silent %s/\v\s*$//'
+    " 'silent' to silence the output
+    " 'silent!' to also silence errors
+
   exe 'normal G'
 
   setlocal syntax=rspecout
