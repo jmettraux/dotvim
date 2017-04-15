@@ -1,7 +1,7 @@
 
 " MIT licensed
 
-hi! lifTitle cterm=NONE ctermfg=darkred ctermbg=16
+hi! lifTitle cterm=NONE ctermfg=grey ctermbg=16
 hi! lifPath cterm=NONE ctermfg=darkgreen ctermbg=16
 hi! lifFilename cterm=NONE ctermfg=green ctermbg=16
 hi def link lifComment Comment
