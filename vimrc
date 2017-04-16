@@ -135,8 +135,8 @@ nnoremap - <C-w>-
 nnoremap <leader>q :q<CR>
 "nnoremap <leader>w :w<CR>
 
-nnoremap <leader>g <C-o>
-nnoremap <leader>gg <C-o>
+"nnoremap <leader>g <C-o>
+"nnoremap <leader>gg <C-o>
 
 let g:jmAlt = 1
 function! <SID>JmBufLeave()
@@ -323,12 +323,6 @@ set statusline+=\ %P " file position
 "nnoremap <leader>ec :e ~/.vim/colors/jm_green.vim<CR>
 "nnoremap <leader>sc :colorscheme jm_green<CR>
 "nnoremap <leader>gd :! cd ~/.vim && git diff<CR>
-
-" Git
-"
-"nnoremap <leader>gu :!git status<cr>
-"nnoremap <leader>gl :!git log --graph --oneline --abbrev-commit --decorate<CR>
-"nnoremap <leader>ti :!tig<CR>
 
 " make
 "
