@@ -7,20 +7,10 @@
 "endif
 
 hi! stoFilename cterm=NONE ctermfg=green ctermbg=16
+hi def link stoSummary Comment
 
-"syn match flBinaryFilename '^Binary file .\+ matches'
-"hi def link flBinaryFilename Special
-"syn match flBf '^Binary file'
-"hi def link flBinaryFilename Normal
-
-"syn match groTitle '^== .\+'
-"syn match groFilename '[^\/]\+$'
-"syn match groFilename 'core'
-"syn match groLineNr '\d\+:'
 syn match stoFilename '/[^/]\+$'
-
-"echo "syn match groPattern " . g:groPattern
-"exe "syn match groPattern " . g:groPattern
+syn match stoSummary '\v^\d+ .+$'
 
 let b:current_syntax = "showtreeout"
 
