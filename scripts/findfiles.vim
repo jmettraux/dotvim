@@ -3,7 +3,7 @@ function! s:FindFiles(fragment)
 
   if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
 
-  let fn = tempname() . '--' . s:Ntr(a:fragment) . '.greprout'
+  let fn = tempname() . '--' . JmNtr(a:fragment) . '.greprout'
 
   exe 'e ' . fn
   exe '%d_'

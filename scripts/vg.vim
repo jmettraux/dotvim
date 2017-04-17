@@ -37,7 +37,7 @@ function! s:Vg(args)
 
   let pr = s:ExtractPatternAndRest(a:args)
   let rest = pr[1] == '' ? '.' : pr[1]
-  let fn = tempname() . '--' . s:Ntr(pr[0]) . '--' . s:Ntr(rest) . '.greprout'
+  let fn = tempname() . '--' . JmNtr(pr[0]) . '--' . JmNtr(rest) . '.greprout'
 
   exe 'e ' . fn
   exe '%d_'

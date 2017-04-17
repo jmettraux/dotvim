@@ -3,7 +3,7 @@ function! s:ShowTree(start)
 
   if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
 
-  let fn = tempname() . '--' . s:Ntr(a:start) . '.showtreeout'
+  let fn = tempname() . '--' . JmNtr(a:start) . '.showtreeout'
 
   exe 'e ' . fn
 
