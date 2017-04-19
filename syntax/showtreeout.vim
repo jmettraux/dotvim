@@ -9,7 +9,7 @@
 hi! stoFilename cterm=NONE ctermfg=green ctermbg=16
 hi def link stoSummary Comment
 
-syn match stoFilename '/[^/]\+$'
+syn match stoFilename '\v/@<=[^\/]+$'
 syn match stoSummary '\v^\d+ .+$'
 
 let b:current_syntax = "showtreeout"
