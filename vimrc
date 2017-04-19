@@ -48,7 +48,10 @@ au BufRead *.rake set filetype=ruby
 au BufRead *.rconf set filetype=ruby
 au BufNewFile,BufRead *.go set filetype=go
 au BufNewFile,BufRead *.ru set filetype=ruby
+
 au BufNewFile,BufRead *.slim set filetype=slim
+"au BufNewFile,BufRead *.slim highlight ColorColumn ctermbg=16
+"  " disable > 80 column highlight
 
 au BufNewFile,BufRead *.flo set ft=flor
 au BufNewFile,BufRead *.flor set ft=flor
