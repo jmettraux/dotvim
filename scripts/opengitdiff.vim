@@ -14,6 +14,7 @@ function! s:OpenFile()
       let fn = m[1]
       let ln = str2nr(m[2]) + nn - 1
       exe ':e +' . ln . ' ' . fn
+      normal zz
 
       break
     endif
