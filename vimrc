@@ -327,9 +327,6 @@ set statusline+=\ %P " file position
 "nnoremap <leader>sc :colorscheme jm_green<CR>
 "nnoremap <leader>gd :! cd ~/.vim && git diff<CR>
 
-" make
-"
-nnoremap <leader>m :!make<CR>
 
 "" from http://vim.wikia.com/wiki/Simple_Macros_to_quote_and_unquote_a_word
 ""
