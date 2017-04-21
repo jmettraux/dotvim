@@ -140,6 +140,7 @@ nnoremap <silent> <leader>l :call <SID>OpenGitLog()<CR>
 function! s:OpenGitBlame()
 
   let fn = expand('%.')
+  let ln = line('.')
 
   if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
 
@@ -158,13 +159,15 @@ function! s:OpenGitBlame()
 
   exe 'silent r! git blame ' . fn . ' | perl ~/.vim/scripts/regitblame.pl'
 
+  exe 'g/^$/d_'
+
   setlocal syntax=gitblame
 
   "nmap <buffer> a :call search('^.\+ ---+++', '')<CR>:echo<CR>0
   "nmap <buffer> A :call search('^.\+ ---+++', 'b')<CR>:echo<CR>0
     " silently go to next file
 
-  exe 'normal 1G'
+  exe 'normal ' . ln . 'G'
 
   "nmap <buffer> o gF
   "nmap <buffer> <SPACE> gF
