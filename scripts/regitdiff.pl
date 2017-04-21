@@ -1,5 +1,5 @@
 
-# MIT Licensed
+# regitdiff.pl
 
 my $fname = '(none)';
 my @files = ();

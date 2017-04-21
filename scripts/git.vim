@@ -97,13 +97,6 @@ function! s:OpenCommit()
   setlocal syntax=gitdiff
 
   exe 'normal 1G'
-
-  "nmap <buffer> o gF
-  "nmap <buffer> <SPACE> gF
-  "nmap <buffer> <CR> gF
-  "nmap <buffer> o :call <SID>OpenFile()<CR>
-  "nmap <buffer> <SPACE> :call <SID>OpenFile()<CR>
-  nmap <buffer> <CR> :call <SID>OpenCommit()<CR>
 endfunction " OpenCommit
 
 function! s:OpenGitLog()

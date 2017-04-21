@@ -1,5 +1,5 @@
 
-# MIT Licensed
+# restatus.pl
 
 while (<>) {
 
