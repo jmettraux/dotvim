@@ -10,5 +10,8 @@ syn match gdiFilename /^[^:]\+:[0-9]\+ ---+++/
 syn region gdiDiffPlus start=/^+/ end="\n"
 syn region gdiDiffMinus start=/^-/ end="\n"
 
+highlight ColorColumn ctermbg=16
+  " disable > 80 column highlight
+
 let b:current_syntax = "gitdiff"
 
