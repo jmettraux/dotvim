@@ -58,9 +58,6 @@ function! s:OpenGitDiff()
 
   exe 'normal 1Gdda'
 
-  "nmap <buffer> o gF
-  "nmap <buffer> <SPACE> gF
-  "nmap <buffer> <CR> gF
   nmap <buffer> o :call <SID>OpenFile()<CR>
   nmap <buffer> <SPACE> :call <SID>OpenFile()<CR>
   nmap <buffer> <CR> :call <SID>OpenFile()<CR>
@@ -72,14 +69,12 @@ nnoremap <silent> <leader>d :call <SID>OpenGitDiff()<CR>
 "
 " git log
 
-function! s:OpenCommit()
+function! s:OpenCommit(sha)
 
   if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
 
   if bufnr('==GitCommit') > 0 | exe 'bwipeout! ==GitCommit' | endif
     " close previous GitLog if any
-
-  let sha = matchstr(getline('.'), '\v^\* \zs([a-fA-F0-9]+)')
 
   exe 'new | only'
     " | only makes it full window
@@ -91,8 +86,7 @@ function! s:OpenCommit()
   exe 'setlocal nobuflisted'
   "exe 'setlocal filetype=ListFiles'
 
-  "exe 'silent r! git log --graph --oneline --abbrev-commit --decorate | perl ~/.vim/scripts/regitlog.pl'
-  exe 'silent r! git show ' . sha . ' | perl ~/.vim/scripts/regitdiff.pl'
+  exe 'silent r! git show ' . a:sha . ' | perl ~/.vim/scripts/regitdiff.pl'
 
   setlocal syntax=gitdiff
 
@@ -122,12 +116,7 @@ function! s:OpenGitLog()
 
   exe 'normal 1G'
 
-  "nmap <buffer> o gF
-  "nmap <buffer> <SPACE> gF
-  "nmap <buffer> <CR> gF
-  "nmap <buffer> o :call <SID>OpenFile()<CR>
-  "nmap <buffer> <SPACE> :call <SID>OpenFile()<CR>
-  nmap <buffer> <CR> :call <SID>OpenCommit()<CR>
+  nmap <buffer> <CR> :call <SID>OpenCommit(matchstr(getline('.'), '\v^\* \zs([a-fA-F0-9]+)'))<CR>
 endfunction " OpenGitLog
 
 command! -nargs=0 Gil :call <SID>OpenGitLog()
@@ -136,6 +125,19 @@ nnoremap <silent> <leader>l :call <SID>OpenGitLog()<CR>
 
 "
 " git blame
+
+function! s:DetermineBlameSha()
+
+  let ln = line('.')
+
+  while ln > 0
+    let m = matchstr(getline(ln), '\v^[a-fA-F0-9]+')
+    if empty(m) == 0 | return m | end
+    let ln = ln - 1
+  endwhile
+
+  return -1
+endfunction " DetermineBlameSha
 
 function! s:OpenGitBlame()
 
@@ -163,24 +165,13 @@ function! s:OpenGitBlame()
 
   setlocal syntax=gitblame
 
-  "nmap <buffer> a :call search('^.\+ ---+++', '')<CR>:echo<CR>0
-  "nmap <buffer> A :call search('^.\+ ---+++', 'b')<CR>:echo<CR>0
-    " silently go to next file
-
   exe 'normal ' . ln . 'G'
 
-  "nmap <buffer> o gF
-  "nmap <buffer> <SPACE> gF
-  "nmap <buffer> <CR> gF
-    "
-  "nmap <buffer> o :call <SID>OpenFile()<CR>
-  "nmap <buffer> <SPACE> :call <SID>OpenFile()<CR>
   nmap <buffer> <leader>m <CR>
+  nmap <buffer> <CR> :call <SID>OpenCommit(<SID>DetermineBlameSha())<CR>
+  nmap <buffer> <SPACE> :call <SID>OpenCommit(<SID>DetermineBlameSha())<CR>
 endfunction " OpenGitBlame
 
 nnoremap <silent> <leader>m :call <SID>OpenGitBlame()<CR>
 command! -nargs=0 Blame :call <SID>OpenGitBlame()
-
-" https://vi.stackexchange.com/questions/3962/change-color-of-section-dynamically-in-vimscript
-" http://lardcave.net/text/Highlighting%20arbitrary%20lines%20in%20Vim.html
 
