@@ -3,7 +3,7 @@
 
 hi! gdiCommit cterm=NONE ctermfg=136 ctermbg=16
 
-hi! gdiFilename cterm=NONE ctermfg=white ctermbg=16
+hi! gdiFilename cterm=NONE ctermfg=white ctermbg=darkgrey
 hi! gdiDiffMinus cterm=NONE ctermfg=red ctermbg=16
 hi! gdiDiffPlus cterm=NONE ctermfg=green ctermbg=16
 
