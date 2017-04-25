@@ -1,7 +1,7 @@
 
 function! s:OpenRspecOut()
 
-  exe 'e .rspec.out'
+  exe 'silent! e .rspec.out'
   let ln = line('.')
 
   exe 'setlocal buftype=nofile'
