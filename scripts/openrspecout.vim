@@ -2,6 +2,7 @@
 function! s:OpenRspecOut()
 
   exe 'e .rspec.out'
+  let ln = line('.')
 
   exe 'setlocal buftype=nofile'
   exe 'setlocal bufhidden=hide'
@@ -15,7 +16,8 @@ function! s:OpenRspecOut()
     " 'silent' to silence the output
     " 'silent!' to also silence errors
 
-  exe 'normal G'
+  "exe 'normal G'
+  exe 'normal ' . ln . 'G'
 
   setlocal syntax=rspecout
 
