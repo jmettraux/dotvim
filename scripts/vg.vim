@@ -39,20 +39,19 @@ function! s:Vg(args)
   let rest = pr[1] == '' ? '.' : pr[1]
   let fn = tempname() . '--' . JmNtr(pr[0]) . '--' . JmNtr(rest) . '.greprout'
 
-  exe 'e ' . fn
+  exe 'silent e ' . fn
   exe '%d_'
-  exe "r! echo '== :Vg " . pr[0] . " " . rest . "'"
+  exe "silent r! echo '== :Vg " . pr[0] . " " . rest . "'"
   exe "Clean"
   exe 'r! echo ""'
-  "exe 'r! grep -R -n --exclude-dir=.git --exclude-dir=tmp --exclude=.viminfo --exclude="*.log" ' . pr[0] . ' ' . rest
-  exe 'r! grep -R -n --exclude-dir=.git --exclude-dir=tmp --exclude=.viminfo ' . pr[0] . ' ' . rest
+  exe 'silent r! grep -R -n --exclude-dir=.git --exclude-dir=tmp --exclude=.viminfo ' . pr[0] . ' ' . rest
   exe 'r! echo ""'
   exe 'g/: No such file or directory/d_'
   let g:groPattern = pr[0]
   setlocal syntax=greprout
   "call feedkeys('4G')
   normal 4G
-  write
+  silent write
   nmap <buffer> o gF
   nmap <buffer> <space> gF
   nmap <buffer> <CR> gF
@@ -63,10 +62,10 @@ au BufRead *.greprout set filetype=greprout
 
 "command! -nargs=1 Vg :! grep -R -n --exclude-dir=.git <args>
 "command! -nargs=* Vg :call <SID>Vg(<f-args>)
-command! -nargs=* -complete=file Vg :silent! call <SID>Vg(<q-args>)
+command! -nargs=* -complete=file Vg :call <SID>Vg(<q-args>)
 
 "nnoremap <leader>q "zyw:exe ":call <SID>Vg(\"" . @z . "\")"<CR>
 "nnoremap <leader>q "zyw:exe ":echo \"" . @z . "\""<CR>
 "nnoremap <leader>g "zyw:exe ":call <SID>Vg(" . string(@z) . ")"<CR>
-nnoremap <leader>g "zyw:exe ":silent! call <SID>Vg('" . @z . " lib/ src/')"<CR>
+nnoremap <leader>g "zyw:exe ":call <SID>Vg('" . @z . " lib/ src/')"<CR>
 
