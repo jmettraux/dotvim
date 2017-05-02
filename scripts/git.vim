@@ -40,7 +40,7 @@ function! s:OpenGitDiff()
 
   exe 'new | only'
     " | only makes it full window
-  exe 'file ==GitDiff'
+  exe 'silent file ==GitDiff'
     " replace buffer name
   exe 'setlocal buftype=nofile'
   exe 'setlocal bufhidden=hide'
@@ -78,7 +78,7 @@ function! s:OpenCommit(sha)
 
   exe 'new | only'
     " | only makes it full window
-  exe 'file ==GitCommit'
+  exe 'silent file ==GitCommit'
     " replace buffer name
   exe 'setlocal buftype=nofile'
   exe 'setlocal bufhidden=hide'
@@ -87,6 +87,7 @@ function! s:OpenCommit(sha)
   "exe 'setlocal filetype=ListFiles'
 
   exe 'silent r! git show ' . a:sha . ' | perl ~/.vim/scripts/regitdiff.pl'
+echo '2'
 
   setlocal syntax=gitdiff
 
@@ -102,7 +103,7 @@ function! s:OpenGitLog()
 
   exe 'new | only'
     " | only makes it full window
-  exe 'file ==GitLog'
+  exe 'silent file ==GitLog'
     " replace buffer name
   exe 'setlocal buftype=nofile'
   exe 'setlocal bufhidden=hide'
@@ -117,6 +118,8 @@ function! s:OpenGitLog()
   exe 'normal 1G'
 
   nmap <buffer> <CR> :call <SID>OpenCommit(matchstr(getline('.'), '\v^\* \zs([a-fA-F0-9]+)'))<CR>
+  nmap <buffer> <SPACE> :call <SID>OpenCommit(matchstr(getline('.'), '\v^\* \zs([a-fA-F0-9]+)'))<CR>
+  nmap <buffer> o :call <SID>OpenCommit(matchstr(getline('.'), '\v^\* \zs([a-fA-F0-9]+)'))<CR>
 endfunction " OpenGitLog
 
 command! -nargs=0 Gil :call <SID>OpenGitLog()
@@ -151,7 +154,7 @@ function! s:OpenGitBlame()
 
   exe 'new | only'
     " | only makes it full window
-  exe 'file ==GitBlame'
+  exe 'silent file ==GitBlame'
     " replace buffer name
   exe 'setlocal buftype=nofile'
   exe 'setlocal bufhidden=hide'
