@@ -87,7 +87,6 @@ function! s:OpenCommit(sha)
   "exe 'setlocal filetype=ListFiles'
 
   exe 'silent r! git show ' . a:sha . ' | perl ~/.vim/scripts/regitdiff.pl'
-echo '2'
 
   setlocal syntax=gitdiff
 
