@@ -116,9 +116,9 @@ function! s:OpenGitLog()
 
   exe 'normal 1G'
 
-  nmap <buffer> <CR> :call <SID>OpenCommit(matchstr(getline('.'), '\v^\* \zs([a-fA-F0-9]+)'))<CR>
-  nmap <buffer> <SPACE> :call <SID>OpenCommit(matchstr(getline('.'), '\v^\* \zs([a-fA-F0-9]+)'))<CR>
-  nmap <buffer> o :call <SID>OpenCommit(matchstr(getline('.'), '\v^\* \zs([a-fA-F0-9]+)'))<CR>
+  nnoremap <buffer> <silent> <CR> :call <SID>OpenCommit(matchstr(getline('.'), '\v^\* \zs([a-fA-F0-9]+)'))<CR>
+  nnoremap <buffer> <silent> <SPACE> :call <SID>OpenCommit(matchstr(getline('.'), '\v^\* \zs([a-fA-F0-9]+)'))<CR>
+  nnoremap <buffer> <silent> o :call <SID>OpenCommit(matchstr(getline('.'), '\v^\* \zs([a-fA-F0-9]+)'))<CR>
 endfunction " OpenGitLog
 
 command! -nargs=0 Gil :call <SID>OpenGitLog()
@@ -170,8 +170,8 @@ function! s:OpenGitBlame()
   exe 'normal ' . ln . 'G'
 
   nmap <buffer> <leader>m <CR>
-  nmap <buffer> <CR> :call <SID>OpenCommit(<SID>DetermineBlameSha())<CR>
-  nmap <buffer> <SPACE> :call <SID>OpenCommit(<SID>DetermineBlameSha())<CR>
+  nnoremap <buffer> <silent> <CR> :call <SID>OpenCommit(<SID>DetermineBlameSha())<CR>
+  nnoremap <buffer> <silent> <SPACE> :call <SID>OpenCommit(<SID>DetermineBlameSha())<CR>
 endfunction " OpenGitBlame
 
 nnoremap <silent> <leader>m :call <SID>OpenGitBlame()<CR>
