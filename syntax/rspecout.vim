@@ -14,7 +14,7 @@ highlight ColorColumn ctermbg=16
   " disable > 80 column highlight
 
 syn match rsoLocalFilename ' \.\/[^:]\+:[0-9]\+'
-syn match rsoFilename ' \/[^:]\+:[0-9]\+'
+syn match rsoFilename '[" ]\/[^:]\+:[0-9]\+'
 syn match rsoPending 'Pending:'
 syn match rsoFail 'Failures:'
 syn match rsoFail 'Failed examples:'
