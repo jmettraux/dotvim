@@ -52,8 +52,8 @@ function! s:OpenGitDiff()
 
   setlocal syntax=gitdiff
 
-  nmap <buffer> a :call search('^.\+ ---+++', '')<CR>:echo<CR>0
-  nmap <buffer> A :call search('^.\+ ---+++', 'b')<CR>:echo<CR>0
+  nnoremap <buffer> <silent> a :call search('^.\+ ---+++', '')<CR>0zz
+  nnoremap <buffer> <silent> A :call search('^.\+ ---+++', 'b')<CR>0zz
     " silently go to next file
 
   exe 'normal 1Gdda'
@@ -91,6 +91,10 @@ function! s:OpenCommit(sha)
   setlocal syntax=gitdiff
 
   exe 'normal 1G'
+
+  nnoremap <buffer> <silent> a :call search('^.\+ ---+++', '')<CR>0zz
+  nnoremap <buffer> <silent> A :call search('^.\+ ---+++', 'b')<CR>0zz
+    " silently go to next file
 endfunction " OpenCommit
 
 function! s:OpenGitLog()
