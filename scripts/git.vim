@@ -58,9 +58,9 @@ function! s:OpenGitDiff()
 
   exe 'normal 1Gdda'
 
-  nmap <buffer> o :call <SID>OpenFile()<CR>
-  nmap <buffer> <SPACE> :call <SID>OpenFile()<CR>
-  nmap <buffer> <CR> :call <SID>OpenFile()<CR>
+  nnoremap <buffer> o :call <SID>OpenFile()<CR>
+  nnoremap <buffer> <CR> :call <SID>OpenFile()<CR>
+  nnoremap <buffer> <SPACE> :call <SID>OpenFile()<CR>
 endfunction " OpenGitDiff
 
 nnoremap <silent> <leader>d :call <SID>OpenGitDiff()<CR>
@@ -95,6 +95,10 @@ function! s:OpenCommit(sha)
   nnoremap <buffer> <silent> a :call search('^.\+ ---+++', '')<CR>0zz
   nnoremap <buffer> <silent> A :call search('^.\+ ---+++', 'b')<CR>0zz
     " silently go to next file
+
+  nnoremap <buffer> o :call <SID>OpenFile()<CR>
+  nnoremap <buffer> <CR> :call <SID>OpenFile()<CR>
+  nnoremap <buffer> <SPACE> :call <SID>OpenFile()<CR>
 endfunction " OpenCommit
 
 function! s:OpenGitLog()
