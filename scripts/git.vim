@@ -124,9 +124,9 @@ function! s:OpenGitLog()
 
   exe 'normal 1G'
 
-  nnoremap <buffer> <silent> <CR> :call <SID>OpenCommit(matchstr(getline('.'), '\v^\* \zs([a-fA-F0-9]+)'))<CR>
-  nnoremap <buffer> <silent> <SPACE> :call <SID>OpenCommit(matchstr(getline('.'), '\v^\* \zs([a-fA-F0-9]+)'))<CR>
-  nnoremap <buffer> <silent> o :call <SID>OpenCommit(matchstr(getline('.'), '\v^\* \zs([a-fA-F0-9]+)'))<CR>
+  nnoremap <buffer> <silent> o :call <SID>OpenCommit(matchstr(getline('.'), '\v^[^a-fA-F0-9]+\zs([a-fA-F0-9]+)'))<CR>
+  nnoremap <buffer> <silent> <CR> :call <SID>OpenCommit(matchstr(getline('.'), '\v^[^a-fA-F0-9]+\zs([a-fA-F0-9]+)'))<CR>
+  nnoremap <buffer> <silent> <SPACE> :call <SID>OpenCommit(matchstr(getline('.'), '\v^[^a-fA-F0-9]+\zs([a-fA-F0-9]+)'))<CR>
 endfunction " OpenGitLog
 
 command! -nargs=0 Gil :call <SID>OpenGitLog()
