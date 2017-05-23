@@ -61,6 +61,8 @@ function! s:OpenGitDiff()
   nnoremap <buffer> o :call <SID>OpenFile()<CR>
   nnoremap <buffer> <CR> :call <SID>OpenFile()<CR>
   nnoremap <buffer> <SPACE> :call <SID>OpenFile()<CR>
+
+  nnoremap <buffer> q :bd<CR>
 endfunction " OpenGitDiff
 
 nnoremap <silent> <leader>d :call <SID>OpenGitDiff()<CR>
