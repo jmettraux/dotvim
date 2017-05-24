@@ -62,7 +62,7 @@ function! s:OpenGitDiff()
   nnoremap <buffer> <CR> :call <SID>OpenFile()<CR>
   nnoremap <buffer> <SPACE> :call <SID>OpenFile()<CR>
 
-  nnoremap <buffer> q :bd<CR>
+  nnoremap <buffer> <silent> q :bd<CR>
 endfunction " OpenGitDiff
 
 nnoremap <silent> <leader>d :call <SID>OpenGitDiff()<CR>
@@ -101,6 +101,8 @@ function! s:OpenCommit(sha)
   nnoremap <buffer> o :call <SID>OpenFile()<CR>
   nnoremap <buffer> <CR> :call <SID>OpenFile()<CR>
   nnoremap <buffer> <SPACE> :call <SID>OpenFile()<CR>
+
+  nnoremap <buffer> <silent> q :bd<CR>
 endfunction " OpenCommit
 
 function! s:OpenGitLog()
@@ -129,6 +131,8 @@ function! s:OpenGitLog()
   nnoremap <buffer> <silent> o :call <SID>OpenCommit(matchstr(getline('.'), '\v^[^a-fA-F0-9]+\zs([a-fA-F0-9]+)'))<CR>
   nnoremap <buffer> <silent> <CR> :call <SID>OpenCommit(matchstr(getline('.'), '\v^[^a-fA-F0-9]+\zs([a-fA-F0-9]+)'))<CR>
   nnoremap <buffer> <silent> <SPACE> :call <SID>OpenCommit(matchstr(getline('.'), '\v^[^a-fA-F0-9]+\zs([a-fA-F0-9]+)'))<CR>
+
+  nnoremap <buffer> <silent> q :bd<CR>
 endfunction " OpenGitLog
 
 command! -nargs=0 Gil :call <SID>OpenGitLog()
@@ -182,6 +186,8 @@ function! s:OpenGitBlame()
   nmap <buffer> <leader>m <CR>
   nnoremap <buffer> <silent> <CR> :call <SID>OpenCommit(<SID>DetermineBlameSha())<CR>
   nnoremap <buffer> <silent> <SPACE> :call <SID>OpenCommit(<SID>DetermineBlameSha())<CR>
+
+  nnoremap <buffer> <silent> q :bd<CR>
 endfunction " OpenGitBlame
 
 nnoremap <silent> <leader>m :call <SID>OpenGitBlame()<CR>
