@@ -32,12 +32,14 @@ function! s:ListFiles()
     exe 'r .errors'
   endif
 
-  exe 'let @z=""'
-  exe 'redir @z'
-  exe 'silent echo "== git status"'
-  exe 'redir END'
-  exe 'silent $put z'
-  exe 'r! (echo "`git status`"; echo "`git diff --stat`") | perl ~/.vim/scripts/restatus.pl'
+  if isdirectory('.git')
+    exe 'let @z=""'
+    exe 'redir @z'
+    exe 'silent echo "== git status"'
+    exe 'redir END'
+    exe 'silent $put z'
+    exe 'r! (echo "`git status`"; echo "`git diff --stat`") | perl ~/.vim/scripts/restatus.pl'
+  endif
 
   let l = line('.') + 1
   exe 'let @z=""'
