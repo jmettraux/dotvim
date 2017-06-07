@@ -6,7 +6,9 @@ function! s:OpenTodos()
   exe 'e .todo.md'
   let src = search('^## src')
   if src > 0
-    exe 'silent ' . src . ',$d'
+    exe 'silent ' . src . ',$d_'
+      " the _ after the d prevents the delete lines from being copied
+      " in the default register
   else
     exe 'normal Go'
   endif
