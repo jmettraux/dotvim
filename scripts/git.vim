@@ -105,7 +105,7 @@ function! s:OpenCommit(sha)
   nnoremap <buffer> <silent> q :bd<CR>
 endfunction " OpenCommit
 
-function! s:OpenGitLog()
+function! s:OpenGitLog(all)
 
   if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
 
@@ -122,7 +122,11 @@ function! s:OpenGitLog()
   exe 'setlocal nobuflisted'
   "exe 'setlocal filetype=ListFiles'
 
-  exe 'silent r! git log --graph --oneline --abbrev-commit --decorate | perl ~/.vim/scripts/regitlog.pl'
+  if a:all
+    exe 'silent r! git log --graph --oneline --abbrev-commit --decorate --branches | perl ~/.vim/scripts/regitlog.pl'
+  else
+    exe 'silent r! git log --graph --oneline --abbrev-commit --decorate | perl ~/.vim/scripts/regitlog.pl'
+  endif
 
   setlocal syntax=gitlog
 
@@ -135,8 +139,9 @@ function! s:OpenGitLog()
   nnoremap <buffer> <silent> q :bd<CR>
 endfunction " OpenGitLog
 
-command! -nargs=0 Gil :call <SID>OpenGitLog()
-nnoremap <silent> <leader>l :call <SID>OpenGitLog()<CR>
+command! -nargs=0 Gil :call <SID>OpenGitLog(0)
+nnoremap <silent> <leader>l :call <SID>OpenGitLog(0)<CR>
+nnoremap <silent> <leader>L :call <SID>OpenGitLog(1)<CR>
 
 
 "
