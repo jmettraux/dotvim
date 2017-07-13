@@ -71,6 +71,15 @@ nnoremap <silent> <leader>d :call <SID>OpenGitDiff()<CR>
 "
 " git log
 
+function! s:CheckoutCommit(sha)
+
+  let s = system('git status -s -uno') " short, untracked: no
+  if strlen(s) > 0 | echoerr "Current repo has uncommited changes." | return | endif
+
+  exe '!git checkout ' . a:sha
+  exe ':bd'
+endfunction " CheckoutCommit
+
 function! s:OpenCommit(sha)
 
   if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
@@ -135,6 +144,8 @@ function! s:OpenGitLog(all)
   nnoremap <buffer> <silent> o :call <SID>OpenCommit(matchstr(getline('.'), '\v^[^a-fA-F0-9]+\zs([a-fA-F0-9]+)'))<CR>
   nnoremap <buffer> <silent> <CR> :call <SID>OpenCommit(matchstr(getline('.'), '\v^[^a-fA-F0-9]+\zs([a-fA-F0-9]+)'))<CR>
   nnoremap <buffer> <silent> <SPACE> :call <SID>OpenCommit(matchstr(getline('.'), '\v^[^a-fA-F0-9]+\zs([a-fA-F0-9]+)'))<CR>
+  nnoremap <buffer> <silent> c :call <SID>CheckoutCommit(matchstr(getline('.'), '\v^[^a-fA-F0-9]+\zs([a-fA-F0-9]+)'))<CR>
+  nnoremap <buffer> <silent> m :call <SID>CheckoutCommit('master')<CR>
 
   nnoremap <buffer> <silent> q :bd<CR>
 endfunction " OpenGitLog
