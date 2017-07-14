@@ -145,7 +145,7 @@ function! s:OpenGitLog(all)
   nnoremap <buffer> <silent> <CR> :call <SID>OpenCommit(matchstr(getline('.'), '\v^[^a-fA-F0-9]+\zs([a-fA-F0-9]+)'))<CR>
   nnoremap <buffer> <silent> <SPACE> :call <SID>OpenCommit(matchstr(getline('.'), '\v^[^a-fA-F0-9]+\zs([a-fA-F0-9]+)'))<CR>
   nnoremap <buffer> <silent> c :call <SID>CheckoutCommit(matchstr(getline('.'), '\v^[^a-fA-F0-9]+\zs([a-fA-F0-9]+)'))<CR>
-  nnoremap <buffer> <silent> m :call <SID>CheckoutCommit('master')<CR>
+  nnoremap <buffer> <silent> M :call <SID>CheckoutCommit('master')<CR>
 
   nnoremap <buffer> <silent> q :bd<CR>
 endfunction " OpenGitLog
