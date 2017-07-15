@@ -33,4 +33,5 @@ function! s:ShowSourceTree()
   endif
 endfunction " ShowSourceTree
 command! -nargs=0 Vs :call <SID>ShowSourceTree()
+nnoremap <silent> <leader>s :call <SID>ShowSourceTree()<CR>
 

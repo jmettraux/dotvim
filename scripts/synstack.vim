@@ -20,5 +20,5 @@ function! <SID>SynStack()
 
   echo '.'
 endfunc
-nnoremap <silent> <leader>s :call <SID>SynStack()<CR>
+nnoremap <silent> <leader>y :call <SID>SynStack()<CR>
 
