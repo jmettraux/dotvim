@@ -23,3 +23,14 @@ endfunction " ShowTree
 command! -nargs=1 -complete=dir Vt :call <SID>ShowTree(<f-args>)
 au BufRead *.showtreeout set filetype=showtreeout
 
+
+function! s:ShowSourceTree()
+
+  if !empty(glob("lib"))
+    exe ':call <SID>ShowTree("lib")'
+  elseif !empty(glob("src"))
+    exe ':call <SID>ShowTree("src")'
+  endif
+endfunction " ShowSourceTree
+command! -nargs=0 Vs :call <SID>ShowSourceTree()
+
