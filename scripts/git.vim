@@ -74,7 +74,7 @@ nnoremap <silent> <leader>d :call <SID>OpenGitDiff()<CR>
 function! s:CheckoutCommit(sha)
 
   let s = system('git status -s -uno') " short, untracked: no
-  if strlen(s) > 0 | echoerr "Current repo has uncommited changes." | return | endif
+  if strlen(s) > 0 | echoerr "Current repo has uncommitted changes." | return | endif
 
   exe '!git checkout ' . a:sha
   exe ':bd'
