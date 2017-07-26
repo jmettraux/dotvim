@@ -13,7 +13,7 @@
 "syn match flBf '^Binary file'
 "hi def link flBinaryFilename Normal
 
-hi! groTitle cterm=NONE ctermfg=darkred ctermbg=16
+hi! groTitle cterm=NONE ctermfg=darkyellow ctermbg=16
 hi! groFilename cterm=NONE ctermfg=blue ctermbg=16
 hi! groLineNr cterm=NONE ctermfg=darkblue ctermbg=16
 hi! groPattern cterm=NONE ctermfg=darkgreen ctermbg=16
