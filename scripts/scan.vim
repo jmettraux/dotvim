@@ -34,4 +34,5 @@ endfunction " Scan
 au BufRead *.scanout set filetype=scanout
 
 command! -nargs=0 Scan :call <SID>Scan()
+nnoremap <silent> <leader>k :call <SID>Scan()<CR>
 
