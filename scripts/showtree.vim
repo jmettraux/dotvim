@@ -35,3 +35,14 @@ endfunction " ShowSourceTree
 command! -nargs=0 Vs :call <SID>ShowSourceTree()
 nnoremap <silent> <leader>s :call <SID>ShowSourceTree()<CR>
 
+function! s:ShowTestTree()
+
+  if !empty(glob("spec"))
+    exe ':call <SID>ShowTree("spec")'
+  elseif !empty(glob("test"))
+    exe ':call <SID>ShowTree("test")'
+  endif
+endfunction " ShowTestTree
+command! -nargs=0 Vtt :call <SID>ShowTestTree()
+command! -nargs=0 Vst :call <SID>ShowTestTree()
+
