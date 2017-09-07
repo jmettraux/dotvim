@@ -131,6 +131,7 @@ function! s:OpenGitLog(all)
   exe 'setlocal nobuflisted'
   "exe 'setlocal filetype=ListFiles'
 
+  " TODO git log --pretty=format:"%h %an |%ad %d %s" --date=iso
   if a:all
     exe 'silent r! git log --graph --oneline --abbrev-commit --decorate --branches | perl ~/.vim/scripts/regitlog.pl'
   else
