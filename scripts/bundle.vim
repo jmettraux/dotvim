@@ -23,7 +23,24 @@ function! s:BundleList()
   setlocal syntax=bundlelist
 
   exe 'normal 1G'
+
+  nnoremap <buffer> o :call <SID>BundleOpen()<CR>
+  nnoremap <buffer> <CR> :call <SID>BundleOpen()<CR>
+  nnoremap <buffer> <SPACE> :call <SID>BundleOpen()<CR>
+
+  nnoremap <buffer> <silent> q :bd<CR>
 endfunction " BundleList
+
+function! s:BundleOpen()
+
+  let l = getline('.')
+  let m = matchlist(l, '\v^[^ ]+ +\d[^ ]+ +(.+)$')
+  if empty(m) == 0
+    let pa = m[1]
+    echo pa
+    exe ':Vt ' . pa
+  endif
+endfunction " BundleOpen
 
 command! -nargs=0 Blist :call <SID>BundleList()
 
