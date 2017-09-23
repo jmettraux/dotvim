@@ -18,6 +18,8 @@ function! s:ShowTree(start)
   nmap <buffer> <CR> gF
 
   nmap <buffer> v /
+
+  nnoremap <buffer> <silent> q :bd<CR>
 endfunction " ShowTree
 
 command! -nargs=1 -complete=dir Vt :call <SID>ShowTree(<f-args>)
