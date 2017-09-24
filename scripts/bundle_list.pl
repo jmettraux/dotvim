@@ -1,13 +1,16 @@
 
 # bundle_list.pl
 
-foreach(split(/\n/, `bundle list`)) {
-  if (/^  \* ([^ ]+)\s+\(([^)]+)/) {
-    my $name = $1;
-    my $version = $2;
-    my $path = `bundle show $1`; $path =~ s/\s+$//g;
-    printf("%-21s %9s %s\n", $name, $version, $path)
-  }
+my @gems = grep(/^  \* /, split(/\n/, `bundle list`));
+my @paths = split(/\n/, `bundle show --paths`);
+my $home = $ENV{'HOME'};
+
+for ($i=0; $i <= $#gems; $i++) {
+  $gems[$i] =~ /^  \* ([^ ]+)\s+\(([^)]+)/;
+  my $gem = $1;
+  my $version = $2;
+  my $path = ($paths[$i] =~ s/$home/~/gr);
+  printf("%-21s %9s %s\n", $gem, $version, $path)
 }
 print("\n");
 
