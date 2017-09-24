@@ -5,22 +5,18 @@ function! s:BundleList()
 
   if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
 
-  if bufnr('==BundleList') > 0 | exe 'bwipeout! ==BundleList' | endif
-    " close previous BundleList if any
-
   let fn = tempname() . '__.bundlelist'
 
   exe 'e ' . fn
 
-  "exe 'setlocal buftype=nofile'
-  exe 'setlocal noswapfile'
-
-  exe 'silent r! perl ~/.vim/scripts/bundle_list.pl'
+  silent r! perl ~/.vim/scripts/bundle_list.pl
 
   setlocal syntax=bundlelist
 
-  exe 'normal 1G'
+  normal 2G
   write
+
+  setlocal nomodifiable
 
   nnoremap <buffer> o :call <SID>BundleOpen()<CR>
   nnoremap <buffer> <CR> :call <SID>BundleOpen()<CR>
