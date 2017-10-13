@@ -1,6 +1,8 @@
 
 # regitdiff.pl
 
+print "\n=============================================vv== changes, point by point ==vv==\n\n";
+
 my $fname = '(none)';
 my @files = ();
 
@@ -22,7 +24,7 @@ while (<>) {
   }
 }
 
-print "\n";
+print "\n===========================================vv== summary of changed points ==vv==\n\n";
 print join("", @files);
 print "\n";
 

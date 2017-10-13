@@ -48,15 +48,16 @@ function! s:OpenGitDiff()
   exe 'setlocal nobuflisted'
   "exe 'setlocal filetype=ListFiles'
 
+  exe 'silent r! git diff --stat | perl ~/.vim/scripts/regitdiffstat.pl'
   exe 'silent r! git diff | perl ~/.vim/scripts/regitdiff.pl'
+
+  exe 'normal 1Gdda'
 
   setlocal syntax=gitdiff
 
   nnoremap <buffer> <silent> a :call search('^.\+ ---+++', '')<CR>0zz
   nnoremap <buffer> <silent> A :call search('^.\+ ---+++', 'b')<CR>0zz
     " silently go to next file
-
-  exe 'normal 1Gdda'
 
   nnoremap <buffer> o :call <SID>OpenFile()<CR>
   nnoremap <buffer> <CR> :call <SID>OpenFile()<CR>
