@@ -13,12 +13,19 @@ function! s:OpenFile()
   while n > 0
 
     let l = getline(n)
-    let m = matchlist(l, '\v^([^:]+):([0-9]+) ---\+\+\+$')
+    let m0 = matchlist(l, '\v^([^:]+) +\| +[0-9]+ \+*-*$')
+    let m1 = matchlist(l, '\v^([^:]+):([0-9]+) ---\+\+\+$')
 
-    if empty(m) == 0
+    if empty(m0) == 0
 
-      let fn = m[1]
-      let ln = str2nr(m[2]) + nn - 1
+      exe ':e ' . m0[1]
+
+      break
+
+    elseif empty(m1) == 0
+
+      let fn = m1[1]
+      let ln = str2nr(m1[2]) + nn - 1
       exe ':e +' . ln . ' ' . fn
       normal zz
 
