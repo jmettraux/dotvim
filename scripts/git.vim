@@ -18,7 +18,11 @@ function! s:OpenFile()
 
     if empty(m0) == 0
 
-      exe ':e ' . m0[1]
+      "exe ':e ' . m0[1]
+
+      call search('^' . m0[1] . ':', '')
+      normal zz
+      echo ''
 
       break
 
