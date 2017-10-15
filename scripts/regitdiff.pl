@@ -24,7 +24,9 @@ while (<>) {
   }
 }
 
-print "\n===========================================vv== summary of changed points ==vv==\n\n";
-print join("", @files);
+#print "\n===========================================vv== summary of changed points ==vv==\n\n";
+#print join("", @files);
+#print "\n";
+
 print "\n";
 
