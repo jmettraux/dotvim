@@ -20,7 +20,12 @@ function! s:OpenFile()
 
       "exe ':e ' . m0[1]
 
-      call search('^' . m0[1] . ':', '')
+      let pa = substitute(m0[1], '\v\s+$', '', '')
+      let pa = substitute(pa, '\v\/', '\\/', 'g')
+      let pa = substitute(pa, '\v\.', '\\.', 'g')
+        "
+      call search('^' . pa . ':[0-9]\+ ---', '')
+
       normal zz
       echo ''
 
