@@ -47,4 +47,5 @@ function! s:ShowTestTree()
 endfunction " ShowTestTree
 command! -nargs=0 Vtt :call <SID>ShowTestTree()
 command! -nargs=0 Vst :call <SID>ShowTestTree()
+command! -nargs=0 Vc :call <SID>ShowTestTree()
 
