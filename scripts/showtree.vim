@@ -31,7 +31,7 @@ function! s:ShowTree(start)
 
   "exe 'silent r! tree -i -f -F ' . a:start
   normal O
-  exe 'silent r! tree ' . a:start
+  exe 'silent r! tree -F ' . a:start
   normal 1G
   setlocal syntax=showtreeout
   write
