@@ -45,6 +45,9 @@ function! s:ShowTree(start)
 
   nmap <buffer> v /
 
+  nnoremap <buffer> <silent> a j:call search('\v [^ ]+\/', '')<CR>0zz
+  nnoremap <buffer> <silent> A :call search('\v [^ ]+\/', 'b')<CR>0zz
+
   nnoremap <buffer> <silent> q :bd<CR>
 endfunction " ShowTree
 
