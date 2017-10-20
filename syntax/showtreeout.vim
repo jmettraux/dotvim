@@ -16,6 +16,7 @@ syn match stoSummary '\v^\d+ .+$'
 syn match stoLine '\v─ .+' contains=stoFilename,stoDirname
 syn match stoFilename '\v [^ \/]+$' contained
 syn match stoDirname '\v [^ \/]+\/$' contained
+syn match stoDirname '\v[a-zA-Z].*$'
 
 let b:current_syntax = "showtreeout"
 
