@@ -18,7 +18,10 @@ function! s:OpenTreeFile()
     let elts = [ right ] + elts
   endwhile
 
-  exe 'e ' . join(elts, '/')
+  let path = join(elts, '/')
+  let path = substitute(path, '\v\/\/+', '/', 'g')
+
+  exe 'e ' . path
 endfunction " OpenTreeFile
 
 function! s:ShowTree(start)
