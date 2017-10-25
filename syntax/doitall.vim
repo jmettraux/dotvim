@@ -8,7 +8,7 @@
 
 hi! diaKey cterm=NONE ctermfg=grey ctermbg=16
 hi! diaString cterm=NONE ctermfg=yellow ctermbg=16
-hi! diaTable cterm=NONE ctermfg=darkgrey ctermbg=16
+hi! diaTable cterm=NONE ctermfg=darkgreen ctermbg=16
 "hi def link diaTable Comment
 
 syn region diaString start=+"+  skip=+\\"+  end=+"+
