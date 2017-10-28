@@ -16,12 +16,21 @@ function! s:ListFiles()
   exe 'setlocal nobuflisted'
   exe 'setlocal filetype=ListFiles'
 
+  let l = line('.') + 1
   exe 'let @z=""'
   exe 'redir @z'
   exe 'silent echo "== buffers"'
   exe 'silent buffers'
   exe 'redir END'
   exe 'silent $put z'
+    "
+  exe '%s/^[0-9]\+: //'
+  exe '%s/^\s\+\d\+[^\"]\+"//'
+  exe '%s/"\s\+line /:/'
+    "
+  exe '' . l . ',g/greprout/d_'
+  exe '' . l . ',g/showtreeout/d_'
+    " don't show recent .greprout or .showtreeout files (they're gone)
 
   if filereadable('.errors') && getfsize('.errors') > 0
     exe 'let @z=""'
@@ -41,40 +50,21 @@ function! s:ListFiles()
     exe 'r! (echo "`git status`"; echo "`git diff --stat`") | perl ~/.vim/scripts/restatus.pl'
   endif
 
-  let l = line('.') + 1
+  "let l = line('.') + 1
   exe 'let @z=""'
   exe 'redir @z'
-  exe 'silent echo "== recent"'
+  "exe 'silent echo "== recent"'
   exe 'silent oldfiles'
   exe 'redir END'
+  exe 'let @z = system("perl ~/.vim/scripts/oldfiles.pl", @z)'
   exe 'silent $put z'
-  "
-  exe '' . l . ',g/greprout/d_'
-  exe '' . l . ',g/showtreeout/d_'
-    " don't show recent .greprout or .showtreeout files (they're gone)
 
-  exe '%s/^\s\+\d\+[^\"]\+"//'
-  exe '%s/"\s\+line /:/'
-
-  exe 'g/COMMIT_EDITMSG/d_'
-  exe 'g/NetrwTreeListing/d_'
-  exe 'g/bash-fc-/d_'
-  exe 'g/==ListFiles/d_'
-  exe 'g/==GitLog/d_'
-  exe 'g/==GitDiff/d_'
-  exe 'g/==GitBlame/d_'
-  exe 'g/==GitCommit/d_'
-  exe 'g/\/private\/var\//d_'
-  exe 'g/\/mutt-/d_'
-    " hide a set well known temp files
-
-  exe 'silent %s/^[0-9]\+: //'
-
-  exe '%sno#^' . fnamemodify(expand("."), ":~:.") . '/##'
+  "exe '%sno#^' . fnamemodify(expand("."), ":~:.") . '/##'
     " shorten paths if in a current dir subdir
 
   exe 'g/^$/d_'
   exe '%s/^==/==/'
+    " respace sections
 
   "call search('== recent')
   "let l = line('.') + 1
