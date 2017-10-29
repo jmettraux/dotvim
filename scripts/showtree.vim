@@ -1,29 +1,4 @@
 
-function! s:OpenTreeFile()
-
-  let n = line('.')
-  let last = '................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................'
-  let elts = []
-
-  while n > 0
-    let l = getline(n)
-    let m = matchlist(l, '\v^([│├─└  ]+) (.+)$')
-    if empty(m) == 1 | let elts = [ l ] + elts | break | endif
-    let left = substitute(m[1], '└', '├', 'g')
-    let right = m[2]
-    let n = n - 1
-    if left == last | continue | endif
-    if len(left) > len(last) | continue | endif
-    let last = left
-    let elts = [ right ] + elts
-  endwhile
-
-  let path = join(elts, '/')
-  let path = substitute(path, '\v\/\/+', '/', 'g')
-
-  exe 'e ' . path
-endfunction " OpenTreeFile
-
 function! s:ShowTree(start)
 
   if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
@@ -42,9 +17,14 @@ function! s:ShowTree(start)
   "nmap <buffer> o gF
   "nmap <buffer> <space> gF
   "nmap <buffer> <CR> gF
-  nnoremap <buffer> o :call <SID>OpenTreeFile()<CR>
-  nnoremap <buffer> <space> :call <SID>OpenTreeFile()<CR>
-  nnoremap <buffer> <CR> :call <SID>OpenTreeFile()<CR>
+    "
+  "nnoremap <buffer> o :call <SID>OpenTreeFile()<CR>
+  "nnoremap <buffer> <space> :call <SID>OpenTreeFile()<CR>
+  "nnoremap <buffer> <CR> :call <SID>OpenTreeFile()<CR>
+    "
+  nnoremap <buffer> o :call JmOpenTreeFile()<CR>
+  nnoremap <buffer> <space> :call JmOpenTreeFile()<CR>
+  nnoremap <buffer> <CR> :call JmOpenTreeFile()<CR>
 
   nmap <buffer> v /
 

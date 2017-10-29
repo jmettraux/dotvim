@@ -77,9 +77,13 @@ function! s:ListFiles()
 
   setlocal syntax=listfiles
 
-  nmap <buffer> o gF
-  nmap <buffer> <space> gF
-  nmap <buffer> <CR> gF
+  "nmap <buffer> o gF
+  "nmap <buffer> <space> gF
+  "nmap <buffer> <CR> gF
+    "
+  nnoremap <buffer> o :call JmOpenTreeFile()<CR>
+  nnoremap <buffer> <space> :call JmOpenTreeFile()<CR>
+  nnoremap <buffer> <CR> :call JmOpenTreeFile()<CR>
 
   nmap <buffer> v /
 
