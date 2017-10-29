@@ -53,11 +53,11 @@ function! s:ListFiles()
   "let l = line('.') + 1
   exe 'let @z=""'
   exe 'redir @z'
-  "exe 'silent echo "== recent"'
   exe 'silent oldfiles'
   exe 'redir END'
   exe 'let @z = system("perl ~/.vim/scripts/oldfiles.pl", @z)'
-  exe 'silent $put z'
+  "exe 'silent $put z'
+  exe '$put z'
 
   "exe '%sno#^' . fnamemodify(expand("."), ":~:.") . '/##'
     " shorten paths if in a current dir subdir
