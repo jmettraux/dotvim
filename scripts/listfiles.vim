@@ -55,7 +55,7 @@ function! s:ListFiles()
   exe 'redir @z'
   exe 'silent oldfiles'
   exe 'redir END'
-  exe 'let @z = system("perl ~/.vim/scripts/oldfiles.pl", @z)'
+  exe 'let @z = system("/usr/bin/env python ~/.vim/scripts/recentfiles.py", @z)'
   "exe 'silent $put z'
   exe '$put z'
 
