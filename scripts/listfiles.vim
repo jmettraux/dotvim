@@ -19,7 +19,7 @@ function! s:ListFiles()
 
   exe 'new | only'
     " | only makes it full window
-  exe 'file ==ListFiles'
+  exe 'silent file ==ListFiles'
     " replace buffer name
   exe 'setlocal buftype=nofile'
   exe 'setlocal bufhidden=hide'
@@ -35,12 +35,12 @@ function! s:ListFiles()
   exe 'redir END'
   exe 'silent $put z'
     "
-  exe '%s/^[0-9]\+: //'
-  exe '%s/^\s\+\d\+[^\"]\+"//'
-  exe '%s/"\s\+line /:/'
+  exe '%s/^[0-9]\+: //e'
+  exe '%s/^\s\+\d\+[^\"]\+"//e'
+  exe '%s/"\s\+line /:/e'
     "
-  exe '' . l . ',g/greprout/d_'
-  exe '' . l . ',g/showtreeout/d_'
+  exe 'silent! ' . l . ',g/greprout/d_'
+  exe 'silent! ' . l . ',g/showtreeout/d_'
     " don't show recent .greprout or .showtreeout files (they're gone)
 
   if filereadable('.errors') && getfsize('.errors') > 0
@@ -49,7 +49,7 @@ function! s:ListFiles()
     exe 'silent echo "== .errors"'
     exe 'redir END'
     exe 'silent $put z'
-    exe 'r .errors'
+    exe 'silent r .errors'
   endif
 
   if isdirectory('.git')
@@ -58,7 +58,7 @@ function! s:ListFiles()
     exe 'silent echo "== git status"'
     exe 'redir END'
     exe 'silent $put z'
-    exe 'r! (echo "`git status`"; echo "`git diff --stat`") | perl ~/.vim/scripts/restatus.pl'
+    exe 'silent r! (echo "`git status`"; echo "`git diff --stat`") | perl ~/.vim/scripts/restatus.pl'
   endif
 
   "let l = line('.') + 1
@@ -67,8 +67,7 @@ function! s:ListFiles()
   exe 'silent oldfiles'
   exe 'redir END'
   exe 'let @z = system("/usr/bin/env python ~/.vim/scripts/recentfiles.py", @z)'
-  "exe 'silent $put z'
-  exe '$put z'
+  exe 'silent $put z'
 
   "exe '%sno#^' . fnamemodify(expand("."), ":~:.") . '/##'
     " shorten paths if in a current dir subdir
