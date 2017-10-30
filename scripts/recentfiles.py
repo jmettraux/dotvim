@@ -62,10 +62,9 @@ def print_level(a, h):
   for k in ks[0:-1]:
     do_print_level(a, h, k)
   for k in ks[-1:]:
-    #aa = a[0:-1]
-    #aa.append("└─")
-    #print ''.join(aa), "<"
-    do_print_level(a, h, k)
+    aa = a[:-1]
+    aa.append("└─")
+    do_print_level(aa, h, k)
 
 print './'
 print_level([ "├─" ], tree['.'])

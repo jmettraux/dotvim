@@ -15,10 +15,10 @@ syn match bufPath '\v^/?([^=# /]+/)+'
 syn match bufFilename '\v/@<=[^ ]+'
 syn match bufFilename '\v^[^= /├│]+( |$)'
 
-syn match bufTree '\v^[├│─ ]+' contained
-syn match bufTreeDir '\v[^├│─ ]+$' contained
-syn match bufTreeFile '\v[^├│─ /]+$' contained
-syn match bufTreeLine '\v^[├│─ ]+.+$' contains=bufTree,bufTreeDir,bufTreeFile
+syn match bufTree '\v^[└├│─ ]+' contained
+syn match bufTreeDir '\v[^└├│─ ]+$' contained
+syn match bufTreeFile '\v[^└├│─ /]+$' contained
+syn match bufTreeLine '\v^[└├│─ ]+.+$' contains=bufTree,bufTreeDir,bufTreeFile
 
 syn region bufComment start="#" end="\n"
 syn region bufComment start="(" end="\n"
