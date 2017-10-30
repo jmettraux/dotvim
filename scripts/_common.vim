@@ -32,7 +32,8 @@ function! JmOpenTreeFile()
   endwhile
 
   let path = join(elts, '/')
-  let path = substitute(path, '\v\/\/+', '/', 'g')
+  let path = substitute(path, '\v\/\/+', '/', 'g') " turn // or /// into /
+  let path = substitute(path, '\v +.+$', '', '') " cut trailing info
   let line = 'no'
 
   let m = matchlist(path, '\v^([^:]+):(\d+)')
