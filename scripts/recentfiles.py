@@ -45,16 +45,26 @@ for path in paths[0:recent_count]:
 
 print "== recent (tree)"
 
+def do_print_level(a, h, k):
+  v = h[k]
+  if len(v) > 0:
+    print "%s %s/" % (''.join(a), k)
+    aa = a[0:-1]
+    aa.append("│  ")
+    aa.append("├─")
+    print_level(aa, v)
+  else:
+    print "%s %s" % (''.join(a), k)
+
 def print_level(a, h):
-  for k in h:
-    if len(h[k]) > 0:
-      print "%s %s/" % (''.join(a), k)
-      aa = a[0:-1]
-      aa.append("│  ")
-      aa.append("├─")
-      print_level(aa, h[k])
-    else:
-      print "%s %s" % (''.join(a), k)
+  ks = h.keys()
+  for k in ks[0:-1]:
+    do_print_level(a, h, k)
+  for k in ks[-1:]:
+    #aa = a[0:-1]
+    #aa.append("└─")
+    #print ''.join(aa), "<"
+    do_print_level(a, h, k)
 
 print './'
 print_level([ "├─" ], tree['.'])
