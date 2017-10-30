@@ -58,6 +58,7 @@ def do_print_level(a, h, k):
 
 def print_level(a, h):
   ks = h.keys()
+  ks.sort()
   for k in ks[0:-1]:
     do_print_level(a, h, k)
   for k in ks[-1:]:
