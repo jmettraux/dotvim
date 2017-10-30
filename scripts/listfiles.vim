@@ -1,4 +1,15 @@
 
+function! s:DeleteBuffer()
+
+  let l = getline('.')
+  let m = matchlist(l, '\v^([^ :]+)')
+  if empty(m) == 1 | return | endif
+
+  exe 'bd ' . m[1]
+  call <SID>ListFiles()
+endfunction " DeleteBuffer
+
+
 function! s:ListFiles()
 
   if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
@@ -85,6 +96,8 @@ function! s:ListFiles()
   nnoremap <buffer> <space> :call JmOpenTreeFile()<CR>
   nnoremap <buffer> <CR> :call JmOpenTreeFile()<CR>
 
+  nnoremap <buffer> d :call <SID>DeleteBuffer()<CR>
+
   nmap <buffer> v /
 
   nmap <buffer> rr :call search('^== \.errors', '')<CR>:echo<CR>jll
@@ -98,6 +111,7 @@ function! s:ListFiles()
     " silently go to last file in buffer
     " reminder type "}" to go to next blank line... See also "{", ")" and "("
 endfunction " ListFiles
+
 
 command! -nargs=0 ListFiles :call <SID>ListFiles()
 nnoremap <silent> <leader>b :call <SID>ListFiles()<CR>
