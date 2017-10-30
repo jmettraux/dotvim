@@ -11,7 +11,7 @@ rejects = [
 def expand_path(path):
   p = os.path.relpath(os.path.expanduser(path))
   if re.match('\.\.\/\.\.\/', p):
-    p = os.path.abspath(path)
+    p = os.path.abspath(p)
   return p
 
 paths = []
