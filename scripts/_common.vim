@@ -33,7 +33,15 @@ function! JmOpenTreeFile()
 
   let path = join(elts, '/')
   let path = substitute(path, '\v\/\/+', '/', 'g')
+  let line = 'no'
+
+  let m = matchlist(path, '\v^([^:]+):(\d+)')
+  if empty(m) == 0
+    let path = m[1]
+    let line = m[2]
+  endif
 
   exe 'e ' . path
+  if line != 'no' | call feedkeys(line . 'G') | endif
 endfunction " OpenTreeFile
 
