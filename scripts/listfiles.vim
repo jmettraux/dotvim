@@ -75,7 +75,7 @@ function! s:ListFiles()
   call feedkeys(":call search('^[\.\/a-zA-Z0-9]', '')\r:echo\r")
     " go to first file
 
-  setlocal syntax=listfiles
+  setlocal syntax=buffers
 
   "nmap <buffer> o gF
   "nmap <buffer> <space> gF
