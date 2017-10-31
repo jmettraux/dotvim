@@ -127,4 +127,5 @@ function! s:GitAdd()
 endfunction " GitAdd
 
 command! -nargs=0 GitAdd :call <SID>GitAdd()
+command! -nargs=0 Gadd :call <SID>GitAdd()
 
