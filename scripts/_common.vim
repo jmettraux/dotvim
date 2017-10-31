@@ -12,7 +12,7 @@ function! JmNtr(s)
   return substitute(a:s, '[^a-zA-Z0-9]', '_', 'g')
 endfunction
 
-function! JmOpenTreeFile()
+function! JmDetermineTreePathAndLine()
 
   let n = line('.')
   let last = '................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................'
@@ -34,15 +34,24 @@ function! JmOpenTreeFile()
   let path = join(elts, '/')
   let path = substitute(path, '\v\/\/+', '/', 'g') " turn // or /// into /
   let path = substitute(path, '\v +.+$', '', '') " cut trailing info
-  let line = 'no'
+  let line = -1
 
   let m = matchlist(path, '\v^([^:]+):(\d+)')
   if empty(m) == 0
     let path = m[1]
-    let line = m[2]
+    let line = str2nr(m[2])
   endif
 
+  return [ path, line ]
+endfunction " JmDetermineTreePathAndLine
+
+function! JmOpenTreeFile()
+
+  let pl = JmDetermineTreePathAndLine()
+  let path = pl[0]
+  let line = pl[1]
+
   exe 'e ' . path
-  if line != 'no' | call feedkeys(line . 'G') | endif
-endfunction " OpenTreeFile
+  if line > 0 | call feedkeys(line . 'G') | endif
+endfunction " JmOpenTreeFile
 

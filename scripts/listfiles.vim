@@ -117,3 +117,14 @@ nnoremap <silent> <leader>b :call <SID>ListFiles()<CR>
 
 nnoremap <silent> <leader>B :exe 'bdelete ' . join(range(1, bufnr('$')), ' ')<CR>:call <SID>ListFiles()<CR>
 
+
+function! s:GitAdd()
+
+  let path = JmDetermineTreePathAndLine()[0]
+  let s = system('git add ' . path)
+  call <SID>ListFiles()
+  echo s
+endfunction " GitAdd
+
+command! -nargs=0 GitAdd :call <SID>GitAdd()
+
