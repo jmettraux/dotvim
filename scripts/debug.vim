@@ -7,3 +7,8 @@ command! Tap :normal o<ESC>0C.tap { |x| p x }<ESC>013l
 "
 command! Clo :normal o<ESC>0Cconsole.log([ 0, 1 ]);<ESC>014l
 
+" inject a js throw
+"
+command! Thro :normal o<ESC>0Cthrow new Error("Thro:" + JSON.stringify(xxx));<ESC>041l
+
+
