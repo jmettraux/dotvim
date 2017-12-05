@@ -9,6 +9,6 @@ command! Clo :normal o<ESC>0Cconsole.log([ 0, 1 ]);<ESC>014l
 
 " inject a js throw
 "
-command! Thro :normal o<ESC>0Cthrow new Error("Thro:" + JSON.stringify(xxx));<ESC>041l
+command! Thro :normal o<ESC>0Cif (true) throw new Error("Thro:" + JSON.stringify(xxx));<ESC>051l
 
 
