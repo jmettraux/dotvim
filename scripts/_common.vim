@@ -20,7 +20,7 @@ function! JmDetermineTreePathAndLine()
 
   while n > 0
     let l = getline(n)
-    let m = matchlist(l, '\v^([│├─└  ]+) (.+)$')
+    let m = matchlist(l, '\v^([│├─└][│├─└  ]*) (.+)$')
     if empty(m) == 1 | let elts = [ l ] + elts | break | endif
     let left = substitute(m[1], '└', '├', 'g')
     let right = m[2]
@@ -32,6 +32,7 @@ function! JmDetermineTreePathAndLine()
   endwhile
 
   let path = join(elts, '/')
+  let path = substitute(path, '\v^[  ]+', '', '') " trim left
   let path = substitute(path, '\v\/\/+', '/', 'g') " turn // or /// into /
   let path = substitute(path, '\v +.+$', '', '') " cut trailing info
   let line = -1
