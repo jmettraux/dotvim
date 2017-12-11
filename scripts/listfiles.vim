@@ -58,7 +58,8 @@ function! s:ListFiles()
     exe 'silent echo "== git status"'
     exe 'redir END'
     exe 'silent $put z'
-    exe 'silent r! (echo "`git status`"; echo "`git diff --stat`") | perl ~/.vim/scripts/restatus.pl'
+    "exe 'silent r! (echo "`git status`"; echo "`git diff --stat`") | perl ~/.vim/scripts/restatus.pl'
+    exe 'r! /usr/bin/env python ~/.vim/scripts/restatus.py'
   endif
 
   "let l = line('.') + 1

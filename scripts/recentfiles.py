@@ -4,6 +4,7 @@ import os, re, sys
 
 recent_count = 14
 
+
 rejects = [
   'COMMIT_EDITMSG', 'NetrwTreeListing', 'bash-fc-', '==[A-Z]',
   '\/private\/var\/', '\/mutt-' ]
