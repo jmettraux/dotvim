@@ -23,7 +23,7 @@ for line in lines:
     continue
   m = re.match('\A ([^\(]+)\s+\|[ ]*(\d+) (\+[-+]*)', line)
   if m:
-    paths[m.group(1)] = m.group(1) + " | " + m.group(3) + " " + m.group(2)
+    paths[m.group(1).strip()] = m.group(1) + " | " + m.group(3) + " " + m.group(2)
     continue
   m = re.match('\A\s\d+ ', line)
   if m:
@@ -31,6 +31,8 @@ for line in lines:
     #continue
   #print '>>>' + line
 
+#for k in paths.keys():
+#  print '>' + k + '<'
 for line in sorted(paths.values()):
   print line
 for line in footer:
