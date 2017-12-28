@@ -19,14 +19,22 @@ function! JmDetermineTreePathAndLine()
   let elts = []
 
   while n > 0
+
     let l = getline(n)
-    let m = matchlist(l, '\v^([│├─└][│├─└  ]*) (.+)$')
+
+    "let m = matchlist(l, '\v^([│├─└][│├─└  ]*) (.+)$')
+      " keep around until completely fixed
+    let m = matchlist(l, '\v^([│├─└  ]+) (.+)$')
+
     if empty(m) == 1 | let elts = [ l ] + elts | break | endif
+
     let left = substitute(m[1], '└', '├', 'g')
     let right = m[2]
     let n = n - 1
     if left == last | continue | endif
+
     if len(left) > len(last) | continue | endif
+
     let last = left
     let elts = [ right ] + elts
   endwhile
