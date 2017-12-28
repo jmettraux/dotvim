@@ -29,6 +29,10 @@ for line in lines:
   if m:
     footer.append("#\n#" + line)
     #continue
+  m = re.match('\A\s+renamed:\s+(.+) -> (.+)', line)
+  if m:
+    paths[m.group(2)] = m.group(2) + '  (renamed)'
+    continue
   #print '>>>' + line
 
 #for k in paths.keys():
