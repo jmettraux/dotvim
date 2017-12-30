@@ -28,6 +28,9 @@ function! JmDetermineTreePathAndLine()
 
     if empty(m) == 1 | let elts = [ l ] + elts | break | endif
 
+    let lspace = substitute(m[1], ' ', '', 'g')
+    if len(lspace) == 0 | let elts = [ l ] + elts | break | endif
+
     let left = substitute(m[1], '└', '├', 'g')
     let right = m[2]
     let n = n - 1
