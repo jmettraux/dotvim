@@ -6,6 +6,7 @@ hi! scoLine cterm=NONE ctermfg=darkgreen ctermbg=16
 hi! scoFuncName cterm=NONE ctermfg=white ctermbg=16
 hi! scoKeyword cterm=NONE ctermfg=darkyellow ctermbg=16
 hi def link scoString String
+hi def link scoSpecDescribe ScoFuncName
 
 syn match scoTitle '^== .\+'
 syn match scoLine /\v^\s*\d+/
@@ -25,6 +26,9 @@ syn region scoFuncName matchgroup=scoX start=/\v(^|\s+)def(\s+self\.|\s+)/ match
 " Javascript
 syn region scoFuncName matchgroup=scoX start=/\v(^|\s+)var\s+/ matchgroup=scoX end=/\v\s*\=\s*\(?function/
 syn region scoFuncName matchgroup=scoX start=/\v(^|\s+)this\./ matchgroup=scoX end=/\v\s*\=\s*function/
+
+" Rspec
+syn keyword scoSpecDescribe describe
 
 let b:current_syntax = "scanout"
 
