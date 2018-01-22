@@ -5,9 +5,12 @@ hi! scoTitle cterm=NONE ctermfg=darkyellow ctermbg=16
 hi! scoLine cterm=NONE ctermfg=darkgreen ctermbg=16
 hi! scoFuncName cterm=NONE ctermfg=white ctermbg=16
 hi! scoKeyword cterm=NONE ctermfg=darkyellow ctermbg=16
+hi def link scoString String
 
 syn match scoTitle '^== .\+'
 syn match scoLine /\v^\s*\d+/
+syn region scoString start=+"+  skip=+\\"+  end=+"+
+syn region scoString start=+'+  skip=+\\'+  end=+'+
 
 " Ruby
 syn keyword scoKeyword class
