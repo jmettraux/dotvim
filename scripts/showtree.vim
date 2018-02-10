@@ -10,7 +10,8 @@ function! s:ShowTree(start)
   "exe 'silent r! tree -i -f -F ' . a:start
   normal O
   exe 'silent r! tree -F ' . a:start
-  exe 'silent %s/\*$//g'
+  exe '%s/\*$//ge'
+    " e to silent when no pattern match
   normal 1G
   setlocal syntax=showtreeout
   write
