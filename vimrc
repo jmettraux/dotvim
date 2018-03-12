@@ -161,15 +161,9 @@ nnoremap <silent> <leader>; :call <SID>JmBufAlt()<CR>
 "nnoremap <silent> <leader>c :only!<CR>
 
 "nnoremap <silent> <leader>b :buffers<CR>
-nnoremap <silent> <leader>1 :e #1<CR>
-nnoremap <silent> <leader>2 :e #2<CR>
-nnoremap <silent> <leader>3 :e #3<CR>
-nnoremap <silent> <leader>4 :e #4<CR>
-nnoremap <silent> <leader>5 :e #5<CR>
-nnoremap <silent> <leader>6 :e #6<CR>
-nnoremap <silent> <leader>7 :e #7<CR>
-nnoremap <silent> <leader>8 :e #8<CR>
-nnoremap <silent> <leader>9 :e #9<CR>
+"nnoremap <silent> <leader>1 :e #1<CR>
+"nnoremap <silent> <leader>2 :e #2<CR>
+"...
 "nnoremap <silent> <leader>a 0w
 
 nnoremap <leader>f gF
