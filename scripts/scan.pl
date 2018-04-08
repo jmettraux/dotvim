@@ -12,7 +12,7 @@ while (<>) {
         \bvar\s+.+\s+=\s+\(?function\b|
         public\b|protected\b|private\b|
         before\s+:[a-z]+|after\s+:[a-z]+|
-        describe\s+['"]|context\s+['"]|it\s+['"]
+        describe\s+(['"A-Za-z])|context\s+['"]|it\s+['"]
       )|
       \s+this\.\S+\s+=\s+function\b
     /x
