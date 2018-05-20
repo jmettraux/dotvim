@@ -15,7 +15,8 @@ while (<>) {
         describe\s+(['"A-Za-z])|context\s+['"]|it\s+['"]
       )|
       \s+this\.\S+\s+=\s+function\b
-    /x
+    /x ||
+    /\bFIXME|TODO\b/
   ) {
     printf("%5d %s", $i, $_);
   };
