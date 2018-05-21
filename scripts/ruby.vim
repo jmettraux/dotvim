@@ -1,12 +1,9 @@
 
 function! s:BxsFnameAndLnumber()
-
-  "exe '! echo "bxs ' . @% . ':' . line('.') . '" | pbcopy'
-    " expensive, creates a subprocess, the below kp is cleaner
-
-  let @x = 'bxs ' . @% . ':' . line('.')
-  exe '"xkp'
-  exe 'echo "\"" . getreg("x") . "\" copied"'
+  let @z = 'bxs ' . fnamemodify(expand("%"), ":~:.") . ':' . line('.')
+  exe 'silent ! echo "' . @z . '" | pbcopy'
+  exe 'redraw!'
+  echo "\"" . getreg("z") . "\" copied"
 endfunction " BxsFnameAndLnumber
 
 nnoremap <silent> <leader>@ :call <SID>BxsFnameAndLnumber()<CR>
