@@ -11,15 +11,15 @@ footer = []
 for line in lines:
   m = re.match('\A\s+new file:\s+(.+)', line)
   if m:
-    paths[m.group(1)] = m.group(1) + "  (new file)"
+    paths[m.group(1)] = m.group(1) + "  | (new file)"
     continue
   m = re.match('\A\s+modified:\s+(.+)', line)
   if m:
-    paths[m.group(1)] = m.group(1) + "  (modified)"
+    paths[m.group(1)] = m.group(1) + "  | (modified)"
     continue
   m = re.match('\A\s+deleted:\s+(.+)', line)
   if m:
-    paths[m.group(1)] = m.group(1) + "  (deleted)"
+    paths[m.group(1)] = m.group(1) + "  | (deleted)"
     continue
   m = re.match('\A ([^\(]+)\s+\|[ ]*(\d+) (\+[-+]*)', line)
   if m:
@@ -31,7 +31,7 @@ for line in lines:
     #continue
   m = re.match('\A\s+renamed:\s+(.+) -> (.+)', line)
   if m:
-    paths[m.group(2)] = m.group(2) + '  (renamed)'
+    paths[m.group(2)] = m.group(2) + '  | (renamed)'
     continue
   #print '>>>' + line
 

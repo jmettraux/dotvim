@@ -27,7 +27,7 @@ syn match bufTreeFile '\v[-A-Za-z0-9 \(\)_.]+$' contained
 syn match bufTreeLine '\v^[├│└─  ]+ .+$' contains=bufTree,bufTreeDir,bufTreeFile
 
 syn region bufComment start="#" end="\n"
-syn region bufComment start="(" end="\n"
+"syn region bufComment start="(" end="\n"
 syn region bufComment start="|" end="\n"
 
 let b:current_syntax = "buffers"
