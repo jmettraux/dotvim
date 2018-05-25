@@ -45,7 +45,7 @@ function! JmDetermineTreePathAndLine()
   let path = join(elts, '/')
   let path = substitute(path, '\v^[  ]+', '', '') " trim left
   let path = substitute(path, '\v\/\/+', '/', 'g') " turn // or /// into /
-  let path = substitute(path, '\v +.+$', '', '') " cut trailing info
+  "let path = substitute(path, '\v +.+$', '', '') " cut trailing info
   let line = -1
 
   let m = matchlist(path, '\v^([^:]+):(\d+)')

@@ -18,7 +18,7 @@ def expand_path(path):
 paths = []
   #
 for line in sys.stdin:
-  m = re.match('\d+: ([^ \n]+)', line)
+  m = re.match('\d+: ([^\n]+)', line)
   if not m:
     continue
   if next((r for r in rejects if re.search(r, line)), None):

@@ -13,11 +13,11 @@ hi def link stoSummary Comment
 
 syn match stoSummary '\v^\d+ .+$'
 
-syn match stoLine '\v[├│└─  ]+ .+' contains=stoTree,stoFilename,stoDirname
+syn match stoLine '\v^[├│└─  ]+ .+' contains=stoTree,stoDirname,stoFilename
 syn match stoTree '\v^[├│└─  ]+' contained
-syn match stoFilename '\v[^ \/]+$' contained
-syn match stoDirname '\v[^ \/]+\/$' contained
-syn match stoDirname '\v^[a-zA-Z].*$'
+syn match stoDirname  '\v[-A-Za-z0-9 \(\)_.]+\/$' contained
+syn match stoFilename '\v[-A-Za-z0-9 \(\)_.]+$' contained
+syn match stoDirname  '\v^[a-zA-Z].*$'
 
 let b:current_syntax = "showtreeout"
 
