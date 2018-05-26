@@ -23,6 +23,10 @@ function! s:OpenTodos()
   exe 'normal ' . olin . 'G'
   write
   au CursorHold,InsertLeave <buffer> :w
+
+  nnoremap <buffer> o :call JmOpenTreeFile()<CR>
+  nnoremap <buffer> <space> :call JmOpenTreeFile()<CR>
+  nnoremap <buffer> <CR> :call JmOpenTreeFile()<CR>
 endfunction " OpenTodos
 
 nnoremap <silent> <leader>t :call <SID>OpenTodos()<CR>
