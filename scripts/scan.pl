@@ -11,6 +11,7 @@ while (<>) {
         def\s+[^\s.]+|
         \bvar\s+.+\s+=\s+\(?function\b|
         public\b|protected\b|private\b|
+        Option\b|Public\b|Sub\b|Function\b|
         before\s+:[a-z]+|after\s+:[a-z]+|
         describe\s+(['"A-Za-z])|context\s+['"]|it\s+['"]
       )|
