@@ -64,8 +64,21 @@ au BufRead *.greprout set filetype=greprout
 "command! -nargs=* Vg :call <SID>Vg(<f-args>)
 command! -nargs=* -complete=file Vg :call <SID>Vg(<q-args>)
 
+function! s:VgSrc(args)
+
+  if !empty(glob("lib"))
+    call <SID>Vg(a:args . " lib")
+  elseif !empty(glob("src"))
+    call <SID>Vg(a:args . " src")
+  else
+    call <SID>Vg(a:args . " .")
+  endif
+endfunction
+
 "nnoremap <leader>q "zyw:exe ":call <SID>Vg(\"" . @z . "\")"<CR>
 "nnoremap <leader>q "zyw:exe ":echo \"" . @z . "\""<CR>
 "nnoremap <leader>g "zyw:exe ":call <SID>Vg(" . string(@z) . ")"<CR>
-nnoremap <leader>g "zyw:exe ":call <SID>Vg('" . @z . " lib/ src/')"<CR>
+  "
+"nnoremap <leader>g "zyw:exe ":call <SID>Vg('" . @z . " lib/ src/')"<CR>
+nnoremap <leader>g "zyw:exe ":call <SID>VgSrc('" . @z . "')"<CR>
 
