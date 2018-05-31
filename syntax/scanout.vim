@@ -17,7 +17,7 @@ syn region scoString start=+'+  skip=+\\'+  end=+'+
 
 " Ruby
 syn keyword scoKeyword class module public protected private include extends
-syn region scoFuncName matchgroup=scoX start=/\v(^|\s+)def(\s+self\.|\s+)/ matchgroup=scoX end=/\v\s*(\(|\\|$)/
+syn region scoFuncName matchgroup=scoX start=/\v(^|\s+)def(\s+self\.|\s+)/ matchgroup=scoX end=/\v\s*(\(|\\|;|$)/
 
 " Javascript
 syn region scoFuncName matchgroup=scoX start=/\v(^|\s+)var\s+/ matchgroup=scoX end=/\v\s*\=\s*\(?function/
