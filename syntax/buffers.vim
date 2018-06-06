@@ -19,12 +19,12 @@ syn match bufLineNumber '\v:[0-9]+$' contained
   " @= is positive lookahead...
 
 syn match bufPath   '\v^[/~]?[-A-Za-z0-9 \(\)_./]+(:[0-9]+)?$' contains=bufFileName,bufDirName,bufLineNumber
-syn match bufStatus '\v^[-A-Za-z0-9 \(\)_./]+ +|$' contains=bufFileName,bufDirName
+syn match bufStatus '\v^[-A-Za-z0-9 \(\)_./]+ +\|$' contains=bufFileName,bufDirName
 
 syn match bufTree     '\v^[├│└─  ]+' contained
 syn match bufTreeDir  '\v[-A-Za-z0-9 \(\)_.]+\/' contained
 syn match bufTreeFile '\v[-A-Za-z0-9 \(\)_.]+$' contained
-syn match bufTreeLine '\v^[├│└─  ]+ .+$' contains=bufTree,bufTreeDir,bufTreeFile
+syn match bufTreeLine '\v^[├│└─  ]+ [^:]+$' contains=bufTree,bufTreeDir,bufTreeFile
 
 syn region bufComment start="#" end="\n"
 "syn region bufComment start="(" end="\n"
