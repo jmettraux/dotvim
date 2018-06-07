@@ -48,6 +48,7 @@ au BufRead *.rake set filetype=ruby
 au BufRead *.rconf set filetype=ruby
 au BufNewFile,BufRead *.go set filetype=go
 au BufNewFile,BufRead *.ru set filetype=ruby
+au BufNewFile,BufRead *.applescript set filetype=applescript
 
 au BufNewFile,BufRead *.slim set filetype=slim
 "au BufNewFile,BufRead *.slim highlight ColorColumn ctermbg=16
