@@ -6,19 +6,23 @@ function! s:BxsFnameAndLnumber()
   if has("win32")
     " cygwin
     exe 'silent ! echo "' . @z . '" | putclip'
+    exe 'redraw!'
+    echo "\"" . getreg("z") . "\" copied"
   else
     if has("unix")
       let s:uname = system("uname")
       if s:uname == "Darwin\n"
-        exe 'silent ! echo "' . @z . '" | pbcopy'
+        "exe 'silent ! echo "' . @z . '" | bcopy'
+        exe 'silent ! osascript ~/.vim/scripts/bxs.applescript "' . @z . '"'
+        exe 'redraw!'
       else
         exe 'silent ! echo "' . @z . '" | xclip -i'
+        exe 'redraw!'
+        echo "\"" . getreg("z") . "\" copied"
       endif
     endif
   endif
 
-  exe 'redraw!'
-  echo "\"" . getreg("z") . "\" copied"
 endfunction " BxsFnameAndLnumber
 
 nnoremap <silent> <leader>@ :call <SID>BxsFnameAndLnumber()<CR>
