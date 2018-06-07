@@ -9,7 +9,9 @@ function! s:ShowTree(start)
 
   "exe 'silent r! tree -i -f -F ' . a:start
   normal O
-  exe 'silent r! tree -F ' . a:start
+  exe 'silent r! tree -hF ' . a:start
+  "exe 'silent %s/\v\[ *([0-9.]+[KMGTPE]?)\]  //e'
+  exe 'silent %s/\v\[ *([0-9.]+[KMGTPE]?)\]  (.+)$/\2 \1/e'
   exe 'silent %s/\*$//ge'
   exe 'silent %s/\\ / /ge'
     " e to silent when no pattern match
