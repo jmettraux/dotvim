@@ -16,7 +16,7 @@ syn match stoSummary '\v^\d+ .+$'
 
 syn match stoDirname  '\v^[a-zA-Z].*$'
   "
-syn match stoTree '\v^[├│└─  ]+' contained
+syn match stoTree '\v[├│└─  ]+ ' contained
 syn match stoDirname  '\v[-A-Za-z0-9 \(\)_.]+\/' contained
 syn match stoFilename '\v[-A-Za-z0-9 \(\)_.]+ ' contained
 syn match stoSize '\v[0-9.]+[KMGTPE]?$' contained
