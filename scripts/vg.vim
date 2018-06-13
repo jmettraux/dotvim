@@ -80,5 +80,5 @@ endfunction
 "nnoremap <leader>g "zyw:exe ":call <SID>Vg(" . string(@z) . ")"<CR>
   "
 "nnoremap <leader>g "zyw:exe ":call <SID>Vg('" . @z . " lib/ src/')"<CR>
-nnoremap <leader>g "zyw:exe ":call <SID>VgSrc('" . @z . "')"<CR>
+nnoremap <leader>g wb"zyw:exe ":call <SID>VgSrc('" . @z . "')"<CR>
 
