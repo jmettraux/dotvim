@@ -3,7 +3,7 @@
 " Maintainer:	Ben Williams <benw@plasticboy.com>
 " URL:		http://plasticboy.com/markdown-vim-mode/
 " Version:	9
-" Last Change:  2009 May 18 
+" Last Change:  2009 May 18
 " Remark:	Uses HTML syntax file
 " Remark:	I don't do anything with angle brackets (<>) because that would too easily
 "		easily conflict with HTML syntax
@@ -66,7 +66,8 @@ syn match  mkdRule        /^\s*-\{3,}$/
 syn match  mkdRule        /^\s*\*\{3,5}$/
 syn match  mkdListItem    "^\s*[-*+]\s\+"
 syn match  mkdListItem    "^\s*\d\+\.\s\+"
-syn match  mkdCode        /^\s*\n\(\(\s\{4,}[^ ]\|\t\+[^\t]\).*\n\)\+/
+"syn match  mkdCode        /^\s*\n\(\(\s\{4,}[^ ]\|\t\+[^\t]\).*\n\)\+/
+  " disable StackOverflow like code blocks
 syn match  mkdLineBreak   /  \+$/
 
 syn match   mkdCode        /`[^`]*`/
