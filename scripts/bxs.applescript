@@ -13,5 +13,8 @@ on run argv
     delay 0.1
     tell application "System Events" to key code 36
   end tell
+
+  -- go to next window
+  tell application "System Events" to keystroke ";" using control down
 end run
 
