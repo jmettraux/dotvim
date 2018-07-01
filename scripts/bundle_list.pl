@@ -6,7 +6,7 @@ my @paths = split(/\n/, `bundle show --paths`);
 my $home = $ENV{'HOME'};
 
 for ($i=0; $i <= $#gems; $i++) {
-  $gems[$i] =~ /^  \* ([^ ]+)\s+\(([^)]+)/;
+  $gems[$i] =~ /^  \* ([^ ]+)\s+\(([^ )]+)/;
   my $gem = $1;
   my $version = $2;
   my $path = ($paths[$i] =~ s/$home/~/gr);
