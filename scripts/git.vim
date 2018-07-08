@@ -114,6 +114,7 @@ function! s:OpenCommit(sha)
   exe 'setlocal nobuflisted'
   "exe 'setlocal filetype=ListFiles'
 
+  exe 'silent r! git diff --stat ' . a:sha . '^ ' . a:sha . ' | perl ~/.vim/scripts/regitdiffstat.pl'
   exe 'silent r! git show ' . a:sha . ' | perl ~/.vim/scripts/regitdiff.pl'
 
   setlocal syntax=gitdiff
