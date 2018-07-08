@@ -47,42 +47,42 @@ function! s:OpenFile()
 endfunction " OpenFile
 
 
-function! s:OpenGitDiff()
-
-  if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
-
-  if bufnr('==GitDiff') > 0 | exe 'bwipeout! ==GitDiff' | endif
-    " close previous GitDiff if any
-
-  exe 'new | only'
-    " | only makes it full window
-  exe 'silent file ==GitDiff'
-    " replace buffer name
-  exe 'setlocal buftype=nofile'
-  exe 'setlocal bufhidden=hide'
-  exe 'setlocal noswapfile'
-  exe 'setlocal nobuflisted'
-  "exe 'setlocal filetype=ListFiles'
-
-  exe 'silent r! git diff --stat | perl ~/.vim/scripts/regitdiffstat.pl'
-  exe 'silent r! git diff | perl ~/.vim/scripts/regitdiff.pl'
-
-  exe 'normal 1Gdda'
-
-  setlocal syntax=gitdiff
-
-  nnoremap <buffer> <silent> a :call search('^.\+ ---+++', '')<CR>0zz
-  nnoremap <buffer> <silent> A :call search('^.\+ ---+++', 'b')<CR>0zz
-    " silently go to next file
-
-  nnoremap <buffer> o :call <SID>OpenFile()<CR>
-  nnoremap <buffer> <CR> :call <SID>OpenFile()<CR>
-  nnoremap <buffer> <SPACE> :call <SID>OpenFile()<CR>
-
-  nnoremap <buffer> <silent> q :bd<CR>
-endfunction " OpenGitDiff
-
-nnoremap <silent> <leader>d :call <SID>OpenGitDiff()<CR>
+"function! s:OpenGitDiff()
+"
+"  if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
+"
+"  if bufnr('==GitDiff') > 0 | exe 'bwipeout! ==GitDiff' | endif
+"    " close previous GitDiff if any
+"
+"  exe 'new | only'
+"    " | only makes it full window
+"  exe 'silent file ==GitDiff'
+"    " replace buffer name
+"  exe 'setlocal buftype=nofile'
+"  exe 'setlocal bufhidden=hide'
+"  exe 'setlocal noswapfile'
+"  exe 'setlocal nobuflisted'
+"  "exe 'setlocal filetype=ListFiles'
+"
+"  exe 'silent r! git diff --stat | perl ~/.vim/scripts/regitdiffstat.pl'
+"  exe 'silent r! git diff | perl ~/.vim/scripts/regitdiff.pl'
+"
+"  exe 'normal 1Gdda'
+"
+"  setlocal syntax=gitdiff
+"
+"  nnoremap <buffer> <silent> a :call search('^.\+ ---+++', '')<CR>0zz
+"  nnoremap <buffer> <silent> A :call search('^.\+ ---+++', 'b')<CR>0zz
+"    " silently go to next file
+"
+"  nnoremap <buffer> o :call <SID>OpenFile()<CR>
+"  nnoremap <buffer> <CR> :call <SID>OpenFile()<CR>
+"  nnoremap <buffer> <SPACE> :call <SID>OpenFile()<CR>
+"
+"  nnoremap <buffer> <silent> q :bd<CR>
+"endfunction " OpenGitDiff
+"
+"nnoremap <silent> <leader>d :call <SID>OpenGitDiff()<CR>
 
 
 "
@@ -101,21 +101,37 @@ function! s:OpenCommit(sha)
 
   if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
 
-  if bufnr('==GitCommit') > 0 | exe 'bwipeout! ==GitCommit' | endif
+  "if a:sha
+  "  if bufnr('== git show ' . a:sha) > 0 | exe 'bwipeout! "== git show ' . a:sha . '"' | endif
+  "else
+  "  if bufnr('== git diff') > 0 | exe 'bwipeout! "== git diff"' | endif
+  "endif
+  if bufnr('==GitDiff') > 0 | exe 'bwipeout! ==GitDiff' | endif
     " close previous GitLog if any
 
   exe 'new | only'
     " | only makes it full window
-  exe 'silent file ==GitCommit'
-    " replace buffer name
+
+  "if a:sha
+  "  exe 'silent file == git show ' . a:sha
+  "else
+  "  exe 'silent file == git diff'
+  "endif
+  exe 'silent file ==GitDiff'
+
   exe 'setlocal buftype=nofile'
   exe 'setlocal bufhidden=hide'
   exe 'setlocal noswapfile'
   exe 'setlocal nobuflisted'
   "exe 'setlocal filetype=ListFiles'
 
-  exe 'silent r! git diff --stat ' . a:sha . '^ ' . a:sha . ' | perl ~/.vim/scripts/regitdiffstat.pl'
-  exe 'silent r! git show ' . a:sha . ' | perl ~/.vim/scripts/regitdiff.pl'
+  if a:sha
+    exe 'silent r! git diff --stat ' . a:sha . '^ ' . a:sha . ' | perl ~/.vim/scripts/regitdiffstat.pl'
+    exe 'silent r! git show ' . a:sha . ' | perl ~/.vim/scripts/regitdiff.pl'
+  else
+    exe 'silent r! git diff --stat | perl ~/.vim/scripts/regitdiffstat.pl'
+    exe 'silent r! git diff | perl ~/.vim/scripts/regitdiff.pl'
+  endif
 
   setlocal syntax=gitdiff
 
@@ -131,6 +147,8 @@ function! s:OpenCommit(sha)
 
   nnoremap <buffer> <silent> q :bd<CR>
 endfunction " OpenCommit
+
+nnoremap <silent> <leader>d :call <SID>OpenCommit(0)<CR>
 
 function! s:OpenGitLog(all)
 

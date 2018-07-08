@@ -42,6 +42,7 @@ function! s:ListFiles()
   exe 'silent! ' . l . ',g/greprout/d_'
   exe 'silent! ' . l . ',g/showtreeout/d_'
     " don't show recent .greprout or .showtreeout files (they're gone)
+  "exe '' . l . ',g/^== git (diff|show)/d_'
 
   if filereadable('.errors') && getfsize('.errors') > 0
     exe 'let @z=""'
