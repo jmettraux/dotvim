@@ -9,6 +9,7 @@ while (<>) {
         module\s+|
         class\s+|
         def\s+[^\s.]+|
+        alias\s+[^\s.]+\s+[^\s.]+|
         attr_(reader|accessor|writer)\s+|
         \bvar\s+.+\s+=\s+\(?function\b|
         public\b|protected\b|private\b|
