@@ -12,7 +12,7 @@ function! s:ShowTree(start)
   exe 'silent r! tree -hF ' . a:start
   "exe 'silent %s/\v\[ *([0-9.]+[KMGTPE]?)\]  //e'
   exe 'silent %s/\v\[ *([0-9.]+[KMGTPE]?)\]  (.+)$/\2 \1/e'
-  exe 'silent %s/\*$//ge'
+  exe 'silent %s/\v\* / /ge'
   exe 'silent %s/\\ / /ge'
     " e to silent when no pattern match
   normal 1G
