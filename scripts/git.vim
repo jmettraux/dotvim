@@ -125,7 +125,8 @@ function! s:OpenCommit(sha)
   exe 'setlocal nobuflisted'
   "exe 'setlocal filetype=ListFiles'
 
-  if a:sha
+  if strlen(a:sha) > 1
+    "exe 'silent r! echo ' . a:sha
     exe 'silent r! git diff --stat ' . a:sha . '^ ' . a:sha . ' | perl ~/.vim/scripts/regitdiffstat.pl'
     exe 'silent r! git show ' . a:sha . ' | perl ~/.vim/scripts/regitdiff.pl'
   else
