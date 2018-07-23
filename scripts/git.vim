@@ -150,6 +150,11 @@ endfunction " OpenCommit
 
 nnoremap <silent> <leader>d :call <SID>OpenCommit(0)<CR>
 
+function! s:ExtractSha()
+
+  return matchstr(getline('.'), '\v^[^a-fA-F0-9]+\zs([a-fA-F0-9]+)')
+endfunction " ExtractSha
+
 function! s:OpenGitLog(all)
 
   if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
@@ -178,11 +183,12 @@ function! s:OpenGitLog(all)
 
   exe 'normal 1G'
 
-  nnoremap <buffer> <silent> o :call <SID>OpenCommit(matchstr(getline('.'), '\v^[^a-fA-F0-9]+\zs([a-fA-F0-9]+)'))<CR>
-  nnoremap <buffer> <silent> <CR> :call <SID>OpenCommit(matchstr(getline('.'), '\v^[^a-fA-F0-9]+\zs([a-fA-F0-9]+)'))<CR>
-  nnoremap <buffer> <silent> <SPACE> :call <SID>OpenCommit(matchstr(getline('.'), '\v^[^a-fA-F0-9]+\zs([a-fA-F0-9]+)'))<CR>
-  nnoremap <buffer> <silent> c :call <SID>CheckoutCommit(matchstr(getline('.'), '\v^[^a-fA-F0-9]+\zs([a-fA-F0-9]+)'))<CR>
-  nnoremap <buffer> <silent> M :call <SID>CheckoutCommit('master')<CR>
+  nnoremap <buffer> <silent> o :call <SID>OpenCommit(<SID>ExtractSha())<CR>
+  nnoremap <buffer> <silent> <CR> :call <SID>OpenCommit(<SID>ExtractSha())<CR>
+  nnoremap <buffer> <silent> <SPACE> :call <SID>OpenCommit(<SID>ExtractSha())<CR>
+
+  "nnoremap <buffer> <silent> c :call <SID>CheckoutCommit(<SID>ExtractSha())<CR>
+  "nnoremap <buffer> <silent> M :call <SID>CheckoutCommit('master')<CR>
 
   nnoremap <buffer> <silent> q :bd<CR>
 endfunction " OpenGitLog
