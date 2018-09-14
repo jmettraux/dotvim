@@ -3,22 +3,47 @@
 
 import re, sys
 
-f = open(sys.argv[1], 'r')
-ls = map(lambda l: l.rstrip(), f.readlines())
+fn = sys.argv[1]
+f = open(fn, 'r')
+ls = [ [ i + 1, l.rstrip() ] for i, l in enumerate(f.readlines()) ]
 f.close
 
-r = [
-  'module', 'class', 'def', 'alias', 'attr_(reader|accessor|writer)', 'function',
-  'public', 'private', 'protected', 'Option', 'Public', 'Sub', 'Function',
-  'before', 'after', 'describe', 'context', 'it',
-  'TODO', 'FIXME' ]
-r = r'\A\s*\b(' + '|'.join(r) + r')\b'
-print r
+rs = [ r'.*' ]
 
-ls = [ l for l in ls if re.match(r, l) ]
+if re.search(r'_spec\.rb$', fn):
+  rs = [
+    r'^require\s*(\s|\().',
+    r'^\s*describe\b',
+    r'^\s*(before|after)\s*(\s|\():[a-z]',
+    r'^\s*it\s*(\s|\().',
+      ]
+elif re.search(r'\.rb$', fn):
+  rs = [
+    r'^require\s*(\s|\().',
+    r'^\s*(module|class)\s+',
+    r'^\s*attr_(accessor|reader|writer)\b',
+    r'^\s*(public|protected|private)\b',
+    r'^\s*def\s+',
+    r'^\s*alias\b',
+      ]
+elif re.search(r'\.js$', fn):
+  rs = [
+    r'^\s*var\s+.+\s*=\s*\(?\s*function\s*\(',
+    r'^\s*this\..+\s*=\s*',
+      ]
 
-for l in ls:
-  print l
+rs.append(r'\bTODO\b')
+rs.append(r'\bFIXME\b')
+
+#print "<<<"
+#print fn
+#print rs
+#print "<<<"
+
+for i, l in ls:
+  for r in rs:
+    if re.search(r, l):
+      print '%5d %s' % (i, l)
 
 ## scan.pl
 #
