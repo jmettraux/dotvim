@@ -21,7 +21,7 @@ function! s:Scan()
   exe '%d_'
   exe "silent r! echo '== :Scan " . path . "'"
   exe 'r! echo ""'
-  exe 'silent r! cat ' . path . ' | perl ~/.vim/scripts/scan.pl'
+  exe 'silent r! python ~/.vim/scripts/scan.py ' . path
   exe 'r! echo ""'
 
   setlocal syntax=scanout
