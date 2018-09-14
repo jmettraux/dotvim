@@ -13,9 +13,8 @@ rs = [ r'.*' ]
 if re.search(r'_spec\.rb$', fn):
   rs = [
     r'^require\s*(\s|\().',
-    r'^\s*describe\b',
+    r'^\s*(describe|context|it)\s*(\s|\().',
     r'^\s*(before|after)\s*(\s|\():[a-z]',
-    r'^\s*it\s*(\s|\().',
       ]
 elif re.search(r'\.rb$', fn):
   rs = [
