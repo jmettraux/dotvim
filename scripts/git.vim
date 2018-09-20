@@ -119,11 +119,11 @@ function! s:OpenCommit(sha)
   "endif
   exe 'silent file ==GitDiff'
 
-  exe 'setlocal buftype=nofile'
-  exe 'setlocal bufhidden=hide'
-  exe 'setlocal noswapfile'
-  exe 'setlocal nobuflisted'
-  "exe 'setlocal filetype=ListFiles'
+  setlocal buftype=nofile
+  setlocal bufhidden=hide
+  setlocal noswapfile
+  setlocal nobuflisted
+  "setlocal filetype=ListFiles
 
   if strlen(a:sha) > 1
     "exe 'silent r! echo ' . a:sha
@@ -135,6 +135,7 @@ function! s:OpenCommit(sha)
   endif
 
   setlocal syntax=gitdiff
+  setlocal nomodifiable
 
   exe 'normal 1G'
 
@@ -167,11 +168,11 @@ function! s:OpenGitLog(all)
     " | only makes it full window
   exe 'silent file ==GitLog'
     " replace buffer name
-  exe 'setlocal buftype=nofile'
-  exe 'setlocal bufhidden=hide'
-  exe 'setlocal noswapfile'
-  exe 'setlocal nobuflisted'
-  "exe 'setlocal filetype=ListFiles'
+  setlocal buftype=nofile
+  setlocal bufhidden=hide
+  setlocal noswapfile
+  setlocal nobuflisted
+  "setlocal filetype=ListFiles
 
   " TODO git log --pretty=format:"%h %an |%ad %d %s" --date=iso
   if a:all
@@ -181,6 +182,7 @@ function! s:OpenGitLog(all)
   endif
 
   setlocal syntax=gitlog
+  setlocal nomodifiable
 
   exe 'normal 1G'
 
@@ -229,17 +231,18 @@ function! s:OpenGitBlame()
     " | only makes it full window
   exe 'silent file ==GitBlame'
     " replace buffer name
-  exe 'setlocal buftype=nofile'
-  exe 'setlocal bufhidden=hide'
-  exe 'setlocal noswapfile'
-  exe 'setlocal nobuflisted'
-  "exe 'setlocal filetype=ListFiles'
+  setlocal buftype=nofile
+  setlocal bufhidden=hide
+  setlocal noswapfile
+  setlocal nobuflisted
+  "setlocal filetype=ListFiles
 
   exe 'silent r! git blame ' . fn . ' | perl ~/.vim/scripts/regitblame.pl'
 
   exe 'g/^$/d_'
 
   setlocal syntax=gitblame
+  setlocal nomodifiable
 
   exe 'normal ' . ln . 'G'
 

@@ -17,7 +17,8 @@ function! s:ShowTree(start)
     " e to silent when no pattern match
   normal 1G
   setlocal syntax=showtreeout
-  write
+  setlocal nomodifiable
+  silent write
 
   "nmap <buffer> o gF
   "nmap <buffer> <space> gF

@@ -25,6 +25,7 @@ function! s:Scan()
   exe 'r! echo ""'
 
   setlocal syntax=scanout
+  setlocal nomodifiable
   normal 4G
   silent write
   nnoremap <buffer> <silent> o :call <SID>OpenAtLine()<CR>
