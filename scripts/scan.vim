@@ -11,13 +11,26 @@ function! s:Scan()
 
   if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
 
-  "let path = expand("%:p") " expands into absolute file path
+  ""let path = expand("%:p") " expands into absolute file path
   let path = expand("%") " expands into relative file path
   let fname = expand("%:t")
+  "let fn = tempname() . '--' . fname . '.scanout'
+  "exe 'silent e ' . fn
+  let bname = '==Scan: ' . fname
 
-  let fn = tempname() . '--' . fname . '.scanout'
+  if bufnr(bname) > 0 | exe 'bwipeout! ' . bname | endif
+    " close previous GitLog if any
 
-  exe 'silent e ' . fn
+  exe 'new | only'
+    " | only makes it full window
+  exe 'silent file ' . bname
+    " replace buffer name
+
+  setlocal buftype=nofile
+  setlocal bufhidden=hide
+  setlocal noswapfile
+  setlocal nobuflisted
+
   exe '%d_'
   exe "silent r! echo '== :Scan " . path . "'"
   exe 'r! echo ""'
@@ -27,7 +40,8 @@ function! s:Scan()
   setlocal syntax=scanout
   setlocal nomodifiable
   normal 4G
-  silent write
+  "silent write
+
   nnoremap <buffer> <silent> o :call <SID>OpenAtLine()<CR>
   nnoremap <buffer> <silent> <space> :call <SID>OpenAtLine()<CR>
   nnoremap <buffer> <silent> <CR> :call <SID>OpenAtLine()<CR>
