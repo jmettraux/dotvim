@@ -37,10 +37,17 @@ function! s:Scan()
   exe 'silent r! python ~/.vim/scripts/scan.py ' . path
   exe 'r! echo ""'
 
-  setlocal syntax=scanout
+  if fname =~ "_spec\.rb$"
+    setlocal syntax=scanout_ruby_spec
+  elseif fname =~ "\.rb$"
+    setlocal syntax=scanout_ruby
+  elseif fname =~ "\.py$"
+    setlocal syntax=scanout_python
+  else
+    setlocal syntax=scanout
+  endif
   setlocal nomodifiable
   normal 4G
-  "silent write
 
   nnoremap <buffer> <silent> o :call <SID>OpenAtLine()<CR>
   nnoremap <buffer> <silent> <space> :call <SID>OpenAtLine()<CR>
