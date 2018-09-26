@@ -24,6 +24,7 @@ elif re.search(r'\.rb$', fn):
     r'^\s*(public|protected|private)\b',
     r'^\s*def\s+',
     r'^\s*alias\b',
+    r'^\s*(get|post|put|delete|head)\s+', # Sinatra
       ]
 elif re.search(r'\.js$', fn):
   rs = [
