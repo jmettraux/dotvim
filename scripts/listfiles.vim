@@ -14,7 +14,7 @@ function! s:ListFiles()
 
   if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
 
-  if bufnr('==ListFiles') > 0 | exe 'bwipeout! ==ListFiles' | endif
+  exe '' . bufnr('==ListFiles') . 'bwipeout!'
     " close previous ListFiles if any
 
   exe 'new | only'

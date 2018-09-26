@@ -101,22 +101,12 @@ function! s:OpenCommit(sha)
 
   if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
 
-  "if a:sha
-  "  if bufnr('== git show ' . a:sha) > 0 | exe 'bwipeout! "== git show ' . a:sha . '"' | endif
-  "else
-  "  if bufnr('== git diff') > 0 | exe 'bwipeout! "== git diff"' | endif
-  "endif
-  if bufnr('==GitDiff') > 0 | exe 'bwipeout! ==GitDiff' | endif
+  exe '' . bufnr('==GitDiff') . 'bwipeout!'
     " close previous GitLog if any
 
   exe 'new | only'
     " | only makes it full window
 
-  "if a:sha
-  "  exe 'silent file == git show ' . a:sha
-  "else
-  "  exe 'silent file == git diff'
-  "endif
   exe 'silent file ==GitDiff'
 
   setlocal buftype=nofile
@@ -161,7 +151,7 @@ function! s:OpenGitLog(all)
 
   if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
 
-  if bufnr('==GitLog') > 0 | exe 'bwipeout! ==GitLog' | endif
+  exe '' . bufnr('==GitLog') . 'bwipeout!'
     " close previous GitLog if any
 
   exe 'new | only'
@@ -224,7 +214,7 @@ function! s:OpenGitBlame()
 
   if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
 
-  if bufnr('==GitBlame') > 0 | exe 'bwipeout! ==GitBlame' | endif
+  exe '' . bufnr('==GitBlame') . 'bwipeout!'
     " close previous GitBlame if any
 
   exe 'new | only'

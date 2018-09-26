@@ -18,7 +18,7 @@ function! s:Scan()
   "exe 'silent e ' . fn
   let bname = '==Scan: ' . fname
 
-  if bufnr(bname) > 0 | exe 'bwipeout! ' . bname | endif
+  exe '' . bufnr(bname) . 'bwipeout!'
     " close previous GitLog if any
 
   exe 'new | only'
