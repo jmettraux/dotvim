@@ -51,7 +51,8 @@ endfunction " OpenFile
 "
 "  if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
 "
-"  if bufnr('==GitDiff') > 0 | exe 'bwipeout! ==GitDiff' | endif
+"  let bn = bufnr('==GitDiff')
+"  if bn > -1 | exe '' . bn . 'bwipeout!' | endif
 "    " close previous GitDiff if any
 "
 "  exe 'new | only'
@@ -101,7 +102,8 @@ function! s:OpenCommit(sha)
 
   if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
 
-  exe '' . bufnr('==GitDiff') . 'bwipeout!'
+  let bn = bufnr('==GitDiff')
+  if bn > -1 | exe '' . bn . 'bwipeout!' | endif
     " close previous GitLog if any
 
   exe 'new | only'
@@ -151,7 +153,8 @@ function! s:OpenGitLog(all)
 
   if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
 
-  exe '' . bufnr('==GitLog') . 'bwipeout!'
+  let bn = bufnr('==GitLog')
+  if bn > -1 | exe '' . bn . 'bwipeout!' | endif
     " close previous GitLog if any
 
   exe 'new | only'
@@ -214,7 +217,8 @@ function! s:OpenGitBlame()
 
   if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
 
-  exe '' . bufnr('==GitBlame') . 'bwipeout!'
+  let bn = bufnr('==GitBlame')
+  if bn > -1 | exe '' . bn . 'bwipeout!' | endif
     " close previous GitBlame if any
 
   exe 'new | only'

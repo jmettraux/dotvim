@@ -14,7 +14,8 @@ function! s:ListFiles()
 
   if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
 
-  exe '' . bufnr('==ListFiles') . 'bwipeout!'
+  let bn = bufnr('==ListFiles')
+  if bn > -1 | exe '' . bn . 'bwipeout!' | endif
     " close previous ListFiles if any
 
   exe 'new | only'

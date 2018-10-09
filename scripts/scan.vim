@@ -18,8 +18,9 @@ function! s:Scan()
   "exe 'silent e ' . fn
   let bname = '==Scan: ' . fname
 
-  exe '' . bufnr(bname) . 'bwipeout!'
-    " close previous GitLog if any
+  let bn = bufnr(bname)
+  if bn > -1 | exe '' . bn . 'bwipeout!' | endif
+    " close previous buffer if any
 
   exe 'new | only'
     " | only makes it full window
