@@ -29,7 +29,8 @@ elif re.search(r'\.rb$', fn):
 elif re.search(r'\.js$', fn):
   rs = [
     r'^\s*var\s+.+\s*=\s*\(?\s*function\s*\(',
-    r'^\s*this\..+\s*=\s*',
+    #r'^\s*this\..+\s*=\s*',
+    r'^\s*this\..+\s*=\s*.+\bfunction\b',
       ]
 
 rs.append(r'\bTODO\b')

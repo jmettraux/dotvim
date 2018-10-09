@@ -43,6 +43,8 @@ function! s:Scan()
     setlocal syntax=scanout_ruby
   elseif fname =~ "\.py$"
     setlocal syntax=scanout_python
+  elseif fname =~ "\.js$"
+    setlocal syntax=scanout_javascript
   else
     setlocal syntax=scanout
   endif
