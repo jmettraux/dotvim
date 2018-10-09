@@ -3,11 +3,13 @@ function! s:ShowTree(start)
 
   if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
 
-  let fn = tempname() . '--' . JmNtr(a:start) . '.showtreeout'
-
+  let fn = '.' . JmNtr(a:start) . '.showtreeout'
   exe 'e ' . fn
+  setlocal noswapfile
+  setlocal modifiable
 
-  "exe 'silent r! tree -i -f -F ' . a:start
+  exe '%d'
+    " delete all the lines
   normal O
   exe 'silent r! tree -hF ' . a:start
   "exe 'silent %s/\v\[ *([0-9.]+[KMGTPE]?)\]  //e'
@@ -18,16 +20,8 @@ function! s:ShowTree(start)
   normal 1G
   setlocal syntax=showtreeout
   setlocal nomodifiable
-  silent write
+  silent write!
 
-  "nmap <buffer> o gF
-  "nmap <buffer> <space> gF
-  "nmap <buffer> <CR> gF
-    "
-  "nnoremap <buffer> o :call <SID>OpenTreeFile()<CR>
-  "nnoremap <buffer> <space> :call <SID>OpenTreeFile()<CR>
-  "nnoremap <buffer> <CR> :call <SID>OpenTreeFile()<CR>
-    "
   nnoremap <buffer> o :call JmOpenTreeFile()<CR>
   nnoremap <buffer> <space> :call JmOpenTreeFile()<CR>
   nnoremap <buffer> <CR> :call JmOpenTreeFile()<CR>
@@ -42,6 +36,9 @@ endfunction " ShowTree
 
 command! -nargs=1 -complete=dir Vt :call <SID>ShowTree(<f-args>)
 au BufRead *.showtreeout set filetype=showtreeout
+
+au VimLeave * :!rm -f .*.showtreeout
+  " remove all the local .showtreeout files upon leaving Vim
 
 
 function! s:ShowSourceTree()
