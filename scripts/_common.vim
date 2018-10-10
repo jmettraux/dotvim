@@ -61,7 +61,13 @@ function! JmOpenTreeFile()
   let path = pl[0]
   let line = pl[1]
 
-  exe 'e ' . path
+  let n = bufnr(path)
+  if n > -1
+    exe 'b ' . n
+  else
+    exe 'e ' . path
+  endif
+
   if line > 0 | call feedkeys(line . 'G') | endif
 endfunction " JmOpenTreeFile
 
