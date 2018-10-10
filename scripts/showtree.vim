@@ -3,10 +3,20 @@ function! s:ShowTree(start)
 
   if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
 
-  let fn = '.' . JmNtr(a:start) . '.showtreeout'
-  exe 'e ' . fn
+  let fn = '__' . JmNtr(a:start) . '.showtreeout'
+
+  let bn = bufnr(fn)
+  if bn > -1 | exe '' . bn . 'bwipeout!' | endif
+    " close previous GitLog if any
+
+  exe 'new | only'
+    " | only makes it full window
+
+  exe 'silent file ' . fn
+
+  setlocal buftype=nofile
+  setlocal bufhidden=hide
   setlocal noswapfile
-  setlocal modifiable
 
   exe '%d'
     " delete all the lines
@@ -20,7 +30,6 @@ function! s:ShowTree(start)
   normal 1G
   setlocal syntax=showtreeout
   setlocal nomodifiable
-  silent write!
 
   nnoremap <buffer> o :call JmOpenTreeFile()<CR>
   nnoremap <buffer> <space> :call JmOpenTreeFile()<CR>
@@ -35,9 +44,9 @@ function! s:ShowTree(start)
 endfunction " ShowTree
 
 command! -nargs=1 -complete=dir Vt :call <SID>ShowTree(<f-args>)
-au BufRead *.showtreeout set filetype=showtreeout
+"au BufRead *.showtreeout set filetype=showtreeout
 
-au VimLeave * :!rm -f .*.showtreeout
+"au VimLeave * :!rm -f .*.showtreeout
   " remove all the local .showtreeout files upon leaving Vim
 
 
