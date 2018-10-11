@@ -3,7 +3,7 @@ function! s:ShowTree(start)
 
   if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
 
-  let fn = '__' . JmNtr(a:start) . '.showtreeout'
+  let fn = '_t___' . JmNtr(a:start)
 
   let bn = bufnr(fn)
   if bn > -1 | exe '' . bn . 'bwipeout!' | endif
