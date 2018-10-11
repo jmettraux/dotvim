@@ -37,9 +37,23 @@ function! s:Vg(args)
 
   let pr = s:ExtractPatternAndRest(a:args)
   let rest = pr[1] == '' ? '.' : pr[1]
-  let fn = tempname() . '--' . JmNtr(pr[0]) . '--' . JmNtr(rest) . '.greprout'
+  "let fn = tempname() . '--' . JmNtr(pr[0]) . '--' . JmNtr(rest) . '.greprout'
+  let fn = '_g___' . JmNtr(pr[0]) . '__' . JmNtr(rest)
 
-  exe 'silent e ' . fn
+  let bn = bufnr(fn)
+  if bn > -1 | exe '' . bn . 'bwipeout!' | endif
+    " close previous buffer if any
+
+  exe 'new | only'
+    " | only makes it full window
+  exe 'silent file ' . fn
+    " replace buffer name
+
+  setlocal buftype=nofile
+  setlocal bufhidden=hide
+  setlocal noswapfile
+  "setlocal nobuflisted
+
   exe '%d_'
   exe "silent r! echo '== :Vg " . pr[0] . " " . rest . "'"
   exe "Clean"
@@ -51,7 +65,8 @@ function! s:Vg(args)
   setlocal syntax=greprout
   "call feedkeys('4G')
   normal 4G
-  silent write
+  setlocal nomodifiable
+
   nmap <buffer> o gF
   nmap <buffer> <space> gF
   nmap <buffer> <CR> gF
