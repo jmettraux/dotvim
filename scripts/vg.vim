@@ -73,7 +73,7 @@ function! s:Vg(args)
   "nmap <buffer> <leader>; gF
     " no, keep it for switching to alternate buffer
 endfunction
-au BufRead *.greprout set filetype=greprout
+"au BufRead *.greprout set filetype=greprout
 
 "command! -nargs=1 Vg :! grep -R -n --exclude-dir=.git <args>
 "command! -nargs=* Vg :call <SID>Vg(<f-args>)
