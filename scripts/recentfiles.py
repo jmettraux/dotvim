@@ -7,7 +7,7 @@ recent_count = 14
 
 rejects = [
   'COMMIT_EDITMSG', 'NetrwTreeListing', 'bash-fc-', '==[A-Z]',
-  '\/private\/var\/', '\/mutt-', '_[t]___[a-zA-Z0-9]' ]
+  '\/private\/var\/', '\/mutt-' ]
 
 def expand_path(path):
   p = os.path.relpath(os.path.expanduser(path))
