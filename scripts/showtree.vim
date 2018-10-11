@@ -1,5 +1,5 @@
 
-function! s:ShowTree(start)
+function! JmShowTree(start)
 
   if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
 
@@ -53,9 +53,9 @@ command! -nargs=1 -complete=dir Vt :call <SID>ShowTree(<f-args>)
 function! s:ShowSourceTree()
 
   if !empty(glob("lib"))
-    exe ':call <SID>ShowTree("lib")'
+    call JmShowTree('lib')
   elseif !empty(glob("src"))
-    exe ':call <SID>ShowTree("src")'
+    call JmShowTree('src')
   endif
 endfunction " ShowSourceTree
 command! -nargs=0 Vs :call <SID>ShowSourceTree()
@@ -64,9 +64,9 @@ nnoremap <silent> <leader>s :call <SID>ShowSourceTree()<CR>
 function! s:ShowTestTree()
 
   if !empty(glob("spec"))
-    exe ':call <SID>ShowTree("spec")'
+    call JmShowTree('spec')
   elseif !empty(glob("test"))
-    exe ':call <SID>ShowTree("test")'
+    call JmShowTree('test')
   endif
 endfunction " ShowTestTree
 command! -nargs=0 Vtt :call <SID>ShowTestTree()

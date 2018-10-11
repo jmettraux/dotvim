@@ -60,6 +60,8 @@ function! JmOpenFile(path, line)
   let n = bufnr(a:path)
   if n > -1
     exe 'b ' . n
+  elseif isdirectory(a:path)
+    call JmShowTree(a:path)
   else
     exe 'e ' . a:path
   endif
