@@ -13,24 +13,23 @@ function! s:Scan()
 
   ""let path = expand("%:p") " expands into absolute file path
   let path = expand("%") " expands into relative file path
-  let fname = expand("%:t")
-  "let fn = tempname() . '--' . fname . '.scanout'
-  "exe 'silent e ' . fn
-  let bname = '==Scan: ' . fname
+  "let fname = expand("%:t")
 
-  let bn = bufnr(bname)
+  let fn = '_k___' . JmNtr(path)
+
+  let bn = bufnr(fn)
   if bn > -1 | exe '' . bn . 'bwipeout!' | endif
     " close previous buffer if any
 
   exe 'new | only'
     " | only makes it full window
-  exe 'silent file ' . bname
+  exe 'silent file ' . fn
     " replace buffer name
 
   setlocal buftype=nofile
   setlocal bufhidden=hide
   setlocal noswapfile
-  setlocal nobuflisted
+  "setlocal nobuflisted
 
   exe '%d_'
   exe "silent r! echo '== :Scan " . path . "'"
@@ -38,13 +37,13 @@ function! s:Scan()
   exe 'silent r! python ~/.vim/scripts/scan.py ' . path
   exe 'r! echo ""'
 
-  if fname =~ "_spec\.rb$"
+  if path =~ "_spec\.rb$"
     setlocal syntax=scanout_ruby_spec
-  elseif fname =~ "\.rb$"
+  elseif path =~ "\.rb$"
     setlocal syntax=scanout_ruby
-  elseif fname =~ "\.py$"
+  elseif path =~ "\.py$"
     setlocal syntax=scanout_python
-  elseif fname =~ "\.js$"
+  elseif path =~ "\.js$"
     setlocal syntax=scanout_javascript
   else
     setlocal syntax=scanout
@@ -56,7 +55,7 @@ function! s:Scan()
   nnoremap <buffer> <silent> <space> :call <SID>OpenAtLine()<CR>
   nnoremap <buffer> <silent> <CR> :call <SID>OpenAtLine()<CR>
 endfunction " Scan
-au BufRead *.scanout set filetype=scanout
+"au BufRead *.scanout set filetype=scanout
 
 command! -nargs=0 Scan :call <SID>Scan()
 nnoremap <silent> <leader>k :call <SID>Scan()<CR>
