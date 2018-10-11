@@ -55,19 +55,21 @@ function! JmDetermineTreePathAndLine()
   return [ path, line ]
 endfunction " JmDetermineTreePathAndLine
 
-function! JmOpenTreeFile()
+function! JmOpenFile(path, line)
 
-  let pl = JmDetermineTreePathAndLine()
-  let path = pl[0]
-  let line = pl[1]
-
-  let n = bufnr(path)
+  let n = bufnr(a:path)
   if n > -1
     exe 'b ' . n
   else
-    exe 'e ' . path
+    exe 'e ' . a:path
   endif
 
-  if line > 0 | call feedkeys(line . 'G') | endif
+  if a:line > 0 | call feedkeys(a:line . 'G') | endif
+endfunction " JmOpenFile
+
+function! JmOpenTreeFile()
+
+  let pl = JmDetermineTreePathAndLine()
+  call JmOpenFile(pl[0], pl[1])
 endfunction " JmOpenTreeFile
 

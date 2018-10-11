@@ -29,6 +29,27 @@ function! s:ExtractPatternAndRest(s)
   return [ patt, s:Strip(rest) ]
 endfunction " ExtractPatternAndRest
 
+function! s:GrepOpenFile()
+
+  let n = line('.')
+  let l = getline(n)
+  let r = '\v^ *([0-9]+)\|'
+  let m = matchlist(l, r)
+
+  if empty(m) == 1
+    call JmOpenFile(l, -1)
+  else
+    let ln = str2nr(m[1])
+    while n > 1
+      let l = getline(n - 1)
+      let m = matchlist(l, r)
+      if empty(m) == 1 | break | endif
+      let n = n - 1
+    endwhile
+    call JmOpenFile(l, ln)
+  endif
+endfunction " GrepOpenFile
+
 " inspiration: http://stackoverflow.com/questions/10493452
 "
 function! s:Vg(args)
@@ -58,7 +79,7 @@ function! s:Vg(args)
   exe "silent r! echo '== :Vg " . pr[0] . " " . rest . "'"
   exe "Clean"
   exe 'r! echo ""'
-  exe 'silent r! grep -R -n --exclude-dir=.git --exclude-dir=tmp --exclude=.viminfo ' . pr[0] . ' ' . rest
+  exe 'silent r! grep -R -n --exclude-dir=.git --exclude-dir=tmp --exclude=.viminfo --exclude=*.swp ' . pr[0] . ' ' . rest . ' | python scripts/grep.py'
   exe 'r! echo ""'
   exe 'g/: No such file or directory/d_'
   let g:groPattern = pr[0]
@@ -67,11 +88,9 @@ function! s:Vg(args)
   normal 4G
   setlocal nomodifiable
 
-  nmap <buffer> o gF
-  nmap <buffer> <space> gF
-  nmap <buffer> <CR> gF
-  "nmap <buffer> <leader>; gF
-    " no, keep it for switching to alternate buffer
+  nnoremap <buffer> o :call <SID>GrepOpenFile()<CR>
+  nnoremap <buffer> <space> :call <SID>GrepOpenFile()<CR>
+  nnoremap <buffer> <CR> :call <SID>GrepOpenFile()<CR>
 endfunction
 "au BufRead *.greprout set filetype=greprout
 
