@@ -23,7 +23,10 @@ for line in sys.stdin:
     continue
   if next((r for r in rejects if re.search(r, line)), None):
     continue
-  paths.append(expand_path(m.group(1)))
+  path = expand_path(m.group(1))
+  if not os.path.isfile(path):
+    continue
+  paths.append(path)
 
 tree = { '/': [], '..': [], '.': {} }
   #
