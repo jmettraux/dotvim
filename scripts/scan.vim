@@ -9,11 +9,27 @@ endfunction " OpenAtLine
 
 function! s:Scan()
 
-  if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
+  if &filetype == 'Scan' | return | endif
 
   ""let path = expand("%:p") " expands into absolute file path
   let path = expand("%") " expands into relative file path
   "let fname = expand("%:t")
+
+  let syn = 'scanout_ruby'
+  if path =~ "_spec\.rb$"
+    let syn = 'scanout_ruby_spec'
+  "elseif path =~ "\.rb$"
+  "  let syn = 'scanout_ruby'
+  "elseif path =~ "\.py$"
+  "  let syn = 'scanout_python'
+  elseif path =~ "\.js$"
+    let syn = 'scanout_javascript'
+  else
+    echoerr "don't know how to scan " . path
+    return
+  endif
+
+  if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
 
   let fn = '_k___' . JmNtr(path)
 
@@ -37,17 +53,8 @@ function! s:Scan()
   exe 'silent r! /usr/bin/env python ~/.vim/scripts/scan.py ' . path
   exe 'r! echo ""'
 
-  if path =~ "_spec\.rb$"
-    setlocal syntax=scanout_ruby_spec
-  elseif path =~ "\.rb$"
-    setlocal syntax=scanout_ruby
-  elseif path =~ "\.py$"
-    setlocal syntax=scanout_python
-  elseif path =~ "\.js$"
-    setlocal syntax=scanout_javascript
-  else
-    setlocal syntax=scanout
-  endif
+  exe 'setlocal syntax=' . syn
+  setlocal filetype=Scan
   setlocal nomodifiable
   normal 4G
 
@@ -55,7 +62,6 @@ function! s:Scan()
   nnoremap <buffer> <silent> <space> :call <SID>OpenAtLine()<CR>
   nnoremap <buffer> <silent> <CR> :call <SID>OpenAtLine()<CR>
 endfunction " Scan
-"au BufRead *.scanout set filetype=scanout
 
 command! -nargs=0 Scan :call <SID>Scan()
 nnoremap <silent> <leader>k :call <SID>Scan()<CR>

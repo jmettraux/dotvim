@@ -81,6 +81,7 @@ function! JmVg(args)
   exe 'silent r! /usr/bin/env python ~/.vim/scripts/grep.py ' . shellescape(pr[0]) . ' ' . shellescape(rest)
   let g:groPattern = pr[0]
   setlocal syntax=greprout
+  setlocal filetype=greprout
   normal 4G
   setlocal nomodifiable
 
@@ -88,7 +89,6 @@ function! JmVg(args)
   nnoremap <buffer> <space> :call <SID>GrepOpenFile()<CR>
   nnoremap <buffer> <CR> :call <SID>GrepOpenFile()<CR>
 endfunction " JmVg
-"au BufRead *.greprout set filetype=greprout
 
 "command! -nargs=1 Vg :! grep -R -n --exclude-dir=.git <args>
 "command! -nargs=* Vg :call <SID>Vg(<f-args>)
