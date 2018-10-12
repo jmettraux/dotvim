@@ -78,7 +78,7 @@ function! s:Vg(args)
   exe '%d_'
   exe "silent r! echo '== :Vg " . pr[0] . " " . rest . "'"
   exe "Clean"
-  exe 'silent r! grep -R -n --exclude-dir=.git --exclude-dir=tmp --exclude=.viminfo --exclude=*.swp ' . pr[0] . ' ' . rest . ' | /usr/bin/env python ~/.vim/scripts/grep.py'
+  exe 'silent r! /usr/bin/env python ~/.vim/scripts/grep.py ' . shellescape(pr[0]) . ' ' . shellescape(rest)
   let g:groPattern = pr[0]
   setlocal syntax=greprout
   normal 4G
