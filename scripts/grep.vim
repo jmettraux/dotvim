@@ -78,13 +78,9 @@ function! s:Vg(args)
   exe '%d_'
   exe "silent r! echo '== :Vg " . pr[0] . " " . rest . "'"
   exe "Clean"
-  exe 'r! echo ""'
   exe 'silent r! grep -R -n --exclude-dir=.git --exclude-dir=tmp --exclude=.viminfo --exclude=*.swp ' . pr[0] . ' ' . rest . ' | /usr/bin/env python ~/.vim/scripts/grep.py'
-  exe 'r! echo ""'
-  exe 'g/: No such file or directory/d_'
   let g:groPattern = pr[0]
   setlocal syntax=greprout
-  "call feedkeys('4G')
   normal 4G
   setlocal nomodifiable
 

@@ -7,6 +7,8 @@ import os, re, sys
 
 path = None
 
+print
+
 for line in sys.stdin:
   m = re.match(r'^([^:]+):(\d+):(.+)$', line)
   if not(m):
@@ -17,4 +19,6 @@ for line in sys.stdin:
       print pa
       path = pa
     print '%5d|%s' % (int(m.group(2)), m.group(3))
+
+print
 
