@@ -71,7 +71,15 @@ endfunction " JmOpenFile
 
 function! JmOpenTreeFile()
 
-  let pl = JmDetermineTreePathAndLine()
-  call JmOpenFile(pl[0], pl[1])
+  let l = getline('.')
+  let m = matchlist(l, '\v  \/ (["''].+)$')
+  if empty(m) == 1 | let m = matchlist(l, '\v  \/ ''([^'']+)'' +(.+)$') | endif
+
+  if empty(m) == 1
+    let pl = JmDetermineTreePathAndLine()
+    call JmOpenFile(pl[0], pl[1])
+  else
+    call JmVg(m[1])
+  endif
 endfunction " JmOpenTreeFile
 

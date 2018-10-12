@@ -52,7 +52,7 @@ endfunction " GrepOpenFile
 
 " inspiration: http://stackoverflow.com/questions/10493452
 "
-function! s:Vg(args)
+function! JmVg(args)
 
   if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
 
@@ -87,23 +87,23 @@ function! s:Vg(args)
   nnoremap <buffer> o :call <SID>GrepOpenFile()<CR>
   nnoremap <buffer> <space> :call <SID>GrepOpenFile()<CR>
   nnoremap <buffer> <CR> :call <SID>GrepOpenFile()<CR>
-endfunction
+endfunction " JmVg
 "au BufRead *.greprout set filetype=greprout
 
 "command! -nargs=1 Vg :! grep -R -n --exclude-dir=.git <args>
 "command! -nargs=* Vg :call <SID>Vg(<f-args>)
-command! -nargs=* -complete=file Vg :call <SID>Vg(<q-args>)
+command! -nargs=* -complete=file Vg :call JmVg(<q-args>)
 
 function! s:VgSrc(args)
 
   if !empty(glob("lib"))
-    call <SID>Vg(a:args . " lib")
+    call JmVg(a:args . " lib")
   elseif !empty(glob("src"))
-    call <SID>Vg(a:args . " src")
+    call JmVg(a:args . " src")
   else
-    call <SID>Vg(a:args . " .")
+    call JmVg(a:args . " .")
   endif
-endfunction
+endfunction " s:VgSrc
 
 "nnoremap <leader>q "zyw:exe ":call <SID>Vg(\"" . @z . "\")"<CR>
 "nnoremap <leader>q "zyw:exe ":echo \"" . @z . "\""<CR>
