@@ -43,7 +43,7 @@ function! JmShowTree(start)
   nnoremap <buffer> <silent> q :bd<CR>
 endfunction " ShowTree
 
-command! -nargs=1 -complete=dir Vt :call <SID>ShowTree(<f-args>)
+command! -nargs=1 -complete=dir Vt :call JmShowTree(<f-args>)
 "au BufRead *.showtreeout set filetype=showtreeout
 
 "au VimLeave * :!rm -f .*.showtreeout
