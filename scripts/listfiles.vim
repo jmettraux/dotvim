@@ -20,13 +20,13 @@ function! s:ListFiles()
 
   exe 'new | only'
     " | only makes it full window
-  exe 'silent file ==ListFiles'
+  silent file ==ListFiles
     " replace buffer name
-  exe 'setlocal buftype=nofile'
-  exe 'setlocal bufhidden=hide'
-  exe 'setlocal noswapfile'
-  exe 'setlocal nobuflisted'
-  exe 'setlocal filetype=ListFiles'
+  setlocal buftype=nofile
+  setlocal bufhidden=hide
+  setlocal noswapfile
+  setlocal nobuflisted
+  setlocal filetype=ListFiles
 
   exe 'let @z=""'
   exe 'redir @z'
@@ -52,6 +52,15 @@ function! s:ListFiles()
     exe 'redir END'
     exe 'silent $put z'
     exe 'r! /usr/bin/env python ~/.vim/scripts/restatus.py'
+  endif
+
+  if filereadable('.vimgrep') && getfsize('.vimgrep') > 0
+    exe 'let @z=""'
+    exe 'redir @z'
+    exe 'silent echo "== .vimgrep"'
+    exe 'redir END'
+    exe 'silent $put z'
+    exe 'silent r .vimgrep'
   endif
 
   "let l = line('.') + 1

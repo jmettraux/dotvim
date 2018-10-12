@@ -20,6 +20,34 @@ cmd += ' ' + regex
 cmd += ' ' + directory
 #print cmd
 
+
+#
+# .vimgrep management
+
+ls = []
+try:
+  ls = open('.vimgrep', 'r').readlines()
+except:
+  pass
+ls.append(('  / ' + regex).ljust(35) + ' ' + directory + '\n')
+
+f = open('.vimgrep', 'w')
+count = 0
+seen = []
+for l in ls:
+  if l in seen:
+    continue
+  f.write(l)
+  seen.append(l)
+  count = count + 1
+  if count > 14:
+    break
+f.close
+
+
+#
+# output for grep.vim
+
 path = None
 
 print
