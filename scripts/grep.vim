@@ -79,7 +79,7 @@ function! s:Vg(args)
   exe "silent r! echo '== :Vg " . pr[0] . " " . rest . "'"
   exe "Clean"
   exe 'r! echo ""'
-  exe 'silent r! grep -R -n --exclude-dir=.git --exclude-dir=tmp --exclude=.viminfo --exclude=*.swp ' . pr[0] . ' ' . rest . ' | python ~/.vim/scripts/grep.py'
+  exe 'silent r! grep -R -n --exclude-dir=.git --exclude-dir=tmp --exclude=.viminfo --exclude=*.swp ' . pr[0] . ' ' . rest . ' | /usr/bin/env python ~/.vim/scripts/grep.py'
   exe 'r! echo ""'
   exe 'g/: No such file or directory/d_'
   let g:groPattern = pr[0]

@@ -14,11 +14,11 @@ syn match bufTitle '^== .\+'
 
 syn match bufDirName    '\v[/~]?[-A-Za-z0-9 \(\)_.]+/' contained
 syn match bufFileName   '\v[/~]?[-A-Za-z0-9 \(\)_.]+(:| +\||$)@=' contained
-syn match bufLineNumber '\v:[0-9]+$' contained
+syn match bufLineNumber '\v:[0-9]+(\s+[0-9]+)$' contained
   "
   " @= is positive lookahead...
 
-syn match bufPath   '\v^[/~]?[-A-Za-z0-9 \(\)_./]+(:[0-9]+)?$' contains=bufFileName,bufDirName,bufLineNumber
+syn match bufPath   '\v^[/~]?[-A-Za-z0-9 \(\)_./]+(:[0-9]+)?(\s+[0-9]+)?$' contains=bufFileName,bufDirName,bufLineNumber
 syn match bufStatus '\v^[-A-Za-z0-9 \(\)_./]+ +\|' contains=bufFileName,bufDirName
 
 syn match bufTree     '\v^[├│└─  ]+' contained

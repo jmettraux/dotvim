@@ -28,22 +28,13 @@ function! s:ListFiles()
   exe 'setlocal nobuflisted'
   exe 'setlocal filetype=ListFiles'
 
-  let l = line('.') + 1
   exe 'let @z=""'
   exe 'redir @z'
-  exe 'silent echo "== buffers"'
   exe 'silent buffers'
   exe 'redir END'
+  exe 'let @z = system("/usr/bin/env python ~/.vim/scripts/buffers.py", @z)'
   exe 'silent $put z'
-    "
-  exe '%s/^[0-9]\+: //e'
-  exe '%s/^\s\+\d\+[^\"]\+"//e'
-  exe '%s/"\s\+line /:/e'
-    "
-  exe 'silent! ' . l . ',g/greprout/d_'
-  "exe 'silent! ' . l . ',g/showtreeout/d_'
-    " don't show recent .greprout files (they're gone)
-  "exe '' . l . ',g/^== git (diff|show)/d_'
+  "exe 'silent echo "== buffers"'
 
   if filereadable('.errors') && getfsize('.errors') > 0
     exe 'let @z=""'
@@ -60,7 +51,6 @@ function! s:ListFiles()
     exe 'silent echo "== git status"'
     exe 'redir END'
     exe 'silent $put z'
-    "exe 'silent r! (echo "`git status`"; echo "`git diff --stat`") | perl ~/.vim/scripts/restatus.pl'
     exe 'r! /usr/bin/env python ~/.vim/scripts/restatus.py'
   endif
 
@@ -89,6 +79,7 @@ function! s:ListFiles()
     " go to first file
 
   setlocal syntax=buffers
+  setlocal nomodifiable
 
   "nmap <buffer> o gF
   "nmap <buffer> <space> gF
