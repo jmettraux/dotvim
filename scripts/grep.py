@@ -25,23 +25,28 @@ cmd += ' ' + directory
 # .vimgrep management
 
 ls = []
+ls.append([ regex, directory ])
 try:
-  ls = open('.vimgrep', 'r').readlines()
+  for l in open('.vimgrep', 'r').readlines():
+    if len(ls) > 14:
+      break
+    m = re.match(r'^  / (["\'][^"\']+["\']) *(.+)$', l)
+    if m:
+      p = [ m.group(1), m.group(2) ]
+      if not(p in ls):
+        ls.append(p)
+    #else:
+    #  print '>>>' + l
 except:
   pass
-ls.append(('  / ' + regex).ljust(35) + ' ' + directory + '\n')
+
+m = 0
+for l in ls:
+  m = max(len(l[0]), m)
 
 f = open('.vimgrep', 'w')
-count = 0
-seen = []
 for l in ls:
-  if l in seen:
-    continue
-  f.write(l)
-  seen.append(l)
-  count = count + 1
-  if count > 14:
-    break
+  f.write('  / ' + l[0].ljust(m) + ' ' + l[1] + '\n')
 f.close
 
 
