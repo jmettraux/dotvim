@@ -28,6 +28,11 @@ function! s:ListFiles()
   setlocal nobuflisted
   setlocal filetype=ListFiles
 
+  setlocal noautoindent
+  setlocal nocindent
+  setlocal nosmartindent
+  setlocal indentexpr=
+
   exe 'let @z=""'
   exe 'redir @z'
   exe 'silent buffers'
@@ -62,6 +67,11 @@ function! s:ListFiles()
     exe 'silent $put z'
     exe 'silent r .vimgrep'
   endif
+
+  if filereadable('.vimshorts') && getfsize('.vimshorts') > 0
+    normal o== .vimshorts
+    exe 'silent r .vimshorts'
+  end
 
   "let l = line('.') + 1
   exe 'let @z=""'
