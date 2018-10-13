@@ -25,6 +25,8 @@ for l in normals:
   mx = max(len(l[0]), mx)
 for l in specials:
   mx = max(len(l[0]), mx)
+  #
+mx = mx + 1
 
 for l in normals:
   print l[0].ljust(mx) + l[1]
