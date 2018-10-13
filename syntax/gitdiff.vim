@@ -8,7 +8,7 @@ hi! gdiCommit cterm=NONE ctermfg=136 ctermbg=16
 hi! gdiFilename cterm=NONE ctermfg=darkblue ctermbg=lightgrey
 hi! gdiDiffMinus cterm=NONE ctermfg=red ctermbg=16
 hi! gdiDiffPlus cterm=NONE ctermfg=green ctermbg=16
-hi! gdiDiffSeparator cterm=NONE ctermfg=black ctermbg=darkgreen
+hi! gdiDiffSeparator cterm=NONE ctermfg=black ctermbg=darkyellow
 
 syn match gdiCommit /\v^commit [a-fA-F0-9]+/
 syn match gdiCommit /\v^Author: .+/
