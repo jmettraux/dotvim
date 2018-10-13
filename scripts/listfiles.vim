@@ -33,38 +33,26 @@ function! s:ListFiles()
   setlocal nosmartindent
   setlocal indentexpr=
 
+  normal o== buffers
   exe 'let @z=""'
   exe 'redir @z'
   exe 'silent buffers'
   exe 'redir END'
   exe 'let @z = system("/usr/bin/env python ~/.vim/scripts/buffers.py", @z)'
   exe 'silent $put z'
-  "exe 'silent echo "== buffers"'
 
   if filereadable('.errors') && getfsize('.errors') > 0
-    exe 'let @z=""'
-    exe 'redir @z'
-    exe 'silent echo "== .errors"'
-    exe 'redir END'
-    exe 'silent $put z'
+    normal o== .errors
     exe 'silent r .errors'
   endif
 
   if isdirectory('.git')
-    exe 'let @z=""'
-    exe 'redir @z'
-    exe 'silent echo "== git status"'
-    exe 'redir END'
-    exe 'silent $put z'
+    normal o== git status
     exe 'r! /usr/bin/env python ~/.vim/scripts/restatus.py'
   endif
 
   if filereadable('.vimgrep') && getfsize('.vimgrep') > 0
-    exe 'let @z=""'
-    exe 'redir @z'
-    exe 'silent echo "== .vimgrep"'
-    exe 'redir END'
-    exe 'silent $put z'
+    normal o== .vimgrep
     exe 'silent r .vimgrep'
   endif
 

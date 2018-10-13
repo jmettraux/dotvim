@@ -4,7 +4,6 @@
 
 import os, re, sys
 
-print "== buffers"
 
 normals = []
 specials = []
