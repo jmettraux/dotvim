@@ -58,7 +58,7 @@ function! s:ListFiles()
 
   if filereadable('.vimshorts') && getfsize('.vimshorts') > 0
     normal o== .vimshorts
-    exe 'silent r .vimshorts'
+    exe 'r! /usr/bin/env python ~/.vim/scripts/cat.py .vimshorts'
   end
 
   "let l = line('.') + 1
