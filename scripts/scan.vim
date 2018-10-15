@@ -18,8 +18,8 @@ function! s:Scan()
   let syn = 'scanout_ruby'
   if path =~ "_spec\.rb$"
     let syn = 'scanout_ruby_spec'
-  "elseif path =~ "\.rb$"
-  "  let syn = 'scanout_ruby'
+  elseif path =~ "\.rb$"
+    "let syn = 'scanout_ruby'
   "elseif path =~ "\.py$"
   "  let syn = 'scanout_python'
   elseif path =~ "\.js$"
@@ -53,8 +53,8 @@ function! s:Scan()
   exe 'silent r! /usr/bin/env python ~/.vim/scripts/scan.py ' . path
   exe 'r! echo ""'
 
-  exe 'setlocal syntax=' . syn
   setlocal filetype=Scan
+  exe 'setlocal syntax=' . syn
   setlocal nomodifiable
   normal 4G
 
