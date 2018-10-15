@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 
-import os, re, sys
+import os, re, sys, string, subprocess
 
 recent_count = 28
 
@@ -43,10 +43,23 @@ for path in paths:
       current = current[p]
 
 #print "== recent (%d)" % recent_count
+#
+#for path in paths[0:recent_count]:
+#  print path
+
 print "== recent"
 
-for path in paths[0:recent_count]:
-  print path
+count = 0
+  #
+for line in subprocess.Popen('ls -lh ' + string.join(paths), shell=True, stdout=subprocess.PIPE).stdout:
+  if count > recent_count:
+    break
+  m = re.match('^.+ +.+ +.+ +.+ ([0-9.]+[BKMT]?) +.+ \d+ +[0-9:]+ +(.+)$', line)
+  if m:
+    print m.group(2) + ' ' + m.group(1)
+  else:
+    print line
+  count = count + 1
 
 #print "== recent (tree)"
 #
