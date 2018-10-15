@@ -34,7 +34,7 @@ syn match bufLineComment '\v^[ 	]*#.*$'
 syn match bufLineGit '\v^[^ 	][^|]+ \| .*$' contains=bufPath,bufLgiStatus
 syn match bufLinePath '\v^[^ #=][^|]+$' contains=bufFilename
 
-syn match bufSize '\v ([0-9]+\.)?[0-9]+[BKMT]$' contained
+syn match bufSize '\v ([0-9]+\.)?[0-9]+[BKMGTPE]$' contained
 syn match bufLineAndRegister '\v:[0-9]+( +[0-9]+)?$' contained
 
 syn match bufLgiStatus '\v\|[^|]+$' contained
