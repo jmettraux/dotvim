@@ -2,7 +2,7 @@
 
 import os, re, sys
 
-recent_count = 14
+recent_count = 28
 
 
 rejects = [
@@ -42,46 +42,48 @@ for path in paths:
         current[p] = {}
       current = current[p]
 
-print "== recent (%d)" % recent_count
+#print "== recent (%d)" % recent_count
+print "== recent"
 
 for path in paths[0:recent_count]:
   print path
 
-print "== recent (tree)"
-
-def do_print_level(a, h, k):
-  v = h[k]
-  if len(v) > 0:
-    print "%s %s/" % (''.join(a), k)
-    aa = a[0:-1]
-    aa.append("│  ")
-    aa.append("├─")
-    print_level(aa, v)
-  else:
-    print "%s %s" % (''.join(a), k)
-
-def print_level(a, h):
-  ks = h.keys()
-  ks.sort()
-  for k in ks[0:-1]:
-    do_print_level(a, h, k)
-  for k in ks[-1:]:
-    aa = a[:-1]
-    aa.append("└─")
-    do_print_level(aa, h, k)
-
-print './'
-print_level([ "├─" ], tree['.'])
-
-def print_flat(h, k):
-  if len(h[k]) > 0:
-    print (k if k == '/' else "%s/" % k)
-    off = 1 if k == '/' else len(k) + 1
-    for path in h[k][0:-2]:
-      print "├── %s" % path[off:]
-    for path in h[k][-2:-1]:
-      print "└── %s" % path[off:]
-
-print_flat(tree, '..')
-print_flat(tree, '/')
+#print "== recent (tree)"
+#
+#def do_print_level(a, h, k):
+#  v = h[k]
+#  if len(v) > 0:
+#    print "%s %s/" % (''.join(a), k)
+#    aa = a[0:-1]
+#    aa.append("│  ")
+#    aa.append("├─")
+#    print_level(aa, v)
+#  else:
+#    print "%s %s" % (''.join(a), k)
+#
+#def print_level(a, h):
+#  ks = h.keys()
+#  ks.sort()
+#  for k in ks[0:-1]:
+#    do_print_level(a, h, k)
+#  for k in ks[-1:]:
+#    aa = a[:-1]
+#    aa.append("└─")
+#    do_print_level(aa, h, k)
+#
+#print './'
+#print_level([ "├─" ], tree['.'])
+#
+#def print_flat(h, k):
+#  if len(h[k]) > 0:
+#    print (k if k == '/' else "%s/" % k)
+#    off = 1 if k == '/' else len(k) + 1
+#    for path in h[k][0:-2]:
+#      print "├── %s" % path[off:]
+#    for path in h[k][-2:-1]:
+#      print "└── %s" % path[off:]
+#
+#print_flat(tree, '..')
+##print_flat(tree, '/')
+#print "│"
 

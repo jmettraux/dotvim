@@ -75,6 +75,8 @@ function! s:ListFiles()
   exe 'g/^$/d_'
   exe '%s/^==/==/'
     " respace sections
+  call append(line('$'), '')
+    " append final, blank, line
 
   "call search('== recent')
   "let l = line('.') + 1
