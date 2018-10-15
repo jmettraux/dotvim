@@ -22,7 +22,11 @@ function! JmDetermineTreePathAndLine()
 
     let l = getline(n)
 
-    let m = matchlist(l, '\v^([│├─└  |`-]+) (.{-1,})( [0-9.]+[KMGTPE]?)?$')
+    let m = matchlist(l, '\v^(.{-1,})( +([0-9]+\.)?[0-9]+[BKMGTPE]?)?$')
+      " .{-1,} is non-greedy
+    if empty(m) == 0 | let l = m[1] | endif
+
+    let m = matchlist(l, '\v^([│├─└  |`-]*)(.+)$')
 
     if empty(m) == 1 | let elts = [ l ] + elts | break | endif
 
