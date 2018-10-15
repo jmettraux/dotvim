@@ -49,17 +49,14 @@ for path in paths:
 
 print "== recent"
 
-count = 0
+cmd = 'ls -lh ' + string.join(paths[0:recent_count])
   #
-for line in subprocess.Popen('ls -lh ' + string.join(paths), shell=True, stdout=subprocess.PIPE).stdout:
-  if count > recent_count:
-    break
+for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).stdout:
   m = re.match('^.+ +.+ +.+ +.+ ([0-9.]+[BKMT]?) +.+ \d+ +[0-9:]+ +(.+)$', line)
   if m:
     print m.group(2) + ' ' + m.group(1)
   else:
     print line
-  count = count + 1
 
 #print "== recent (tree)"
 #
