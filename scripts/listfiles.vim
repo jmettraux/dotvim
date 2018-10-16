@@ -44,21 +44,25 @@ function! s:ListFiles()
   if filereadable('.errors') && getfsize('.errors') > 0
     normal o== .errors
     exe 'silent r .errors'
+    normal G
   endif
 
   if isdirectory('.git')
     normal o== git status
     exe 'r! /usr/bin/env python ~/.vim/scripts/restatus.py'
+    normal G
   endif
 
   if filereadable('.vimgrep') && getfsize('.vimgrep') > 0
     normal o== .vimgrep
     exe 'silent r .vimgrep'
+    normal G
   endif
 
   if filereadable('.vimshorts') && getfsize('.vimshorts') > 0
     normal o== .vimshorts
     exe 'r! /usr/bin/env python ~/.vim/scripts/cat.py .vimshorts'
+    normal G
   end
 
   "let l = line('.') + 1
