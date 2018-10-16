@@ -2,7 +2,7 @@
 
 import os, re, sys, string, subprocess
 
-recent_count = 28
+#recent_count = 28
 
 
 rejects = [
@@ -49,7 +49,8 @@ for path in paths:
 
 print "== recent"
 
-cmd = 'ls -lh ' + string.join(paths[0:recent_count])
+#cmd = 'ls -lh ' + string.join(paths[0:recent_count])
+cmd = 'ls -lh ' + string.join(paths)
   #
 for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).stdout:
   m = re.match('^.+ +.+ +.+ +.+ ([0-9.]+[BKMT]?) +.+ \d+ +[0-9:]+ +(.+)$', line)
