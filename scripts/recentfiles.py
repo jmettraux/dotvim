@@ -57,6 +57,8 @@ for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).stdout:
   if m:
     print m.group(2) + ' ' + m.group(1)
   else:
+    if re.match('^total \d+', line):
+      continue
     print line
 
 #print "== recent (tree)"
