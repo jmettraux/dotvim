@@ -7,15 +7,16 @@ import os, re, sys, subprocess
 
 regex = sys.argv[1]
 directory = sys.argv[2]
+uname = sys.argv[3]
 
 
 # TODO write to .vimgrep
 
 cmd = 'grep -R -n'
-cmd += ' --exclude-dir=.git'
-cmd += ' --exclude-dir=tmp'
-cmd += ' --exclude=.viminfo'
-cmd += ' --exclude=*.swp'
+if uname != 'OpenBSD':
+  cmd += ' --exclude-dir=.git'
+  cmd += ' --exclude-dir=tmp'
+  cmd += ' --exclude=.viminfo'
 cmd += ' ' + regex
 cmd += ' ' + directory
 #print cmd
@@ -53,20 +54,37 @@ f.close
 #
 # output for grep.vim
 
+  # cmd += ' --exclude-dir=.git'
+  # cmd += ' --exclude-dir=tmp'
+  # cmd += ' --exclude=.viminfo'
+  #
+def should_mute(path):
+  ps = re.split(r'[\\\/]', path)
+  return ps[0] == '.git' or ps[0] == 'tmp' or ps[-1] == '.viminfo'
+
 path = None
+mute = False
 
 print
 
 for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).stdout:
   m = re.match(r'^([^:]+):(\d+):(.+)$', line)
   if not(m):
-    print 'grep.py choked on >>' + line.strip() + '<<'
+    m = re.match(r'^Binary file ([^$]+)$', line)
+    if m:
+      if should_mute(os.path.relpath(m.group(1))):
+        line = False
+    if line:
+      print 'grep.py choked on >>' + line.strip() + '<<'
   else:
     pa = os.path.relpath(m.group(1))
+    nomute = not(should_mute(pa))
     if pa != path:
-      print pa
+      if nomute:
+        print pa
       path = pa
-    print '%5d|%s' % (int(m.group(2)), m.group(3))
+    if nomute:
+      print '%5d|%s' % (int(m.group(2)), m.group(3))
 
 print
 
