@@ -182,8 +182,9 @@ nnoremap <leader>h :let @" = expand("%") . ':' . line('.')<CR>
   " 'here'
 
 "nnoremap <leader>k 0wDa
-nnoremap <C-k> 0wDa
-inoremap <C-k> <ESC>0wDa
+"nnoremap <C-k> 0wDa
+"inoremap <C-k> <ESC>0wDa
+  " <C-k> is for digraphs
 nnoremap <C-h> bDa
 inoremap <C-h> <ESC>bDa
 
