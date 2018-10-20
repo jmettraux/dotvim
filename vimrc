@@ -8,7 +8,8 @@ let g:isWindows = has('win32')
 let g:isUnix = has('unix')
 let g:uname = g:isWindows ? 'Windows' : system('uname')[:-2]
 let g:isDarwin = g:uname == 'Darwin'
-let g:isOpenBsd = g:uname == 'OpenBSD'
+let g:isOpenBSD = g:uname == 'OpenBSD'
+let g:isOpenBsd = g:isOpenBSD
 
 
 set nocompatible

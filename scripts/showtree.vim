@@ -21,8 +21,11 @@ function! JmShowTree(start)
   exe '%d'
     " delete all the lines
   normal O
-  exe 'silent r! tree -hF ' . a:start
-  "exe 'silent %s/\v\[ *([0-9.]+[KMGTPE]?)\]  //e'
+  if g:isOpenBSD
+    exe 'silent r! tree -F ' . a:start
+  else
+    exe 'silent r! tree -hF ' . a:start
+  endif
   exe 'silent %s/\v\[ *([0-9.]+[KMGTPE]?)\]  (.+)$/\2 \1/e'
   exe 'silent %s/\v\* / /ge'
   exe 'silent %s/\\ / /ge'
