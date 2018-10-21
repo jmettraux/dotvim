@@ -67,7 +67,7 @@ hi clear
 " let s:cyan        = "37"
 " let s:green       = "64"
 
-if &term == 'xterm-256color'
+if &term == 'xterm-256color' || &term == 'st-256color'
 
   set t_Co=256
 
