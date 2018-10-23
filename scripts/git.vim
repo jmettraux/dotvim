@@ -233,15 +233,12 @@ function! s:OpenGitBlame()
   setlocal noswapfile
   "setlocal nobuflisted
 
-  "exe 'silent r! git blame ' . fn . ' | perl ~/.vim/scripts/regitblame.pl'
-  "exe 'g/^$/d_'
-
   exe 'silent r! /usr/bin/env python ~/.vim/scripts/gitblame.py ' . path
 
   setlocal syntax=gitblame
   setlocal nomodifiable
 
-  exe 'normal ' . ln . 'G'
+  exe 'normal ' . (ln + 1) . 'G'
 
   nmap <buffer> <leader>m <CR>
   nnoremap <buffer> <silent> <CR> :call <SID>OpenCommit(<SID>DetermineBlameSha())<CR>

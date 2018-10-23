@@ -8,8 +8,9 @@ path = sys.argv[1]
 
 cmd = 'git blame ' + path
 
+titles = {}
 previous_head = ''
-title_shown = False
+title = ''
 
 for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).stdout:
 
@@ -26,17 +27,18 @@ for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).stdout:
 
   head = sha + ' ' + author + ' ' + date
 
+  if not(sha in titles):
+    titles[sha] = os.popen('git show -s --format="%s" ' + sha).read()[:-1]
+
   if head == previous_head:
-    lh = len(head)
-    if title_shown == False:
-      title_shown = True
-      head = '  ' + os.popen('git show -s --format="%s" ' + sha).read()
-    else:
-      head = ''
-    head = ('%-' + str(lh) + 's') % head[:lh]
+    lh = len(head) - 2
+    head = '  ' + ('%-' + str(lh) + 's') % title[:lh]
+    title = title[lh:]
   else:
     previous_head = head
-    title_shown = False
+    title = titles[sha]
 
   print head + ' ' + lnum + (' ' + line if len(line) > 0 else '')
+
+print
 
