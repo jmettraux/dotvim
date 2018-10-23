@@ -10,8 +10,7 @@ function! s:BxsFnameAndLnumber()
     echo "\"" . getreg("z") . "\" copied"
   else
     if has("unix")
-      let s:uname = system("uname")
-      if s:uname == "Darwin\n"
+      if g:uname == "Darwin"
         "exe 'silent ! echo "' . @z . '" | bcopy'
         exe 'silent ! osascript ~/.vim/scripts/bxs.applescript "' . @z . '"'
         exe 'redraw!'
