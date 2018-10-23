@@ -212,28 +212,31 @@ endfunction " DetermineBlameSha
 
 function! s:OpenGitBlame()
 
-  let fn = expand('%.')
+  let path = expand('%.')
   let ln = line('.')
+
+  let fn = '_b___' . JmNtr(path)
 
   if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
 
-  let bn = bufnr('==GitBlame')
+  let bn = bufnr(fn)
   if bn > -1 | exe '' . bn . 'bwipeout!' | endif
-    " close previous GitBlame if any
+    " close previous buffer if any
 
   exe 'new | only'
     " | only makes it full window
-  exe 'silent file ==GitBlame'
+  exe 'silent file ' . fn
     " replace buffer name
+
   setlocal buftype=nofile
   setlocal bufhidden=hide
   setlocal noswapfile
-  setlocal nobuflisted
-  "setlocal filetype=ListFiles
+  "setlocal nobuflisted
 
-  exe 'silent r! git blame ' . fn . ' | perl ~/.vim/scripts/regitblame.pl'
+  "exe 'silent r! git blame ' . fn . ' | perl ~/.vim/scripts/regitblame.pl'
+  "exe 'g/^$/d_'
 
-  exe 'g/^$/d_'
+  exe 'silent r! /usr/bin/env python ~/.vim/scripts/gitblame.py ' . path
 
   setlocal syntax=gitblame
   setlocal nomodifiable
