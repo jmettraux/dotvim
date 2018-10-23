@@ -59,6 +59,8 @@ f.close
   # cmd += ' --exclude=.viminfo'
   #
 def should_mute(path):
+  if re.search(r'(\.swp) matches$', path):
+    return True
   ps = re.split(r'[\\\/]', path)
   return ps[0] == '.git' or ps[0] == 'tmp' or ps[-1] == '.viminfo'
 
