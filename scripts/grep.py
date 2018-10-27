@@ -4,6 +4,8 @@
 
 import os, re, sys, subprocess
 
+maxlen = 7
+
 
 regex = sys.argv[1]
 directory = sys.argv[2]
@@ -29,7 +31,7 @@ ls = []
 ls.append([ regex, directory ])
 try:
   for l in open('.vimgrep', 'r').readlines():
-    if len(ls) > 14:
+    if len(ls) > maxlen:
       break
     m = re.match(r'^  / (["\'][^"\']+["\']) *(.+)$', l)
     if m:
