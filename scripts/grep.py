@@ -27,9 +27,11 @@ cmd += ' ' + directory
 #
 # .vimgrep management
 
-ls = []
-ls.append([ regex, directory ])
 try:
+
+  ls = []
+  ls.append([ regex, directory ])
+
   for l in open('.vimgrep', 'r').readlines():
     if len(ls) > maxlen:
       break
@@ -40,17 +42,19 @@ try:
         ls.append(p)
     #else:
     #  print '>>>' + l
+
+  m = 0
+  for l in ls:
+    m = max(len(l[0]), m)
+
+  f = open('.vimgrep', 'w')
+  for l in ls:
+    f.write('  / ' + l[0].ljust(m) + ' ' + l[1] + '\n')
+  f.close
+
 except:
+
   pass
-
-m = 0
-for l in ls:
-  m = max(len(l[0]), m)
-
-f = open('.vimgrep', 'w')
-for l in ls:
-  f.write('  / ' + l[0].ljust(m) + ' ' + l[1] + '\n')
-f.close
 
 
 #
