@@ -27,10 +27,13 @@ cmd += ' ' + directory
 #
 # .vimgrep management
 
-try:
+if os.path.isdir(directory) and not(re.search(r'/$', directory)):
+  directory = directory + os.sep
 
-  ls = []
-  ls.append([ regex, directory ])
+ls = []
+ls.append([ regex, directory ])
+
+try:
 
   for l in open('.vimgrep', 'r').readlines():
     if len(ls) > maxlen:
@@ -43,9 +46,15 @@ try:
     #else:
     #  print '>>>' + l
 
-  m = 0
-  for l in ls:
-    m = max(len(l[0]), m)
+except:
+
+  pass
+
+m = 0
+for l in ls:
+  m = max(len(l[0]), m)
+
+try :
 
   f = open('.vimgrep', 'w')
   for l in ls:
