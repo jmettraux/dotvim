@@ -2,8 +2,6 @@
 
 import os, re, sys, string, subprocess
 
-#recent_count = 28
-
 
 rejects = [
   'COMMIT_EDITMSG', 'NetrwTreeListing', 'bash-fc-', '==[A-Z]',
@@ -42,24 +40,21 @@ for path in paths:
         current[p] = {}
       current = current[p]
 
-#print "== recent (%d)" % recent_count
-#
-#for path in paths[0:recent_count]:
-#  print path
+print "== recent (%d)" % len(paths)
 
-print "== recent"
-
-#cmd = 'ls -lh ' + string.join(paths[0:recent_count])
+d = {}
 cmd = 'ls -lh ' + string.join(paths)
   #
 for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).stdout:
   m = re.match('^.+ +.+ +.+ +.+ ([0-9.]+[BKMT]?) +.+ \d+ +[0-9:]+ +(.+)$', line)
   if m:
-    print m.group(2) + ' ' + m.group(1)
-  else:
-    if re.match('^total \d+', line):
-      continue
-    print line
+    d[m.group(2)] = m.group(2) + ' ' + m.group(1)
+  #else:
+  #  if re.match('^total \d+', line):
+  #    continue
+  #  print line
+for path in paths:
+  print d[path]
 
 #print "== recent (tree)"
 #
