@@ -102,19 +102,21 @@ function! s:OpenCommit(sha)
 
   if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
 
-  let bn = bufnr('==GitDiff')
+  let fn = '_c___' . a:sha . '__commit'
+
+  let bn = bufnr(fn)
   if bn > -1 | exe '' . bn . 'bwipeout!' | endif
-    " close previous GitLog if any
+    " close previous commit if any
 
   exe 'new | only'
     " | only makes it full window
 
-  exe 'silent file ==GitDiff'
+  exe 'silent file ' . fn
 
   setlocal buftype=nofile
   setlocal bufhidden=hide
   setlocal noswapfile
-  setlocal nobuflisted
+  "setlocal nobuflisted
   "setlocal filetype=ListFiles
 
   if strlen(a:sha) > 1
@@ -127,6 +129,7 @@ function! s:OpenCommit(sha)
   endif
 
   setlocal syntax=gitdiff
+  setlocal filetype=gitdiff
   setlocal nomodifiable
 
   exe 'normal 1G'
