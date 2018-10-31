@@ -49,12 +49,10 @@ for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).stdout:
   m = re.match('^.+ +.+ +.+ +.+ ([0-9.]+[BKMT]?) +.+ \d+ +[0-9:]+ +(.+)$', line)
   if m:
     d[m.group(2)] = m.group(2) + ' ' + m.group(1)
-  #else:
-  #  if re.match('^total \d+', line):
-  #    continue
-  #  print line
 for path in paths:
-  print d[path]
+  l = d.get(path, None)
+  if l:
+    print l
 
 #print "== recent (tree)"
 #
