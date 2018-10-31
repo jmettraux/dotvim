@@ -102,7 +102,11 @@ function! s:OpenCommit(sha)
 
   if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
 
-  let fn = '_c___' . a:sha . '__commit'
+  let sha = a:sha
+  let title = ''
+  if type(a:sha) == 3 | let title = a:sha[1] | let sha = a:sha[0] | endif
+
+  let fn = '_c___' . sha . '___' . JmNtr(title)
 
   let bn = bufnr(fn)
   if bn > -1 | exe '' . bn . 'bwipeout!' | endif
@@ -119,10 +123,10 @@ function! s:OpenCommit(sha)
   "setlocal nobuflisted
   "setlocal filetype=ListFiles
 
-  if strlen(a:sha) > 1
-    "exe 'silent r! echo ' . a:sha
-    exe 'silent r! git diff --stat ' . a:sha . '^ ' . a:sha . ' | perl ~/.vim/scripts/regitdiffstat.pl'
-    exe 'silent r! git show ' . a:sha . ' | perl ~/.vim/scripts/regitdiff.pl'
+  if strlen(sha) > 1
+    "exe 'silent r! echo ' . sha
+    exe 'silent r! git diff --stat ' . sha . '^ ' . sha . ' | perl ~/.vim/scripts/regitdiffstat.pl'
+    exe 'silent r! git show ' . sha . ' | perl ~/.vim/scripts/regitdiff.pl'
   else
     exe 'silent r! git diff --stat | perl ~/.vim/scripts/regitdiffstat.pl'
     exe 'silent r! git diff | perl ~/.vim/scripts/regitdiff.pl'
@@ -149,7 +153,10 @@ nnoremap <silent> <leader>d :call <SID>OpenCommit(0)<CR>
 
 function! s:ExtractSha()
 
-  return matchstr(getline('.'), '\v^[^a-fA-F0-9]+\zs([a-fA-F0-9]+)')
+echo getline('.')
+  "return matchstr(getline('.'), '\v^[^a-fA-F0-9]+\zs([a-fA-F0-9]+)')
+  let m = matchlist(getline('.'), '\v^[^a-fA-F0-9]+\zs([a-fA-F0-9]+) (\([^)]+\) )?(.+)$')
+  return [ m[1], m[3] ]
 endfunction " ExtractSha
 
 function! s:OpenGitLog(all)
