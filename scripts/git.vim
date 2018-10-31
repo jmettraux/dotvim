@@ -153,8 +153,6 @@ nnoremap <silent> <leader>d :call <SID>OpenCommit(0)<CR>
 
 function! s:ExtractSha()
 
-echo getline('.')
-  "return matchstr(getline('.'), '\v^[^a-fA-F0-9]+\zs([a-fA-F0-9]+)')
   let m = matchlist(getline('.'), '\v^[^a-fA-F0-9]+\zs([a-fA-F0-9]+) (\([^)]+\) )?(.+)$')
   return [ m[1], m[3] ]
 endfunction " ExtractSha
