@@ -163,19 +163,21 @@ function! s:OpenGitLog(all)
 
   if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
 
-  let bn = bufnr('==GitLog')
+  let fn = '_l___git_log'
+  if a:all | let fn = fn . '___all' | endif
+
+  let bn = bufnr(fn)
   if bn > -1 | exe '' . bn . 'bwipeout!' | endif
     " close previous GitLog if any
 
   exe 'new | only'
     " | only makes it full window
-  exe 'silent file ==GitLog'
+  exe 'silent file ' . fn
     " replace buffer name
   setlocal buftype=nofile
   setlocal bufhidden=hide
   setlocal noswapfile
-  setlocal nobuflisted
-  "setlocal filetype=ListFiles
+  "setlocal nobuflisted
 
   " TODO git log --pretty=format:"%h %an |%ad %d %s" --date=iso
   if a:all
@@ -185,6 +187,7 @@ function! s:OpenGitLog(all)
   endif
 
   setlocal syntax=gitlog
+  "setlocal filetype=gitlog
   setlocal nomodifiable
 
   exe 'normal 1G'
