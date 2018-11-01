@@ -104,14 +104,19 @@ function! s:ListFiles()
 
   nnoremap <buffer> d :call <SID>DeleteBuffer()<CR>
 
-  nmap <buffer> v /
+  nmap <buffer> s /
 
+  nmap <buffer> bb :call search('^== buffers', '')<CR>:echo<CR>j
   nmap <buffer> rr :call search('^== \.errors', '')<CR>:echo<CR>jll
-    " silently go to "== .errors" well... the commands appear downstairs...
+  nmap <buffer> tt :call search('^== git status', '')<CR>:echo<CR>j
+  nmap <buffer> vv :call search('^== \.vimgrep', '')<CR>:echo<CR>j
+  nmap <buffer> ss :call search('^== \.vimshorts', '')<CR>:echo<CR>j
+  nmap <buffer> cc :call search('^== recent', '')<CR>:echo<CR>j
+    " silently go to "^== xxx"
 
-  nmap <buffer> a :call search('^== ', '')<CR>:echo<CR>0
-  nmap <buffer> A :call search('^== ', 'b')<CR>:echo<CR>0
-    " silently go to next "== "
+  nmap <buffer> a :call search('^== ', '')<CR>:echo<CR>0j
+  nmap <buffer> A :call search('^== ', 'b')<CR>:call search('^== ', 'b')<CR>:echo<CR>j
+    " silently go to next/previous "== "
 
   nmap <buffer> gl :call search('^== buffers', '')<CR>}k
     " silently go to last file in buffer
