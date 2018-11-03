@@ -41,7 +41,8 @@ syn match bufLgiStatus '\v\|[^|]+$' contained
 syn match bufFilename '\v(^|\/)@<=[^|\/]+$' contained contains=bufLineAndRegister,bufSize
 syn match bufPath '\v[^|]+' contained contains=bufFilename
 
-syn match bufLgRx '\v(\/ ["\'])@<=[^"\']+' contained
+syn match bufLgRx '\v(\/ ")@<=[^"]+' contained
+syn match bufLgRx '\v(\/ \')@<=[^\']+' contained
 syn match bufLgRex '\v\/ "[^"]+" ' contained contains=bufLgRx
 syn match bufLgRex '\v\/ \'[^\']+\' ' contained contains=bufLgRx
 syn match bufLgDir '\v(["\'][ 	]+)@<=.+$' contained

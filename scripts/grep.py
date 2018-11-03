@@ -12,8 +12,6 @@ directory = sys.argv[2]
 uname = sys.argv[3]
 
 
-# TODO write to .vimgrep
-
 cmd = 'grep -R -n'
 if uname != 'OpenBSD':
   cmd += ' --exclude-dir=.git'
@@ -38,7 +36,7 @@ try:
   for l in open('.vimgrep', 'r').readlines():
     if len(ls) > maxlen:
       break
-    m = re.match(r'^  / (["\'][^"\']+["\']) *(.+)$', l)
+    m = re.match(r'^  / ("[^"]+"|\'[^\']+\') *(.+)$', l)
     if m:
       p = [ m.group(1), m.group(2) ]
       if not(p in ls):
