@@ -1,12 +1,24 @@
 
-import re, subprocess
+import os, re, subprocess
 
-lines = \
-  subprocess.check_output("git status", shell=True).splitlines() + \
-  subprocess.check_output("git diff --stat", shell=True).splitlines()
+
+lines = subprocess.check_output("git status", shell=True).splitlines()
+
+def stat_dir(path):
+  if os.path.isdir(path):
+    return [
+      subprocess.check_output("git diff --stat " + path + " | tail -1", shell=True).splitlines()[0] + " (" + path + ")" ]
+  else:
+    return []
+
+for path in [ 'lib/', 'src/', 'spec/', 'test/' ]:
+  lines = lines + stat_dir(path)
+
+lines = lines + subprocess.check_output("git diff --stat", shell=True).splitlines()
+
 
 paths = {}
-footer = []
+footer = [ '#' ]
 
 for line in lines:
   m = re.match('\A\s+new file:\s+(.+)', line)
@@ -27,12 +39,14 @@ for line in lines:
     continue
   m = re.match('\A\s\d+ ', line)
   if m:
-    footer.append("#\n#" + line)
+    footer.append("#" + line)
     #continue
   m = re.match('\A\s+renamed:\s+(.+) -> (.+)', line)
   if m:
     paths[m.group(2)] = [ m.group(2), '| (renamed)' ]
     continue
+
+footer.insert(len(footer) - 1, '#')
 
 ps = paths.values()
 m = 0
