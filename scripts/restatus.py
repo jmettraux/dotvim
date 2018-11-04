@@ -47,6 +47,15 @@ for line in lines:
     continue
 
 footer.insert(len(footer) - 1, '#')
+def foormat(mo):
+  c = mo.group(1)
+  t = mo.group(2)
+  if t == 'file changed,':
+    t = t + ' '
+  elif t == 'insertion(+),':
+    t = t + ' '
+  return " %3s %s" % (c, t)
+footer = [ re.sub(' (\d+) ([^,]+(,|$))', foormat, f) for f in footer ]
 
 ps = paths.values()
 m = 0
