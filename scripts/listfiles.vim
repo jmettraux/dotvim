@@ -61,7 +61,7 @@ function! s:ListFiles()
 
   if filereadable('.vimshorts') && getfsize('.vimshorts') > 0
     normal o== .vimshorts
-    exe 'r! /usr/bin/env python ~/.vim/scripts/cat.py .vimshorts'
+    exe 'silent r! /usr/bin/env python ~/.vim/scripts/cat.py .vimshorts'
     normal G
   end
 
@@ -76,7 +76,7 @@ function! s:ListFiles()
   "exe '%sno#^' . fnamemodify(expand("."), ":~:.") . '/##'
     " shorten paths if in a current dir subdir
 
-  exe 'g/^$/d_'
+  exe 'silent g/^$/d_'
   exe '%s/^==/==/'
     " respace sections
   call append(line('$'), '')
