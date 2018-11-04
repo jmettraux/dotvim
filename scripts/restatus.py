@@ -9,11 +9,12 @@ lines = \
 
 def stat_dir(path):
   if os.path.isdir(path):
-    return [
-      subprocess.check_output("git diff --stat " + path + " | tail -1", shell=True).splitlines()[0] + \
-      ", " + path ]
-  else:
-    return []
+    ls = subprocess \
+      .check_output("git diff --stat " + path + " | tail -1", shell=True) \
+      .splitlines()
+    if len(ls) > 0:
+      return [ ls[0] + ", " + path ]
+  return []
 
 for path in [ 'lib/', 'src/', 'spec/', 'test/', './' ]:
   lines = lines + stat_dir(path)
@@ -85,12 +86,13 @@ for l in stats:
   maxes[3] = max(maxes[3], len(dc))
   counts.append([ m.group(7), fc, ic, dc ])
 
-print '#'
+if len(counts) > 0:
+  print '#'
+
 def f(mo):
   return str(maxes[int(mo.group(1))])
 for c in counts:
   if c[0] == './':
     print '#'
-  print re.sub("m(\d)", f, "# %-m0s  files changed: %m1s, insertions: %m2s, deletions: %m3s")% \
-    (c[0], c[1], c[2], c[3]) # :-(
+  print re.sub("m(\d)", f, "# %-m0s  files changed: %m1s, insertions: %m2s, deletions: %m3s") % (c[0], c[1], c[2], c[3]) # :-(
 
