@@ -77,7 +77,7 @@ function! s:ListFiles()
     " shorten paths if in a current dir subdir
 
   exe 'silent g/^$/d_'
-  exe '%s/^==/==/'
+  exe 'silent %s/^==/==/'
     " respace sections
   call append(line('$'), '')
     " append final, blank, line
