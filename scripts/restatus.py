@@ -4,8 +4,8 @@ import os, re, subprocess
 
 lines = \
   subprocess.check_output("git status", shell=True).splitlines()
-lines = \
-  lines + subprocess.check_output("git diff --stat", shell=True).splitlines()[:-1]
+lines = lines + \
+  subprocess.check_output("git diff --stat", shell=True).splitlines()[:-1]
 
 def stat_dir(path):
   if os.path.isdir(path):
@@ -88,6 +88,9 @@ for l in stats:
 
 if len(counts) > 0:
   print '#'
+
+if len(counts) == 2:
+  counts = counts[:-1]
 
 def f(mo):
   return str(maxes[int(mo.group(1))])
