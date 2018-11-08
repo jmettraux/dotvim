@@ -34,6 +34,7 @@ function! JmDetermineTreePathAndLine()
     if len(lspace) == 0 | let elts = [ l ] + elts | break | endif
 
     let left = substitute(m[1], '└', '├', 'g')
+    let left = substitute(left, '`', '|', 'g')
     let right = m[2]
     let n = n - 1
     if left == last | continue | endif
