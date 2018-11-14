@@ -13,8 +13,8 @@ hi def link scoComment Comment
 
 syn match scoTitle '^== .\+'
 syn match scoLine /\v^\s*\d+/
-syn region scoString start=+"+ skip=+\\"+ end=+"+
-syn region scoString start=+'+ skip=+\\'+ end=+'+
+syn region scoString start=+"+ skip=+\\"+ end=+"+ oneline
+syn region scoString start=+'+ skip=+\\'+ end=+'+ oneline
 
 " Ruby
 syn keyword scoKeyword class module public protected private include extends
