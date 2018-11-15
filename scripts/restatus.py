@@ -56,7 +56,7 @@ ps = paths.values()
 m = 0
 for p in ps:
   m = max(len(p[0]), m)
-m = m + 2
+m = m + 1
 ps = map(lambda p: p[0].ljust(m) + p[1], ps)
 
 for p in sorted(ps):
