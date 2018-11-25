@@ -72,7 +72,8 @@ au BufNewFile,BufRead *.flon set ft=flor
 au BufNewFile,BufRead *.fln set ft=flor
 au BufNewFile,BufRead *.json set ft=javascript
 
-au BufNewFile,BufRead *.ino set filetype=cpp
+au BufNewFile,BufRead *.ino set ft=cpp
+au BufNewFile,BufRead *.scad set ft=openscad
 
 function! <SID>GoMkd()
   set filetype=mkd
