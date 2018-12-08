@@ -16,7 +16,7 @@ def stat_dir(path):
       return [ ls[0] + ", " + path ]
   return []
 
-for path in [ 'lib/', 'src/', 'scripts/', 'app/', 'spec/', 'test/', './' ]:
+for path in [ 'lib/', 'src/', 'scripts/', 'app/', 'spec/', 'test/', 'doc/', './' ]:
   lines = lines + stat_dir(path)
 
 
