@@ -77,6 +77,13 @@ endfunction " JmOpenFile
 function! JmOpenTreeFile()
 
   let l = getline('.')
+
+  let m = matchlist(l, '\v\=\= (.+)$')
+  if empty(m) != 1
+    if match(m[1], '\v\.') > -1 | call JmOpenFile(m[1], 1) | endif
+    return 0
+  endif
+
   let m = matchlist(l, '\v  \/ (["''].+)$')
   if empty(m) == 1 | let m = matchlist(l, '\v  \/ ''([^'']+)'' +(.+)$') | endif
 
