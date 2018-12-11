@@ -204,6 +204,13 @@ nnoremap <silent> <leader>a g'a
 
 inoremap <C-j> <ESC>
 
+function! <SID>JmWriteToVimmarks()
+  let path = expand('%') . ':' . line('.')
+  call writefile([ path ], '.vimmarks', 'a')
+  echo "added \"" . path . "\" to .vimmarks"
+endfunction
+nnoremap <leader>x :call <SID>JmWriteToVimmarks()<CR>
+
 " netrw
 "
 " with lots of help from

@@ -13,5 +13,5 @@ function! s:GoToLink()
   execute 'edit ' . path
 endfunction " GoToLink
 
-nnoremap <leader>x :call <SID>GoToLink()<CR>
+nnoremap <leader>w :call <SID>GoToLink()<CR>
 

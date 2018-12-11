@@ -47,6 +47,12 @@ function! s:ListFiles()
     normal G
   endif
 
+  if filereadable('.vimmarks') && getfsize('.vimmarks') > 0
+    normal o== .vimmarks
+    exe 'silent r! /usr/bin/env python ~/.vim/scripts/cat.py .vimmarks'
+    normal G
+  end
+
   if isdirectory('.git')
     normal o== git status
     exe 'r! /usr/bin/env python ~/.vim/scripts/restatus.py'
@@ -112,6 +118,7 @@ function! s:ListFiles()
   nmap <buffer> vv :call search('^== \.vimgrep', '')<CR>:echo<CR>j
   nmap <buffer> ss :call search('^== \.vimshorts', '')<CR>:echo<CR>j
   nmap <buffer> cc :call search('^== recent', '')<CR>:echo<CR>j
+  nmap <buffer> mm :call search('^== \.vimmarks', '')<CR>:echo<CR>j
     " silently go to "^== xxx"
 
   nmap <buffer> a :call search('^== ', '')<CR>:echo<CR>0j
