@@ -20,6 +20,7 @@ hi! bufLineTitle cterm=NONE ctermfg=grey ctermbg=16
 hi! bufLine cterm=NONE ctermfg=green ctermbg=16
 hi! bufLineGrep cterm=NONE ctermfg=blue ctermbg=16
 hi def link bufLineComment Comment
+hi def link bufEolComment Comment
 hi! bufLineGrep cterm=NONE ctermfg=darkgray ctermbg=16
 hi! bufLgRx cterm=NONE ctermfg=136 ctermbg=16
 hi! bufLgiStatus cterm=NONE ctermfg=darkgray ctermbg=16
@@ -31,14 +32,15 @@ hi def link bufSize Comment
 syn match bufLineTitle '\v^\=\= .+'
 syn match bufLineGrep '\v^  \/ .*$' contains=bufLgRex,bufLgDir
 syn match bufLineComment '\v^[ 	]*#.*$'
+syn match bufEolComment '\v#.*$'
 syn match bufLineGit '\v^[^ 	][^|]+ \| .*$' contains=bufPath,bufLgiStatus
 syn match bufLinePath '\v^[^ #=][^|]+$' contains=bufFilename
 
 syn match bufSize '\v ([0-9]+\.)?[0-9]+[BKMGTPE]$' contained
-syn match bufLineAndRegister '\v:[0-9]+( +[0-9]+)?$' contained
+syn match bufLineAndRegister '\v:[0-9]+( +[0-9]+)?' contained
 
 syn match bufLgiStatus '\v\|[^|]+$' contained
-syn match bufFilename '\v(^|\/)@<=[^|\/]+$' contained contains=bufLineAndRegister,bufSize
+syn match bufFilename '\v(^|\/)@<=[^|\/]+$' contained contains=bufLineAndRegister,bufSize,bufEolComment
 syn match bufPath '\v[^|]+' contained contains=bufFilename
 
 syn match bufLgRx '\v(\/ ")@<=[^"]+' contained
