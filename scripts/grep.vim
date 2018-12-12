@@ -1,14 +1,7 @@
 
-" with help from http://stackoverflow.com/questions/4478891
-"
-function! s:Strip(s)
-
-  return substitute(a:s, '^\s*\(.*\)\s*$', '\1', '')
-endfunction " Strip
-
 function! s:ExtractPatternAndRest(s)
 
-  let s = s:Strip(a:s)
+  let s = JmStrip(a:s)
 
   let patt = ''
   let rest = ''
@@ -26,7 +19,7 @@ function! s:ExtractPatternAndRest(s)
     let rest = s[strlen(patt) - 2:]
   endif
 
-  return [ patt, s:Strip(rest) ]
+  return [ patt, JmStrip(rest) ]
 endfunction " ExtractPatternAndRest
 
 function! s:GrepOpenFile()

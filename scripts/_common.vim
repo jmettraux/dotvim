@@ -13,6 +13,7 @@ function! JmNtr(s)
 endfunction
 
 function! JmStrip(s)
+
   return substitute(a:s, '^\s*\(.\{-}\)\s*$', '\1', '')
 endfunction
 
