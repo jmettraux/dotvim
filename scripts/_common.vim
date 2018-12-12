@@ -12,6 +12,10 @@ function! JmNtr(s)
   return substitute(a:s, '[^a-zA-Z0-9]', '_', 'g')
 endfunction
 
+function! JmStrip(s)
+  return substitute(a:s, '^\s*\(.\{-}\)\s*$', '\1', '')
+endfunction
+
 function! JmDetermineTreePathAndLine()
 
   let n = line('.')

@@ -205,9 +205,12 @@ nnoremap <silent> <leader>a g'a
 inoremap <C-j> <ESC>
 
 function! <SID>JmWriteToVimmarks()
-  let path = expand('%') . ':' . line('.')
-  call writefile([ path ], '.vimmarks', 'a')
-  echo "added \"" . path . "\" to .vimmarks"
+  let li = line('.')
+  let pa = expand('%') . ':' . li
+  let tx = JmStrip(getline(li))
+  let tx = JmStrip(strpart(tx, 0, 80 - len(pa) - 4))
+  call writefile([ pa . "  # " . tx ], '.vimmarks', 'a')
+  echo "added \"" . pa . "\" to .vimmarks"
 endfunction
 nnoremap <leader>x :call <SID>JmWriteToVimmarks()<CR>
 
