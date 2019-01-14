@@ -12,11 +12,12 @@ syn match scoTitle '^== .\+'
 "
 " javascript
 
-syn match scoLine '\v^ *[0-9]+ .*$' contains=scoLineNumber,scoVar,scoThis,scoComment
+syn match scoLine '\v^ *[0-9]+ .*$' contains=scoLineNumber,scoVar,scoThis,scoFunction,scoComment
 syn match scoLineNumber '\v^ *[0-9]+' contained
 syn match scoVar '\v\s*var\s+[^ 	]+\s*\=' contained contains=scoName
 syn match scoThis '\v\s*this\.[^ 	]+' contained contains=scoName
-syn match scoName '\v(var\s+|this\.)@<=[^ 	]+' contained
+syn match scoFunction '\v\s*function\s+[^ 	(]+' contained contains=scoName
+syn match scoName '\v(var\s+|this\.|function\s+)@<=[^ 	(]+' contained
 syn match scoComment '\v\/\/[^$]+' contained contains=scoSpecial
 syn match scoSpecial '\v(TODO|FIXME)' contained
 

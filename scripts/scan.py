@@ -28,9 +28,12 @@ elif re.search(r'\.rb$', fn):
       ]
 elif re.search(r'\.js$', fn):
   rs = [
+    r'^\s*var\s+self\s*=',
     r'^\s*var\s+.+\s*=\s*\(?\s*function\s*\(',
-    #r'^\s*this\..+\s*=\s*',
-    r'^\s*this\..+\s*=\s*.+\bfunction\b',
+    r'^\s*this\..+\s*=\s*',
+    #r'^\s*this\..+\s*=\s*.+\bfunction\b',
+    r'^\s*var\s+[A-Z]',
+    r'^\s*function\s+',
       ]
 
 rs.append(r'\bTODO\b')
@@ -45,31 +48,5 @@ for i, l in ls:
   for r in rs:
     if re.search(r, l):
       print '%5d %s' % (i, l)
-
-## scan.pl
-#
-#$i = 1;
-#while (<>) {
-#  if (
-#    /^\s*
-#      (
-#        module\s+|
-#        class\s+|
-#        def\s+[^\s.]+|
-#        alias\s+[^\s.]+\s+[^\s.]+|
-#        attr_(reader|accessor|writer)\s+|
-#        \bvar\s+.+\s+=\s+\(?function\b|
-#        public\b|protected\b|private\b|
-#        Option\b|Public\b|Sub\b|Function\b|
-#        before\s+:[a-z]+|after\s+:[a-z]+|
-#        describe\s+(['"A-Za-z])|context\s+['"]|it\s+['"]
-#      )|
-#      \s+this\.\S+\s+=\s+function\b
-#    /x ||
-#    /\bFIXME|TODO\b/
-#  ) {
-#    printf("%5d %s", $i, $_);
-#  };
-#  $i = $i + 1;
-#}
+      break
 
