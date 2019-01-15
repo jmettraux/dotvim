@@ -18,7 +18,7 @@ syn match scoVar '\v\s*var\s+[^ 	]+\s*\=' contained contains=scoName
 syn match scoThis '\v\s*this\.[^ 	]+' contained contains=scoName
 syn match scoFunction '\v\s*function\s+[^ 	(]+' contained contains=scoName
 syn match scoName '\v(var\s+|this\.|function\s+)@<=[^ 	(]+' contained
-syn match scoComment '\v\/\/[^$]+' contained contains=scoSpecial
+syn match scoComment '\v\/\/[^$]*' contained contains=scoSpecial
 syn match scoSpecial '\v(TODO|FIXME)' contained
 
 

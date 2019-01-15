@@ -44,7 +44,7 @@ rs.append(r'\bFIXME\b')
 #print rs
 #print "<<<"
 
-c_rex = r'^\s*(#|//).+'
+c_rex = r'^\s*(#|//)'
 c_threshold = 4
 c_lines = []
   #
@@ -64,6 +64,8 @@ for i, l in ls:
 
   if len(c_lines) >= c_threshold:
     for ii, ll in c_lines:
+      if len(ll) > 70:
+        ll = ll[0:70] + '...'
       print '%5d %s' % (ii, ll)
 
   c_lines = []
