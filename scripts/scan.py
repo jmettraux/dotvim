@@ -44,7 +44,33 @@ rs.append(r'\bFIXME\b')
 #print rs
 #print "<<<"
 
+c_rex = r'^\s*(#|//).+'
+c_threshold = 4
+c_lines = []
+  #
+  # comments displaying
+
+
 for i, l in ls:
+
+  #
+  # is it a full comment line?
+
+  c_m = re.search(c_rex, l)
+
+  if c_m:
+    c_lines.append([ i, l ])
+    continue
+
+  if len(c_lines) >= c_threshold:
+    for ii, ll in c_lines:
+      print '%5d %s' % (ii, ll)
+
+  c_lines = []
+
+  #
+  # regular, code line
+
   for r in rs:
     if re.search(r, l):
       print '%5d %s' % (i, l)
