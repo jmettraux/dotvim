@@ -1,4 +1,13 @@
 
+function! JmScanSyn(path)
+
+  if a:path =~ "_spec\.rb$" | return 'scanout_ruby_spec' | endif
+  if a:path =~ "\.rb$" | return 'scanout_ruby' | endif
+  "if a:path =~ "\.py$" | return 'scanout_python' | endif
+  if a:path =~ "\.js$" | return 'scanout_javascript' | endif
+  return ''
+endfunction " JmScanSyn
+
 function! s:OpenAtLine()
 
   let fn = matchstr(getline(2), '\v [^:].+')
@@ -10,26 +19,14 @@ endfunction " OpenAtLine
 function! s:Scan()
 
   if &filetype == 'Scan' | return | endif
+  if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
 
   ""let path = expand("%:p") " expands into absolute file path
   let path = expand("%") " expands into relative file path
   "let fname = expand("%:t")
 
-  let syn = 'scanout_ruby'
-  if path =~ "_spec\.rb$"
-    let syn = 'scanout_ruby_spec'
-  elseif path =~ "\.rb$"
-    "let syn = 'scanout_ruby'
-  "elseif path =~ "\.py$"
-  "  let syn = 'scanout_python'
-  elseif path =~ "\.js$"
-    let syn = 'scanout_javascript'
-  else
-    echoerr "don't know how to scan " . path
-    return
-  endif
-
-  if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
+  let syn = JmScanSyn(path)
+  if syn == '' | echoerr "don't know how to scan " . path | return | endif
 
   let fn = '_k___' . JmNtr(path)
 
