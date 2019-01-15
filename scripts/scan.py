@@ -45,7 +45,7 @@ rs.append(r'\bFIXME\b')
 #print "<<<"
 
 c_rex = r'^\s*(#|//)'
-c_threshold = 4
+c_threshold = 2
 c_lines = []
   #
   # comments displaying
