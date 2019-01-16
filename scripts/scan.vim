@@ -8,17 +8,19 @@ function! JmScanSyn(path)
   return ''
 endfunction " JmScanSyn
 
-function! s:OpenAtLine()
+function! JmScanOpenAtLine()
 
   let fn = matchstr(getline(2), '\v [^:].+')
   let ln = matchstr(getline(line('.')), '\v^\s*\d+')
   exe 'silent e ' . fn
   exe 'normal ' . ln . 'G'
-endfunction " OpenAtLine
+endfunction " JmScanOpenAtLine
 
 function! s:Scan()
 
   if &filetype == 'Scan' | return | endif
+  if &filetype == 'ListFiles' | return | endif
+
   if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
 
   ""let path = expand("%:p") " expands into absolute file path
@@ -55,9 +57,9 @@ function! s:Scan()
   setlocal nomodifiable
   normal 4G
 
-  nnoremap <buffer> <silent> o :call <SID>OpenAtLine()<CR>
-  nnoremap <buffer> <silent> <space> :call <SID>OpenAtLine()<CR>
-  nnoremap <buffer> <silent> <CR> :call <SID>OpenAtLine()<CR>
+  nnoremap <buffer> <silent> o :call JmScanOpenAtLine()<CR>
+  nnoremap <buffer> <silent> <space> :call JmScanOpenAtLine()<CR>
+  nnoremap <buffer> <silent> <CR> :call JmScanOpenAtLine()<CR>
 endfunction " Scan
 
 command! -nargs=0 Scan :call <SID>Scan()
