@@ -67,11 +67,11 @@ for i, l in ls:
   if cl > 1:
     c0 = c_lines[0][1].strip()
 
-  if cl >= c_threshold or (cl >= 2 and (c0 == '//' or c0 == '#')):
-    for ii, ll in c_lines:
-      if len(ll) > 70:
-        ll = ll[0:70] + '...'
-      print '%5d %s' % (ii, ll)
+  #if cl >= c_threshold or (cl >= 2 and (c0 == '//' or c0 == '#')):
+  #  for ii, ll in c_lines:
+  #    if len(ll) > 70:
+  #      ll = ll[0:70] + '...'
+  #    print '%5d %s' % (ii, ll)
 
   c_lines = []
 
