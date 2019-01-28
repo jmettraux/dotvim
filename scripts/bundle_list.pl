@@ -1,8 +1,8 @@
 
 # bundle_list.pl
 
-my @gems = grep(/^  \* /, split(/\n/, `bundle list`));
-my @paths = split(/\n/, `bundle show --paths`);
+my @gems = grep(/^  \* /, split(/\n/, `bundle list 2>/dev/null`));
+my @paths = split(/\n/, `bundle show --paths 2>/dev/null`);
 my $home = $ENV{'HOME'};
 
 for ($i=0; $i <= $#gems; $i++) {
