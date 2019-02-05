@@ -97,6 +97,8 @@ au FileType java set shiftwidth=4
 
 au FileType ruby set shiftwidth=2
 
+au FileType go set tabstop=2
+
 au BufRead COMMIT_EDITMSG call feedkeys('1G')
   " go to first line of commit messages
 
