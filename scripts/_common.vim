@@ -62,6 +62,8 @@ function! JmDetermineTreePathAndLine()
     let line = str2nr(m[2])
   endif
 
+  if path[0:1] == './' | let path = path[2:] | endif
+
   return [ path, line ]
 endfunction " JmDetermineTreePathAndLine
 
