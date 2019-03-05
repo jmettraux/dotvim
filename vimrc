@@ -215,6 +215,7 @@ function! <SID>JmWriteToVimmarks()
   echo "added \"" . pa . "\" to .vimmarks"
 endfunction
 nnoremap <leader>x :call <SID>JmWriteToVimmarks()<CR>
+nnoremap <leader>X :e .vimmarks<CR>
 
 " netrw
 "
