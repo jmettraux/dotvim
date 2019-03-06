@@ -47,45 +47,6 @@ function! s:OpenFile()
 endfunction " OpenFile
 
 
-"function! s:OpenGitDiff()
-"
-"  if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
-"
-"  let bn = bufnr('==GitDiff')
-"  if bn > -1 | exe '' . bn . 'bwipeout!' | endif
-"    " close previous GitDiff if any
-"
-"  exe 'new | only'
-"    " | only makes it full window
-"  exe 'silent file ==GitDiff'
-"    " replace buffer name
-"  exe 'setlocal buftype=nofile'
-"  exe 'setlocal bufhidden=hide'
-"  exe 'setlocal noswapfile'
-"  exe 'setlocal nobuflisted'
-"  "exe 'setlocal filetype=ListFiles'
-"
-"  exe 'silent r! git diff --stat | perl ~/.vim/scripts/regitdiffstat.pl'
-"  exe 'silent r! git diff | perl ~/.vim/scripts/regitdiff.pl'
-"
-"  exe 'normal 1Gdda'
-"
-"  setlocal syntax=gitdiff
-"
-"  nnoremap <buffer> <silent> a :call search('^.\+ ---+++', '')<CR>0zz
-"  nnoremap <buffer> <silent> A :call search('^.\+ ---+++', 'b')<CR>0zz
-"    " silently go to next file
-"
-"  nnoremap <buffer> o :call <SID>OpenFile()<CR>
-"  nnoremap <buffer> <CR> :call <SID>OpenFile()<CR>
-"  nnoremap <buffer> <SPACE> :call <SID>OpenFile()<CR>
-"
-"  nnoremap <buffer> <silent> q :bd<CR>
-"endfunction " OpenGitDiff
-"
-"nnoremap <silent> <leader>d :call <SID>OpenGitDiff()<CR>
-
-
 "
 " git log
 
@@ -260,4 +221,48 @@ endfunction " OpenGitBlame
 
 nnoremap <silent> <leader>m :call <SID>OpenGitBlame()<CR>
 command! -nargs=0 Blame :call <SID>OpenGitBlame()
+
+
+function! s:OpenGitDiff(path)
+
+  if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
+
+  let fn = '_d___' . JmNtr(a:path)
+
+  let bn = bufnr(fn)
+  if bn > -1 | exe '' . bn . 'bwipeout!' | endif
+    " close previous commit if any
+
+  exe 'new | only'
+    " | only makes it full window
+
+  exe 'silent file ' . fn
+
+  setlocal buftype=nofile
+  setlocal bufhidden=hide
+  setlocal noswapfile
+  "setlocal nobuflisted
+  "setlocal filetype=ListFiles
+
+  exe 'silent r! git diff -U9999999 --no-color ' . a:path
+  exe 'Clean'
+
+  setlocal syntax=gitdiff
+  setlocal filetype=gitdiff
+  setlocal nomodifiable
+
+  exe 'normal 1G'
+
+"  nnoremap <buffer> <silent> a :call search('^.\+ ---+++', '')<CR>0zz
+"  nnoremap <buffer> <silent> A :call search('^.\+ ---+++', 'b')<CR>0zz
+"    " silently go to next file
+"
+"  nnoremap <buffer> o :call <SID>OpenFile()<CR>
+"  nnoremap <buffer> <CR> :call <SID>OpenFile()<CR>
+"  nnoremap <buffer> <SPACE> :call <SID>OpenFile()<CR>
+
+  nnoremap <buffer> <silent> q :bd<CR>
+endfunction " OpenGitDiff
+
+nnoremap <silent> <leader>D :call <SID>OpenGitDiff(@%)<CR>
 
