@@ -6,11 +6,11 @@ function! s:DeleteBuffer()
   if empty(m) == 1 | return | endif
 
   exe 'bd ' . m[1]
-  call <SID>ListFiles()
+  call <SID>ListFiles(line('.'))
 endfunction " DeleteBuffer
 
 
-function! s:ListFiles()
+function! s:ListFiles(...)
 
   if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
 
@@ -94,8 +94,14 @@ function! s:ListFiles()
     " sort recent files
 
   call feedkeys('1G')
-  call feedkeys(":call search('^[\.\/a-zA-Z0-9]', '')\r:echo\r")
-    " go to first file
+
+  let ln = get(a:, 1, -1)
+  if ln > 0
+    call feedkeys('' . ln . 'G')
+  else
+    call feedkeys(":call search('^[\.\/a-zA-Z0-9]', '')\r:echo\r")
+      " go to first file
+  end
 
   setlocal syntax=buffers
   setlocal nomodifiable
