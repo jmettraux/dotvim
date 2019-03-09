@@ -184,7 +184,7 @@ nnoremap <silent> <leader>; :call <SID>JmBufAlt()<CR>
 
 nnoremap <leader>f gF
   " go file
-nnoremap <leader>h :let @" = expand("%") . ':' . line('.')<CR>
+nnoremap <leader>H :let @" = expand("%") . ':' . line('.')<CR>
   " 'here'
 
 "nnoremap <leader>k 0wDa

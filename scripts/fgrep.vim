@@ -48,4 +48,5 @@ function! s:Fgrep(rex)
 endfunction " Fgrep
 
 command! -nargs=1 Fg :call <SID>Fgrep(<q-args>)
+nnoremap <leader>h wb"zyw:exe ":call <SID>Fgrep('" . @z . "')"<CR>
 
