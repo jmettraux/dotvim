@@ -47,6 +47,12 @@ function! s:ListFiles(...)
     normal G
   endif
 
+  if filereadable('.vimspec') && getfsize('.vimspec') > 0
+    normal o== .vimspec
+    exe 'silent r! /usr/bin/env python ~/.vim/scripts/cat.py .vimspec'
+    normal G
+  end
+
   if filereadable('.vimmarks') && getfsize('.vimmarks') > 0
     normal o== .vimmarks
     exe 'silent r! /usr/bin/env python ~/.vim/scripts/cat.py .vimmarks'
