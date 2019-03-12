@@ -43,7 +43,8 @@ set encoding=utf-8
 set enc=utf-8
 set fenc=utf-8
 
-set smartindent
+"set smartindent
+set autoindent
 set smarttab
 
 set history=128
@@ -87,14 +88,13 @@ au BufNewFile,BufRead */_layouts/*.html set ft=liquid
 au BufNewFile,BufRead *.html,*.xml,*.textile
   \ if getline(1) == '---' | set ft=liquid | endif
 
-au BufNewFile,BufRead Gemfile setlocal ft=ruby
-
 au FileType java set shiftwidth=4
-au FileType java set autoindent
+"au FileType java set autoindent
 au FileType java set noexpandtab
 au FileType java set tabstop=4
 au FileType java set shiftwidth=4
 
+au BufNewFile,BufRead Gemfile setlocal ft=ruby
 au FileType ruby set shiftwidth=2
 
 au FileType go set tabstop=2
