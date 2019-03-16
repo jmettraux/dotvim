@@ -40,7 +40,7 @@ syn match bufSize '\v ([0-9]+\.)?[0-9]+[BKMGTPE]$' contained
 syn match bufLineAndRegister '\v:[0-9]+( +[0-9]+)?' contained
 
 syn match bufLgiStatus '\v\|[^|]+$' contained
-syn match bufFilename '\v(^|\/)@<=[^|\/]+$' contained contains=bufLineAndRegister,bufSize,bufEolComment
+syn match bufFilename '\v(^|\/)@<=.+$' contained contains=bufLineAndRegister,bufSize,bufEolComment
 syn match bufPath '\v[^|]+' contained contains=bufFilename
 
 syn match bufLgRx '\v(\/ ")@<=[^"]+' contained
