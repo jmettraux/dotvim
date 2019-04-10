@@ -1,0 +1,11 @@
+#!/usr/bin/env fish
+
+for path in $argv
+  echo
+  echo "== $path"
+  echo
+  python ~/.vim/scripts/scan.py $path
+  echo
+end
+echo "# vim: set syntax=scanout_ruby"
+
