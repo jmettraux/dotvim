@@ -126,6 +126,7 @@ function! s:ListFiles(...)
 
   nmap <buffer> bb :call search('^== buffers', '')<CR>:echo<CR>j
   nmap <buffer> rr :call search('^== \.errors', '')<CR>:echo<CR>jll
+  nmap <buffer> ii :call search('^== git status', '')<CR>:echo<CR>j
   nmap <buffer> tt :call search('^== git status', '')<CR>:echo<CR>j
   nmap <buffer> vv :call search('^== \.vimgrep', '')<CR>:echo<CR>j
   nmap <buffer> ss :call search('^== \.vimshorts', '')<CR>:echo<CR>j
