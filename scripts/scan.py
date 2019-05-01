@@ -46,7 +46,7 @@ rs.append(r'\bFIXME\b')
 #print "<<<"
 
 c_rex = r'^\s*(#|//)'
-c_threshold = 3
+#c_threshold = 3
 c_lines = []
   #
   # comments displaying
@@ -69,10 +69,12 @@ for i, l in ls:
     c0 = c_lines[0][1].strip()
 
   #if cl >= c_threshold or (cl >= 2 and (c0 == '//' or c0 == '#')):
-  #  for ii, ll in c_lines:
-  #    if len(ll) > 70:
-  #      ll = ll[0:70] + '...'
-  #    print '%5d %s' % (ii, ll)
+  if cl >= 2 and (c0 == '//' or c0 == '#'):
+    for ii, ll in c_lines:
+    #for ii, ll in c_lines[1:]:
+      if len(ll) > 70:
+        ll = ll[0:70] + '...'
+      print '%5d %s' % (ii, ll)
 
   c_lines = []
 
