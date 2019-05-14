@@ -12,6 +12,12 @@ function! JmNtr(s)
   return substitute(a:s, '[^a-zA-Z0-9]', '_', 'g')
 endfunction
 
+"function! JmNtrDot(s)
+"  let m = matchlist(a:s, '\v(\.[a-zA-Z0-9]+)?$')
+"  let l = strlen(m[1])
+"  return JmNtr(a:s[0:-(l + 1)]) . m[1]
+"endfunction
+
 function! JmStrip(s)
 
   return substitute(a:s, '^\s*\(.\{-}\)\s*$', '\1', '')

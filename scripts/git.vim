@@ -266,3 +266,89 @@ endfunction " OpenGitDiff
 
 nnoremap <silent> <leader>D :call <SID>OpenGitDiff(@%)<CR>
 
+
+function! s:OpenGitHistory()
+
+  if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
+
+  let path = expand('%.')
+  let ln = line('.')
+
+  let fn = '_h___' . JmNtr(path)
+
+  let bn = bufnr(fn)
+  if bn > -1 | exe '' . bn . 'bwipeout!' | endif
+    " close previous GitLog if any
+
+  exe 'new | only'
+    " | only makes it full window
+  exe 'silent file ' . fn
+    " replace buffer name
+  setlocal buftype=nofile
+  setlocal bufhidden=hide
+  setlocal noswapfile
+  "setlocal nobuflisted
+
+  " TODO git log --pretty=format:"%h %an |%ad %d %s" --date=iso
+  exe 'silent r! git log --graph --oneline --abbrev-commit --decorate --branches ' . path . ' | perl ~/.vim/scripts/regitlog.pl'
+
+  setlocal syntax=gitlog
+  "setlocal filetype=gitlog
+  setlocal nomodifiable
+
+  exe 'normal 1G'
+
+  let b:path = path
+
+  " open commit
+  nnoremap <buffer> <silent> o :call <SID>OpenCommit(<SID>ExtractSha())<CR>
+
+  " open version
+  nnoremap <buffer> <silent> <CR> :call <SID>OpenVersion(b:path, <SID>ExtractSha()[0])<CR>
+  nnoremap <buffer> <silent> <SPACE> :call <SID>OpenVersion(b:path, <SID>ExtractSha()[0])<CR>
+
+  nnoremap <buffer> <silent> q :bd<CR>
+endfunction " OpenGitHistory
+
+command! -nargs=0 Gih :call <SID>OpenGitHistory()
+nnoremap <silent> <leader>Y :call <SID>OpenGitHistory()<CR>
+
+
+function s:OpenVersion(path, sha)
+
+  let fn = '_v_' . a:sha . '__' . JmNtr(a:path)
+
+  let bn = bufnr(fn)
+  if bn > -1 | exe '' . bn . 'bwipeout!' | endif
+    " close previous GitLog if any
+
+  exe 'new | only'
+    " | only makes it full window
+  exe 'silent file ' . fn
+    " replace buffer name
+  setlocal buftype=nofile
+  setlocal bufhidden=hide
+  setlocal noswapfile
+  "setlocal nobuflisted
+
+  exe 'silent r! git show ' . a:sha . ':' . a:path
+
+  if match(a:path, '\v\.rb$') > -1
+    setlocal filetype=ruby
+  elseif match(a:path, '\v\.js$') > -1
+    setlocal filetype=javascript
+  elseif match(a:path, '\v\.css$') > -1
+    setlocal filetype=css
+  elseif match(a:path, '\v\.scss$') > -1
+    setlocal filetype=scss
+  elseif match(a:path, '\v\.vim$') > -1
+    setlocal filetype=vim
+  endif
+
+  setlocal nomodifiable
+
+  exe 'normal 1G'
+
+  nnoremap <buffer> <silent> q :bd<CR>
+endfunction " OpenVersion
+
