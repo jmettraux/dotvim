@@ -7,6 +7,8 @@ hi! gilDate cterm=NONE ctermfg=darkgrey ctermbg=16
 hi! gilNav cterm=NONE ctermfg=darkgrey ctermbg=16
 hi! gilLine cterm=NONE ctermfg=grey ctermbg=16
 
+syn match gilNav /\v^[*|\\/ ]+/
+
 syn match gilNav /\v^[*|\\/ ]+/ contained
 syn match gilSha /\v^[*|\\/ ]+[a-fA-F0-9]+/ contains=gilNav
 syn match gilAuthor /\v^[*|\\/ ]+[a-fA-F0-9]+ [^ ]+/ contains=gilSha

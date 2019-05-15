@@ -6,7 +6,7 @@ for line in sys.stdin:
 
   l = line.rstrip()
 
-  m = re.match(r'^([*|\\/ ]+)([^\s]+)([^|]+)\|([^ ]+)(.*)$', l)
+  m = re.match(r'^([*|\\/ ]+)([^\s]+)([^|]+)\|([^ ]+)  (\([^)]+\))?(.*)$', l)
 
   if m:
 
@@ -20,9 +20,16 @@ for line in sys.stdin:
     date = re.sub(r'[-:]', '', date)
     date = re.sub(r'[T]', ' ', date)
 
-    text = m.group(5).lstrip()
+    tags = m.group(5)
 
-    print ' '.join((head, author, date, text))
+    text = m.group(6).lstrip()
+
+    s = head + ' ' + author + ' ' + date + ' '
+    if tags:
+      s = s + re.sub(r' ', '', tags) + ' '
+    s = s + text
+
+    print s
 
   else:
 
