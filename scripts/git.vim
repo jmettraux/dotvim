@@ -138,11 +138,10 @@ function! s:OpenGitLog(all)
   setlocal noswapfile
   "setlocal nobuflisted
 
-  " TODO git log --pretty=format:"%h %an |%ad %d %s" --date=iso
   if a:all
-    exe 'silent r! git log --graph --oneline --abbrev-commit --decorate --branches | perl ~/.vim/scripts/regitlog.pl'
+    exe 'silent r! git log --graph --branches --pretty=format:"\%h \%an |\%ad \%d \%s" --date=iso-strict | /usr/bin/env python ~/.vim/scripts/regitlog.py'
   else
-    exe 'silent r! git log --graph --oneline --abbrev-commit --decorate | perl ~/.vim/scripts/regitlog.pl'
+    exe 'silent r! git log --graph --pretty=format:"\%h \%an |\%ad \%d \%s" --date=iso-strict | /usr/bin/env python ~/.vim/scripts/regitlog.py'
   endif
 
   setlocal syntax=gitlog
@@ -289,8 +288,7 @@ function! s:OpenGitHistory()
   setlocal noswapfile
   "setlocal nobuflisted
 
-  " TODO git log --pretty=format:"%h %an |%ad %d %s" --date=iso
-  exe 'silent r! git log --graph --oneline --abbrev-commit --decorate --branches ' . path . ' | perl ~/.vim/scripts/regitlog.pl'
+  exe 'silent r! git log --graph --pretty=format:"\%h \%an |\%ad \%d \%s" --date=iso-strict ' . path . ' | /usr/bin/env python ~/.vim/scripts/regitlog.py'
 
   setlocal syntax=gitlog
   "setlocal filetype=gitlog
