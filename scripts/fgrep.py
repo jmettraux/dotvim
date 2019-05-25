@@ -6,6 +6,8 @@ import re, sys
 fname = sys.argv[1]
 
 rex = sys.argv[2]
+if rex[0] == '"' and rex[-1] == '"':
+  rex = rex[1:-2]
 if rex[1] == '/':
   rex = rex[1:-1]
 
