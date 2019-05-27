@@ -64,10 +64,12 @@ function! s:OpenCommit(sha)
   if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
 
   let sha = a:sha
+  let date = ''
   let title = ''
-  if type(a:sha) == 3 | let title = a:sha[1] | let sha = a:sha[0] | endif
+  if type(a:sha) == 3 | let sha = a:sha[0] | let date = a:sha[1] | let title = a:sha[2] | endif
+    " help type, type 3 is List
 
-  let fn = '_c___' . sha . '___' . JmNtr(title)
+  let fn = '_c__' . sha . '__' . date . '__' . JmNtr(title)
 
   let bn = bufnr(fn)
   if bn > -1 | exe '' . bn . 'bwipeout!' | endif
@@ -114,8 +116,8 @@ nnoremap <silent> <leader>d :call <SID>OpenCommit(0)<CR>
 
 function! s:ExtractSha()
 
-  let m = matchlist(getline('.'), '\v^[^a-fA-F0-9]+\zs([a-fA-F0-9]+) (\([^)]+\) )?(.+)$')
-  return [ m[1], m[3] ]
+  let m = matchlist(getline('.'), '\v^[^a-fA-F0-9]+\zs([a-fA-F0-9]+) [^ ]+ ([0-9]+) [0-9]+ (\([^)]+\) )?(.+)$')
+  return [ m[1], m[2], m[4] ]
 endfunction " ExtractSha
 
 function! s:OpenGitLog(all)
@@ -302,8 +304,8 @@ function! s:OpenGitHistory()
   nnoremap <buffer> <silent> o :call <SID>OpenCommit(<SID>ExtractSha())<CR>
 
   " open version
-  nnoremap <buffer> <silent> <CR> :call <SID>OpenVersion(b:path, <SID>ExtractSha()[0])<CR>
-  nnoremap <buffer> <silent> <SPACE> :call <SID>OpenVersion(b:path, <SID>ExtractSha()[0])<CR>
+  nnoremap <buffer> <silent> <CR> :call <SID>OpenVersion(b:path, <SID>ExtractSha())<CR>
+  nnoremap <buffer> <silent> <SPACE> :call <SID>OpenVersion(b:path, <SID>ExtractSha())<CR>
 
   nnoremap <buffer> <silent> q :bd<CR>
 endfunction " OpenGitHistory
@@ -314,7 +316,10 @@ nnoremap <silent> <leader>Y :call <SID>OpenGitHistory()<CR>
 
 function s:OpenVersion(path, sha)
 
-  let fn = '_v_' . a:sha . '__' . JmNtr(a:path)
+  let sha = a:sha[0]
+  let date = a:sha[1]
+
+  let fn = '_v__' . sha . '__' . date . '__' . JmNtr(a:path)
 
   let bn = bufnr(fn)
   if bn > -1 | exe '' . bn . 'bwipeout!' | endif
@@ -329,7 +334,7 @@ function s:OpenVersion(path, sha)
   setlocal noswapfile
   "setlocal nobuflisted
 
-  exe 'silent r! git show ' . a:sha . ':' . a:path
+  exe 'silent r! git show ' . sha . ':' . a:path
 
   if match(a:path, '\v\.rb$') > -1
     setlocal filetype=ruby
