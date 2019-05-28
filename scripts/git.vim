@@ -68,6 +68,7 @@ function! s:OpenCommit(sha)
   let title = ''
   if type(a:sha) == 3 | let sha = a:sha[0] | let date = a:sha[1] | let title = a:sha[2] | endif
     " help type, type 3 is List
+  let title = title[0:35]
 
   let fn = '_c__' . sha . '__' . date . '__' . JmNtr(title)
 
