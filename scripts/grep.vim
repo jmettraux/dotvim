@@ -89,13 +89,16 @@ command! -nargs=* -complete=file Vg :call JmVg(<q-args>)
 
 function! s:VgSrc(args)
 
-  if !empty(glob("lib"))
-    call JmVg(a:args . " lib")
-  elseif !empty(glob("src"))
-    call JmVg(a:args . " src")
-  else
-    call JmVg(a:args . " .")
-  endif
+"  if !empty(glob("lib"))
+"    call JmVg(a:args . " lib")
+"  elseif !empty(glob("src"))
+"    call JmVg(a:args . " src")
+"  else
+"    call JmVg(a:args . " .")
+"  endif
+
+  call JmVg(a:args . " " . split(fnamemodify(expand("%"), ":~:."), "/")[0])
+    " may be spec/ scripts/ lib/ src/ ... whatever is the first path element...
 endfunction " s:VgSrc
 
 "nnoremap <leader>q "zyw:exe ":call <SID>Vg(\"" . @z . "\")"<CR>
