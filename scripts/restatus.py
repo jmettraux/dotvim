@@ -16,6 +16,12 @@ def stat_dir(path):
       return [ ls[0] + ", " + path ]
   return []
 
+def file_len(path):
+  f = open(path, 'r')
+  ls = f.readlines()
+  f.close
+  return len(ls)
+
 for path in [ 'lib/', 'src/', 'scripts/', 'app/', 'spec/', 'test/', 'doc/', './' ]:
   lines = lines + stat_dir(path)
 
@@ -26,7 +32,7 @@ stats = []
 for line in lines:
   m = re.match('\A\s+new file:\s+(.+)', line)
   if m:
-    paths[m.group(1)] = [ m.group(1), "| (new file)" ]
+    paths[m.group(1)] = [ m.group(1), "| (new file) +" + str(file_len(m.group(1))) ]
     continue
   m = re.match('\A\s+modified:\s+(.+)', line)
   if m:
