@@ -13,7 +13,7 @@ highlight ColorColumn ctermbg=16
 
 syn match groTitle '^== .\+'
 syn match groFilename '^[^ :=]\+'
-syn match groLineNr '\v^ +\d+\|' contains=groPipe
+syn match groLineNr '\v^ *\d+\|' contains=groPipe
 syn match groPipe '\v\|' contained
 syn match groError '\v^grep\.py choked .+$'
 
