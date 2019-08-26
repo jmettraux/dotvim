@@ -7,6 +7,7 @@ hi! scoFuncName cterm=NONE ctermfg=white ctermbg=16
 hi! scoAttr cterm=NONE ctermfg=white ctermbg=16
 hi! scoKeyword cterm=NONE ctermfg=darkyellow ctermbg=16
 hi! scoSpecial cterm=NONE ctermfg=black ctermbg=yellow
+hi! scoRex cterm=NONE ctermfg=red ctermbg=16
 hi def link scoString String
 hi def link scoComment Comment
 
@@ -15,6 +16,7 @@ syn match scoLine /\v^\s*\d+/
 syn region scoString start=+"+ skip=+\\"+ end=+"+ oneline
 syn region scoString start=+'+ skip=+\\'+ end=+'+ oneline
 syn region scoComment start=+#+ end=+$+ contains=scoSpecial
+syn region scoRex start=+/+ skip=+\\/+ end=+/+ oneline
 
 " Ruby
 syn keyword scoKeyword class module public protected private include extends
