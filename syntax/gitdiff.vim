@@ -2,7 +2,8 @@
 " MIT licensed
 
 
-hi! gdiCommit cterm=NONE ctermfg=136 ctermbg=16
+"hi! gdiCommit cterm=NONE ctermfg=136 ctermbg=16
+hi! gdiCommit cterm=NONE ctermfg=white ctermbg=darkgrey
 
 "hi! gdiFilename cterm=NONE ctermfg=black ctermbg=lightgrey
 hi! gdiFilename cterm=NONE ctermfg=darkblue ctermbg=lightgrey

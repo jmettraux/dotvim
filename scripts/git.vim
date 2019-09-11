@@ -269,6 +269,43 @@ endfunction " OpenGitDiff
 nnoremap <silent> <leader>D :call <SID>OpenGitDiff(@%)<CR>
 
 
+function! s:OpenGitCommits()
+
+  if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
+
+  let path = expand('%.')
+
+  let fn = '_C___' . JmNtr(path)
+
+  let bn = bufnr(fn)
+  if bn > -1 | exe '' . bn . 'bwipeout!' | endif
+    " close previous buffer if any
+
+  exe 'new | only'
+    " | only makes it full window
+  exe 'silent file ' . fn
+    " replace buffer name
+  setlocal buftype=nofile
+  setlocal bufhidden=hide
+  setlocal noswapfile
+  "setlocal nobuflisted
+
+  exe 'silent r! git log -p --follow ' . path
+  exe 'Clean'
+
+  setlocal syntax=gitdiff
+  "setlocal filetype=gitdiff
+  setlocal nomodifiable
+
+  exe 'normal 1G'
+
+  let b:path = path
+
+  " TODO have way to open a full commit
+
+endfunction " OpenGitCommits
+
+
 function! s:OpenGitHistory()
 
   if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
@@ -280,7 +317,7 @@ function! s:OpenGitHistory()
 
   let bn = bufnr(fn)
   if bn > -1 | exe '' . bn . 'bwipeout!' | endif
-    " close previous GitLog if any
+    " close previous buffer if any
 
   exe 'new | only'
     " | only makes it full window
@@ -313,6 +350,8 @@ endfunction " OpenGitHistory
 
 command! -nargs=0 Gih :call <SID>OpenGitHistory()
 nnoremap <silent> <leader>Y :call <SID>OpenGitHistory()<CR>
+
+nnoremap <silent> <leader>S :call <SID>OpenGitCommits()<CR>
 
 
 function s:OpenVersion(path, sha)
