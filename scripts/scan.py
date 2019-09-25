@@ -45,8 +45,8 @@ rs.append(r'\bFIXME\b')
 #print rs
 #print "<<<"
 
+p_line = None
 c_rex = r'^\s*(#|//)'
-#c_threshold = 3
 c_lines = []
   #
   # comments displaying
@@ -59,19 +59,22 @@ for i, l in ls:
 
   c_m = re.search(c_rex, l)
 
+  if len(c_lines) == 0 and c_m:
+    c_lines.append([ -1, p_line ])
+    p_line = None
   if c_m:
     c_lines.append([ i, l ])
     continue
 
   cl = len(c_lines)
+  c1 = ''
   c0 = ''
-  if cl > 1:
-    c0 = c_lines[0][1].strip()
+  if cl > 2:
+    c1 = c_lines[0][1].strip()
+    c0 = c_lines[1][1].strip()
 
-  #if cl >= c_threshold or (cl >= 2 and (c0 == '//' or c0 == '#')):
-  if cl >= 2 and (c0 == '//' or c0 == '#'):
-    for ii, ll in c_lines:
-    #for ii, ll in c_lines[1:]:
+  if cl >= 2 and c1 == '' and (c0 == '//' or c0 == '#'):
+    for ii, ll in c_lines[1:]:
       if len(ll) > 70:
         ll = ll[0:70] + '...'
       print '%5d %s' % (ii, ll)
@@ -80,6 +83,8 @@ for i, l in ls:
 
   #
   # regular, code line
+
+  p_line = l
 
   for r in rs:
     if re.search(r, l):
