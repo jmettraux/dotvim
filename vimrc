@@ -195,6 +195,10 @@ nnoremap <leader>H :let @" = expand("%") . ':' . line('.')<CR>
 nnoremap <C-h> bDa
 inoremap <C-h> <ESC>bDa
 
+"cnoremap <C-w> "zyiw<C-r>"
+cnoremap <C-w> <C-R>=expand('<cword>')<CR>
+"cnoremap <C-W> <C-R>=expand('<cWORD>')<CR>
+
 "nnoremap <silent> <leader>t /TODO<CR>
 " TODO: pop that search when done
 
