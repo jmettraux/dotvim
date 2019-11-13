@@ -33,8 +33,13 @@ function! s:OpenFile()
 
     elseif empty(m1) == 0
 
-      let fn = m1[1]
+      let rt = systemlist('git rev-parse --show-toplevel')[0]
+      let rt = fnamemodify(rt, ":p:.") " make path relative...
+      if len(rt) > 0 && rt[-1:] != '/' | let rt = rt . '/' | endif
+
+      let fn = rt . m1[1]
       let ln = str2nr(m1[2]) + nn - 1
+
       exe ':e +' . ln . ' ' . fn
       normal zz
 
