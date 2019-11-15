@@ -82,12 +82,7 @@ mute = False
 
 print
 
-lines = []
 for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).stdout:
-  lines.append(line)
-lines.sort()
-
-for line in lines:
   m = re.match(r'^([^:]+):(\d+):(.+)$', line)
   if not(m):
     m = re.match(r'^Binary file ([^$]+)$', line)
