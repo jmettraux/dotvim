@@ -12,7 +12,7 @@
 "hi! bufVgRx cterm=NONE ctermfg=136 ctermbg=16
 "hi def link bufVgDir bufTreeDir
 hi! bufDir cterm=NONE ctermfg=darkgreen ctermbg=16
-hi! bufPath cterm=NONE ctermfg=darkgreen ctermbg=16
+hi! bufPath cterm=NONE ctermfg=136 ctermbg=16
 hi! bufFilename cterm=NONE ctermfg=green ctermbg=16
 hi def link bufLinePath bufPath
   "
