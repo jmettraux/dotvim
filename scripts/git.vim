@@ -160,6 +160,7 @@ function! s:OpenGitLog(all)
   setlocal nomodifiable
 
   exe 'normal 1G'
+  exe 'normal 4G'
 
   nnoremap <buffer> <silent> o :call <SID>OpenCommit(<SID>ExtractSha())<CR>
   nnoremap <buffer> <silent> <CR> :call <SID>OpenCommit(<SID>ExtractSha())<CR>
@@ -345,6 +346,7 @@ function! s:OpenGitHistory()
   setlocal nomodifiable
 
   exe 'normal 1G'
+  exe 'normal 4G'
 
   let b:path = path
 
