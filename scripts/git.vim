@@ -123,6 +123,7 @@ nnoremap <silent> <leader>d :call <SID>OpenCommit(0)<CR>
 function! s:ExtractSha()
 
   let m = matchlist(getline('.'), '\v^[^a-fA-F0-9]+\zs([a-fA-F0-9]+) [^ ]+ ([0-9]+) [0-9]+ (\([^)]+\) )?(.+)$')
+  if empty(m) == 1 | return [] | endif
   return [ m[1], m[2], m[4] ]
 endfunction " ExtractSha
 
@@ -333,6 +334,8 @@ function! s:OpenGitHistory()
   setlocal noswapfile
   "setlocal nobuflisted
 
+  exe 'normal o== version history for ' . path . ''
+
   exe 'silent r! git log --graph --pretty=format:"\%h \%an |\%ad \%d \%s" --date=iso-strict ' . path . ' | /usr/bin/env python ~/.vim/scripts/regitlog.py'
 
   setlocal syntax=gitlog
@@ -360,6 +363,8 @@ nnoremap <silent> <leader>S :call <SID>OpenGitCommits()<CR>
 
 
 function s:OpenVersion(path, sha)
+
+  if empty(a:sha) == 1 | return | endif
 
   let sha = a:sha[0]
   let date = a:sha[1]
