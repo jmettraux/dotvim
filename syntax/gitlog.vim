@@ -20,7 +20,7 @@ syn match gilTags /\v^[*|\\/ ]+[a-fA-F0-9]+ [^ ]+ [0-9]{8} [0-9]{4} (\([^)]+\) )
 syn match gilLine /\v^[*|\\/ ]+[a-fA-F0-9]+ [^ ]+ [0-9]{8} [0-9]{4} (\([^)]+\) )? .+/ contains=gilTags
 
 syn match gilPath /\v [^ ]+$/ contained
-syn match gilTitleLine /\v^\=\= .+/ contains=gilPath
+syn match gilTitleLine /\v^\=\= .+$/ contains=gilPath
 
 highlight ColorColumn ctermbg=16
   " disable > 80 column highlight

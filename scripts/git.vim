@@ -147,6 +147,8 @@ function! s:OpenGitLog(all)
   setlocal noswapfile
   "setlocal nobuflisted
 
+  exe 'normal o== git log at ' . getcwd() . ''
+
   if a:all
     exe 'silent r! git log --graph --branches --pretty=format:"\%h \%an |\%ad \%d \%s" --date=iso-strict | /usr/bin/env python ~/.vim/scripts/regitlog.py'
   else
