@@ -26,3 +26,17 @@ endfunction " BxsFnameAndLnumber
 
 nnoremap <silent> <leader>@ :call <SID>BxsFnameAndLnumber()<CR>
 
+
+function! s:Bxs()
+
+  if ! has("unix") | return | endif
+  if g:uname != "Darwin" | return | endif
+
+  let @z = "bxs <cWORD>"
+
+  exe 'silent ! osascript ~/.vim/scripts/bxs.applescript "' . @z . '"'
+  exe 'redraw!'
+endfunction " Bxs
+
+command! -nargs=0 Bxs :call <SID>Bxs()
+
