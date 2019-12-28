@@ -373,7 +373,10 @@ function s:OpenVersion(path, sha)
   let sha = a:sha[0]
   let date = a:sha[1]
 
-  let fn = '_v__' . sha . '__' . date . '__' . JmNtr(a:path)
+  let path = systemlist('git rev-parse --show-prefix')[0] . a:path
+    " this --show-prefix returns '' at the root...
+
+  let fn = '_v__' . sha . '__' . date . '__' . JmNtr(path)
 
   let bn = bufnr(fn)
   if bn > -1 | exe '' . bn . 'bwipeout!' | endif
@@ -388,17 +391,17 @@ function s:OpenVersion(path, sha)
   setlocal noswapfile
   "setlocal nobuflisted
 
-  exe 'silent r! git show ' . sha . ':' . a:path
+  exe 'silent r! git show ' . sha . ':' . path
 
-  if match(a:path, '\v\.rb$') > -1
+  if match(path, '\v\.rb$') > -1
     setlocal filetype=ruby
-  elseif match(a:path, '\v\.js$') > -1
+  elseif match(path, '\v\.js$') > -1
     setlocal filetype=javascript
-  elseif match(a:path, '\v\.css$') > -1
+  elseif match(path, '\v\.css$') > -1
     setlocal filetype=css
-  elseif match(a:path, '\v\.scss$') > -1
+  elseif match(path, '\v\.scss$') > -1
     setlocal filetype=scss
-  elseif match(a:path, '\v\.vim$') > -1
+  elseif match(path, '\v\.vim$') > -1
     setlocal filetype=vim
   endif
 
