@@ -76,6 +76,7 @@ au BufNewFile,BufRead *.json set ft=javascript
 au BufNewFile,BufRead *.ino set ft=cpp
 au BufNewFile,BufRead *.scad set ft=openscad
 au BufNewFile,BufRead *.fish set ft=fish
+au BufNewFile,BufRead *.log set ft=jolog
 
 function! <SID>GoMkd()
   set filetype=mkd
