@@ -309,7 +309,7 @@ function! s:OpenGitDiff(path)
   nnoremap <buffer> <silent> q :bd<CR>
 endfunction " OpenGitDiff
 
-nnoremap <silent> <leader>D :call <SID>OpenGitDiff(@%)<CR>
+nnoremap <silent> <leader>F :call <SID>OpenGitDiff(@%)<CR>
 
 
 function! s:OpenGitCommits()
