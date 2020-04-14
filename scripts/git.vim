@@ -234,6 +234,40 @@ nnoremap <silent> <leader>m :call <SID>OpenGitBlame()<CR>
 command! -nargs=0 Blame :call <SID>OpenGitBlame()
 
 
+function! s:OpenFileFromDiff()
+
+  let n = line('.')
+  let nn = 0
+
+  while n > 0
+
+    let l = getline(n)
+    "let me = matchlist(l, '\v^[@][@] -[,0-9]+ \+[,0-9]+ [@][@]')
+    let me = matchlist(l, '\v^\+\+\+ b\/(.+)$')
+    if empty(me) == 0
+      echo me
+      echo nn
+
+      let rt = systemlist('git rev-parse --show-toplevel')[0]
+      let rt = fnamemodify(rt, ":p:.") " make path relative...
+      if len(rt) > 0 && rt[-1:] != '/' | let rt = rt . '/' | endif
+
+      let fn = rt . me[1]
+      echo fn
+
+      let ln = nn - 1
+
+      exe ':e +' . ln . ' ' . fn
+      normal zz
+
+      break
+    endif
+
+    let n = n - 1
+    let nn = nn + empty(matchstr(l, '\v^-'))
+  endwhile
+endfunction " OpenFileFromDiff
+
 function! s:OpenGitDiff(path)
 
   if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
@@ -268,9 +302,9 @@ function! s:OpenGitDiff(path)
 "  nnoremap <buffer> <silent> A :call search('^.\+ ---+++', 'b')<CR>0zz
 "    " silently go to next file
 "
-"  nnoremap <buffer> o :call <SID>OpenFile()<CR>
-"  nnoremap <buffer> <CR> :call <SID>OpenFile()<CR>
-"  nnoremap <buffer> <SPACE> :call <SID>OpenFile()<CR>
+  nnoremap <buffer> o :call <SID>OpenFileFromDiff()<CR>
+  nnoremap <buffer> <CR> :call <SID>OpenFileFromDiff()<CR>
+  nnoremap <buffer> <SPACE> :call <SID>OpenFileFromDiff()<CR>
 
   nnoremap <buffer> <silent> q :bd<CR>
 endfunction " OpenGitDiff
