@@ -242,18 +242,15 @@ function! s:OpenFileFromDiff()
   while n > 0
 
     let l = getline(n)
-    "let me = matchlist(l, '\v^[@][@] -[,0-9]+ \+[,0-9]+ [@][@]')
     let me = matchlist(l, '\v^\+\+\+ b\/(.+)$')
+
     if empty(me) == 0
-      echo me
-      echo nn
 
       let rt = systemlist('git rev-parse --show-toplevel')[0]
       let rt = fnamemodify(rt, ":p:.") " make path relative...
       if len(rt) > 0 && rt[-1:] != '/' | let rt = rt . '/' | endif
 
       let fn = rt . me[1]
-      echo fn
 
       let ln = nn - 1
 
