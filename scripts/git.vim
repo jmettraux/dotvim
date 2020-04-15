@@ -269,6 +269,8 @@ function! s:OpenGitDiff(path)
 
   if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
 
+  let ln = line('.')
+
   let fn = '_d___' . JmNtr(a:path)
 
   let bn = bufnr(fn)
@@ -293,12 +295,22 @@ function! s:OpenGitDiff(path)
   setlocal filetype=gitdiff
   setlocal nomodifiable
 
-  exe 'normal 1G'
+  normal 1G
+  let n = 0
+  let nn = -1
+  let mn = line('$') + 1
+  while n < mn
+    let n = n + 1
+    let l = getline(n)
+    if nn < 0
+      if len(matchstr(l, '\v^[@][@] [-+0-9, ]+ [@][@]$')) > 0 | let nn = 0 | endif
+    else
+      if len(matchstr(l, '\v^-')) == 0 | let nn = nn + 1 | endif
+    endif
+    if nn >= ln | break | endif
+  endwhile
+  exe 'normal ' . n . 'G'
 
-"  nnoremap <buffer> <silent> a :call search('^.\+ ---+++', '')<CR>0zz
-"  nnoremap <buffer> <silent> A :call search('^.\+ ---+++', 'b')<CR>0zz
-"    " silently go to next file
-"
   nnoremap <buffer> o :call <SID>OpenFileFromDiff()<CR>
   nnoremap <buffer> <CR> :call <SID>OpenFileFromDiff()<CR>
   nnoremap <buffer> <SPACE> :call <SID>OpenFileFromDiff()<CR>
