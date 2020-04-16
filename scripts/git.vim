@@ -291,8 +291,11 @@ function! s:OpenGitDiff(path)
   exe 'silent r! git diff -U9999999 --no-color ' . a:path
   exe 'Clean'
 
-  setlocal syntax=gitdiff
-  setlocal filetype=gitdiff
+  exe 'setlocal syntax=' . JmDetermineSyntax(a:path)
+  "exe 'setlocal filetype=' . JmDetermineSyntax(a:path)
+  syntax include @GITSINGLEDIFF ~/.vim/syntax/gitsinglediff.vim
+  syntax region gitsinglediff start="\v^diff --git a\/" end="\v\d [@][@]$" contains=@GITSINGLEDIFF
+  syntax region gitdiff start="\v^[-+]" end="\v$" contains=@GITSINGLEDIFF
   setlocal nomodifiable
 
   normal 1G
