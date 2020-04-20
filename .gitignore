@@ -1,6 +1,9 @@
 
 .netrwhist
 .todo.md
-.vimgrep
 *.swp
+
+.vimgrep
+.vimrc
+.viminfo
 
