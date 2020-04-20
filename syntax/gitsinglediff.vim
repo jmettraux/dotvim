@@ -1,14 +1,16 @@
 
 " MIT licensed
 
-hi! gsdAts cterm=NONE ctermfg=lightgrey ctermbg=darkgrey
-hi! gsdMinus cterm=NONE ctermfg=lightgrey ctermbg=red
-hi! gsdPlus cterm=NONE ctermfg=black ctermbg=darkgreen
+"hi! gsdAts cterm=NONE ctermfg=lightgrey ctermbg=darkgrey
+hi! gsdLineMinus cterm=NONE ctermfg=lightgrey ctermbg=red
+hi! gsdLinePlus cterm=NONE ctermfg=black ctermbg=darkgreen
+hi! gsdLineNumber cterm=NONE ctermfg=238 ctermbg=black
+hi! gitSingleDiffLine cterm=NONE ctermfg=238 ctermbg=black
 
-"syn region gsdAts start="\v^[@]" end="\v [@]"
-syn region gsdPlus start=/^+/ end="\n"
-syn region gsdMinus start=/^-/ end="\n"
+syn match gsdLinePlus /\v^ *\d+ \+.+$/ contains=gsdLineNumber
+syn match gsdLineMinus /\v^ *\d+ -.+$/ contains=gsdLineNumber
+syn match gsdLineNumber /\v^ *\d+/ contained
 
-"highlight ColorColumn ctermbg=16
+highlight ColorColumn ctermbg=16
   " disable > 80 column highlight
 

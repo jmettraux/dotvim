@@ -288,14 +288,14 @@ function! s:OpenGitDiff(path)
   "setlocal nobuflisted
   "setlocal filetype=ListFiles
 
-  exe 'silent r! git diff -U9999999 --no-color ' . a:path
+  exe 'silent r! /usr/bin/env python ~/.vim/scripts/opengitdiff.py ' . a:path
   exe 'Clean'
 
   exe 'setlocal syntax=' . JmDetermineSyntax(a:path)
   "exe 'setlocal filetype=' . JmDetermineSyntax(a:path)
-  syntax include @GITSINGLEDIFF ~/.vim/syntax/gitsinglediff.vim
-  syntax region gitsinglediff start="\v^diff --git a\/" end="\v\d [@][@]$" contains=@GITSINGLEDIFF
-  syntax region gitdiff start="\v^[-+]" end="\v$" contains=@GITSINGLEDIFF
+  syn include @GITSINGLEDIFF ~/.vim/syntax/gitsinglediff.vim
+  syn region gitSingleDiffHeader start="\v^diff --git a\/" end="\v\d [@][@]$" contains=@GITSINGLEDIFF
+  syn match gitSingleDiffLine /\v^ *\d+( [-+].+$)?/ contains=@GITSINGLEDIFF
   setlocal nomodifiable
 
   normal 1G
