@@ -236,33 +236,17 @@ command! -nargs=0 Blame :call <SID>OpenGitBlame()
 
 function! s:OpenFileFromDiff()
 
-  let n = line('.')
-  let nn = 0
+  let rt = systemlist('git rev-parse --show-toplevel')[0]
+  let rt = fnamemodify(rt, ":p:.") " make path relative...
+  if len(rt) > 0 && rt[-1:] != '/' | let rt = rt . '/' | endif
+  let fn = rt . matchlist(getline(2), '\v b\/(.+)$')[1]
 
-  while n > 0
-
-    let l = getline(n)
-    let me = matchlist(l, '\v^\+\+\+ b\/(.+)$')
-
-    if empty(me) == 0
-
-      let rt = systemlist('git rev-parse --show-toplevel')[0]
-      let rt = fnamemodify(rt, ":p:.") " make path relative...
-      if len(rt) > 0 && rt[-1:] != '/' | let rt = rt . '/' | endif
-
-      let fn = rt . me[1]
-
-      let ln = nn - 1
-
-      exe ':e +' . ln . ' ' . fn
-      normal zz
-
-      break
-    endif
-
-    let n = n - 1
-    let nn = nn + empty(matchstr(l, '\v^-'))
-  endwhile
+  let l = getline('.')
+  let m = matchlist(getline('.'), '\v^ *(\d+)')
+  if empty(m) == 0
+    exe ':e +' . m[1] . ' ' . fn
+    normal zz
+  endif
 endfunction " OpenFileFromDiff
 
 function! s:OpenGitDiff(path)

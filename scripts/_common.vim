@@ -114,6 +114,7 @@ function! JmDetermineSyntax(path)
   if a:path =~ "\.js$" | return 'javascript' | endif
   if a:path =~ "\.py$" | return 'python' | endif
   if a:path =~ "\.md$" | return 'markdown' | endif
+  if a:path =~ "\.vim$" | return 'vim' | endif
   if a:path =~ "\.html?$" | return 'html' | endif
   return ''
 endfunction " JmDetermineSyntax
