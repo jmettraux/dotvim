@@ -13,3 +13,6 @@ command! Thro :normal o<ESC>0Cif (true) throw new Error("Thro:" + JSON.stringify
 
 command! Rescue :normal o<ESC>0Cbeginrescue => err  p [ __FILE__, __LINE__ ]p errputs err.backtraceend<ESC><<0
 
+command! Tim :normal O<ESC>0Ct0 = Time.now<ESC>jo<ESC>0Cp [ :took, Time.now - t0 ]<ESC>k0
+command! Tom :normal O<ESC>0Cdef _monow; Process.clock_gettime(Process::CLOCK_MONOTONIC); end; t0 = _monow<ESC>jo<ESC>0Cp [ :took, _monow - t0 ]<ESC>k0
+
