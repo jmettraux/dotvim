@@ -40,6 +40,7 @@ function! JmShowTree(start)
 
   nnoremap <buffer> C :call JmCopyTreeFile()<CR>
   nnoremap <buffer> D :call JmDeleteTreeFile()<CR>
+  nnoremap <buffer> R :call JmRenameTreeFile()<CR>
 
   nmap <buffer> v /
 
@@ -98,7 +99,6 @@ endfunction " JmDetermineTreePath
 function! JmCopyTreeFile()
 
   let path = JmDetermineTreePath()
-
   if empty(path) | return 0 | endif
   if isdirectory(path) | return 0 | endif
 
@@ -113,7 +113,6 @@ endfunction " JmCopyTreeFile
 function! JmDeleteTreeFile()
 
   let path = JmDetermineTreePath()
-
   if empty(path) | return 0 | endif
   if isdirectory(path) | return 0 | endif
 
@@ -125,4 +124,27 @@ function! JmDeleteTreeFile()
   call JmShowTree(getline(2))
   call feedkeys(l . 'G')
 endfunction " JmDeleteTreeFile
+
+
+function! JmRenameTreeFile()
+
+  let path = JmDetermineTreePath()
+  if empty(path) | return 0 | endif
+  if isdirectory(path) | return 0 | endif
+
+  let p = fnamemodify(path, ':h')
+  let n = fnamemodify(path, ':t')
+  echo '==> ' . p . ' // ' . n
+  let n1 = trim(input('Rename to: ', n))
+  echo '  ' . p . '/' . n . ' --> ' . p . '/' . n1
+
+  if empty(n1) | return 0 | endif
+  if n1 == n | return 0 | endif
+
+  exe system("mv " . p . "/" . n . " " . p . "/" . n1)
+
+  let l = line('.')
+  call JmShowTree(getline(2))
+  call feedkeys(l . 'G')
+endfunction " JmRenameTreeFile
 
