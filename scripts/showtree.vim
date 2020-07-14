@@ -104,7 +104,7 @@ function! JmCopyTreeFile()
   if empty(path) | return 0 | endif
   if isdirectory(path) | return 0 | endif
 
-  exe system('cp ' . path . ' ' . path . '.copy')
+  call system('cp ' . path . ' ' . path . '.copy')
 
   let l = line('.') + 1
   call JmShowTree(getline(2))
@@ -120,10 +120,17 @@ function! JmDeleteTreeFile()
 
   if confirm('Delete ' . path . ' ?', "&No\n&yes") == 1 | return 0 | endif
 
-  exe system('rm ' . path)
+  let cmd = 'rm'
+  if isdirectory('.git') && empty(system('git ls-files ' . path)) == 0
+    let cmd = 'git rm -f'
+  endif
 
-  let l = line('.') - 1
-  call JmShowTree(getline(2))
+  let l = line('.')
+  let d = getline(2)
+
+  call system(cmd . ' ' . path)
+
+  call JmShowTree(d)
   call feedkeys(l . 'G')
 endfunction " JmDeleteTreeFile
 
@@ -143,7 +150,7 @@ function! JmRenameTreeFile()
   if empty(n1) | return 0 | endif
   if n1 == n | return 0 | endif
 
-  exe system('mv ' . p . '/' . n . ' ' . p . '/' . n1)
+  call system('mv ' . p . '/' . n . ' ' . p . '/' . n1)
 
   let l = line('.')
   call JmShowTree(getline(2))
@@ -167,7 +174,7 @@ function! JmMoveTreeFile()
     let cmd = 'git mv'
   endif
 
-  exe system(cmd . ' ' . path . ' ' . p1)
+  call system(cmd . ' ' . path . ' ' . p1)
 
   let l = line('.')
   call JmShowTree(getline(2))
@@ -180,7 +187,7 @@ function! JmGitAddTreeFile()
   let path = JmDetermineTreePath()
   if empty(path) | return 0 | endif
 
-  exe system('git add ' . path)
+  call system('git add ' . path)
 
   echo 'Added ' . path . ' to Git'
 endfunction " JmGitAddTreeFile
