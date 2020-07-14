@@ -38,6 +38,9 @@ function! JmShowTree(start)
   nnoremap <buffer> <space> :call JmOpenTreeFile()<CR>
   nnoremap <buffer> <CR> :call JmOpenTreeFile()<CR>
 
+  nnoremap <buffer> C :call JmCopyTreeFile()<CR>
+  nnoremap <buffer> D :call JmDeleteTreeFile()<CR>
+
   nmap <buffer> v /
 
   nnoremap <buffer> <silent> a j:call search('\v [^ ]+\/', '')<CR>0zz
@@ -75,4 +78,51 @@ endfunction " ShowTestTree
 command! -nargs=0 Vtt :call <SID>ShowTestTree()
 command! -nargs=0 Vst :call <SID>ShowTestTree()
 command! -nargs=0 Vc :call <SID>ShowTestTree()
+
+
+function! JmDetermineTreePath()
+
+  let l = getline('.')
+
+  let m = matchlist(l, '\v\=\= (.+)$')
+  if empty(m) != 1 | return '' | endif
+
+  let m = matchlist(l, '\v  \/ (["''].+)$')
+  if empty(m) == 1 | let m = matchlist(l, '\v  \/ ''([^'']+)'' +(.+)$') | endif
+  if empty(m) != 1 | return '' | endif
+
+  return JmDetermineTreePathAndLine()[0]
+endfunction " JmDetermineTreePath
+
+
+function! JmCopyTreeFile()
+
+  let path = JmDetermineTreePath()
+
+  if empty(path) | return 0 | endif
+  if isdirectory(path) | return 0 | endif
+
+  exe system("cp " . path . " " . path . ".copy")
+
+  let l = line('.') + 1
+  call JmShowTree(getline(2))
+  call feedkeys(l . 'G')
+endfunction " JmCopyTreeFile
+
+
+function! JmDeleteTreeFile()
+
+  let path = JmDetermineTreePath()
+
+  if empty(path) | return 0 | endif
+  if isdirectory(path) | return 0 | endif
+
+  if confirm("Delete " . path . " ?", "&No\n&yes") == 1 | return 0 | endif
+
+  exe system("rm " . path)
+
+  let l = line('.') - 1
+  call JmShowTree(getline(2))
+  call feedkeys(l . 'G')
+endfunction " JmDeleteTreeFile
 
