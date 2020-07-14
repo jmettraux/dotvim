@@ -42,6 +42,7 @@ function! JmShowTree(start)
   nnoremap <buffer> D :call JmDeleteTreeFile()<CR>
   nnoremap <buffer> R :call JmRenameTreeFile()<CR>
   nnoremap <buffer> M :call JmMoveTreeFile()<CR>
+  nnoremap <buffer> ga :call JmGitAddTreeFile()<CR>
 
   nmap <buffer> v /
 
@@ -172,4 +173,15 @@ function! JmMoveTreeFile()
   call JmShowTree(getline(2))
   call feedkeys(l . 'G')
 endfunction " JmMoveTreeFile
+
+
+function! JmGitAddTreeFile()
+
+  let path = JmDetermineTreePath()
+  if empty(path) | return 0 | endif
+
+  exe system('git add ' . path)
+
+  echo 'Added ' . path . ' to Git'
+endfunction " JmGitAddTreeFile
 
