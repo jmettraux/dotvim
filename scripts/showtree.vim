@@ -127,6 +127,8 @@ function! JmDeleteTreeFile()
 endfunction " JmDeleteTreeFile
 
 
+  " Unlike JmMoveTreeFile() is local to its dir and doesn't defer to Git
+  "
 function! JmRenameTreeFile()
 
   let path = JmDetermineTreePath()
@@ -160,7 +162,9 @@ function! JmMoveTreeFile()
   if empty(p1) | return 0 | endif
 
   let cmd = 'mv'
-  "if isdirectory('.git') | let cmd = 'git mv' | endif
+  if isdirectory('.git') && empty(system('git ls-files ' . path)) == 0
+    let cmd = 'git mv'
+  endif
 
   exe system(cmd . ' ' . path . ' ' . p1)
 
