@@ -40,6 +40,7 @@ function! JmShowTree(start)
   nnoremap <buffer> M :call JmMoveTreeFile()<CR>
   nnoremap <buffer> ga :call JmGitAddTreeFile()<CR>
   nnoremap <buffer> p :exe "echo JmDetermineTreePath()"<CR>
+  nnoremap <buffer> r :call JmReloadTree(0)<CR>
 
   nmap <buffer> v /
 
@@ -103,9 +104,7 @@ function! JmCopyTreeFile()
 
   call system('cp ' . path . ' ' . path . '.copy')
 
-  let l = line('.') + 1
-  call JmShowTree(getline(2))
-  call feedkeys(l . 'G')
+  call JmReloadTree(1)
 endfunction " JmCopyTreeFile
 
 
@@ -122,13 +121,8 @@ function! JmDeleteTreeFile()
     let cmd = 'git rm -f'
   endif
 
-  let l = line('.')
-  let d = getline(2)
-
   call system(cmd . ' ' . path)
-
-  call JmShowTree(d)
-  call feedkeys(l . 'G')
+  call JmReloadTree(0)
 endfunction " JmDeleteTreeFile
 
 
@@ -149,9 +143,7 @@ function! JmRenameTreeFile()
 
   call system('mv ' . p . '/' . n . ' ' . p . '/' . n1)
 
-  let l = line('.')
-  call JmShowTree(getline(2))
-  call feedkeys(l . 'G')
+  call JmReloadTree(0)
 endfunction " JmRenameTreeFile
 
 
@@ -173,9 +165,7 @@ function! JmMoveTreeFile()
 
   call system(cmd . ' ' . path . ' ' . p1)
 
-  let l = line('.')
-  call JmShowTree(getline(2))
-  call feedkeys(l . 'G')
+  call JmReloadTree(0)
 endfunction " JmMoveTreeFile
 
 
@@ -188,4 +178,12 @@ function! JmGitAddTreeFile()
 
   echo 'Added ' . path . ' to Git'
 endfunction " JmGitAddTreeFile
+
+
+function! JmReloadTree(dline)
+
+  let l = line('.') + a:dline
+  call JmShowTree(getline(2))
+  call feedkeys(l . 'G')
+endfunction " JmReloadTree
 
