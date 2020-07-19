@@ -33,12 +33,14 @@ function! JmDetermineTreePathAndLine()
 
     let l = getline(n)
 
-    let m = matchlist(l, '\v^(.{-1,})( +([0-9]+\.)?[0-9]+[BKMGTPE]?)?$')
-      " .{-1,} is non-greedy
+    let m = matchlist(l, '\v^(.+) ((\+[0-9]+-[0-9]+)|new|untracked)$')
     if empty(m) == 0 | let l = m[1] | endif
+    let m = matchlist(l, '\v^(.+) ([0-9]+[BKMGTPE]?)$')
+    if empty(m) == 0 | let l = m[1] | endif
+      "
+      " trim out git and size from the right side of the line
 
     let m = matchlist(l, '\v^([│├─└  |`-]*)(.+)$')
-
     if empty(m) == 1 | let elts = [ l ] + elts | break | endif
 
     let lspace = substitute(m[1], ' ', '', 'g')

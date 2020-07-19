@@ -21,11 +21,7 @@ function! JmShowTree(start)
   exe '%d'
     " delete all the lines
   normal O
-  if g:isOpenBSD
-    exe 'silent r! tree -F ' . a:start
-  else
-    exe 'silent r! tree -hF ' . a:start
-  endif
+  exe 'silent r! /usr/bin/env python ~/.vim/scripts/tree.py ' . a:start
   exe 'silent %s/\v\[ *([0-9.]+[KMGTPE]?)\]  (.+)$/\2 \1/e'
   exe 'silent %s/\v\* / /ge'
   exe 'silent %s/\\ / /ge'
@@ -43,6 +39,7 @@ function! JmShowTree(start)
   nnoremap <buffer> R :call JmRenameTreeFile()<CR>
   nnoremap <buffer> M :call JmMoveTreeFile()<CR>
   nnoremap <buffer> ga :call JmGitAddTreeFile()<CR>
+  nnoremap <buffer> p :exe "echo JmDetermineTreePath()"<CR>
 
   nmap <buffer> v /
 
