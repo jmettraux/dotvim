@@ -39,8 +39,10 @@ def to_kmgt(s): # https://stackoverflow.com/questions/12523586
     s /= step_unit
 def compute_size(path):
   m = re.match(r'^([^*]+)', path)
-  p = m.group(1)
-  return to_kmgt(os.path.getsize(p))
+  if m == None: return '-1'
+  pa = m.group(1)
+  if os.path.exists(pa) == False: return '-1'
+  return to_kmgt(os.path.getsize(pa))
 
 def compute_path():
   i = fs[-1]['i'] + 1
@@ -51,36 +53,29 @@ def compute_path():
       i = f['i']
   return os.path.join(*d)
 
-  #if g:isOpenBSD
-  #  exe 'silent r! tree -F ' . a:start
-  #else
-  #  exe 'silent r! tree -hF ' . a:start
-  #endif
-cmd = 'tree -F ' + sys.argv[1]
+root = sys.argv[1]
+if root[-1] != '/': root = root + '/'
+cmd = 'tree -F ' + root
 
 for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).stdout:
 
-  line = line.strip()
+  line = line.rstrip()
 
   d = { 'l': line, 'i': -1 }
   fs.append(d);
 
-  m = re.match(r'^([-|` ]+ )?([^\d].*)$', line)
-  if m:
-    i = len(m.group(1)) if m.group(1) else 0
-    d['i'] = i
-    d['n'] = m.group(2)
-    d['p'] = compute_path()
-    d['s'] = compute_size(d['p'])
-    d['d'] = os.path.isdir(d['p'])
+  m = re.match(r'^([-|` ]+ )?(.*)$', line)
+  if m == None: continue
+  d['i'] = len(m.group(1) or '')
+  d['n'] = m.group(2)
+  d['p'] = compute_path()
+  d['s'] = compute_size(d['p'])
+  d['d'] = os.path.isdir(d['p'])
 
 for f in fs:
-  #print f
-  if f['i'] < 0:
-    #print ' '.join([ f['l'], str(f['i']) ])
+  if f['i'] < 0 or f['s'] == '-1':
     print f['l']
   else:
-    #print ' '.join([ f['l'], str(f['i']), f['p'], str(f['d']) ])
     g = git.get(os.path.abspath(f['p']))
     if g:
       un = g.get('s')
