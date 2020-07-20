@@ -5,6 +5,11 @@
 import os, re, sys, string, subprocess
 
 
+# determine root
+
+root = sys.argv[1]
+if root[-1] != '/': root = root + '/'
+
 # gather git stats
 
 git = {}
@@ -25,6 +30,22 @@ for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).stdout:
   g['s'] = ss[0]
 
 #print git
+
+wcl = {}
+cmd = (
+  'find ' + root + ' ' +
+  ' -o '.join(
+    map(
+      lambda x: '-name "*.' + x + '" ',
+      string.split(
+        'rb js sh json yaml md txt vim py csv slim haml flor java'))) +
+  '| xargs wc -l 2>/dev/null')
+for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).stdout:
+  line = line.strip()
+  ss = string.split(line)
+  if ss[1] == 'total': continue
+  if re.match(r'\/\.git\/', ss[1]): continue
+  wcl[os.path.abspath(ss[1])] = ss[0]
 
 
 # do the tree
@@ -53,8 +74,6 @@ def compute_path():
       i = f['i']
   return os.path.join(*d)
 
-root = sys.argv[1]
-if root[-1] != '/': root = root + '/'
 cmd = 'tree -F ' + root
 
 for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).stdout:
@@ -71,12 +90,18 @@ for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).stdout:
   d['p'] = compute_path()
   d['s'] = compute_size(d['p'])
   d['d'] = os.path.isdir(d['p'])
+  d['L'] = wcl.get(os.path.abspath(d['p']))
+
+def to_s(l):
+  return ' '.join(filter(None, l))
+
 
 for f in fs:
   if f['i'] < 0 or f['s'] == '-1':
     print f['l']
   else:
     g = git.get(os.path.abspath(f['p']))
+    ls = f['L'] + 'L' if f['L'] else None
     if g:
       un = g.get('s')
       ad = '+' + g.get('a', '0') + '-' + g.get('d', '0')
@@ -84,7 +109,7 @@ for f in fs:
         ad = 'untracked'
       elif un[0:1] == 'A':
         ad = ad + ' new'
-      print ' '.join([ f['l'], f['s'], ad ])
+      print to_s([ f['l'], f['s'], ls, ad ])
     else:
-      print ' '.join([ f['l'], f['s'] ])
+      print to_s([ f['l'], f['s'], ls ])
 

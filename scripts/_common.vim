@@ -35,6 +35,8 @@ function! JmDetermineTreePathAndLine()
 
     let m = matchlist(l, '\v^(.+) ((\+[0-9]+-[0-9]+)|new|untracked)$')
     if empty(m) == 0 | let l = m[1] | endif
+    let m = matchlist(l, '\v^(.+) ([0-9]+L)$')
+    if empty(m) == 0 | let l = m[1] | endif
     let m = matchlist(l, '\v^(.+) ([0-9]+[BKMGTPE]?)$')
     if empty(m) == 0 | let l = m[1] | endif
       "
