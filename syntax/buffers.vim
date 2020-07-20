@@ -28,6 +28,7 @@ hi! bufLineAndRegister cterm=NONE ctermfg=darkgray ctermbg=16
 hi def link bufLgDir bufDir
 hi def link bufComment Comment
 hi def link bufSize Comment
+hi def link bufLines Comment
 
 syn match bufLineTitle '\v^\=\= .+'
 syn match bufLineGrep '\v^  \/ .*$' contains=bufLgRex,bufLgDir
@@ -36,11 +37,12 @@ syn match bufEolComment '\v#.*$'
 syn match bufLineGit '\v^[^ 	][^|]+ \| .*$' contains=bufPath,bufLgiStatus
 syn match bufLinePath '\v^[^ #=][^|]+$' contains=bufFilename
 
-syn match bufSize '\v ([0-9]+\.)?[0-9]+[BKMGTPE]$' contained
+syn match bufSize '\v ([0-9]+\.)?[0-9]+[BKMGTPE]' contained
+syn match bufLines '\v [0-9]+L' contained
 syn match bufLineAndRegister '\v:[0-9]+( +[0-9]+)?' contained
 
 syn match bufLgiStatus '\v\|[^|]+$' contained
-syn match bufFilename '\v(^|\/)@<=[^|]+$' contained contains=bufLineAndRegister,bufSize,bufEolComment
+syn match bufFilename '\v(^|\/)@<=[^|]+$' contained contains=bufLineAndRegister,bufSize,bufLines,bufEolComment
 syn match bufPath '\v[^|]+' contained contains=bufFilename
 
 syn match bufLgRx '\v(\/ ")@<=[^"]+' contained

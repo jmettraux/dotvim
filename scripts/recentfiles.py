@@ -50,18 +50,37 @@ for path in paths:
 
 print "== recent (%d)" % len(paths)
 
-d = {}
-cmd = 'ls -lh ' + string.join(paths)
-  #
+def shellquote(s):
+  return "'" + s.replace("'", "'\\''") + "'"
+
+fs = {}
+
+cmd = 'ls -lh ' + string.join(map(shellquote, paths))
+
 for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).stdout:
-  m = re.match(r'^.+ +.+ +.+ +.+ ([0-9.]+[BKMT]?) +.+ \d+ +[0-9:]+ +(.+)$', line)
+  m = re.match(
+    r'^.+ +.+ +.+ +.+ ([0-9.]+[BKMT]?) +.+ \d+ +[0-9:]+ +(.+)$', line)
   if m:
     path = escape_path(m.group(2))
-    d[path] = m.group(2) + ' ' + m.group(1)
+    #d[path] = m.group(2) + ' ' + m.group(1)
+    fs[os.path.abspath(path)] = { 'p': m.group(2), 's': m.group(1) }
+
+exts = 'rb ru js py c h sh fish flor slim haml html csv md txt json yaml java'.split()
+tpaths = filter(lambda x: os.path.splitext(x)[1][1:] in exts, paths)
+cmd = 'wc -l ' + string.join(map(shellquote, tpaths))
+
+for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).stdout:
+  m = re.match('^\s+(\d+) (.+)$', line)
+  if m == None: continue
+  if m.group(2) == 'total': continue
+  fs[os.path.abspath(m.group(2))]['l'] = m.group(1) + 'L'
+
+#for k in fs:
+#  print "%s:" % k
+#  print fs[k]
+
 for path in paths:
-  l = d.get(path, None)
-  if l:
-    print l
-  #else:
-  #  print "NOT FOUND: " + path
+  f = fs.get(os.path.abspath(path), None)
+  if not f: continue
+  print ' '.join(filter(None, [ f['p'], f['s'], f.get('l') ]))
 
