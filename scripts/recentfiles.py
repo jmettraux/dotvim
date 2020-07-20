@@ -65,7 +65,10 @@ for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).stdout:
     #d[path] = m.group(2) + ' ' + m.group(1)
     fs[os.path.abspath(path)] = { 'p': m.group(2), 's': m.group(1) }
 
-exts = 'rb ru js py c h sh fish flor slim haml html csv md txt json yaml java'.split()
+cf = open(os.path.join(os.path.dirname(__file__), 'countable.txt'), 'r')
+exts = cf.read().split()
+cf.close()
+#print exts
 tpaths = filter(lambda x: os.path.splitext(x)[1][1:] in exts, paths)
 cmd = 'wc -l ' + string.join(map(shellquote, tpaths))
 

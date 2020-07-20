@@ -31,15 +31,18 @@ for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).stdout:
 
 #print git
 
+cf = open(os.path.join(os.path.dirname(__file__), 'countable.txt'), 'r')
+exts = cf.read().split()
+cf.close()
+
 wcl = {}
 cmd = (
   'find ' + root + ' ' +
   ' -o '.join(
     map(
       lambda x: '-name "*.' + x + '" ',
-      string.split(
-        'rb js sh json yaml md txt vim py csv slim haml flor java'))) +
-  '| xargs wc -l 2>/dev/null')
+      exts)) +
+  ' | xargs wc -l 2>/dev/null')
 for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).stdout:
   line = line.strip()
   ss = string.split(line)
