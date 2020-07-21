@@ -176,6 +176,8 @@ function! JmGitAddTreeFile()
 
   call system('git add ' . path)
 
+  call JmReloadTree(0)
+
   echo 'Added ' . path . ' to Git'
 endfunction " JmGitAddTreeFile
 
