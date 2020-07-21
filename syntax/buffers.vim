@@ -29,6 +29,7 @@ hi def link bufLgDir bufDir
 hi def link bufComment Comment
 hi def link bufSize Comment
 hi def link bufLines Comment
+"hi def link bufGit Comment
 
 syn match bufLineTitle '\v^\=\= .+'
 syn match bufLineGrep '\v^  \/ .*$' contains=bufLgRex,bufLgDir
@@ -39,10 +40,11 @@ syn match bufLinePath '\v^[^ #=][^|]+$' contains=bufFilename
 
 syn match bufSize '\v ([0-9]+\.)?[0-9]+[BKMGTPE]' contained
 syn match bufLines '\v [0-9]+L' contained
+syn match bufGit '\v \+[0-9]+-[0-9]+' contained
 syn match bufLineAndRegister '\v:[0-9]+( +[0-9]+)?' contained
 
 syn match bufLgiStatus '\v\|[^|]+$' contained
-syn match bufFilename '\v(^|\/)@<=[^|]+$' contained contains=bufLineAndRegister,bufSize,bufLines,bufEolComment
+syn match bufFilename '\v(^|\/)@<=[^|]+$' contained contains=bufLineAndRegister,bufSize,bufLines,bufGit,bufEolComment
 syn match bufPath '\v[^|]+' contained contains=bufFilename
 
 syn match bufLgRx '\v(\/ ")@<=[^"]+' contained

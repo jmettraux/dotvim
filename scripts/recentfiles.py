@@ -78,6 +78,14 @@ for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).stdout:
   if m.group(2) == 'total': continue
   fs[os.path.abspath(m.group(2))]['l'] = m.group(1) + 'L'
 
+cmd = 'git diff --numstat'
+for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).stdout:
+  line = line.strip()
+  ss = string.split(line)
+  f = fs.get(os.path.abspath(ss[2]))
+  if f == None: continue
+  f['g'] = '+' + ss[0] + '-' + ss[1]
+
 #for k in fs:
 #  print "%s:" % k
 #  print fs[k]
@@ -85,5 +93,5 @@ for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).stdout:
 for path in paths:
   f = fs.get(os.path.abspath(path), None)
   if not f: continue
-  print ' '.join(filter(None, [ f['p'], f['s'], f.get('l') ]))
+  print ' '.join(filter(None, [ f['p'], f['s'], f.get('l'), f.get('g') ]))
 
