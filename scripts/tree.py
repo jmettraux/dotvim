@@ -110,7 +110,7 @@ for f in fs:
       ad = '+' + g.get('a', '0') + '-' + g.get('d', '0')
       if un == '??':
         ad = 'untracked'
-      elif un[0:1] == 'A':
+      elif un and un[0:1] == 'A':
         ad = ad + ' new'
       print to_s([ f['l'], f['s'], ls, ad ])
     else:
