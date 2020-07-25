@@ -4,6 +4,7 @@
 
 map fa rà
 map fe ré
+map fy rè
 map fu rù
 map fc rç
 map fA râ
