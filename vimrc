@@ -402,9 +402,9 @@ set wildignore=*.swp
 
 let &colorcolumn=join(range(81,999),",")
 highlight ColorColumn ctermbg=235 guibg=#2c2d27
-
-nnoremap <leader>] :highlight ColorColumn ctermbg=16<CR>:echo<CR>
-nnoremap <leader>[ :highlight ColorColumn ctermbg=235 guibg=#2c2d27<CR>:echo<CR>
+  "
+nnoremap <leader>] :hi ColorColumn ctermbg=16<CR>:echo<CR>
+nnoremap <leader>[ :hi ColorColumn ctermbg=235 guibg=#2c2d27<CR>:echo<CR>
 
 
 nnoremap <leader>ts :r ! ruby -e "puts '###' + Time.now.strftime('\%Y-\%m-\%d \%H:\%M:\%S')"<CR>

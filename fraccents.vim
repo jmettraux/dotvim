@@ -15,3 +15,6 @@ map fU rû
 
 " CTRL-K + , + c  pour la cédille
 
+"nnoremap <leader>] :hi ColorColumn ctermbg=16<CR>:echo<CR>
+"hi ColorColumn ctermbg=16
+
