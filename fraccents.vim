@@ -5,6 +5,7 @@
 map fa rà
 map fe ré
 map fy rè
+map fw rè
 map fu rù
 
 map fc rç
