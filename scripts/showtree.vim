@@ -63,6 +63,8 @@ function! s:ShowSourceTree()
     call JmShowTree('lib')
   elseif !empty(glob("src"))
     call JmShowTree('src')
+  else
+    call JmShowTree('.')
   endif
 endfunction " ShowSourceTree
 command! -nargs=0 Vs :call <SID>ShowSourceTree()
