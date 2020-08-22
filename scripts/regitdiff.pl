@@ -4,7 +4,6 @@
 print "\n=============================================vv== changes, point by point ==vv==\n\n";
 
 my $fname = '(none)';
-my @files = ();
 
 while (<>) {
 
@@ -12,9 +11,8 @@ while (<>) {
     $fname = $1;
   }
   elsif (/\A@@ [-+]\d+,\d+ [-+](\d+),/) {
-    my $f = $fname . ':' . $1 . " ---+++\n";
-    print "\n" . $f;
-    push @files, $f;
+    #print "\n" . $fname . ':' . $1 . " ---+++\n";
+    print "\n" . sprintf("%-79s\.\n", $fname . ':' . $1 . " ---+++");
   }
   elsif (/\A(---|\+\+\+) [ab]\//) {}
   elsif (/\Aindex [0-9a-fA-F]+\.\.[0-9a-fA-F]+/) {}
@@ -23,10 +21,6 @@ while (<>) {
     print $_ . "\n";
   }
 }
-
-#print "\n===========================================vv== summary of changed points ==vv==\n\n";
-#print join("", @files);
-#print "\n";
 
 print "\n";
 

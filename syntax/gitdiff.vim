@@ -15,7 +15,7 @@ syn match gdiCommit /\v^commit [a-fA-F0-9]+/
 syn match gdiCommit /\v^Author: .+/
 syn match gdiCommit /\v^Date: .+/
 
-syn match gdiFilename /^[^:]\+:[0-9]\+ ---+++/
+syn match gdiFilename /\v^[^:]+:[0-9]+ ---\+\+\+\s*\.$/
 
 syn region gdiDiffSeparator start=/^=/ end="\n"
 
