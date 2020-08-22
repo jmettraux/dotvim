@@ -23,7 +23,9 @@ hi def link bufLineComment Comment
 hi def link bufEolComment Comment
 hi! bufLineGrep cterm=NONE ctermfg=darkgray ctermbg=16
 hi! bufLgRx cterm=NONE ctermfg=136 ctermbg=16
-hi! bufLgiStatus cterm=NONE ctermfg=darkgray ctermbg=16
+hi! bufLgiStatusPlus cterm=NONE ctermfg=green ctermbg=16
+hi! bufLgiStatusMinus cterm=NONE ctermfg=red ctermbg=16
+"hi! bufLgiStatus cterm=NONE ctermfg=blue ctermbg=16
 hi! bufLineAndRegister cterm=NONE ctermfg=darkgray ctermbg=16
 hi def link bufLgDir bufDir
 hi def link bufComment Comment
@@ -43,7 +45,9 @@ syn match bufLines '\v [0-9]+L' contained
 syn match bufGit '\v \+[0-9]+-[0-9]+' contained
 syn match bufLineAndRegister '\v:[0-9]+( +[0-9]+)?' contained
 
-syn match bufLgiStatus '\v\|[^|]+$' contained
+syn match bufLgiStatusPlus '\v\+\d+' contained
+syn match bufLgiStatusMinus '\v-\d+' contained
+syn match bufLgiStatus '\v\| [MDA]\+\d+-\d+$' contained contains=bufLgiStatusPlus,bufLgiStatusMinus
 syn match bufFilename '\v(^|\/)@<=[^|]+$' contained contains=bufLineAndRegister,bufSize,bufLines,bufGit,bufEolComment
 syn match bufPath '\v[^|]+' contained contains=bufFilename
 

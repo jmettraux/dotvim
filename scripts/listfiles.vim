@@ -61,7 +61,7 @@ function! s:ListFiles(...)
 
   if isdirectory('.git')
     normal o== git status
-    exe 'r! /usr/bin/env python ~/.vim/scripts/restatus.py'
+    exe 'r! /usr/bin/env python ~/.vim/scripts/gitdiffstat.py 0'
     normal G
   endif
 
