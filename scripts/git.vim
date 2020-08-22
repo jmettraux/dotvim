@@ -13,7 +13,7 @@ function! s:OpenFile()
   while n > 0
 
     let l = getline(n)
-    let m0 = matchlist(l, '\v^([^:]+) +\| +[0-9]+ \+*-*$')
+    let m0 = matchlist(l, '\v^([^:]+) +\| [MDA]\+[0-9]+-[0-9]+$')
     let m1 = matchlist(l, '\v^([^:]+):([0-9]+) ---\+\+\+$')
 
     if empty(m0) == 0
@@ -92,12 +92,13 @@ function! s:OpenCommit(sha)
   "setlocal nobuflisted
   "setlocal filetype=ListFiles
 
+  exe 'silent r! /usr/bin/env python ~/.vim/scripts/gitdiffstat.py ' . sha
   if strlen(sha) > 1
     "exe 'silent r! echo ' . sha
-    exe 'silent r! git diff --stat ' . sha . '^ ' . sha . ' | perl ~/.vim/scripts/regitdiffstat.pl'
+    "exe 'silent r! git diff --stat ' . sha . '^ ' . sha . ' | perl ~/.vim/scripts/regitdiffstat.pl'
     exe 'silent r! git show ' . sha . ' | perl ~/.vim/scripts/regitdiff.pl'
   else
-    exe 'silent r! git diff --stat | perl ~/.vim/scripts/regitdiffstat.pl'
+    "exe 'silent r! git diff --stat | perl ~/.vim/scripts/regitdiffstat.pl'
     exe 'silent r! git diff | perl ~/.vim/scripts/regitdiff.pl'
   endif
 

@@ -22,23 +22,15 @@ syn region gdiDiffSeparator start=/^=/ end="\n"
 syn region gdiDiffPlus start=/^+/ end="\n"
 syn region gdiDiffMinus start=/^-/ end="\n"
 
+hi! gdiStatFileName cterm=NONE ctermfg=darkblue ctermbg=lightgrey
+hi! gdiStatFilePlus cterm=NONE ctermfg=green ctermbg=16
+hi! gdiStatFileMinus cterm=NONE ctermfg=red ctermbg=16
 
-hi! gdiStatFilename cterm=NONE ctermfg=darkblue ctermbg=lightgrey
-hi! gdiStatFilei cterm=NONE ctermfg=white ctermbg=16
-hi! gdiStatFileplus cterm=NONE ctermfg=green ctermbg=16
-hi! gdiStatFileminus cterm=NONE ctermfg=red ctermbg=16
-hi! gdiStatFilechanged cterm=NONE ctermfg=white ctermbg=16
-hi! gdiStatInsertions cterm=NONE ctermfg=green ctermbg=16
-hi! gdiStatDeletions cterm=NONE ctermfg=red ctermbg=16
-
-syn match gdiStatFilename /\v^[^|]+/ contained
-syn match gdiStatFilei /\v [0-9]+ / contained
-syn match gdiStatFileplus /\v\+/ contained
-syn match gdiStatFileminus /\v\-/ contained
-syn match gdiStatFileline /\v^[^|]+\| +[0-9]+ \+*-*$/ contains=gdiStatFilename,gdiStatFilei,gdiStatFileplus,gdiStatFileminus
-syn match gdiStatFilechanged /\v^ [0-9]+ file changed/
-syn match gdiStatInsertions /\v [0-9]+ insertions\(\+\)/
-syn match gdiStatDeletions /\v [0-9]+ deletions\(\-\)/
+syn match gdiStatFileMinus /\v-[0-9]+/ contained
+syn match gdiStatFilePlus /\v\+[0-9]+/ contained
+syn match gdiStatFileName /\v^[^|]+/ contained
+syn match gitStatFileStatus /\v[MDA]/ contained
+syn match gdiStatFileLine /\v^[^|]+\s+\| [MDA]\+[0-9]+-[0-9]+$/ contains=gdiStatFilename,gdiStatFileStatus,gdiStatFileMinus,gdiStatFileplus
 
 highlight ColorColumn ctermbg=16
   " disable > 80 column highlight
