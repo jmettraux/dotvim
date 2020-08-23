@@ -14,7 +14,7 @@ function! s:OpenFile()
 
     let l = getline(n)
     let m0 = matchlist(l, '\v^([^:]+) +\| [MDA]\+[0-9]+-[0-9]+$')
-    let m1 = matchlist(l, '\v^([^:]+):([0-9]+) ---\+\+\+$')
+    let m1 = matchlist(l, '\v^([^:]+):([0-9]+) ---\+\+\+\s*.$')
 
     if empty(m0) == 0
 
