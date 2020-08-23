@@ -1,8 +1,6 @@
 
 # regitdiff.pl
 
-print "\n=============================================vv== changes, point by point ==vv==\n\n";
-
 my $fname = '(none)';
 
 while (<>) {

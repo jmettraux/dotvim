@@ -9,15 +9,12 @@ hi! gdiCommit cterm=NONE ctermfg=white ctermbg=darkgrey
 hi! gdiFilename cterm=NONE ctermfg=darkblue ctermbg=lightgrey
 hi! gdiDiffMinus cterm=NONE ctermfg=red ctermbg=16
 hi! gdiDiffPlus cterm=NONE ctermfg=green ctermbg=16
-hi! gdiDiffSeparator cterm=NONE ctermfg=black ctermbg=darkyellow
 
 syn match gdiCommit /\v^commit [a-fA-F0-9]+/
 syn match gdiCommit /\v^Author: .+/
 syn match gdiCommit /\v^Date: .+/
 
 syn match gdiFilename /\v^[^:]+:[0-9]+ ---\+\+\+\s*\.$/
-
-syn region gdiDiffSeparator start=/^=/ end="\n"
 
 syn region gdiDiffPlus start=/^+/ end="\n"
 syn region gdiDiffMinus start=/^-/ end="\n"
