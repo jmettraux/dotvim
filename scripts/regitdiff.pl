@@ -1,6 +1,8 @@
 
 # regitdiff.pl
 
+print "\n";
+
 my $fname = '(none)';
 
 while (<>) {
