@@ -5,7 +5,7 @@
 "
 " git diff
 
-function! s:OpenFile()
+function! s:OpenFile(variant)
 
   let n = line('.')
   let nn = 0
@@ -16,7 +16,11 @@ function! s:OpenFile()
     let m0 = matchlist(l, '\v^([^:]+) +\| [MDA]\+[0-9]+-[0-9]+$')
     let m1 = matchlist(l, '\v^([^:]+):([0-9]+) ---\+\+\+\s*.$')
 
-    if empty(m0) == 0
+    if empty(m0) == 0 && a:variant == 'o'
+
+      call JmOpenFile(m0[1], -1)
+
+    elseif empty(m0) == 0
 
       "exe ':e ' . m0[1]
 
@@ -112,9 +116,9 @@ function! s:OpenCommit(sha)
   nnoremap <buffer> <silent> A :call search('^.\+ ---+++', 'b')<CR>0zz
     " silently go to next file
 
-  nnoremap <buffer> o :call <SID>OpenFile()<CR>
-  nnoremap <buffer> <CR> :call <SID>OpenFile()<CR>
-  nnoremap <buffer> <SPACE> :call <SID>OpenFile()<CR>
+  nnoremap <buffer> o :call <SID>OpenFile('o')<CR>
+  nnoremap <buffer> <CR> :call <SID>OpenFile('cr')<CR>
+  nnoremap <buffer> <SPACE> :call <SID>OpenFile('space')<CR>
 
   nnoremap <buffer> <silent> q :bd<CR>
 endfunction " OpenCommit
