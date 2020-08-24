@@ -6,7 +6,7 @@
 hi! gdiCommit cterm=NONE ctermfg=white ctermbg=darkgrey
 
 "hi! gdiFilename cterm=NONE ctermfg=black ctermbg=lightgrey
-hi! gdiFilename cterm=NONE ctermfg=darkblue ctermbg=lightgrey
+hi! gdiFilename cterm=NONE ctermfg=white ctermbg=darkgrey
 hi! gdiDiffMinus cterm=NONE ctermfg=red ctermbg=16
 hi! gdiDiffPlus cterm=NONE ctermfg=green ctermbg=16
 
@@ -19,7 +19,9 @@ syn match gdiFilename /\v^[^:]+:[0-9]+ ---\+\+\+\s*\.$/
 syn region gdiDiffPlus start=/^+/ end="\n"
 syn region gdiDiffMinus start=/^-/ end="\n"
 
-hi! gdiStatFileName cterm=NONE ctermfg=darkblue ctermbg=lightgrey
+"hi! gdiStatFileName cterm=NONE ctermfg=black ctermbg=lightgrey
+"hi! gdiStatFileName cterm=NONE ctermfg=136 ctermbg=16
+hi! gdiStatFileName cterm=NONE ctermfg=lightgrey ctermbg=16
 hi! gdiStatFilePlus cterm=NONE ctermfg=green ctermbg=16
 hi! gdiStatFileMinus cterm=NONE ctermfg=red ctermbg=16
 
