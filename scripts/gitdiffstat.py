@@ -47,7 +47,10 @@ for path in paths.keys():
   lpath = len(path)
   if (lpath > lmax): lmax = lpath
 
+#gitroot = subprocess.check_output([ 'git', 'rev-parse', '--show-toplevel' ]).strip()
+
 for path in sorted(paths.keys()):
   a = paths[path]
+  #path = os.path.relpath(os.path.join(gitroot, path))
   print ('%-' + str(lmax) + 's | %s+%s-%s') % (path, a[2], a[0], a[1])
 
