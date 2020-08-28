@@ -10,9 +10,8 @@ hi! gdiFilename cterm=NONE ctermfg=white ctermbg=darkgrey
 hi! gdiDiffMinus cterm=NONE ctermfg=red ctermbg=16
 hi! gdiDiffPlus cterm=NONE ctermfg=green ctermbg=16
 
-syn match gdiCommit /\v^commit [a-fA-F0-9]+/
-syn match gdiCommit /\v^Author: .+/
-syn match gdiCommit /\v^Date: .+/
+syn match gdiCommit /\v^commit [a-fA-F0-9]+ .+/
+syn match gdiCommit /\v^(Author|Date): .+/
 
 syn match gdiFilename /\v^[^:]+:[0-9]+ ---\+\+\+\s*\.$/
 
