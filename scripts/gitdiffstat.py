@@ -15,6 +15,10 @@ if sha != '0': cmd1 = cmd1 + ' ' + sha + '^ ' + sha
 cmd2 = 'git status'
 if sha != '0': cmd2 = None
 
+cmd3 = 'git diff --stat'
+if sha != '0': cmd3 = cmd3 + ' ' + sha + '^ ' + sha
+cmd3 = cmd3 + ' | tail -1'
+
 paths = {}
 
 for line in subprocess.Popen(cmd0, shell=True, stdout=subprocess.PIPE).stdout:
@@ -53,4 +57,9 @@ for path in sorted(paths.keys()):
   a = paths[path]
   #path = os.path.relpath(os.path.join(gitroot, path))
   print ('%-' + str(lmax) + 's | %s+%s-%s') % (path, a[2], a[0], a[1])
+
+print
+for line in subprocess.Popen(cmd3, shell=True, stdout=subprocess.PIPE).stdout:
+  print line
+if sha != '0': print
 
