@@ -60,6 +60,6 @@ for path in sorted(paths.keys()):
 
 print
 for line in subprocess.Popen(cmd3, shell=True, stdout=subprocess.PIPE).stdout:
-  print line
+  print ' ' + line
 if sha != '0': print
 
