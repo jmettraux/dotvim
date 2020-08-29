@@ -16,6 +16,7 @@ function! s:OpenTodos()
   exe 'normal i## src'
   let lin = line('.')
   exe 'silent r! grep -R -n -s TODO src lib spec app'
+  exe 'silent r! grep -R -n -s FIXME src lib spec app'
   exe 'silent ' . lin . ',$s/^\([^ ]\+\)\s\+\(.\+\)$/\1  ```\2```/e'
     " the /e makes the substitution silent
   exe 'normal o'
