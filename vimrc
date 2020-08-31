@@ -145,13 +145,13 @@ au InsertLeave * match ExtraWhiteSpace /\s\+$/
 "nnoremap <leader>l <C-w>l
 "
 " vertical
-nnoremap <leader>j <C-w>j
-nnoremap <leader>k <C-w>k
+"nnoremap <leader>j <C-w>j
+"nnoremap <leader>k <C-w>k
 "
 " split
 "nnoremap \ :split<CR>
-nnoremap @ <C-w>+
-nnoremap - <C-w>-
+"nnoremap @ <C-w>+
+"nnoremap - <C-w>-
 
 "" :q and :w
 "" there is also ZZ for :q
@@ -203,7 +203,7 @@ cnoremap <C-w> <C-R>=expand('<cword>')<CR>
 "nnoremap <silent> <leader>t /TODO<CR>
 " TODO: pop that search when done
 
-nnoremap <silent> <leader>u :setlocal number!<CR>
+"nnoremap <silent> <leader>u :setlocal number!<CR>
 
 "nnoremap <silent> <leader>m ma
 nnoremap <silent> <leader>a g'a
@@ -388,7 +388,7 @@ set secure
 "
 
 " inserting a real tab... Makefile...
-nnoremap <leader><TAB> i<C-v><TAB><ESC>
+"nnoremap <leader><TAB> i<C-v><TAB><ESC>
 
 
 " https://github.com/mcantor/no_plugins/blob/master/no_plugins.vim
