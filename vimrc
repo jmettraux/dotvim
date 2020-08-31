@@ -161,6 +161,8 @@ nnoremap <leader>q :q<CR>
 "nnoremap <leader>g <C-o>
 "nnoremap <leader>gg <C-o>
 
+nnoremap <leader>j 14j
+
 let g:jmAlt = 1
 function! <SID>JmBufLeave()
   if &filetype !=# 'netrw' && &filetype !=# 'ListFiles'
