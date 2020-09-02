@@ -1,4 +1,16 @@
 
+function! s:MoveHalfDown()
+  let cl = line('.')
+  let el = line('$')
+  call cursor(cl + (el - cl) / 2, 0)
+endfunction " MoveHalfDown
+
+function! s:MoveHalfUp()
+  let cl = line('.')
+  call cursor(cl / 2, 0)
+endfunction " MoveHalfDown
+
+
 function! JmShowTree(start)
 
   if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
@@ -48,6 +60,9 @@ function! JmShowTree(start)
   nnoremap <buffer> <silent> A :call search('\v [^ ]+\/', 'b')<CR>0zz
 
   nnoremap <buffer> <silent> q :bd<CR>
+
+  nnoremap <buffer> <silent> <leader>j :call <SID>MoveHalfDown()<CR>
+  nnoremap <buffer> <silent> <leader>k :call <SID>MoveHalfUp()<CR>
 endfunction " ShowTree
 
 command! -nargs=1 -complete=dir Vt :call JmShowTree(<f-args>)
