@@ -63,6 +63,8 @@ function! JmShowTree(start)
 
   nnoremap <buffer> <silent> <leader>j :call <SID>MoveHalfDown()<CR>
   nnoremap <buffer> <silent> <leader>k :call <SID>MoveHalfUp()<CR>
+  nnoremap <buffer> <silent> J :call <SID>MoveHalfDown()<CR>
+  nnoremap <buffer> <silent> K :call <SID>MoveHalfUp()<CR>
 endfunction " ShowTree
 
 command! -nargs=1 -complete=dir Vt :call JmShowTree(<f-args>)
