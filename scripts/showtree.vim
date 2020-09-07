@@ -18,7 +18,8 @@ function! s:MoveToModified(d)
   "while cl <= el
   while 1
     let l = getline(cl)
-    let m = matchlist(l, '\v\dL? \+[0-9]+-[0-9]+$')
+    "let m = matchlist(l, '\v\dL? \+[0-9]+-[0-9]+( new| untracked)?$')
+    let m = matchlist(l, '\v\dL? \+[0-9]+-[0-9]+( new)?$')
     if empty(m) == 0 | let tl = cl | break | endif
     let cl = cl + a:d
     if cl > el | let cl = 1 | endif
