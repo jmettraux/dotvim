@@ -10,6 +10,22 @@ function! s:MoveHalfUp()
   call cursor(cl / 2, 0)
 endfunction " MoveHalfDown
 
+function! s:MoveToModified(d)
+  let sl = line('.')
+  let cl = sl + a:d
+  let el = line('$')
+  let tl = -1
+  "while cl <= el
+  while 1
+    let l = getline(cl)
+    let m = matchlist(l, '\v\dL? \+[0-9]+-[0-9]+$')
+    if empty(m) == 0 | let tl = cl | break | endif
+    let cl = cl + a:d
+    if cl > el | let cl = 1 | endif
+  endwhile
+  if tl > -1 | call cursor(tl, 0) | endif
+endfunction " MoveToNextModified
+
 
 function! JmShowTree(start)
 
@@ -65,6 +81,7 @@ function! JmShowTree(start)
   nnoremap <buffer> <silent> <leader>k :call <SID>MoveHalfUp()<CR>
   nnoremap <buffer> <silent> J :call <SID>MoveHalfDown()<CR>
   nnoremap <buffer> <silent> K :call <SID>MoveHalfUp()<CR>
+  nnoremap <buffer> <silent> m :call <SID>MoveToModified(1)<CR>
 endfunction " ShowTree
 
 command! -nargs=1 -complete=dir Vt :call JmShowTree(<f-args>)
