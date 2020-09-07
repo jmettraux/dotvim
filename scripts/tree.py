@@ -10,6 +10,10 @@ import os, re, sys, string, subprocess
 root = sys.argv[1]
 if root[-1] != '/': root = root + '/'
 
+# determine git root
+
+gitroot = subprocess.check_output([ 'git', 'rev-parse', '--show-toplevel' ]).strip()
+
 # gather git stats
 
 git = {}
@@ -17,12 +21,15 @@ git = {}
 cmd = 'git diff --numstat'
 for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).stdout:
   line = line.strip()
+  #print [ 'gdns', line ]
   ss = string.split(line)
-  git[os.path.abspath(ss[2])] = { 'p': ss[2], 'a': ss[0], 'd': ss[1] }
+  ap = os.path.abspath(os.path.join(gitroot, ss[2]))
+  git[ap] = { 'p': ss[2], 'a': ss[0], 'd': ss[1] }
 
 cmd = 'git status -s'
 for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).stdout:
   line = line.strip()
+  #print [ 'gss', line ]
   ss = string.split(line)
   ap = os.path.abspath(ss[1])
   g = git.get(ap, { 'p': ss[1] })
@@ -30,6 +37,8 @@ for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).stdout:
   g['s'] = ss[0]
 
 #print git
+#print git.keys()
+#print git['/home/jmettraux/w/sg/ispec/spec/common_spec.rb']
 
 cf = open(os.path.join(os.path.dirname(__file__), 'countable.txt'), 'r')
 exts = cf.read().split()
@@ -103,7 +112,8 @@ for f in fs:
   if f['i'] < 0 or f['s'] == '-1':
     print f['l']
   else:
-    g = git.get(os.path.abspath(f['p']))
+    ap = os.path.abspath(f['p'])
+    g = git.get(ap)
     ls = f['L'] + 'L' if f['L'] else None
     if g:
       un = g.get('s')
