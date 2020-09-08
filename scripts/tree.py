@@ -55,6 +55,7 @@ cmd = (
 for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).stdout:
   line = line.strip()
   ss = string.split(line)
+  if len(ss) < 2: continue
   if ss[1] == 'total': continue
   if re.match(r'\/\.git\/', ss[1]): continue
   wcl[os.path.abspath(ss[1])] = ss[0]
