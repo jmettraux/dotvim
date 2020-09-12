@@ -40,12 +40,19 @@ function! s:ToggleAccent()
   if     c == 'e' | exe 'normal! ré' |
   elseif c == 'é' | exe 'normal! rè' |
   elseif c == 'è' | exe 'normal! rê' |
+  elseif c == 'ê' | exe 'normal! re' |
   elseif c == 'a' | exe 'normal! rà' |
   elseif c == 'à' | exe 'normal! râ' |
+  elseif c == 'â' | exe 'normal! ra' |
   elseif c == 'o' | exe 'normal! rô' |
-  elseif c == 'u' | exe 'normal! rû' |
+  elseif c == 'ô' | exe 'normal! ro' |
+  elseif c == 'u' | exe 'normal! rù' |
+  elseif c == 'ù' | exe 'normal! rû' |
+  elseif c == 'û' | exe 'normal! ru' |
   elseif c == 'i' | exe 'normal! rî' |
+  elseif c == 'î' | exe 'normal! ri' |
   elseif c == 'c' | exe 'normal! rç' |
+  elseif c == 'ç' | exe 'normal! rc' |
   endif
 endfunction " ToggleAccent
 nnoremap <silent> ff :call <SID>ToggleAccent()<CR>
