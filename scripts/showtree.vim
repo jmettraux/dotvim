@@ -70,6 +70,7 @@ function! JmShowTree(start)
   nnoremap <buffer> ga :call JmGitAddTreeFile()<CR>
   nnoremap <buffer> p :exe "echo JmDetermineTreePath()"<CR>
   nnoremap <buffer> r :call JmReloadTree(0)<CR>
+  nnoremap <buffer> T :call JmGitCommitTreeFile()<CR>
 
   nmap <buffer> v /
 
@@ -218,6 +219,17 @@ function! JmGitAddTreeFile()
 
   echo 'Added ' . path . ' to Git'
 endfunction " JmGitAddTreeFile
+
+
+function! JmGitCommitTreeFile()
+
+  let path = JmDetermineTreePath()
+  if empty(path) | return 0 | endif
+
+  exe '!git commit ' . path
+
+  call JmReloadTree(0)
+endfunction " JmGitCommitTreeFile
 
 
 function! JmReloadTree(dline)
