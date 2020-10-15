@@ -17,8 +17,7 @@ function! s:MoveToModified(d)
   let cl = sl + a:d
   let el = line('$')
   let tl = -1
-  "while cl <= el
-  while 1
+  while cl != sl
     let l = getline(cl)
     "let m = matchlist(l, '\v\dL? \+[0-9]+-[0-9]+( new| untracked)?$')
     let m = matchlist(l, '\v\dL? \+[0-9]+-[0-9]+( new)?$')
@@ -26,7 +25,10 @@ function! s:MoveToModified(d)
     let cl = cl + a:d
     if cl > el | let cl = 1 | endif
   endwhile
-  if tl > -1 | call cursor(tl, 0) | endif
+  if tl > -1
+    call cursor(tl, 0)
+    normal zz
+  endif
 endfunction " MoveToModified
 
 
