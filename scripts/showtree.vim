@@ -3,11 +3,13 @@ function! s:MoveHalfDown()
   let cl = line('.')
   let el = line('$')
   call cursor(cl + (el - cl) / 2, 0)
+  normal zz
 endfunction " MoveHalfDown
 
 function! s:MoveHalfUp()
   let cl = line('.')
   call cursor(cl / 2, 0)
+  normal zz
 endfunction " MoveHalfDown
 
 function! s:MoveToModified(d)
@@ -25,7 +27,7 @@ function! s:MoveToModified(d)
     if cl > el | let cl = 1 | endif
   endwhile
   if tl > -1 | call cursor(tl, 0) | endif
-endfunction " MoveToNextModified
+endfunction " MoveToModified
 
 
 function! JmShowTree(start)
