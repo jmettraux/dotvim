@@ -31,10 +31,16 @@ for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).stdout:
   line = line.strip()
   #print [ 'gss', line ]
   ss = string.split(line)
-  ap = os.path.abspath(ss[1])
-  g = git.get(ap, { 'p': ss[1] })
-  git[ap] = g
-  g['s'] = ss[0]
+  if len(ss) > 2 and ss[2] == '->':
+    ap = os.path.abspath(ss[3])
+    g = git.get(ap, { 'p': ss[3] })
+    git[ap] = g
+    g['s'] = ss[0]
+  else:
+    ap = os.path.abspath(ss[1])
+    g = git.get(ap, { 'p': ss[1] })
+    git[ap] = g
+    g['s'] = ss[0]
 
 #print git
 #print git.keys()
