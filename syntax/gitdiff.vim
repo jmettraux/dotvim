@@ -27,8 +27,8 @@ hi! gdiStatFileMinus cterm=NONE ctermfg=red ctermbg=16
 syn match gdiStatFileMinus /\v-[0-9]+/ contained
 syn match gdiStatFilePlus /\v\+[0-9]+/ contained
 syn match gdiStatFileName /\v^[^|]+/ contained
-syn match gitStatFileStatus /\v[MDA]/ contained
-syn match gdiStatFileLine /\v^[^|]+\s+\| [MDA]\+[0-9]+-[0-9]+$/ contains=gdiStatFilename,gdiStatFileStatus,gdiStatFileMinus,gdiStatFileplus
+syn match gitStatFileStatus /\v[MDAR]/ contained
+syn match gdiStatFileLine /\v^[^|]+\s+\| [MDAR]\+[0-9]+-[0-9]+$/ contains=gdiStatFilename,gdiStatFileStatus,gdiStatFileMinus,gdiStatFileplus
 
 highlight ColorColumn ctermbg=16
   " disable > 80 column highlight
