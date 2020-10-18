@@ -48,7 +48,7 @@ syn match bufLineAndRegister '\v:[0-9]+( +[0-9]+)?' contained
 
 syn match bufLgiStatusPlus '\v\+\d+' contained
 syn match bufLgiStatusMinus '\v-\d+' contained
-syn match bufLgiStatus '\v\| [MDA]\+\d+-\d+$' contained contains=bufLgiStatusPlus,bufLgiStatusMinus
+syn match bufLgiStatus '\v\| [MDAR]\+\d+-\d+$' contained contains=bufLgiStatusPlus,bufLgiStatusMinus
 syn match bufFilename '\v(^|\/)@<=[^|]+$' contained contains=bufLineAndRegister,bufSize,bufLines,bufGit,bufEolComment
 syn match bufPath '\v[^|]+' contained contains=bufFilename
 

@@ -36,15 +36,25 @@ for line in subprocess.Popen(cmd1, shell=True, stdout=subprocess.PIPE).stdout:
 if cmd2:
   for line in subprocess.Popen(cmd2, shell=True, stdout=subprocess.PIPE).stdout:
     m = re.match(r'^\s+(new file|deleted):\s+(.+)$', line)
-    if not m: continue
-    #paths[m.group(1)][2] = 'A'
-    a = paths.get(m.group(2))
-    c = 'A'
-    if m.group(1) == 'deleted': c = 'D'
-    if a:
-      a[2] = c
-    else:
-      paths[m.group(2)] = [ 0, 0, c ]
+    if m:
+      #paths[m.group(1)][2] = 'A'
+      a = paths.get(m.group(2))
+      c = 'A'
+      if m.group(1) == 'deleted': c = 'D'
+      if a:
+        a[2] = c
+      else:
+        paths[m.group(2)] = [ 0, 0, c ]
+      continue
+    m = re.match(r'^\s+renamed:\s+(.+) -> (.+)$', line)
+    if m:
+      a = paths.get(m.group(2))
+      c = 'R'
+      if a:
+        a[2] = c
+      else:
+        paths[m.group(2)] = [ 0, 0, c ]
+      #continue
 
 lmax = 0
 for path in paths.keys():
