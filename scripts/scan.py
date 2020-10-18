@@ -70,8 +70,10 @@ for i, l in ls:
   c1 = ''
   c0 = ''
   if cl > 2:
-    c1 = c_lines[0][1].strip()
-    c0 = c_lines[1][1].strip()
+    c1 = c_lines[0][1]
+    c0 = c_lines[1][1]
+    if c0: c0 = c0.strip()
+    if c1: c1 = c1.strip()
 
   if cl >= 2 and c1 == '' and (c0 == '//' or c0 == '#'):
     for ii, ll in c_lines[1:]:
