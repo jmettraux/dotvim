@@ -2,6 +2,8 @@
 
 import os, re, sys, string, subprocess
 
+FNULL = open(os.devnull, 'w')
+
 
 rejects = [
   'COMMIT_EDITMSG', 'NetrwTreeListing', 'bash-fc-', '==[A-Z]',
@@ -57,7 +59,7 @@ fs = {}
 
 cmd = 'ls -lh ' + string.join(map(shellquote, paths))
 
-for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).stdout:
+for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=FNULL).stdout:
   m = re.match(
     r'^.+ +.+ +.+ +.+ ([0-9.]+[BKMT]?) +.+ \d+ +[0-9:]+ +(.+)$', line)
   if m:
@@ -72,7 +74,8 @@ cf.close()
 tpaths = filter(lambda x: os.path.splitext(x)[1][1:] in exts, paths)
 cmd = 'wc -l ' + string.join(map(shellquote, tpaths))
 
-for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).stdout:
+for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=FNULL).stdout:
+  if re.match('o such file', line): continue
   m = re.match('^\s+(\d+) (.+)$', line)
   if m == None: continue
   if m.group(2) == 'total': continue
