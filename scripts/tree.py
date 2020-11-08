@@ -12,35 +12,44 @@ if root[-1] != '/': root = root + '/'
 
 # determine git root
 
-gitroot = subprocess.check_output([ 'git', 'rev-parse', '--show-toplevel' ]).strip()
+gitroot = False
+try:
+  DEV_NULL = open(os.devnull, 'w')
+  gitroot = subprocess\
+    .check_output([ 'git', 'rev-parse', '--show-toplevel' ], stderr=DEV_NULL)\
+    .strip()
+except:
+  True # not a git repo
 
 # gather git stats
 
 git = {}
 
-cmd = 'git diff --numstat'
-for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).stdout:
-  line = line.strip()
-  #print [ 'gdns', line ]
-  ss = string.split(line)
-  ap = os.path.abspath(os.path.join(gitroot, ss[2]))
-  git[ap] = { 'p': ss[2], 'a': ss[0], 'd': ss[1] }
+if gitroot:
 
-cmd = 'git status -s'
-for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).stdout:
-  line = line.strip()
-  #print [ 'gss', line ]
-  ss = string.split(line)
-  if len(ss) > 2 and ss[2] == '->':
-    ap = os.path.abspath(ss[3])
-    g = git.get(ap, { 'p': ss[3] })
-    git[ap] = g
-    g['s'] = ss[0]
-  else:
-    ap = os.path.abspath(ss[1])
-    g = git.get(ap, { 'p': ss[1] })
-    git[ap] = g
-    g['s'] = ss[0]
+  cmd = 'git diff --numstat'
+  for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).stdout:
+    line = line.strip()
+    #print [ 'gdns', line ]
+    ss = string.split(line)
+    ap = os.path.abspath(os.path.join(gitroot, ss[2]))
+    git[ap] = { 'p': ss[2], 'a': ss[0], 'd': ss[1] }
+
+  cmd = 'git status -s'
+  for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).stdout:
+    line = line.strip()
+    #print [ 'gss', line ]
+    ss = string.split(line)
+    if len(ss) > 2 and ss[2] == '->':
+      ap = os.path.abspath(ss[3])
+      g = git.get(ap, { 'p': ss[3] })
+      git[ap] = g
+      g['s'] = ss[0]
+    else:
+      ap = os.path.abspath(ss[1])
+      g = git.get(ap, { 'p': ss[1] })
+      git[ap] = g
+      g['s'] = ss[0]
 
 #print git
 #print git.keys()
