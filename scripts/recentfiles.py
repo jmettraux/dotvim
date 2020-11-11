@@ -82,7 +82,7 @@ for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=FNU
   fs[os.path.abspath(m.group(2))]['l'] = m.group(1) + 'L'
 
 cmd = 'git diff --numstat'
-for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).stdout:
+for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=FNULL).stdout:
   line = line.strip()
   ss = string.split(line)
   f = fs.get(os.path.abspath(ss[2]))
