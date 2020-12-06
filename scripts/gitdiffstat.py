@@ -23,6 +23,7 @@ paths = {}
 
 for line in subprocess.Popen(cmd0, shell=True, stdout=subprocess.PIPE).stdout:
   m = re.match(r'^(\d+)\s+(\d+)\s+(.+)$', line)
+  if not m: continue
   plus = m.group(1)
   minus = m.group(2)
   path = m.group(3)
