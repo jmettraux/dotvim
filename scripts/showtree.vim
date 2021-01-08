@@ -64,6 +64,7 @@ function! JmShowTree(start)
   setlocal nomodifiable
 
   nnoremap <buffer> o :call JmOpenTreeFile()<CR>
+  nnoremap <buffer> e :call JmOpenTreeFile()<CR>
   nnoremap <buffer> <space> :call JmOpenTreeFile()<CR>
   nnoremap <buffer> <CR> :call JmOpenTreeFile()<CR>
 
