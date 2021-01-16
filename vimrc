@@ -78,12 +78,6 @@ au BufNewFile,BufRead *.scad set ft=openscad
 au BufNewFile,BufRead *.fish set ft=fish
 au BufNewFile,BufRead *.log set ft=jolog
 
-function! <SID>GoMkd()
-  set filetype=mkd
-  syntax sync fromstart
-endfunction
-au BufNewFile,BufRead *.md :call <SID>GoMkd()
-
 au BufNewFile,BufRead *.liquid set ft=liquid
 au BufNewFile,BufRead */_layouts/*.html set ft=liquid
 
