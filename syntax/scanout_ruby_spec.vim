@@ -15,7 +15,7 @@ syn match scoTitle '^== .\+'
 "
 " Rspec
 
-syn match scoLine '\v^ *[0-9]+ .*$' contains=scoLineNumber,ScoName,scoKeyword,scoString,scoSymbol,scoComment,scoDo
+syn match scoLine '\v^ *[0-9]+ .*$' contains=scoLineNumber,scoName,scoKeyword,scoString,scoSymbol,scoComment,scoDo
 syn match scoKeyword '\v(describe|before|after|context|it|they)' contained
 syn region scoString start=+"+ skip=+\\"+ end=+"+ oneline contained
 syn region scoString start=+'+ skip=+\\'+ end=+'+ oneline contained

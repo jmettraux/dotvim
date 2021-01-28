@@ -9,6 +9,7 @@ ls = [ [ i + 1, l.rstrip() ] for i, l in enumerate(f.readlines()) ]
 f.close
 
 rs = [ r'.*' ]
+c_rex = r'^\s*(#|//)'
 
 if re.search(r'_spec\.rb$', fn):
   rs = [
@@ -36,6 +37,11 @@ elif re.search(r'\.js$', fn):
     r'^\s*var\s+[A-Z]',
     r'^\s*function\s+',
       ]
+elif re.search(r'\.md$', fn):
+  rs = [
+    r'#',
+      ]
+  c_rex = r'^\s*<!--'
 
 rs.append(r'\bTODO\b')
 rs.append(r'\bFIXME\b')
@@ -46,7 +52,6 @@ rs.append(r'\bFIXME\b')
 #print "<<<"
 
 p_line = None
-c_rex = r'^\s*(#|//)'
 c_lines = []
   #
   # comments displaying

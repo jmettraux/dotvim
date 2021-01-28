@@ -5,6 +5,7 @@ function! JmScanSyn(path)
   if a:path =~ "\.rb$" | return 'scanout_ruby' | endif
   "if a:path =~ "\.py$" | return 'scanout_python' | endif
   if a:path =~ "\.js$" | return 'scanout_javascript' | endif
+  if a:path =~ "\.md$" | return 'scanout_markdown' | endif
   return ''
 endfunction " JmScanSyn
 
