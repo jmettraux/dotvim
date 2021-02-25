@@ -21,6 +21,7 @@ nnoremap f-e rē
 nnoremap f-i rī
 nnoremap f-o rō
 nnoremap f-u rū
+nnoremap f-O rŌ
 
 nnoremap f:a rä
 nnoremap f:e rë
