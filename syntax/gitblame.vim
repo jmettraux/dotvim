@@ -13,10 +13,10 @@ hi def link gibTitle Comment
 "syn match gilTree /\v^[*| ]+/ contained
 "syn match gilTags /\v\([^)]+\) /
 syn match gibSha /\v^[a-fA-F0-9]+/ contained
-syn match gibAuthor /\v^[a-fA-F0-9]+ .{3}/ contains=gibSha contained
-syn match gibDate /\v^[a-fA-F0-9]+ .{3} \d{8}/ contains=gibAuthor contained
-syn match gibHour /\v^[a-fA-F0-9]+ .{3} \d{8}\d{4}/ contains=gibDate contained
-syn match gibLnum /\v^[a-fA-F0-9]+ .{3} \d{8}\d{4}\s+\d+/ contains=gibHour
+syn match gibAuthor /\v^[a-fA-F0-9]+  ?.{3}/ contains=gibSha contained
+syn match gibDate /\v^[a-fA-F0-9]+  ?.{3} \d{8}/ contains=gibAuthor contained
+syn match gibHour /\v^[a-fA-F0-9]+  ?.{3} \d{8}\d{4}/ contains=gibDate contained
+syn match gibLnum /\v^[a-fA-F0-9]+  ?.{3} \d{8}\d{4}\s+\d+/ contains=gibHour
 syn match gibLnum /\v^\s{27}\s*\d+/
 
 syn match gibTitle /\v^.{26}/ contained

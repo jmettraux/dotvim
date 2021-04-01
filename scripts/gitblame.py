@@ -14,9 +14,11 @@ title = ''
 
 for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).stdout:
 
-  m = re.match(r'^([a-fA-F0-9]+) ([^(]+)?\((.+) (\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}) ([-+]\d{4}) (\s*\d+)\) (.+)?$', line)
+  m = re.match(r'^\^?([a-fA-F0-9]+) ([^(]+)?\((.+) (\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}) ([-+]\d{4}) (\s*\d+)\) (.+)?$', line)
 
   sha = m.group(1)
+  if len(sha) < 8: sha = sha + ' '
+
   author = m.group(3)[:3]
   date = m.group(4)
   lnum = m.group(6)

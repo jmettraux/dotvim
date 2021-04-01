@@ -6,17 +6,23 @@ import os, re, sys, subprocess
 
 sha = sys.argv[1]
 
+shalpha = subprocess.Popen('git rev-list HEAD | tail -1', shell=True, stdout=subprocess.PIPE
+  ).stdout.read().strip()[0:7]
+
+sha0 = sha + '^'
+if shalpha == sha: sha0 = sha
+
 cmd0 = 'git diff --numstat'
-if sha != '0': cmd0 = cmd0 + ' ' + sha + '^ ' + sha
+if sha != '0': cmd0 = cmd0 + ' ' + sha0 + ' ' + sha
 
 cmd1 = 'git diff --name-status'
-if sha != '0': cmd1 = cmd1 + ' ' + sha + '^ ' + sha
+if sha != '0': cmd1 = cmd1 + ' ' + sha0 + ' ' + sha
 
 cmd2 = 'git status'
 if sha != '0': cmd2 = None
 
 cmd3 = 'git diff --stat'
-if sha != '0': cmd3 = cmd3 + ' ' + sha + '^ ' + sha
+if sha != '0': cmd3 = cmd3 + ' ' + sha0 + ' ' + sha
 cmd3 = cmd3 + ' | tail -1'
 
 paths = {}
