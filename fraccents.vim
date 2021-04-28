@@ -16,6 +16,8 @@ nnoremap fI rî
 nnoremap fO rô
 nnoremap fU rû
 
+nnoremap f'a rá
+
 nnoremap f-a rā
 nnoremap f-e rē
 nnoremap f-i rī
@@ -28,6 +30,8 @@ nnoremap f:e rë
 nnoremap f:i rï
 nnoremap f:o rö
 nnoremap f:u rü
+
+
 
 " CTRL-K + , + c  pour la cédille
 
