@@ -42,6 +42,11 @@ elif re.search(r'\.md$', fn):
     r'#',
       ]
   c_rex = r'^\s*<!--'
+elif re.search(r'\.scad$', fn):
+  rs = [
+    r'^[^\s]+ = ',
+    r'^\s*(function|module)\s+',
+      ]
 
 rs.append(r'\bTODO\b')
 rs.append(r'\bFIXME\b')
