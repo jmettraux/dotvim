@@ -311,10 +311,10 @@ else
       command! -nargs=0 C :silent w ! pbcopy
       vmap <silent> <leader>c <ESC>:'<,'>:w ! pbcopy<CR><CR>
     else
-      nnoremap <silent> <C-p> <ESC>:r ! xclip -o<CR>
-      nnoremap <silent> <leader>v <ESC>:r ! xclip -o<CR>
-      command! -nargs=0 C :silent w ! xclip -i
-      vmap <silent> <leader>c <ESC>:'<,'>:w ! xclip -i<CR><CR>
+      nnoremap <silent> <C-p> <ESC>:r ! xclip -selection c -o<CR>
+      nnoremap <silent> <leader>v <ESC>:r ! xclip -selection c -o<CR>
+      command! -nargs=0 C :silent w ! xclip -selection c  -i
+      vmap <silent> <leader>c <ESC>:'<,'>:w ! xclip -selection c -i<CR><CR>
     endif
   endif
 endif
