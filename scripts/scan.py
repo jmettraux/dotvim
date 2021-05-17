@@ -32,11 +32,17 @@ elif re.search(r'\.js$', fn):
   rs = [
     r'^\s*var\s+self\s*=',
     r'^\s*var\s+.+\s*=\s*\(?\s*function\s*\(',
-    r'^\s*this\..+\s*=\s*',
+    r'^\s*this\.[a-z][a-zA-Z0-9_]+\s*=\s*',
     #r'^\s*this\..+\s*=\s*.+\bfunction\b',
     r'^\s*var\s+[A-Z]',
     r'^\s*function\s+',
+    r'^\s*class\s+',
+    r'^\s*constructor\(',
+    r'^\s*#[a-z_][a-z_A-Z0-9]+',
+    r'^\s*[a-z_][a-z_A-Z0-9]+\([^(){]*\)\s*{\s*$',
+    r'^\s*(get|set)\s+[a-z_][a-z_A-Z0-9]+',
       ]
+  c_rex = r'^\s*//'
 elif re.search(r'\.md$', fn):
   rs = [
     r'#',
