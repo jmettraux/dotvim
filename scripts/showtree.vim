@@ -10,7 +10,7 @@ function! s:MoveHalfUp()
   let cl = line('.')
   call cursor(cl / 2, 0)
   normal zz
-endfunction " MoveHalfDown
+endfunction " MoveHalfUp
 
 function! s:MoveToModified(d)
   let sl = line('.')
@@ -84,8 +84,8 @@ function! JmShowTree(start)
 
   nnoremap <buffer> <silent> q :bd<CR>
 
-  nnoremap <buffer> <silent> <leader>j :call <SID>MoveHalfDown()<CR>
-  nnoremap <buffer> <silent> <leader>k :call <SID>MoveHalfUp()<CR>
+  "nnoremap <buffer> <silent> <leader>j :call <SID>MoveHalfDown()<CR>
+  "nnoremap <buffer> <silent> <leader>k :call <SID>MoveHalfUp()<CR>
   nnoremap <buffer> <silent> J :call <SID>MoveHalfDown()<CR>
   nnoremap <buffer> <silent> K :call <SID>MoveHalfUp()<CR>
   nnoremap <buffer> <silent> m :call <SID>MoveToModified(1)<CR>
@@ -104,12 +104,25 @@ function! s:ShowSourceTree()
     call JmShowTree('lib')
   elseif !empty(glob("src"))
     call JmShowTree('src')
+  elseif !empty(glob("scripts"))
+    call JmShowTree('scripts')
   else
     call JmShowTree('.')
   endif
 endfunction " ShowSourceTree
 command! -nargs=0 Vs :call <SID>ShowSourceTree()
 nnoremap <silent> <leader>s :call <SID>ShowSourceTree()<CR>
+
+function! s:ShowScriptsTree()
+  if !empty(glob("scripts"))
+    call JmShowTree('scripts')
+  elseif !empty(glob("js"))
+    call JmShowTree('js')
+  elseif !empty(glob("src"))
+    call JmShowTree('src')
+  endif
+endfunction " ShowScriptsTree
+nnoremap <silent> <leader>j :call <SID>ShowScriptsTree()<CR>
 
 function! s:ShowTestTree()
 
