@@ -22,7 +22,7 @@ function! JmDictLookup(word)
     " delete all the lines
   normal O
   exe 'silent r! dict "' . a:word . '"'
-  exe 'silent %s/\v^[ 	]+$//e'
+  exe 'silent %s/\v[ 	]+$//e'
     " e to silent when no pattern match
   normal 1G
   "setlocal syntax=showtreeout
@@ -31,5 +31,5 @@ function! JmDictLookup(word)
   nnoremap <buffer> <silent> q :bd<CR>
 endfunction " JmDictLookup
 
-"command! -nargs=1 -complete=dir Dlu :call JmDictLookup(<args>)
+command! -nargs=+ Dict :call JmDictLookup(<q-args>)
 
