@@ -33,5 +33,6 @@ endfunction " JmDictLookup
 
 command! -nargs=+ Dict :call JmDictLookup(<q-args>)
 
-nnoremap <leader>^ :call JmDictLookup(expand('<cword>'))
+"nnoremap <leader>^ :call JmDictLookup(expand('<cword>'))
+nnoremap ^^ :call JmDictLookup(expand('<cword>'))
 
