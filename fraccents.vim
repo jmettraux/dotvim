@@ -48,13 +48,16 @@ function! s:ToggleAccent()
   elseif c == 'ê' | exe 'normal! re' |
   elseif c == 'a' | exe 'normal! rà' |
   elseif c == 'à' | exe 'normal! râ' |
-  elseif c == 'â' | exe 'normal! ra' |
+  elseif c == 'â' | exe 'normal! rä' |
+  elseif c == 'ä' | exe 'normal! ra' |
   elseif c == 'o' | exe 'normal! rô' |
-  elseif c == 'ô' | exe 'normal! ro' |
+  elseif c == 'ô' | exe 'normal! rö' |
+  elseif c == 'ö' | exe 'normal! ro' |
   elseif c == 'u' | exe 'normal! rù' |
   elseif c == 'ù' | exe 'normal! rû' |
   elseif c == 'û' | exe 'normal! rú' |
-  elseif c == 'ú' | exe 'normal! ru' |
+  elseif c == 'ú' | exe 'normal! rü' |
+  elseif c == 'ü' | exe 'normal! ru' |
   elseif c == 'i' | exe 'normal! rî' |
   elseif c == 'î' | exe 'normal! rì' |
   elseif c == 'ì' | exe 'normal! ri' |
