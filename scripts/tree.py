@@ -8,6 +8,7 @@ import os, re, sys, string, subprocess
 # determine root
 
 root = sys.argv[1]
+if os.path.isfile(root): root = os.path.dirname(root)
 if root[-1] != '/': root = root + '/'
 
 # determine git root
