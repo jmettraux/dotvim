@@ -49,7 +49,8 @@ function! s:ToggleAccent()
   elseif c == 'a' | exe 'normal! rà' |
   elseif c == 'à' | exe 'normal! râ' |
   elseif c == 'â' | exe 'normal! rä' |
-  elseif c == 'ä' | exe 'normal! ra' |
+  elseif c == 'ä' | exe 'normal! rá' |
+  elseif c == 'á' | exe 'normal! ra' |
   elseif c == 'o' | exe 'normal! rô' |
   elseif c == 'ô' | exe 'normal! rö' |
   elseif c == 'ö' | exe 'normal! ro' |
