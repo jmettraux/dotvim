@@ -2,20 +2,28 @@
 " open previous file for `vp`
 "
 function! s:OpenPrevious()
+
   exe 'new | only'
+
   exe 'setlocal buftype=nofile'
   exe 'setlocal bufhidden=hide'
   exe 'setlocal noswapfile'
   exe 'setlocal nobuflisted'
   "exe 'setlocal filetype=ListFiles'
+
   exe 'let @z=""'
   exe 'redir @z'
   exe 'silent ol'
   exe 'redir END'
   exe 'silent 0put z'
+
   exe 'g/COMMIT_EDITMSG/d_'
   exe 'g/NetrwTreeListing/d_'
   exe 'g/==ListFiles/d_'
+  exe 'g/_c__/d_'
+  exe 'g/_g__/d_'
+  exe 'g/_t__/d_'
+
   exe 'normal 2G10lgF'
   exe 'syntax sync fromstart'
 endfunction " OpenPrevious
