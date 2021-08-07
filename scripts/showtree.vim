@@ -89,6 +89,9 @@ function! JmShowTree(start)
   nnoremap <buffer> <silent> J :call <SID>MoveHalfDown()<CR>
   nnoremap <buffer> <silent> K :call <SID>MoveHalfUp()<CR>
   nnoremap <buffer> <silent> m :call <SID>MoveToModified(1)<CR>
+
+  exe 'nnoremap <buffer> F :! fe ' . a:start . '*<CR>'
+  nnoremap <buffer> f :call JmShowTreeImage()<CR>
 endfunction " ShowTree
 
 command! -nargs=1 -complete=dir Vt :call JmShowTree(<f-args>)
@@ -224,6 +227,19 @@ function! JmMoveTreeFile()
 
   call JmReloadTree(0)
 endfunction " JmMoveTreeFile
+
+
+function! JmShowTreeImage()
+
+  let path = JmDetermineTreePath()
+  if empty(path) | return 0 | endif
+  if isdirectory(path) | return 0 | endif
+
+  call system('fe ' . path)
+
+  " unfortunately, this does not come back to Vim's terminal :-(
+
+endfunction " JmShowTreeImage
 
 
 function! JmGitAddTreeFile()
