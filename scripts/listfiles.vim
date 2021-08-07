@@ -117,6 +117,7 @@ function! s:ListFiles(...)
   "nmap <buffer> <CR> gF
     "
   nnoremap <buffer> o :call JmOpenTreeFile()<CR>
+  nnoremap <buffer> e :call JmOpenTreeFile('edit')<CR>
   nnoremap <buffer> <space> :call JmOpenTreeFile()<CR>
   nnoremap <buffer> <CR> :call JmOpenTreeFile()<CR>
 
