@@ -28,7 +28,7 @@ for l in specials:
 mx = mx + 1
 
 for l in normals:
-  print l[0].ljust(mx) + l[1]
+  print(l[0].ljust(mx) + l[1])
 for l in specials:
-  print l[0].ljust(mx) + l[1]
+  print(l[0].ljust(mx) + l[1])
 

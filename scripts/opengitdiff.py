@@ -22,13 +22,13 @@ for line in lines:
 
   if lnum > -1:
     if re.match(r'^[^-]', line): lnum = lnum + 1
-    print ('%' + digits + 'i %s') % (lnum, line)
+    print(('%' + digits + 'i %s') % (lnum, line))
   else:
-    print line
+    print(line)
     m = re.match(r'^@@ [-+0-9, ]+ @@$', line)
     if m:
       lnum = 0
-      print
+      print()
 
-print
+print()
 

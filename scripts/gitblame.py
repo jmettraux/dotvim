@@ -14,6 +14,8 @@ title = ''
 
 for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).stdout:
 
+  line = line.decode()
+
   m = re.match(r'^\^?([a-fA-F0-9]+) ([^(]+)?\((.+) (\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}) ([-+]\d{4}) (\s*\d+)\) (.+)?$', line)
 
   sha = m.group(1)
@@ -40,7 +42,7 @@ for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).stdout:
     previous_head = head
     title = titles[sha]
 
-  print head + ' ' + lnum + (' ' + line if len(line) > 0 else '')
+  print(head + ' ' + lnum + (' ' + line if len(line) > 0 else ''))
 
-print
+print()
 

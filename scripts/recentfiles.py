@@ -50,16 +50,17 @@ for path in paths:
         current[p] = {}
       current = current[p]
 
-print "== recent (%d)" % len(paths)
+print("== recent (%d)" % len(paths))
 
 def shellquote(s):
   return "'" + s.replace("'", "'\\''") + "'"
 
 fs = {}
 
-cmd = 'ls -lh ' + string.join(map(shellquote, paths))
+cmd = 'ls -lh ' + ''.join(map(shellquote, paths))
 
 for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=FNULL).stdout:
+  line = line.decode()
   m = re.match(
     r'^.+ +.+ +.+ +.+ ([0-9.]+[BKMT]?) +.+ \d+ +[0-9:]+ +(.+)$', line)
   if m:
@@ -72,9 +73,10 @@ exts = cf.read().split()
 cf.close()
 #print exts
 tpaths = filter(lambda x: os.path.splitext(x)[1][1:] in exts, paths)
-cmd = 'wc -l ' + string.join(map(shellquote, tpaths))
+cmd = 'wc -l ' + ''.join(map(shellquote, tpaths))
 
 for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=FNULL).stdout:
+  line = line.decode()
   if re.match('o such file', line): continue
   m = re.match('^\s+(\d+) (.+)$', line)
   if m == None: continue
@@ -83,8 +85,8 @@ for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=FNU
 
 cmd = 'git diff --numstat'
 for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=FNULL).stdout:
-  line = line.strip()
-  ss = string.split(line)
+  line = line.decode().strip()
+  ss = line.split()
   f = fs.get(os.path.abspath(ss[2]))
   if f == None: continue
   f['g'] = '+' + ss[0] + '-' + ss[1]
@@ -96,5 +98,5 @@ for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=FNU
 for path in paths:
   f = fs.get(os.path.abspath(path), None)
   if not f: continue
-  print ' '.join(filter(None, [ f['p'], f['s'], f.get('l'), f.get('g') ]))
+  print(' '.join(filter(None, [ f['p'], f['s'], f.get('l'), f.get('g') ])))
 

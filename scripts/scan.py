@@ -95,7 +95,7 @@ for i, l in ls:
     for ii, ll in c_lines[1:]:
       if len(ll) > 70:
         ll = ll[0:70] + '...'
-      print '%5d %s' % (ii, ll)
+      print('%5d %s' % (ii, ll))
 
   c_lines = []
 
@@ -106,6 +106,6 @@ for i, l in ls:
 
   for r in rs:
     if re.search(r, l):
-      print '%5d %s' % (i, l)
+      print('%5d %s' % (i, l))
       break
 

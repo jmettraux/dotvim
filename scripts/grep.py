@@ -80,9 +80,10 @@ def should_mute(path):
 path = None
 mute = False
 
-print
+print()
 
 for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).stdout:
+  line = line.decode()
   m = re.match(r'^([^:]+):(\d+):(.+)$', line)
   if not(m):
     m = re.match(r'^Binary file ([^$]+)$', line)
@@ -90,16 +91,16 @@ for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).stdout:
       if should_mute(os.path.relpath(m.group(1))):
         line = False
     if line:
-      print 'grep.py choked on >>' + line.strip() + '<<'
+      print('grep.py choked on >>' + line.strip() + '<<')
   else:
     pa = os.path.relpath(m.group(1))
     nomute = not(should_mute(pa))
     if pa != path:
       if nomute:
-        print pa
+        print(pa)
       path = pa
     if nomute:
-      print '%5d|%s' % (int(m.group(2)), m.group(3))
+      print('%5d|%s' % (int(m.group(2)), m.group(3)))
 
-print
+print()
 

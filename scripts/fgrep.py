@@ -17,5 +17,5 @@ f.close
 
 for i, l in ls:
   if re.search(rex, l):
-    print '%5d %s' % (i, l)
+    print('%5d %s' % (i, l))
 

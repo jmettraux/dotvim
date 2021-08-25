@@ -11,5 +11,5 @@ f.close
 for l in ls:
   if re.match('^#', l):
     continue
-  print l
+  print(l)
 

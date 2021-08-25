@@ -29,9 +29,9 @@ for line in sys.stdin:
       s = s + re.sub(r' ', '', tags) + ' '
     s = s + text
 
-    print s
+    print(s)
 
   else:
 
-    print l
+    print(l)
 

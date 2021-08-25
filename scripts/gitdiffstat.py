@@ -28,6 +28,7 @@ cmd3 = cmd3 + ' | tail -1'
 paths = {}
 
 for line in subprocess.Popen(cmd0, shell=True, stdout=subprocess.PIPE).stdout:
+  line = line.decode()
   m = re.match(r'^(\d+)\s+(\d+)\s+(.+)$', line)
   if not m: continue
   plus = m.group(1)
@@ -36,12 +37,14 @@ for line in subprocess.Popen(cmd0, shell=True, stdout=subprocess.PIPE).stdout:
   paths[path] = [ plus, minus, 'M' ]
 
 for line in subprocess.Popen(cmd1, shell=True, stdout=subprocess.PIPE).stdout:
+  line = line.decode()
   m = re.match(r'^D\s+(.+)$', line)
   if not m: continue
   paths[m.group(1)][2] = 'D'
 
 if cmd2:
   for line in subprocess.Popen(cmd2, shell=True, stdout=subprocess.PIPE).stdout:
+    line = line.decode()
     m = re.match(r'^\s+(new file|deleted):\s+(.+)$', line)
     if m:
       #paths[m.group(1)][2] = 'A'
@@ -73,10 +76,10 @@ for path in paths.keys():
 for path in sorted(paths.keys()):
   a = paths[path]
   #path = os.path.relpath(os.path.join(gitroot, path))
-  print ('%-' + str(lmax) + 's | %s+%s-%s') % (path, a[2], a[0], a[1])
+  print(('%-' + str(lmax) + 's | %s+%s-%s') % (path, a[2], a[0], a[1]))
 
 print
 for line in subprocess.Popen(cmd3, shell=True, stdout=subprocess.PIPE).stdout:
-  print ' ' + line
-if sha != '0': print
+  print(' ' + line.decode())
+if sha != '0': print()
 

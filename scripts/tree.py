@@ -32,7 +32,7 @@ if gitroot:
   for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).stdout:
     line = line.strip()
     #print [ 'gdns', line ]
-    ss = string.split(line)
+    ss = line.split()
     ap = os.path.abspath(os.path.join(gitroot, ss[2]))
     git[ap] = { 'p': ss[2], 'a': ss[0], 'd': ss[1] }
 
@@ -40,7 +40,7 @@ if gitroot:
   for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).stdout:
     line = line.strip()
     #print [ 'gss', line ]
-    ss = string.split(line)
+    ss = line.split()
     if len(ss) > 2 and ss[2] == '->':
       ap = os.path.abspath(ss[3])
       g = git.get(ap, { 'p': ss[3] })
@@ -69,8 +69,8 @@ cmd = (
       exts)) +
   ' | xargs wc -l 2>/dev/null')
 for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).stdout:
-  line = line.strip()
-  ss = string.split(line)
+  line = line.decode().strip()
+  ss = line.split()
   if len(ss) < 2: continue
   if ss[1] == 'total': continue
   if re.match(r'\/\.git\/', ss[1]): continue
@@ -107,7 +107,7 @@ cmd = 'tree -F ' + root
 
 for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).stdout:
 
-  line = line.rstrip()
+  line = line.decode().rstrip()
 
   d = { 'l': line, 'i': -1 }
   fs.append(d);
@@ -127,7 +127,7 @@ def to_s(l):
 
 for f in fs:
   if f['i'] < 0 or f['s'] == '-1':
-    print f['l']
+    print(f['l'])
   else:
     ap = os.path.abspath(f['p'])
     g = git.get(ap)
@@ -139,7 +139,7 @@ for f in fs:
         ad = 'untracked'
       elif un and un[0:1] == 'A':
         ad = ad + ' new'
-      print to_s([ f['l'], f['s'], ls, ad ])
+      print(to_s([ f['l'], f['s'], ls, ad ]))
     else:
-      print to_s([ f['l'], f['s'], ls ])
+      print(to_s([ f['l'], f['s'], ls ]))
 
