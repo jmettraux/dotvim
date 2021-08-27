@@ -57,7 +57,7 @@ def shellquote(s):
 
 fs = {}
 
-cmd = 'ls -lh ' + ''.join(map(shellquote, paths))
+cmd = 'ls -lh ' + ' '.join(map(shellquote, paths))
 
 for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=FNULL).stdout:
   line = line.decode()
@@ -92,8 +92,8 @@ for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=FNU
   f['g'] = '+' + ss[0] + '-' + ss[1]
 
 #for k in fs:
-#  print "%s:" % k
-#  print fs[k]
+#  print("%s:" % k)
+#  print(fs[k])
 
 for path in paths:
   f = fs.get(os.path.abspath(path), None)
