@@ -85,8 +85,7 @@ for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=FNU
 
 cmd = 'git diff --numstat'
 for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=FNULL).stdout:
-  line = line.decode().strip()
-  ss = line.split()
+  ss = line.decode().strip().split()
   f = fs.get(os.path.abspath(ss[2]))
   if f == None: continue
   f['g'] = '+' + ss[0] + '-' + ss[1]

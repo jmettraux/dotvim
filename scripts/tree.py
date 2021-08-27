@@ -30,16 +30,16 @@ if gitroot:
 
   cmd = 'git diff --numstat'
   for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).stdout:
-    line = line.strip()
-    #print [ 'gdns', line ]
+    line = line.decode().strip()
+    #print([ 'gdns', line ])
     ss = line.split()
     ap = os.path.abspath(os.path.join(gitroot, ss[2]))
     git[ap] = { 'p': ss[2], 'a': ss[0], 'd': ss[1] }
 
   cmd = 'git status -s'
   for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).stdout:
-    line = line.strip()
-    #print [ 'gss', line ]
+    line = line.decode().strip()
+    #print([ 'gss', line ])
     ss = line.split()
     if len(ss) > 2 and ss[2] == '->':
       ap = os.path.abspath(ss[3])
@@ -52,8 +52,8 @@ if gitroot:
       git[ap] = g
       g['s'] = ss[0]
 
-#print git
-#print git.keys()
+#print(git)
+#print(git.keys())
 #print git['/home/jmettraux/w/sg/ispec/spec/common_spec.rb']
 
 cf = open(os.path.join(os.path.dirname(__file__), 'countable.txt'), 'r')
@@ -69,8 +69,7 @@ cmd = (
       exts)) +
   ' | xargs wc -l 2>/dev/null')
 for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).stdout:
-  line = line.decode().strip()
-  ss = line.split()
+  ss = line.decode().strip().split()
   if len(ss) < 2: continue
   if ss[1] == 'total': continue
   if re.match(r'\/\.git\/', ss[1]): continue
