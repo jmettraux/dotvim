@@ -18,6 +18,7 @@ try:
   DEV_NULL = open(os.devnull, 'w')
   gitroot = subprocess\
     .check_output([ 'git', 'rev-parse', '--show-toplevel' ], stderr=DEV_NULL)\
+    .decode()\
     .strip()
 except:
   True # not a git repo
@@ -33,6 +34,7 @@ if gitroot:
     line = line.decode().strip()
     #print([ 'gdns', line ])
     ss = line.split()
+    #print([ gitroot, ss[2] ])
     ap = os.path.abspath(os.path.join(gitroot, ss[2]))
     git[ap] = { 'p': ss[2], 'a': ss[0], 'd': ss[1] }
 
