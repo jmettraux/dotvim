@@ -139,7 +139,10 @@ for f in fs:
       if un == '??':
         ad = 'untracked'
       elif un and un[0:1] == 'A':
-        ad = ad + ' new'
+        if ad == '+---':
+          ad = 'new'
+        else:
+          ad = ad + ' new'
       print(to_s([ f['l'], f['s'], ls, ad ]))
     else:
       print(to_s([ f['l'], f['s'], ls ]))
