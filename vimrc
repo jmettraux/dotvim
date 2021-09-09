@@ -313,8 +313,10 @@ else
     else
       nnoremap <silent> <C-p> <ESC>:r ! xclip -selection c -o<CR>
       nnoremap <silent> <leader>v <ESC>:r ! xclip -selection c -o<CR>
-      command! -nargs=0 C :silent w ! xclip -selection c  -i
+      command! -nargs=0 C :silent w ! xclip -selection c -i
       vmap <silent> <leader>c <ESC>:'<,'>:w ! xclip -selection c -i<CR><CR>
+      command! -nargs=0 Cl :silent .w ! xclip -selection c -i
+        " :Cl<CR> to copy current line to the clipboard
     endif
   endif
 endif
