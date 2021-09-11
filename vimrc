@@ -367,6 +367,9 @@ set statusline+=\ %P " file position
 nnoremap qw :silent! normal yiwi'<ESC>ea'<ESC>
 " double "quote" a word
 nnoremap qd :silent! normal yiwi"<ESC>ea"<ESC>
+" `backquote` a word
+nnoremap qb :silent! normal yiwi`<ESC>ea`<ESC>
+
 " remove quotes from a word
 nnoremap wq :silent! normal mpeld bhd `ph<CR>
 
