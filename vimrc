@@ -365,10 +365,15 @@ set statusline+=\ %P " file position
 
 " 'quote' a word
 nnoremap qw :silent! normal yiwi'<ESC>ea'<ESC>
+xnoremap qw c''<ESC>hp
+  "
 " double "quote" a word
 nnoremap qd :silent! normal yiwi"<ESC>ea"<ESC>
+xnoremap qd c""<ESC>hp
+  "
 " `backquote` a word
 nnoremap qb :silent! normal yiwi`<ESC>ea`<ESC>
+xnoremap qb c``<ESC>hp
 
 " remove quotes from a word
 nnoremap wq :silent! normal mpeld bhd `ph<CR>
