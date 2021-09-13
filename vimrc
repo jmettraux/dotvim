@@ -375,6 +375,14 @@ xnoremap qd c""<ESC>hp
 nnoremap qb :silent! normal yiwi`<ESC>ea`<ESC>
 xnoremap qb c``<ESC>hp
 
+" surround by _
+nnoremap q_ :silent! normal yiwi_<ESC>ea_<ESC>
+xnoremap q_ c__<ESC>hp
+
+" surround by *
+nnoremap q* :silent! normal yiwi**<ESC>ea**<ESC>
+xnoremap q* c****<ESC>hhp
+
 " remove quotes from a word
 nnoremap wq :silent! normal mpeld bhd `ph<CR>
 
