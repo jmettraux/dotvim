@@ -25,7 +25,7 @@ function! JmDictLookup(word)
   exe 'silent %s/\v[ 	]+$//e'
     " e to silent when no pattern match
   normal 1G
-  "setlocal syntax=showtreeout
+  setlocal syntax=dictionary
   setlocal nomodifiable
 
   nnoremap <buffer> <silent> q :bd<CR>
