@@ -83,7 +83,7 @@ mute = False
 print()
 
 for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).stdout:
-  line = line.decode()
+  line = line.decode('UTF-8', 'ignore')
   m = re.match(r'^([^:]+):(\d+):(.+)$', line)
   if not(m):
     m = re.match(r'^Binary file ([^$]+)$', line)
