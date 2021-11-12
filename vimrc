@@ -317,6 +317,8 @@ else
       vmap <silent> <leader>c <ESC>:'<,'>:w ! xclip -selection c -i<CR><CR>
       command! -nargs=0 Cl :silent .w ! xclip -selection c -i
         " :Cl<CR> to copy current line to the clipboard
+      command! -nargs=0 Cr :call system('xclip -selection c -i', getreg('"'))
+        " https://stackoverflow.com/questions/10780469/vim-pipe-register-to-external-command
     endif
   endif
 endif
