@@ -319,6 +319,7 @@ else
         " :Cl<CR> to copy current line to the clipboard
       command! -nargs=0 Cr :call system('xclip -selection c -i', getreg('"'))
         " https://stackoverflow.com/questions/10780469/vim-pipe-register-to-external-command
+      nnoremap <silent> yc <ESC>yy :call system('xclip -selection c -i', getreg('"'))<CR>:echo "copied line to clipboard."<CR>
     endif
   endif
 endif
