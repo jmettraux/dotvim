@@ -82,6 +82,8 @@ mute = False
 
 print()
 
+paths = {}
+
 for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).stdout:
   line = line.decode('UTF-8', 'ignore')
   m = re.match(r'^([^:]+):(\d+):(.+)$', line)
@@ -91,16 +93,22 @@ for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).stdout:
       if should_mute(os.path.relpath(m.group(1))):
         line = False
     if line:
-      print('grep.py choked on >>' + line.strip() + '<<')
+      paths[line.strip()] = [ 'grep.py choked on >>' + line.strip() + '<<' ]
   else:
     pa = os.path.relpath(m.group(1))
     nomute = not(should_mute(pa))
     if pa != path:
-      if nomute:
-        print(pa)
+      #if nomute:
+      #  print(pa)
       path = pa
+      paths[path] = []
     if nomute:
-      print('%5d|%s' % (int(m.group(2)), m.group(3)))
+      paths[path].append('%5d|%s' % (int(m.group(2)), m.group(3)))
+
+for path in sorted(paths.keys()):
+  print(path)
+  for line in paths[path]:
+    print(line)
 
 print()
 
