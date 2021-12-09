@@ -324,6 +324,10 @@ else
   endif
 endif
 
+"
+" 1vp to copy over visually... ;-)
+"
+
 "nnoremap <silent> <leader>tt :w<CR>:e ~/scratch.txt<CR>
 
 " from http://howivim.com/2016/salvatore-sanfilippo/
