@@ -81,6 +81,7 @@ function! JmVg(args)
   nnoremap <buffer> o :call <SID>GrepOpenFile()<CR>
   nnoremap <buffer> <space> :call <SID>GrepOpenFile()<CR>
   nnoremap <buffer> <CR> :call <SID>GrepOpenFile()<CR>
+  exe 'nnoremap <buffer> r :call JmVg(' . string(a:args) . ')<CR>'
 endfunction " JmVg
 
 "command! -nargs=1 Vg :! grep -R -n --exclude-dir=.git <args>
