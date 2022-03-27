@@ -93,7 +93,10 @@ function! JmOpenFile(path, line)
   if a:line > 0 | call feedkeys(a:line . 'G') | endif
 endfunction " JmOpenFile
 
-function! JmOpenTreeFile(mode='open')
+"function! JmOpenTreeFile(mode='open')
+function! JmOpenTreeFile(...)
+
+  let mode = get(a:, 0, 'open')
 
   let l = getline('.')
 
@@ -110,7 +113,7 @@ function! JmOpenTreeFile(mode='open')
     let pl = JmDetermineTreePathAndLine()
     let ex = tolower(fnamemodify(pl[0], ':e'))
     if index([ 'jpg', 'jpeg', 'gif', 'png', 'webp', 'bmp' ], ex) > -1
-      if a:mode == 'edit'
+      if mode == 'edit'
         call system('gimp ' . pl[0])
       else
         call system('fe ' . pl[0])
