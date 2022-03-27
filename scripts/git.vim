@@ -401,7 +401,7 @@ nnoremap <silent> <leader>Y :call <SID>OpenGitHistory()<CR>
 nnoremap <silent> <leader>S :call <SID>OpenGitCommits()<CR>
 
 
-function s:OpenVersion(path, sha)
+function! s:OpenVersion(path, sha)
 
   if empty(a:sha) == 1 | return | endif
 
