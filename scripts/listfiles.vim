@@ -109,6 +109,9 @@ function! s:ListFiles(...)
       " go to first file
   end
 
+  exe 'silent! %s/$//'
+  exe 'silent! %s/ ([0-9]+)$/\1C/'
+
   setlocal syntax=buffers
   setlocal nomodifiable
 
