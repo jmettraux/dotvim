@@ -111,6 +111,7 @@ function! s:ListFiles(...)
 
   exe 'silent! %s/$//'
   exe 'silent! %s/\( [0-9]\+\)$/\1C/'
+  exe 'silent! %s/\\/\//g'
 
   setlocal syntax=buffers
   setlocal nomodifiable
