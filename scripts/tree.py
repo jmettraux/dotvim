@@ -88,6 +88,7 @@ def to_kmgt(s): # https://stackoverflow.com/questions/12523586
     #if s < step_unit: return "%3.1f%s" % (s, x)
     if s < step_unit: return "%i%s" % (s, x)
     s /= step_unit
+
 def compute_size(path):
   m = re.match(r'^([^*]+)', path)
   if m == None: return '-1'
@@ -104,23 +105,23 @@ def compute_path():
       i = f['i']
   return os.path.join(*d)
 
-cmd = 'tree -F ' + root
+def walk(path, i, prefix):
+  fns = os.listdir(path)
+  for fn in fns:
+    if fn[0:1] == '.': continue
+    h = { 'i': i, 'n': fn }
+    h['p'] = os.path.join(path, fn)
+    h['d'] = os.path.isdir(h['p'])
+    h['s'] = compute_size(h['p'])
+    h['L'] = wcl.get(os.path.abspath(h['p']))
+    pre = re.sub('\|-- $', '`-- ', prefix) if fn == fns[-1] else prefix
+    h['l'] = pre + fn + ('/' if h['d'] else '')
+    fs.append(h)
+    if h['d']: walk(h['p'], i + 1, prefix[0:-3] + '   |-- ')
 
-for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).stdout:
+fs.append({ 'l': root, 'i': -1 })
+walk(root, 0, '|-- ')
 
-  line = line.decode().rstrip()
-
-  d = { 'l': line, 'i': -1 }
-  fs.append(d);
-
-  m = re.match(r'^([-|` ]+ )?(.*)$', line)
-  if m == None: continue
-  d['i'] = len(m.group(1) or '')
-  d['n'] = m.group(2)
-  d['p'] = compute_path()
-  d['s'] = compute_size(d['p'])
-  d['d'] = os.path.isdir(d['p'])
-  d['L'] = wcl.get(os.path.abspath(d['p']))
 
 def to_s(l):
   return ' '.join(filter(None, l))
