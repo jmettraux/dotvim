@@ -55,6 +55,7 @@ function! JmShowTree(start)
     " delete all the lines
   normal O
   exe 'silent r! /usr/bin/env python ~/.vim/scripts/tree.py ' . a:start
+  exe 'silent g/^The system cannot find the path specified\./d'
   exe 'silent %s/\v\[ *([0-9.]+[KMGTPE]?)\]  (.+)$/\2 \1/e'
   exe 'silent %s/\v\* / /ge'
   exe 'silent %s/\\ / /ge'
