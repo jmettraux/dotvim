@@ -106,7 +106,7 @@ def compute_path():
   return os.path.join(*d)
 
 def walk(path, i, prefix):
-  fns = os.listdir(path)
+  fns = sorted(os.listdir(path))
   for fn in fns:
     if fn[0:1] == '.': continue
     h = { 'i': i, 'n': fn }
