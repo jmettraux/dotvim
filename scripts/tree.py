@@ -106,17 +106,26 @@ def compute_path():
   return os.path.join(*d)
 
 def walk(path, i, prefix):
+
   fns = sorted(os.listdir(path))
+
   for fn in fns:
+
     if fn[0:1] == '.': continue
+
     h = { 'i': i, 'n': fn }
     h['p'] = os.path.join(path, fn)
     h['d'] = os.path.isdir(h['p'])
     h['s'] = compute_size(h['p'])
     h['L'] = wcl.get(os.path.abspath(h['p']))
-    pre = re.sub('\|-- $', '`-- ', prefix) if fn == fns[-1] else prefix
+    pre = prefix
+    if fn == fns[-1]:
+      pre = re.sub('\|-- $', '`-- ', prefix)
+      prefix = re.sub('\|-- $', '    ', prefix)
     h['l'] = pre + fn + ('/' if h['d'] else '')
+
     fs.append(h)
+
     if h['d']: walk(h['p'], i + 1, prefix[0:-3] + '   |-- ')
 
 fs.append({ 'l': root, 'i': -1 })
