@@ -109,7 +109,18 @@ def walk(path, i, prefix):
 
   fns = sorted(os.listdir(path))
 
+  dfns = []
+  ffns = []
+    #
   for fn in fns:
+    if fn[0:1] == '.':
+      1
+    elif os.path.isdir(os.path.join(path, fn)):
+      dfns.append(fn)
+    else:
+      ffns.append(fn)
+
+  for fn in ffns + dfns:
 
     if fn[0:1] == '.': continue
 
