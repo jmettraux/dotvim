@@ -119,8 +119,10 @@ def walk(path, i, prefix):
       dfns.append(fn)
     else:
       ffns.append(fn)
+    #
+  fns = ffns + dfns
 
-  for fn in ffns + dfns:
+  for fn in fns:
 
     if fn[0:1] == '.': continue
 
