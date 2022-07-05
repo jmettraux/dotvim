@@ -31,8 +31,10 @@ function! s:Fgrep(rex)
   "setlocal nobuflisted
 
   exe '%d_'
-  exe "silent r! echo '== :Fgrep " . path . "'"
-  exe "silent r! echo '==        " . a:rex . "'"
+  "exe "silent r! echo '== :Fgrep " . path . "'"
+  "exe "silent r! echo '==        " . a:rex . "'"
+  exe "silent r! echo '== " . path . "'"
+  exe "silent r! echo '== :Fgrep " . a:rex . "'"
   exe 'r! echo ""'
   exe 'silent r! /usr/bin/env python ~/.vim/scripts/fgrep.py ' . shellescape(path) . ' ' . shellescape(a:rex)
   exe 'r! echo ""'
@@ -47,6 +49,7 @@ function! s:Fgrep(rex)
   nnoremap <buffer> <silent> <CR> :call JmScanOpenAtLine()<CR>
 endfunction " Fgrep
 
+command! -nargs=1 Fgrep :call <SID>Fgrep(<q-args>)
 command! -nargs=1 Fg :call <SID>Fgrep(<q-args>)
 nnoremap <leader>h wb"zyw:exe ":call <SID>Fgrep('" . @z . "')"<CR>
 
