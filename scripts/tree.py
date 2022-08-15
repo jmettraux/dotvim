@@ -107,7 +107,11 @@ def compute_path():
 
 def walk(path, i, prefix):
 
-  fns = sorted(os.listdir(path))
+  fns = []
+  try:
+    fns = sorted(os.listdir(path))
+  except:
+    pass
 
   dfns = []
   ffns = []
