@@ -19,6 +19,8 @@ syn match florSpecial ";"
 syn match florSpecial "|"
 syn match florSpecial "\\"
 syn match florSpecial "\v\s_"
+"syn match florOn /\v^\s*on\s(cancel|error|receive)\b/
+"syn match florOn "on receive"
 syn match florHead /^[ ]*[^ ;#\[\]{}()]\+/
 syn match florHead /;\@<=[ ]*[^ ;#\[\]{}()]\+/
 syn match florKey /\v\zs[^' ]+\ze[ ]*:/
@@ -34,6 +36,7 @@ hi def link florString String
 hi def link florComment Comment
 hi def link florSpecial Special
 hi def link florKey Keyword
+"hi def link florOn Keyword
 
 let b:current_syntax = "flor"
 
