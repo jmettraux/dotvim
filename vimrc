@@ -71,6 +71,10 @@ au BufNewFile,BufRead *.flo set ft=flor
 au BufNewFile,BufRead *.flor set ft=flor
 au BufNewFile,BufRead *.flon set ft=flor
 au BufNewFile,BufRead *.fln set ft=flor
+
+au BufNewFile,BufRead *.hp41 set ft=hp41
+au BufNewFile,BufRead *.hp42 set ft=hp42
+
 au BufNewFile,BufRead *.json set ft=javascript
 
 au BufNewFile,BufRead *.ino set ft=cpp
