@@ -16,7 +16,7 @@ syn match hp42Special "\\"
 "syn match hp42Special "\v\s_"
 "syn match hp42On /\v^\s*on\s(cancel|error|receive)\b/
 "syn match hp42On "on receive"
-syn match hp42Head /\v\s*[A-Z][A-Z><?v]+/
+syn match hp42Head /\v\s*[A-Z][A-Z><?v^]+/
 "syn match hp42Head /\v\\\s*[A-Z][A-Z><?]+/
 "syn match hp42Head /;\@<=[ ]*[^ ;#\[\]{}()]\+/
 "syn match hp42Key /\v\zs[^' ]+\ze[ ]*:/
