@@ -29,6 +29,9 @@ set showcmd
 
 set redrawtime=10000 " for vim 8.1.1438 on OpenBSD
 
+set mouse=a
+  " at least prevents scrolling in the "term" on xterm
+
 let mapleader=';'
 
 syntax on
