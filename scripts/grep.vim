@@ -20,7 +20,7 @@ function! s:ExtractPatternAndRest(s)
     let rest = s[strlen(patt) + 1:]
   else
     let patt = string(split(s, ' ')[0])
-    let patv = v . string(split(s, ' ')[0])
+    let patv = string(v . split(s, ' ')[0])
     let rest = s[strlen(patt) - 2:]
   endif
 
