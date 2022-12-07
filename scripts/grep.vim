@@ -4,22 +4,27 @@ function! s:ExtractPatternAndRest(s)
   let s = JmStrip(a:s)
 
   let patt = ''
+  let patv = ''
   let rest = ''
 
   let c = s[0]
+  let v = '\v'
 
   if c == '"'
     let patt = c . split(s, c)[0] . c
+    let patv = c . v . split(s, c)[0] . c
     let rest = s[strlen(patt) + 1:]
   elseif c == "'"
     let patt = c . split(s, c)[0] . c
+    let patv = c . v . split(s, c)[0] . c
     let rest = s[strlen(patt) + 1:]
   else
     let patt = string(split(s, ' ')[0])
+    let patv = v . string(split(s, ' ')[0])
     let rest = s[strlen(patt) - 2:]
   endif
 
-  return [ patt, JmStrip(rest) ]
+  return [ patt, patv, JmStrip(rest) ]
 endfunction " ExtractPatternAndRest
 
 function! s:GrepOpenFile()
@@ -50,7 +55,7 @@ function! JmVg(args)
   if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
 
   let pr = s:ExtractPatternAndRest(a:args)
-  let rest = pr[1] == '' ? '.' : pr[1]
+  let rest = pr[2] == '' ? '.' : pr[2]
   "let fn = tempname() . '--' . JmNtr(pr[0]) . '--' . JmNtr(rest) . '.greprout'
   let fn = '_g___' . JmNtr(pr[0]) . '__' . JmNtr(rest)
 
@@ -72,7 +77,7 @@ function! JmVg(args)
   exe "silent r! echo '== :Vg " . pr[0] . " " . rest . "'"
   exe "Clean"
   exe 'silent r! /usr/bin/env python ~/.vim/scripts/grep.py ' . shellescape(pr[0]) . ' ' . shellescape(rest) . ' ' . g:uname
-  let g:groPattern = pr[0]
+  let g:groPattern = pr[1]
   setlocal syntax=greprout
   setlocal filetype=greprout
   normal 4G

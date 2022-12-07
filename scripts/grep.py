@@ -12,7 +12,7 @@ directory = sys.argv[2]
 uname = sys.argv[3]
 
 
-cmd = 'grep -R -n'
+cmd = 'egrep -R -n'
 if uname != 'OpenBSD':
   cmd += ' --exclude-dir=.git'
   cmd += ' --exclude-dir=tmp'
