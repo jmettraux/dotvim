@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 
-# gitblame.py
+# scripts/gitblame.py
 
 import os, re, sys, subprocess
 
