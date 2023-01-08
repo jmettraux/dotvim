@@ -60,28 +60,30 @@ for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).stdout:
 #
 # render...
 
-print(comment + ' diff \\')
-print(comment + '   ' + from_path + ' \\')
-print(comment + '   ' + to_path)
-
-dli1 = None
+dli1 = -1
   #
 for i in range(len(from_lines)):
   d = len(diffs) > 0 and diffs[0]
   if d and i == d[1][0]:
-    print(comment + ' ' + d[0] + ' ' + str(d[1]) + ' ' + str(d[2]))
+    dli1 = d[1][1]
+    #print(comment + ' ' + d[0] + ' ' + str(d[1]) + ' ' + str(d[2]))
     for dl in d[3]:
-      #print(comment + dl[2 + len(comment):])
       if dl[0:1] == '<':
-        print(comment + '<' + dl[0 + len(comment):]) # FIXME
+        print(comment + '<' + dl[1 + len(comment):]) # display A "<" line
       elif dl == '---':
         1 # noop
       else:
         print(dl[2:])
     diffs = diffs[1:]
     continue
-  if d and i > d[1][0] and i <= d[1][1]:
-    print(comment + '>')
+  if dli1 > -1:
+    if i >= dli1: dli1 = -1
     continue
   print(from_lines[i])
+
+print('')
+print(comment + ' diff \\')
+print(comment + '   ' + from_path + ' \\')
+print(comment + '   ' + to_path)
+print('')
 
