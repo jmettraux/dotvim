@@ -4,8 +4,8 @@
 
 import os, re, sys, subprocess
 
-from_path = sys.argv[1]
-to_path = sys.argv[2]
+from_path = os.path.abspath(sys.argv[1])
+to_path = os.path.abspath(sys.argv[2])
 
 
 def split_line_numbers(s):
@@ -17,8 +17,9 @@ def split_line_numbers(s):
 #
 # determine "comment string"
 
-comment = '//'
-  # TODO adapt to .js, .vim, .sql, etc...
+ext = os.path.splitext(from_path)[1]
+sdic = { '.c': '//', '.js': '//', '.sql': '--', '.vim': '"' }
+comment = sdic[ext] or '#';
 
 
 #
@@ -58,6 +59,10 @@ for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).stdout:
 
 #
 # render...
+
+print(comment + ' diff \\')
+print(comment + '   ' + from_path + ' \\')
+print(comment + '   ' + to_path)
 
 dli1 = None
   #
