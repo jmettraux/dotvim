@@ -10,7 +10,7 @@ to_path = os.path.abspath(sys.argv[2])
 
 def split_line_numbers(s):
   ss = s.split(',')
-  if len(ss) < 2: ss.append(ss[0])
+  if len(ss) < 2: ss.append('0')
   return [ int(si) - 1 for si in ss ]
 
 
@@ -60,12 +60,29 @@ for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).stdout:
 #
 # render...
 
-dli1 = -1
+  # debug
+  #
+#for i in range(len(from_lines)):
+#  d = len(diffs) > 0 and diffs[0]
+#  if d and i == d[1][0]:
+#    print(comment + ' ' + d[0] + ' ' + str(d[1]) + ' ' + str(d[2]))
+#    for dl in d[3]:
+#      print(comment + dl)
+#    diffs = diffs[1:]
+#  print(from_lines[i])
+
+dli = -1
   #
 for i in range(len(from_lines)):
+  if dli > -1 and i < dli:
+    continue
+  if dli > -1:
+    dli = -1
+    print(comment + '<<<')
+    continue
   d = len(diffs) > 0 and diffs[0]
   if d and i == d[1][0]:
-    dli1 = d[1][1]
+    dli = d[1][1]
     #print(comment + ' ' + d[0] + ' ' + str(d[1]) + ' ' + str(d[2]))
     for dl in d[3]:
       if dl[0:1] == '<':
@@ -75,9 +92,6 @@ for i in range(len(from_lines)):
       else:
         print(dl[2:])
     diffs = diffs[1:]
-    continue
-  if dli1 > -1:
-    if i >= dli1: dli1 = -1
     continue
   print(from_lines[i])
 
