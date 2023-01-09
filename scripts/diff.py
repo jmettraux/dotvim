@@ -78,7 +78,6 @@ for i in range(len(from_lines)):
     continue
   if dli > -1:
     dli = -1
-    print(comment + '<<<')
     continue
   d = len(diffs) > 0 and diffs[0]
   if d and i == d[1][0]:
@@ -91,6 +90,7 @@ for i in range(len(from_lines)):
         1 # noop
       else:
         print(dl[2:])
+    print(comment + '<<<')
     diffs = diffs[1:]
     continue
   print(from_lines[i])
