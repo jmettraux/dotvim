@@ -2,7 +2,7 @@
 "
 " DiffFrom and DiffTo
 
-function! s:DiffFrom(toPath)
+function! s:DiffPy(dir, toPath)
 
   if &filetype == 'diff' | return | endif
   if &filetype == 'Scan' | return | endif
@@ -11,31 +11,15 @@ function! s:DiffFrom(toPath)
 
   if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
 
-  let a = expand(a:toPath)
-  let b = expand('%.')
+  let a = (a:dir == 'from') ? expand(a:toPath) : expand('%.')
+  let b = (a:dir == 'from') ? expand('%.') : expand(a:toPath)
 
   exe ':%d'
   exe 'silent r! /usr/bin/env python ~/.vim/scripts/diff.py ' . shellescape(a) . ' ' . shellescape(b)
 endfunction
 
-function! s:DiffTo(toPath)
-
-  if &filetype == 'diff' | return | endif
-  if &filetype == 'Scan' | return | endif
-  if &filetype == 'Fgrep' | return | endif
-  if &filetype == 'ListFiles' | return | endif
-
-  if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
-
-  let a = expand('%.')
-  let b = expand(a:toPath)
-
-  exe ':%d'
-  exe 'silent r! /usr/bin/env python ~/.vim/scripts/diff.py ' . shellescape(a) . ' ' . shellescape(b)
-endfunction
-
-command! -nargs=1 -complete=file DiffFrom :call <SID>DiffFrom(<f-args>)
-command! -nargs=1 -complete=file DiffTo :call <SID>DiffTo(<f-args>)
+command! -nargs=1 -complete=file DiffFrom :call <SID>DiffPy('from', <f-args>)
+command! -nargs=1 -complete=file DiffTo :call <SID>DiffPy('to', t<f-args>)
 
 
 "
