@@ -2,7 +2,7 @@
 "
 " DiffFrom and DiffTo
 
-function! s:DiffPy(dir, toPath)
+function! s:DiffPy(dir, path)
 
   if &filetype == 'diff' | return | endif
   if &filetype == 'Scan' | return | endif
@@ -11,8 +11,8 @@ function! s:DiffPy(dir, toPath)
 
   if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
 
-  let a = (a:dir == 'from') ? expand(a:toPath) : expand('%.')
-  let b = (a:dir == 'from') ? expand('%.') : expand(a:toPath)
+  let a = (a:dir == 'from') ? expand(a:path) : expand('%.')
+  let b = (a:dir == 'from') ? expand('%.') : expand(a:path)
 
   exe ':%d'
   exe 'silent r! /usr/bin/env python ~/.vim/scripts/diff.py ' . shellescape(a) . ' ' . shellescape(b)
@@ -25,7 +25,7 @@ command! -nargs=1 -complete=file DiffTo :call <SID>DiffPy('to', t<f-args>)
 "
 " GitDiffFrom and GitDiffTo
 
-function! s:GitDiff(dir, toPath)
+function! s:GitDiff(dir, path)
 
   if &filetype == 'diff' | return | endif
   if &filetype == 'Scan' | return | endif
@@ -34,8 +34,10 @@ function! s:GitDiff(dir, toPath)
 
   if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
 
-  let a = (a:dir == 'from') ? expand(a:toPath) : expand('%.')
-  let b = (a:dir == 'from') ? expand('%.') : expand(a:toPath)
+  let d = expand('%.')
+  let p = expand(a:path)
+  let a = (a:dir == 'from') ? p : d
+  let b = (a:dir == 'from') ? d : p
 
   let fn = '_gdiff__' . a:dir . '___' . JmNtr(a) . '___' . JmNtr(b)
 
@@ -53,7 +55,12 @@ function! s:GitDiff(dir, toPath)
   setlocal noswapfile
   "setlocal nobuflisted
 
-  exe 'silent r! /usr/local/bin/git diff ' . shellescape(a) . ' ' . shellescape(b)
+  if filereadable(p)
+    exe 'silent r! /usr/local/bin/git diff ' . shellescape(a) . ' ' . shellescape(b)
+  else
+    exe 'silent r! /usr/local/bin/git diff ' . a:path . ' -- ' . d
+  endif
+
   exe 'silent %s/\v\s*$//'
   nohlsearch
 
