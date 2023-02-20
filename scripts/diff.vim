@@ -50,8 +50,9 @@ function! s:GitDiff(dir, path)
   exe 'silent file ' . fn
     " replace buffer name
 
+  setlocal filetype=diff
   setlocal buftype=nofile
-  "setlocal bufhidden=hide
+  setlocal bufhidden=hide
   setlocal noswapfile
   "setlocal nobuflisted
 
@@ -64,9 +65,8 @@ function! s:GitDiff(dir, path)
   exe 'silent %s/\v\s*$//'
   nohlsearch
 
-  setlocal filetype=diff
-  "exe 'setlocal syntax=' . syn
-  setlocal nomodifiable
+  setlocal syntax=diff
+  "setlocal nomodifiable
   normal 1G
 endfunction
 
