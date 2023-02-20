@@ -2,8 +2,9 @@
 
 function! s:Fgrep(rex)
 
-  if &filetype == 'Fgrep' | return | endif
+  if &filetype == 'diff' | return | endif
   if &filetype == 'Scan' | return | endif
+  if &filetype == 'Fgrep' | return | endif
   if &filetype == 'ListFiles' | return | endif
 
   if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
