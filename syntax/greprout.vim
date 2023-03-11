@@ -17,7 +17,8 @@ syn match groLineNr '\v^ *\d+\|' contains=groPipe
 syn match groPipe '\v\|' contained
 syn match groError '\v^grep\.py choked .+$'
 
-exe "syn match groPattern " . g:groPattern
+exe "syn match groPattern " . escape(g:groPattern, '@')
+  " when grepping for @data and stuff like that...
 
 let b:current_syntax = "greprout"
 
