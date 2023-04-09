@@ -15,6 +15,7 @@ fname_messages = '.openai.messages.py'
 model = 'gpt-3.5-turbo'
 max_tokens = 2000
 temperature = 0.7
+max_messages = 2 * 8
 
 lines = sys.stdin.read().strip()
 
@@ -29,9 +30,7 @@ with open(fname_messages) as f:
     messages.append(json.loads(line.strip()))
   #
 messages.append(prompt)
-#print("(((")
-#print(messages)
-#print(")))")
+messages = messages[-max_messages:]
 
 #response = openai.Completion.create(model="ada", prompt="Hello world")
 #print(response.choices[0].text)
