@@ -8,3 +8,7 @@
 .viminfo
 .vimmarks
 
+.openai.*
+
+scripts/__pycache__
+
