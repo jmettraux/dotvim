@@ -435,3 +435,6 @@ nnoremap <leader>[ :hi ColorColumn ctermbg=235 guibg=#2c2d27<CR>:echo<CR>
 
 nnoremap <leader>ts :r ! ruby -e "puts '###' + Time.now.strftime('\%Y-\%m-\%d \%H:\%M:\%S')"<CR>
 
+
+let g:markdown_fenced_languages = [ 'html', 'js=javascript', 'ruby', 'python', 'c', 'java' ]
+
