@@ -43,10 +43,13 @@ with open(fname_messages) as f:
 all_messages.append(prompt)
 
 i = 1
+l = len(all_messages)
+  #
 while 1:
   js = json.dumps(all_messages[-(i+1):])
   if count_tokens(js) > rem_tokens: break
   i = i + 1
+  if i >= l: break
 
 messages = all_messages[-i:]
 l = count_tokens(json.dumps(messages))
@@ -75,7 +78,4 @@ print(f">>> {model} i:{i} l:{l} >>>")
 print(response.choices[0].message.content)
 print(f"<<< {model} <<< .")
 print()
-
-
-
 
