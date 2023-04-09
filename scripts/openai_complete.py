@@ -13,9 +13,9 @@ with open(os.path.expanduser('~') + '/.vim/.openai.key.txt', 'r') as file:
 fname_last = '.openai.last.py'
 fname_messages = '.openai.messages.py'
 model = 'gpt-3.5-turbo'
-max_tokens = 2000
+max_tokens = 1400
 temperature = 0.7
-max_messages = 2 * 8
+max_messages = 2 * 7
 
 lines = sys.stdin.read().strip()
 
@@ -52,7 +52,6 @@ with open(fname_messages, 'a') as f:
   f.write(json.dumps(response.choices[0].message))
   f.write("\n")
 
-#print()
 print('>>> ' + model + ' >>>')
 print(response.choices[0].message.content)
 print('<<< ' + model + ' <<< .')

@@ -9,6 +9,7 @@ function! s:OpenAiChatComplete(prompt)
   put =''
   let @z = system("/usr/bin/env python ~/.vim/scripts/openai_complete.py", a:prompt)
   silent $put z
+  normal <c-g>
 endfunction " OpenAiChatComplete
 
 function! s:OpenAiChatPushLine()
