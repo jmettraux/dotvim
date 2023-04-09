@@ -74,8 +74,14 @@ with open(fname_messages, 'a') as f:
   f.write(json.dumps(response.choices[0].message))
   f.write("\n")
 
-print(f">>> {model} i:{i} l:{l} >>>")
+ct = response.usage.completion_tokens
+pt = response.usage.prompt_tokens
+#tt = response.usage.total_tokens
+
+print(f"<!--  {model}  i:{i} l:{l} -- pt:{pt} ct:{ct}  -->")
+print()
 print(response.choices[0].message.content)
-print(f"<<< {model} <<< .")
+print()
+print("<!-- . -->")
 print()
 
