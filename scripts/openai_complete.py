@@ -29,10 +29,12 @@ max_tokens = 1400
 rem_tokens = whole_tokens - max_tokens
 
 lines = sys.stdin.read().strip()
-
-Path(fname_messages).touch()
+m = re.match(r'^(#+\s+)(.*)', lines)
+if m: lines = m.group(2)
 
 prompt = { "role": "user", "content": lines }
+
+Path(fname_messages).touch()
 
 all_messages = []
   #
