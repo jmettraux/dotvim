@@ -438,3 +438,7 @@ nnoremap <leader>ts :r ! ruby -e "puts '###' + Time.now.strftime('\%Y-\%m-\%d \%
 
 let g:markdown_fenced_languages = [ 'html', 'js=javascript', 'ruby', 'python', 'c', 'java' ]
 
+
+au BufNewFile,BufRead .chat.md  hi ColorColumn ctermbg=16
+  " don't highlight col > 80 for .chat.md
+
