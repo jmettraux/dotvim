@@ -15,6 +15,7 @@ function! s:OpenAiChatPushLine()
 
   if getline('.') !~ '\v^#+\s+'
     exe 'normal I### 0'
+    exe 'w'
   endif
   let l = getline('.')
   exe 'normal o'
@@ -22,6 +23,7 @@ function! s:OpenAiChatPushLine()
   redraw
 
   call <SID>OpenAiChatComplete(l)
+  exe 'w'
 endfunction " OpenAiChatPushLine
 
 "command! -nargs=0 Prompt :call <SID>OpenAiChatPushLine()

@@ -8,6 +8,7 @@
 .viminfo
 .vimmarks
 
+.chat.md
 .openai.*
 
 scripts/__pycache__
