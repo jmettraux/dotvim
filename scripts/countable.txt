@@ -1,1 +1,1 @@
-rb ru js py c h sh fish flor css slim haml html csv md txt json yaml xml java scad
+rb ru js py c h sh fish flor css scss slim haml html csv md txt json yaml xml java scad
