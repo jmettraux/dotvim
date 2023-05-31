@@ -14,7 +14,8 @@ for line in sys.stdin:
 
     author = re.sub(r'[^A-Z]', '', m.group(3).strip())
     if len(author) < 1:
-      author = m.group(3).strip()[:3]
+      author = m.group(3).strip()
+    author = author[:2].upper()
 
     date = m.group(4)[:16]
     date = re.sub(r'[-:]', '', date)
