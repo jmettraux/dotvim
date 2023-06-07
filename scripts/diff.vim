@@ -41,7 +41,9 @@ function! s:GitDiff(dir, path)
 
   let fn = '_gdiff__' . a:dir . '___' . JmNtr(a) . '___' . JmNtr(b)
 
-  let bn = bufnr(fn)
+  "let bn = bufnr(fn)
+  let bn = JmBufferNumber(fn)
+
   if bn > -1 | exe '' . bn . 'bwipeout!' | endif
     " close previous buffer if any
 

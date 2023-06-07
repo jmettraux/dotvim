@@ -34,7 +34,9 @@ function! s:Scan()
 
   let fn = '_k___' . JmNtr(path)
 
-  let bn = bufnr(fn)
+  "let bn = bufnr(fn)
+  let bn = JmBufferNumber(fn)
+
   if bn > -1 | exe '' . bn . 'bwipeout!' | endif
     " close previous buffer if any
 

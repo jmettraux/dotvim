@@ -38,7 +38,9 @@ function! JmShowTree(start)
 
   let fn = '_t___' . JmNtr(a:start)
 
-  let bn = bufnr(fn)
+  "let bn = bufnr(fn)
+  let bn = JmBufferNumber(fn)
+
   if bn > -1 | exe '' . bn . 'bwipeout!' | endif
     " close previous GitLog if any
 

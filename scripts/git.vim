@@ -81,7 +81,9 @@ function! s:OpenCommit(sha)
 
   let fn = '_c__' . sha . '__' . date . '__' . JmNtr(title)
 
-  let bn = bufnr(fn)
+  "let bn = bufnr(fn)
+  let bn = JmBufferNumber(fn)
+
   if bn > -1 | exe '' . bn . 'bwipeout!' | endif
     " close previous commit if any
 
@@ -139,7 +141,9 @@ function! s:OpenGitLog(all)
   let fn = '_l___git_log'
   if a:all | let fn = fn . '___all' | endif
 
-  let bn = bufnr(fn)
+  "let bn = bufnr(fn)
+  let bn = JmBufferNumber(fn)
+
   if bn > -1 | exe '' . bn . 'bwipeout!' | endif
     " close previous GitLog if any
 
@@ -207,7 +211,9 @@ function! s:OpenGitBlame()
 
   if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
 
-  let bn = bufnr(fn)
+  "let bn = bufnr(fn)
+  let bn = JmBufferNumber(fn)
+
   if bn > -1 | exe '' . bn . 'bwipeout!' | endif
     " close previous buffer if any
 
@@ -262,7 +268,9 @@ function! s:OpenGitDiff(path)
 
   let fn = '_d___' . JmNtr(a:path)
 
-  let bn = bufnr(fn)
+  "let bn = bufnr(fn)
+  let bn = JmBufferNumber(fn)
+
   if bn > -1 | exe '' . bn . 'bwipeout!' | endif
     " close previous commit if any
 
@@ -321,7 +329,9 @@ function! s:OpenGitCommits()
 
   let fn = '_C___' . JmNtr(path)
 
-  let bn = bufnr(fn)
+  "let bn = bufnr(fn)
+  let bn = JmBufferNumber(fn)
+
   if bn > -1 | exe '' . bn . 'bwipeout!' | endif
     " close previous buffer if any
 
@@ -359,7 +369,9 @@ function! s:OpenGitHistory()
 
   let fn = '_h___' . JmNtr(path)
 
-  let bn = bufnr(fn)
+  "let bn = bufnr(fn)
+  let bn = JmBufferNumber(fn)
+
   if bn > -1 | exe '' . bn . 'bwipeout!' | endif
     " close previous buffer if any
 
@@ -413,7 +425,9 @@ function! s:OpenVersion(path, sha)
 
   let fn = '_v__' . sha . '__' . date . '__' . JmNtr(path)
 
-  let bn = bufnr(fn)
+  "let bn = bufnr(fn)
+  let bn = JmBufferNumber(fn)
+
   if bn > -1 | exe '' . bn . 'bwipeout!' | endif
     " close previous GitLog if any
 

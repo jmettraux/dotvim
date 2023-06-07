@@ -17,7 +17,9 @@ function! s:Fgrep(rex)
 
   let fn = '_f___' . JmNtr(path) . '__' . JmNtr(a:rex)
 
-  let bn = bufnr(fn)
+  "let bn = bufnr(fn)
+  let bn = JmBufferNumber(fn)
+
   if bn > -1 | exe '' . bn . 'bwipeout!' | endif
     " close previous buffer if any
 

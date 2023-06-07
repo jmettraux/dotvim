@@ -59,7 +59,9 @@ function! JmVg(args)
   "let fn = tempname() . '--' . JmNtr(pr[0]) . '--' . JmNtr(rest) . '.greprout'
   let fn = '_g___' . JmNtr(pr[0]) . '__' . JmNtr(rest)
 
-  let bn = bufnr(fn)
+  "let bn = bufnr(fn)
+  let bn = JmBufferNumber(fn)
+
   if bn > -1 | exe '' . bn . 'bwipeout!' | endif
     " close previous buffer if any
 

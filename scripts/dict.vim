@@ -5,7 +5,9 @@ function! JmDictLookup(word)
 
   let fn = '_d___' . JmNtr(a:word)
 
-  let bn = bufnr(fn)
+  "let bn = bufnr(fn)
+  let bn = JmBufferNumber(fn)
+
   if bn > -1 | exe '' . bn . 'bwipeout!' | endif
     " close previous GitLog if any
 

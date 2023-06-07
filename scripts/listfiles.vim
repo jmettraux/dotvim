@@ -15,6 +15,8 @@ function! s:ListFiles(...)
   if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
 
   let bn = bufnr('==ListFiles')
+  "let bn = JmBufferNumber('==ListFiles')
+
   if bn > -1 | exe '' . bn . 'bwipeout!' | endif
     " close previous ListFiles if any
 
