@@ -81,7 +81,8 @@ endfunction " JmDetermineTreePathAndLine
 
 function! JmOpenFile(path, line)
 
-  let n = bufnr(a:path)
+  let n = bufnr('^' . a:path . '$')
+    " wrap in regex to prevent partial matches!
   if n > -1
     exe 'b ' . n
   elseif isdirectory(a:path)
