@@ -22,5 +22,8 @@ syn match stoFilename '\v[-A-Za-z0-9 \(\)_.+]+' contained contains=stoSize,stoLi
 syn match stoLine '\v^[ |│├└`.]([│├└─  |`-]+ )?.+' contains=stoTree,stoDirname,stoFilename
 syn match stoLine '\v^[^ |│├└`]+/ .+$' contains=stoDirname,stoFilename
 
+syn match stoFilename '\v^[^|` ]+'
+  " for the top lib/ or whatever...
+
 let b:current_syntax = "showtreeout"
 

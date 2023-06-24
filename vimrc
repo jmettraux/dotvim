@@ -119,6 +119,7 @@ command! -nargs=0 Clean :silent %s/\v\s*$// | nohlsearch
 "
 colorscheme jm_green
 "colorscheme jm_blue
+"set termguicolors
 
 " trailing white space highlight
 "
