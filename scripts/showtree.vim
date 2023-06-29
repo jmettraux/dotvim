@@ -76,6 +76,8 @@ function! JmShowTree(start)
   nnoremap <buffer> R :call JmRenameTreeFile()<CR>
   nnoremap <buffer> M :call JmMoveTreeFile()<CR>
   nnoremap <buffer> ga :call JmGitAddTreeFile()<CR>
+  nnoremap <buffer> gr :call JmGitUnaddTreeFile()<CR>
+  nnoremap <buffer> gu :call JmGitUnaddTreeFile()<CR>
   nnoremap <buffer> p :exe "echo JmDetermineTreePath()"<CR>
   nnoremap <buffer> r :call JmReloadTree(0)<CR>
   nnoremap <buffer> T :call JmGitCommitTreeFile()<CR>
@@ -256,6 +258,18 @@ function! JmGitAddTreeFile()
 
   echo 'Added ' . path . ' to Git'
 endfunction " JmGitAddTreeFile
+
+function! JmGitUnaddTreeFile()
+
+  let path = JmDetermineTreePath()
+  if empty(path) | return 0 | endif
+
+  call system('git reset ' . path)
+
+  call JmReloadTree(0)
+
+  echo 'Unstaged ' . path . ' from Git'
+endfunction " JmGitUnaddTreeFile
 
 
 function! JmGitCommitTreeFile()
