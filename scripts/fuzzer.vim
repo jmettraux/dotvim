@@ -1,13 +1,16 @@
 
 function! JmFuzzer()
 
-  "let f = system("/usr/bin/env ruby30 ~/.vim/scripts/fuzzer.rb")
-  "echo "f: " . f
+  let tmp_path = '/tmp/fuzzer.txt'
 
-  execute "! ruby30 ~/.vim/scripts/fuzzer.rb /tmp/fuzzer.txt"
+  execute "! ruby30 ~/.vim/scripts/fuzzer.rb " . tmp_path
   execute ":redraw!"
 
-  "let job = job_start('ruby30 ~/.vim/scripts/fuzzer.rb')
+  let lines = readfile(tmp_path)
+
+  if len(lines) > 0
+    execute ":e " . lines[0]
+  endif
 endfunction " JmFuzzer
 
 nnoremap f :silent call JmFuzzer()<CR>
