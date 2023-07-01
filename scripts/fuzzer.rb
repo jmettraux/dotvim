@@ -15,6 +15,21 @@ fi = (lines[1] || '').strip
 li = (lines[2] || 0).to_i
 pre = nil
 
+  # 15      11      app/views/wma/_dac_4_approvals.slim
+  # 67      24      app/views/wma/_dac_5_assignment.slim
+  # 1       1       app/views/wma/_dac_mandates.slim
+  # 0       7       scripts/wma/dac_4_wls_approvals.js
+  # 79      76      scripts/wma/dac_5_wls_assignment.js
+  # 1       0       scripts/wma/dac_wlk.js
+  # 4       0       style/wma/_mandate.scss
+  #
+$git = `git diff --numstat`.strip.split("\n")
+  .inject({}) { |h, l|
+    ll = l.split("\t")
+    h[ll.pop] = ll
+    h }
+      # FIXME git root might not be here...
+
 def d_size(path)
   i = File.size(path)
   [ '', 'K', 'M', 'G', 'T' ].each do |n|
@@ -27,7 +42,8 @@ def d_lines(path)
   "#{(File.read(path).size rescue -1)}l"
 end
 def d_diff(path)
-  nil
+  g = $git[path]
+  g ? "+#{g[0]}-#{g[1]}" : ''
 end
   #
 def detail(path)
@@ -41,6 +57,7 @@ fcol = '32' # filename colour
 scol = '90' # slash colour
 ocol = '93' # dot color
 tcol = '90' # detail color
+gcol = '2;97' # git color
 
 path = nil
 
@@ -63,6 +80,7 @@ loop do
     tt[-1] = "[#{fcol}m#{tt[-1].split('.').join("[#{ocol}m.[#{fcol}m")}"
     print tt.join("[#{scol}m/#{color}")
     print "  [#{tcol}m#{d[:size]} #{d[:lines]}"
+    print "  [#{gcol}m#{d[:diff]}" if d[:diff]
   end
 
   print "[1;1H"
