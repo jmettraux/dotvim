@@ -27,11 +27,12 @@ loop do
   fs1 =
     fi == '' ? fs :
     fs.select { |f| f.downcase.index(fi) }
+  fs1 = fs1[0, rows - 2]
 
   print "[2J" # clear
 
   print"[2;1H"
-  fs1[0, rows - 2].each_with_index do |f, i|
+  fs1.each_with_index do |f, i|
     print "[0;0m"
     print '  '
     color = i == li ? "[1;#{dcol};7m" : "[#{dcol}m"
@@ -66,8 +67,21 @@ loop do
   elsif c == "\e[A" || c == 'k' # up
     li = li - 1; li = 0 if li < 1
   elsif c == "\e[B" || c == 'j' # down
-    li = li + 1; li = fs1.length - 1 if li > fs1.length - 2
-  elsif c == "\e3~" # Delete
+    li = li + 1; li = fs1.length - 1 unless fs1[li]
+  elsif c == 'G'
+    li = fs1.length - 1
+  elsif c == "\t" || c == '/' # Tab / Slash
+    if li == fs1.length - 1
+      li = 0
+    else
+      dir = File.dirname(fs1[li])
+      while cu = fs1[li]
+        break if File.dirname(cu) != dir
+        li = li + 1
+      end
+      li = fs1.length - 1 unless fs1[li]
+    end
+  elsif c == "\e[3~" # Delete
     fi = ''; li = 0
   elsif c.length > 1
     p c; sleep 0.7
@@ -78,6 +92,7 @@ loop do
   else
     fi = fi + c.downcase; li = 0
   end
+
 #rescue => err
 #  p err
 end
