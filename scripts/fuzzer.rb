@@ -15,10 +15,32 @@ fi = (lines[1] || '').strip
 li = (lines[2] || 0).to_i
 pre = nil
 
+def d_size(path)
+  i = File.size(path)
+  [ '', 'K', 'M', 'G', 'T' ].each do |n|
+    return "#{i.to_i}#{n}" if i < 1024
+    i = i / 1024.0
+  end
+  '-1'
+end
+def d_lines(path)
+  "#{(File.read(path).size rescue -1)}l"
+end
+def d_diff(path)
+  nil
+end
+  #
+def detail(path)
+  $details ||= {}
+  $details[path] ||= {
+    size: d_size(path), lines: d_lines(path), diff: d_diff(path) }
+end
+
 dcol = '92' # directory colour
 fcol = '32' # filename colour
 scol = '90' # slash colour
 ocol = '93' # dot color
+tcol = '90' # detail color
 
 path = nil
 
@@ -32,15 +54,15 @@ loop do
   print "[2J" # clear
 
   fs1.each_with_index do |f, i|
-    print"[#{2 + i};1H"
-    print "[0;0m"
-    print '  '
+    d = detail(f)
+    print "[#{2 + i};1H[0;0m  "
     color = i == li ? "[1;#{dcol};7m" : "[#{dcol}m"
     print color
     t = f[0, cols - 2]
     tt = t.split('/')
     tt[-1] = "[#{fcol}m#{tt[-1].split('.').join("[#{ocol}m.[#{fcol}m")}"
     print tt.join("[#{scol}m/#{color}")
+    print "  [#{tcol}m#{d[:size]} #{d[:lines]}"
   end
 
   print "[1;1H"
