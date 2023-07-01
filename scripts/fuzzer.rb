@@ -22,7 +22,7 @@ loop do
     fi == '' ? fs :
     fs.select { |f| f.downcase.index(fi) }
 
-  print "[2J"
+  print "[2J" # clear
 
   print"[2;1H"
   fs1[0, rows - 2].each_with_index do |f, i|
@@ -75,6 +75,8 @@ loop do
 #rescue => err
 #  p err
 end
+
+print "[2J" # clear
 
 File.open(ARGV[0], 'wb') { |f| f.write(fi) }
 
