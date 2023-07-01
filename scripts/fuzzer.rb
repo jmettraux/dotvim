@@ -45,11 +45,15 @@ def d_diff(path)
   g = $git[path]
   g ? "+#{g[0]}-#{g[1]}" : ''
 end
+def d_recent(path)
+  (Time.now - File.mtime(path)) < 60 * 60
+end
   #
 def detail(path)
   $details ||= {}
   $details[path] ||= {
-    size: d_size(path), lines: d_lines(path), diff: d_diff(path) }
+    size: d_size(path), lines: d_lines(path), diff: d_diff(path),
+    recent: d_recent(path) }
 end
 
 dcol = '92' # directory colour
@@ -57,7 +61,10 @@ fcol = '32' # filename colour
 scol = '90' # slash colour
 ocol = '93' # dot color
 tcol = '90' # detail color
-gcol = '2;97' # git color
+gcol = '97' # git color
+rcol = '2;33' # recent color
+
+recent = '<<'
 
 path = nil
 
@@ -81,6 +88,7 @@ loop do
     print tt.join("[#{scol}m/#{color}")
     print "  [#{tcol}m#{d[:size]} #{d[:lines]}"
     print "  [#{gcol}m#{d[:diff]}" if d[:diff]
+    print "  [#{rcol}m#{recent}" if d[:recent]
   end
 
   print "[1;1H"
