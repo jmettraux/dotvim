@@ -46,7 +46,7 @@ def d_diff(path)
   g ? "+#{g[0]}-#{g[1]}" : ''
 end
 def d_recent(path)
-  (Time.now - File.mtime(path)) < 60 * 60
+  (Time.now - File.mtime(path)) < 24 * 60 * 60
 end
   #
 def detail(path)
