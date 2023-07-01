@@ -8,7 +8,7 @@ rows, cols = IO.console.winsize
 
 lines = (File.readlines(ARGV[0]) rescue [ nil, nil, nil ])
 
-fs = Dir['**/*.{js,rb,yaml,slim,scss,css,md,vim}'].sort
+fs = Dir['**/*.{js,rb,yaml,slim,scss,css,md,vim,sh,fish}'].sort
   # TODO make configurable
 
 fi = (lines[1] || '').strip
