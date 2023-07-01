@@ -27,12 +27,12 @@ loop do
   fs1 =
     fi == '' ? fs :
     fs.select { |f| f.downcase.index(fi) }
-  fs1 = fs1[0, rows - 2]
+  fs1 = fs1[0, rows - 1]
 
   print "[2J" # clear
 
-  print"[2;1H"
   fs1.each_with_index do |f, i|
+    print"[#{2 + i};1H"
     print "[0;0m"
     print '  '
     color = i == li ? "[1;#{dcol};7m" : "[#{dcol}m"
@@ -40,7 +40,7 @@ loop do
     t = f[0, cols - 2]
     tt = t.split('/')
     tt[-1] = "[#{fcol}m#{tt[-1].split('.').join("[#{ocol}m.[#{fcol}m")}"
-    puts tt.join("[#{scol}m/#{color}")
+    print tt.join("[#{scol}m/#{color}")
   end
 
   print "[1;1H"
