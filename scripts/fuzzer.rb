@@ -1,4 +1,5 @@
 
+#
 # fuzzer.rb
 
 require 'io/console'
@@ -9,22 +10,31 @@ fs = Dir['**/*.{js,rb,yaml,slim,scss,css,md,vim}'].sort
 fi = ''
 li = 0
 
+dcol = '92' # directory colour
+fcol = '32' # filename colour
+scol = '90' # slash colour
+ocol = '93' # dot color
+
 loop do
+
   fs1 =
     fi == '' ? fs :
     fs.select { |f| f.downcase.index(fi) }
+
   print "[2J"
+
   print"[2;1H"
   fs1[0, rows - 2].each_with_index do |f, i|
     print "[0;0m"
     print '  '
-    if i == li
-      print "[1;32;7m"
-    else
-      print "[32m"
-    end
-    puts f[0, cols - 2]
+    color = i == li ? "[1;#{dcol};7m" : "[#{dcol}m"
+    print color
+    t = f[0, cols - 2]
+    tt = t.split('/')
+    tt[-1] = "[#{fcol}m#{tt[-1].split('.').join("[#{ocol}m.[#{fcol}m")}"
+    puts tt.join("[#{scol}m/#{color}")
   end
+
   print "[1;1H"
   print "[0;0m"
   print fi
@@ -40,11 +50,13 @@ loop do
   elsif c == "\e[A" || c == 'k' # up
     li = li - 1; li = 0 if li < 1
   elsif c == "\e[B" || c == 'j' # down
-    li = li + 1; li = fs1.length - 1 if li > fs1.length - 1
+    li = li + 1; li = fs1.length - 1 if li > fs1.length - 2
   elsif c == "\e3~" # Delete
     fi = ''; li = 0
   elsif c.length > 1
     p c; sleep 0.7
+  elsif ';'.index(c)
+    # ignore
   else
     fi = fi + c.downcase; li = 0
   end
