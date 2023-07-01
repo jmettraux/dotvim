@@ -9,6 +9,7 @@ rows, cols = IO.console.winsize
 fs = Dir['**/*.{js,rb,yaml,slim,scss,css,md,vim}'].sort
 fi = ''
 li = 0
+pre = nil
 
 dcol = '92' # directory colour
 fcol = '32' # filename colour
@@ -41,6 +42,15 @@ loop do
 
   c = STDIN.raw { |io| io.readpartial(4) }
 
+  if pre == ':'
+    if c == 'q'
+      fi = ''; break
+    end
+  end
+  pre = nil
+
+  # TODO "/" to jump to next directory
+
   if c == "\e" # Escape
     fi = ''; break
   elsif c == "\r" || c == "\n" # Return / Enter
@@ -55,6 +65,8 @@ loop do
     fi = ''; li = 0
   elsif c.length > 1
     p c; sleep 0.7
+  elsif c == ':'
+    pre = ':'
   elsif ';'.index(c)
     # ignore
   else
