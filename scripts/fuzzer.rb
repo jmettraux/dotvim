@@ -31,18 +31,20 @@ loop do
 
   c = STDIN.raw { |io| io.readpartial(4) }
 
-  if c == "\e"
+  if c == "\e" # Escape
     fi = ''; break
-  elsif c == "\r" || c == "\n"
+  elsif c == "\r" || c == "\n" # Return / Enter
     fi = fs1[li]; break
-  elsif c == "\x7F"
+  elsif c == "\x7F" # Backspace
     fi = fi[0..-2]; li = 0
-  elsif c == "\e[A" || c == 'k'
+  elsif c == "\e[A" || c == 'k' # up
     li = li - 1; li = 0 if li < 1
-  elsif c == "\e[B" || c == 'j'
+  elsif c == "\e[B" || c == 'j' # down
     li = li + 1; li = fs1.length - 1 if li > fs1.length - 1
+  elsif c == "\e3~" # Delete
+    fi = ''; li = 0
   elsif c.length > 1
-    p c; sleep 0.5
+    p c; sleep 0.7
   else
     fi = fi + c.downcase; li = 0
   end
