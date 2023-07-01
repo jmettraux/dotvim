@@ -6,15 +6,21 @@ require 'io/console'
 
 rows, cols = IO.console.winsize
 
+lines = (File.readlines(ARGV[0]) rescue [ nil, nil, nil ])
+
 fs = Dir['**/*.{js,rb,yaml,slim,scss,css,md,vim}'].sort
-fi = ''
-li = 0
+  # TODO make configurable
+
+fi = (lines[1] || '').strip
+li = (lines[2] || 0).to_i
 pre = nil
 
 dcol = '92' # directory colour
 fcol = '32' # filename colour
 scol = '90' # slash colour
 ocol = '93' # dot color
+
+path = nil
 
 loop do
 
@@ -40,11 +46,11 @@ loop do
   print "[0;0m"
   print fi
 
-  c = STDIN.raw { |io| io.readpartial(4) }
+  c = $stdin.raw { |io| io.readpartial(4) }
 
   if pre == ':'
     if c == 'q'
-      fi = ''; break
+      path = ''; break
     end
   end
   pre = nil
@@ -52,9 +58,9 @@ loop do
   # TODO "/" to jump to next directory
 
   if c == "\e" # Escape
-    fi = ''; break
+    path = ''; break
   elsif c == "\r" || c == "\n" # Return / Enter
-    fi = fs1[li]; break
+    path = fs1[li]; break
   elsif c == "\x7F" # Backspace
     fi = fi[0..-2]; li = 0
   elsif c == "\e[A" || c == 'k' # up
@@ -78,5 +84,5 @@ end
 
 print "[2J" # clear
 
-File.open(ARGV[0], 'wb') { |f| f.write(fi) }
+File.open(ARGV[0], 'wb') { |f| f.puts([ path, fi, li.to_s ].join("\n")) }
 
