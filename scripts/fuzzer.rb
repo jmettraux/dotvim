@@ -18,10 +18,6 @@ pre = nil
   # 15      11      app/views/wma/_dac_4_approvals.slim
   # 67      24      app/views/wma/_dac_5_assignment.slim
   # 1       1       app/views/wma/_dac_mandates.slim
-  # 0       7       scripts/wma/dac_4_wls_approvals.js
-  # 79      76      scripts/wma/dac_5_wls_assignment.js
-  # 1       0       scripts/wma/dac_wlk.js
-  # 4       0       style/wma/_mandate.scss
   #
 $git = `git diff --numstat`.strip.split("\n")
   .inject({}) { |h, l|
@@ -39,7 +35,7 @@ def d_size(path)
   '-1'
 end
 def d_lines(path)
-  "#{(File.read(path).size rescue -1)}l"
+  "#{(File.readlines(path).size rescue -1)}l"
 end
 def d_diff(path)
   g = $git[path]
