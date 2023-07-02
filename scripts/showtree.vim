@@ -96,7 +96,7 @@ function! JmShowTree(start)
   nnoremap <buffer> <silent> m :call <SID>MoveToModified(1)<CR>
 
   exe 'nnoremap <buffer> F :! fe ' . a:start . '*<CR>'
-  nnoremap <buffer> f :call JmShowTreeImage()<CR>
+  "nnoremap <buffer> f :call JmShowTreeImage()<CR>
 endfunction " ShowTree
 
 command! -nargs=1 -complete=dir Vt :call JmShowTree(<f-args>)
