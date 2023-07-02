@@ -17,9 +17,10 @@ suffixes = %w[
   xml toml json yaml yml conf cnf
   flo ]
 
-fs =
-  Dir["**/*.{#{suffixes.join(',')}}"]
-    .sort
+fs = (
+  Dir["**/*.{#{suffixes.join(',')}}"] +
+  Dir['**/*/']#.collect { |e| e + '/' }
+    ).sort
 
 fi = (lines[1] || '').strip
 li = (lines[2] || 0).to_i
@@ -57,9 +58,11 @@ end
   #
 def detail(path)
   $details ||= {}
-  $details[path] ||= {
-    size: d_size(path), lines: d_lines(path), diff: d_diff(path),
-    recent: d_recent(path) }
+  $details[path] ||=
+    File.directory?(path) ?
+    { dir: true, recent: d_recent(path) } :
+    { size: d_size(path), lines: d_lines(path), diff: d_diff(path),
+      recent: d_recent(path) }
 end
 
 dcol = '92' # directory colour
@@ -90,9 +93,11 @@ loop do
     print color
     t = f[0, cols - 2]
     tt = t.split('/')
-    tt[-1] = "[#{fcol}m#{tt[-1].split('.').join("[#{ocol}m.[#{fcol}m")}"
+    tt[-1] = "[#{fcol}m#{tt[-1].split('.').join("[#{ocol}m.[#{fcol}m")}" \
+      unless d[:dir]
     print tt.join("[#{scol}m/#{color}")
-    print "  [#{tcol}m#{d[:size]} #{d[:lines]}"
+    print "[#{scol}m/#{color}" if d[:dir]
+    print "  [#{tcol}m#{d[:size]} #{d[:lines]}" if d[:size]
     print "  [#{gcol}m#{d[:diff]}" if d[:diff]
     print "  [#{rcol}m#{recent}" if d[:recent]
   end
