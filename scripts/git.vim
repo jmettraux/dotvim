@@ -294,6 +294,8 @@ function! s:OpenGitDiff(path)
   syn region gitSingleDiffHeader start="\v^diff --git a\/" end="\v\d [@][@]$" contains=@GITSINGLEDIFF
   syn match gitSingleDiffLine /\v^ *\d+( [-+].+$)?/ contains=@GITSINGLEDIFF
   setlocal nomodifiable
+    "
+    " TODO fix that!!!
 
   normal 1G
   let n = 0

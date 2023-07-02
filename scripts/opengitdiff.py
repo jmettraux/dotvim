@@ -18,7 +18,7 @@ lnum = -1
 
 for line in lines:
 
-  line = line.rstrip('\r\n')
+  line = line.decode().rstrip('\r\n')
 
   if lnum > -1:
     if re.match(r'^[^-]', line): lnum = lnum + 1
