@@ -12,7 +12,8 @@ lines = subprocess\
   .stdout\
   .readlines()
 
-digits = str(len(str(len(lines))))
+#digits = str(len(str(len(lines))))
+digits = '5'
 
 lnum = -1
 

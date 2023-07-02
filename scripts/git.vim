@@ -290,9 +290,18 @@ function! s:OpenGitDiff(path)
 
   exe 'setlocal syntax=' . JmDetermineSyntax(a:path)
   "exe 'setlocal filetype=' . JmDetermineSyntax(a:path)
-  syn include @GITSINGLEDIFF ~/.vim/syntax/gitsinglediff.vim
-  syn region gitSingleDiffHeader start="\v^diff --git a\/" end="\v\d [@][@]$" contains=@GITSINGLEDIFF
-  syn match gitSingleDiffLine /\v^ *\d+( [-+].+$)?/ contains=@GITSINGLEDIFF
+    "
+  hi! ColorColumn ctermbg=16
+  hi! gsdHeader cterm=NONE ctermfg=238 ctermbg=black
+  hi! gsdLineNumber cterm=NONE ctermfg=238 ctermbg=black
+  hi! gsdPlus cterm=NONE ctermfg=green ctermbg=black
+  hi! gsdMinus cterm=NONE ctermfg=red ctermbg=black
+  syn region gsdHeader start='\v^diff --git a\/' end='\v\d [@][@]$' containedin=ALL
+  "syn match gsdLineNumber /\v^ *\d+/ containedin=ALL
+  syn region gsdLineNumber start='\%1c' end='\%6c' containedin=ALL
+  syn region gsdPlus start='\%7c+' end='\%8c' containedin=ALL
+  syn region gsdMinus start='\%7c\-' end='\%8c' containedin=ALL
+
   setlocal nomodifiable
     "
     " TODO fix that!!!
