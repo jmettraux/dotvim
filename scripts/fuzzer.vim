@@ -10,7 +10,13 @@ function! JmFuzzer()
   let lines = readfile(tmp_path)
 
   if len(lines) > 0
-    execute ":e " . lines[0]
+    if lines[0] == '(log)'
+      Gil
+    elseif lines[0] == '(buffers)'
+      ListFiles
+    else
+      execute ":e " . lines[0]
+    endif
   endif
 endfunction " JmFuzzer
 

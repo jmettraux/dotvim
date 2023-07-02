@@ -97,6 +97,14 @@ loop do
     if c == 'q'
       path = ''; break
     end
+  elsif pre == ';'
+    if c == ';'
+      path = ''; break
+    elsif c == 'l'
+      path = '(log)'; break
+    elsif c == 'b'
+      path = '(buffers)'; break
+    end
   end
   pre = nil
 
@@ -129,8 +137,8 @@ loop do
     fi = ''; li = 0
   elsif c.length > 1
     p c; sleep 0.7
-  elsif c == ':'
-    pre = ':'
+  elsif c == ':' || c == ';'
+    pre = c
   elsif ';'.index(c)
     # ignore
   else
