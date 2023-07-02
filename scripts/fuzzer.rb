@@ -39,7 +39,7 @@ def d_lines(path)
 end
 def d_diff(path)
   g = $git[path]
-  g ? "+#{g[0]}-#{g[1]}" : ''
+  g ? "+#{g[0]}-#{g[1]}" : nil
 end
 def d_recent(path)
   (Time.now - File.mtime(path)) < 24 * 60 * 60
