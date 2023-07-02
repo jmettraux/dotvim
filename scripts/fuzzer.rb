@@ -133,7 +133,7 @@ loop do
       end
       li = fs1.length - 1 unless fs1[li]
     end
-  elsif c == "\e[3~" # Delete
+  elsif c == "\e[3~" || c == 'C' # Delete
     fi = ''; li = 0
   elsif c.length > 1
     p c; sleep 0.7
