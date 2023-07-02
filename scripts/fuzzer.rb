@@ -8,8 +8,18 @@ rows, cols = IO.console.winsize
 
 lines = (File.readlines(ARGV[0]) rescue [ nil, nil, nil ])
 
-fs = Dir['**/*.{js,rb,yaml,slim,scss,css,md,vim,sh,fish}'].sort
-  # TODO make configurable
+suffixes = %w[
+  js rb ru java pl py c go
+  sh fish vim
+  txt text md mdown markdown
+  htm html slim
+  css scss
+  xml toml json yaml yml conf cnf
+  flo ]
+
+fs =
+  Dir["**/*.{#{suffixes.join(',')}}"]
+    .sort
 
 fi = (lines[1] || '').strip
 li = (lines[2] || 0).to_i
