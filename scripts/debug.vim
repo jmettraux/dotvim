@@ -2,6 +2,7 @@
 " inject a ruby tap
 "
 command! Tap :normal o<ESC>0C.tap { |x| pp x }<ESC>013l
+command! Nie :normal o<ESC>0Cfail NotImplementedError<ESC>0
 
 " inject console.log([ 0, 1 ]);
 "
