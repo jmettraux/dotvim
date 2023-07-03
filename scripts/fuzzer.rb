@@ -115,10 +115,12 @@ loop do
   elsif pre == ';'
     if c == ';'
       path = ''; break
-    elsif c == 'l'
-      path = '(log)'; break
     elsif c == 'b'
       path = '(buffers)'; break
+    elsif c == 'd'
+      path = '(diff)'; break
+    elsif c == 'l'
+      path = '(log)'; break
     end
   end
   pre = nil

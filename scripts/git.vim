@@ -125,6 +125,7 @@ function! s:OpenCommit(sha)
   nnoremap <buffer> <silent> q :bd<CR>
 endfunction " OpenCommit
 
+command! -nargs=0 Delta :call <SID>OpenCommit(0)
 nnoremap <silent> <leader>d :call <SID>OpenCommit(0)<CR>
 
 function! s:ExtractSha()

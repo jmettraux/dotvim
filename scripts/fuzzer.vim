@@ -16,6 +16,8 @@ function! JmFuzzer()
       Gil
     elseif lines[0] == '(buffers)'
       ListFiles
+    elseif lines[0] == '(diff)'
+      Delta
     elseif lines[0] =~ '/$'
       execute ":Vt " . lines[0]
     else
