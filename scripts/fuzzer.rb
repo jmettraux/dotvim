@@ -103,6 +103,10 @@ loop do
     print "  [#{rcol}m#{recent}" if d[:recent]
   end
 
+  print "[1;#{cols}H"
+  print "[0;0m"
+  print pre || ''
+
   print "[1;1H"
   print "[0;0m"
   print fi
@@ -125,8 +129,6 @@ loop do
     end
   end
   pre = nil
-
-  # TODO "/" to jump to next directory
 
   if c == "\e" # Escape
     path = ''; break
