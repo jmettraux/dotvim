@@ -143,7 +143,7 @@ loop do
   elsif c == 'G'
     li = fs1.length - 1
   elsif c == '['
-    hi << fi; fi = hi[0]; hi.uniq!.rotate!
+    hi << fi; fi = hi[0] || ''; hi.uniq!.rotate!
   elsif c == "\t" || c == '/' # Tab / Slash
     if li == fs1.length - 1
       li = 0
