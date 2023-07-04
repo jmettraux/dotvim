@@ -159,6 +159,20 @@ loop do
     fi = ''; li = 0
   elsif c.length > 1
     p c; sleep 0.7
+  elsif c == ' '
+    li1 = li + 1
+    #while li1 < fs1.length
+    loop do
+      if li1 >= fs1.length
+        li = 0; break
+      end
+      f = fs1[li1]
+      d = detail(f)
+      if d && (d[:diff] || d[:recent])
+        li = li1; break
+      end
+      li1 += 1
+    end
   elsif c == ':' || c == ';'
     pre = c
   elsif ';'.index(c)
