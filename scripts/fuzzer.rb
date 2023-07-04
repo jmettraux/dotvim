@@ -22,7 +22,8 @@ fs = (
   Dir['**/*/']#.collect { |e| e + '/' }
     ).sort
 
-fi = (lines[1] || '').strip
+hi = (lines[1] || '').strip.split('|')
+fi = hi[0]; hi.rotate!
 li = (lines[2] || 0).to_i
 pre = nil
 
@@ -139,6 +140,8 @@ loop do
     li = li + 1; li = fs1.length - 1 unless fs1[li]
   elsif c == 'G'
     li = fs1.length - 1
+  elsif c == '['
+    hi << fi; fi = hi[0]; hi.uniq!.rotate!
   elsif c == "\t" || c == '/' # Tab / Slash
     if li == fs1.length - 1
       li = 0
@@ -168,5 +171,7 @@ end
 
 print "[2J" # clear
 
-File.open(ARGV[0], 'wb') { |f| f.puts([ path, fi, li.to_s ].join("\n")) }
+hi = ([ fi ] + hi).take(21).uniq.join('|')
+
+File.open(ARGV[0], 'wb') { |f| f.puts([ path, hi, li.to_s ].join("\n")) }
 
