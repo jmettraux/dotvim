@@ -23,7 +23,7 @@ fs = (
     ).sort
 
 hi = (lines[1] || '').strip.split('|')
-fi = hi[0]; hi.rotate!
+fi = hi[0] || ''; hi.rotate!
 li = (lines[2] || 0).to_i
 pre = nil
 
