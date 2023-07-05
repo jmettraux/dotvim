@@ -116,6 +116,8 @@ loop do
   if pre == ':'
     if c == 'q'
       path = ''; break
+    #elsif c == ':'
+    #  c = '['
     end
   elsif pre == ';'
     if c == ';'
@@ -142,7 +144,7 @@ loop do
     li = li + 1; li = fs1.length - 1 unless fs1[li]
   elsif c == 'G'
     li = fs1.length - 1
-  elsif c == '['
+  elsif c == '@' || c == '['
     hi << fi; fi = hi[0] || ''; hi.uniq!.rotate!
   elsif c == "\t" || c == '/' # Tab / Slash
     if li == fs1.length - 1
