@@ -7,6 +7,7 @@ require 'io/console'
 rows, cols = IO.console.winsize
 
 lines = (File.readlines(ARGV[0]) rescue [ nil, nil, nil ])
+fi0 = ARGV[1]
 
 suffixes = %w[
   js rb ru java pl py c go
@@ -23,7 +24,14 @@ fs = (
     ).sort
 
 hi = (lines[1] || '').strip.split('|')
-fi = hi[0] || ''; hi.rotate!
+
+fi =
+  if fi0
+    fi0
+  else
+    fi1 = hi[0] || ''; hi.rotate!; fi1
+  end
+
 li = (lines[2] || 0).to_i
 pre = nil
 
