@@ -4,7 +4,7 @@ function! JmFuzzer(key='')
   "let tmp_path = '/tmp/fuzzer__' . JmNtr(getcwd()) . '.txt'
   let tmp_path = '.vimfuzz'
 
-  execute "! ruby30 ~/.vim/scripts/fuzzer.rb " . tmp_path . " " . a:key
+  execute "! ruby30 ~/.vim/scripts/fuzzer.rb " . tmp_path . " '" . a:key . "'"
   execute ":redraw!"
 
   let lines = readfile(tmp_path)

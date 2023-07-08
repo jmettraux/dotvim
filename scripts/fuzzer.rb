@@ -74,6 +74,19 @@ def detail(path)
       recent: d_recent(path) }
 end
 
+def select(pat, files)
+  return files if pat == ''
+  pats = pat.split('*')
+  if pats.length < 2
+    files.select { |f|
+      f.downcase.index(pat) }
+  else
+    files.select { |f|
+      f1 = f.downcase;
+      f1.start_with?(pats[0]) && f1.index(pats[1]) }
+  end
+end
+
 dcol = '92' # directory colour
 fcol = '32' # filename colour
 scol = '90' # slash colour
@@ -88,10 +101,7 @@ path = nil
 
 loop do
 
-  fs1 =
-    fi == '' ? fs :
-    fs.select { |f| f.downcase.index(fi) }
-  fs1 = fs1[0, rows - 1]
+  fs1 = select(fi, fs)[0, rows - 1]
 
   print "[2J" # clear
 
