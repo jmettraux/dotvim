@@ -443,3 +443,8 @@ let g:markdown_fenced_languages = [ 'html', 'js=javascript', 'ruby', 'python', '
 au BufNewFile,BufRead .chat.md  hi ColorColumn ctermbg=16
   " don't highlight col > 80 for .chat.md
 
+"nnoremap <C-l> 0 39l
+nnoremap <C-l> :silent execute "normal! 0 " . (col("$") / 2) . "l"<CR>:echo<CR>
+  " got to the middle of the current line
+  " the :echo clears the 'command line'
+
