@@ -106,15 +106,21 @@ loop do
   print "[2J" # clear
 
   fs1.each_with_index do |f, i|
+
     d = detail(f)
+
     print "[#{2 + i};1H[0;0m  "
     color = i == li ? "[1;#{dcol};7m" : "[#{dcol}m"
     print color
+
     t = f[0, cols - 2]
     tt = t.split('/')
-    tt[-1] = "[#{fcol}m#{tt[-1].split('.').join("[#{ocol}m.[#{fcol}m")}" \
-      unless d[:dir]
+
+    dot = i == li ? '.' : "[#{ocol}m.#{color}[#{fcol}m"
+    tt[-1] = "[#{fcol}m#{tt[-1].split('.').join(dot)}" unless d[:dir]
+
     print tt.join("[#{scol}m/#{color}")
+
     print "[#{scol}m/#{color}" if d[:dir]
     print "  [#{tcol}m#{d[:size]} #{d[:lines]}" if d[:size]
     print "  [#{gcol}m#{d[:diff]}" if d[:diff]
