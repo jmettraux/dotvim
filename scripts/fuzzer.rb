@@ -26,7 +26,7 @@ fs = (
 hi = (lines[1] || '').strip.split('|')
 
 fi =
-  if fi0
+  if fi0 != ''
     fi0
   else
     fi1 = hi[0] || ''; hi.rotate!; fi1
