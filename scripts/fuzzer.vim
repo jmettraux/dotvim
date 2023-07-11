@@ -26,6 +26,6 @@ function! JmFuzzer(key='')
   endif
 endfunction " JmFuzzer
 
-command! -nargs=* FF :call JmFuzzer(<q-args>)
+command! -nargs=* FF :silent call JmFuzzer(<q-args>)
 nnoremap f :silent call JmFuzzer()<CR>
 
