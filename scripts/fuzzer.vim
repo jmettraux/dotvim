@@ -1,6 +1,8 @@
 
 function! JmFuzzer(key='')
 
+  if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
+
   "let tmp_path = '/tmp/fuzzer__' . JmNtr(getcwd()) . '.txt'
   let tmp_path = '.vimfuzz'
 
