@@ -473,3 +473,10 @@ function! s:OpenVersion(path, sha)
   nnoremap <buffer> <silent> q :bd<CR>
 endfunction " OpenVersion
 
+
+command! -nargs=0 GitCommitAll :! git commit -a<CR>
+command! -nargs=0 GitPush :! git push<CR>
+  "
+command! -nargs=0 Gica :! git commit -a<CR>
+command! -nargs=0 Gipu :! git push<CR>
+
