@@ -17,6 +17,7 @@ syn region scoString start=+"+ skip=+\\"+ end=+"+ oneline
 syn region scoString start=+'+ skip=+\\'+ end=+'+ oneline
 syn region scoComment start=+#+ end=+$+ contains=scoSpecial
 syn region scoRex start=+/+ skip=+\\/+ end=+/+ oneline
+syn region scoRex start=+%r{+ end=+}+ oneline
 
 " Ruby
 syn keyword scoKeyword class module public protected private include extends
