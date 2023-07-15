@@ -152,6 +152,8 @@ loop do
       path = '(diff)'; break
     elsif c == 'l'
       path = '(log)'; break
+    elsif c == 't'
+      path = File.dirname(fs1[li]) + '/'; break
     end
   end
   pre = nil
