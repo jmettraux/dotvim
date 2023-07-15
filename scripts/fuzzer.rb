@@ -26,7 +26,7 @@ fs = (
 hi = (lines[1] || '').strip.split('|')
 
 fi =
-  if fi0 != ''
+  if fi0 && fi0 != ''
     fi0
   else
     fi1 = hi[0] || ''; hi.rotate!; fi1
@@ -45,6 +45,7 @@ $git = `git diff --numstat`.strip.split("\n")
     h[ll.pop] = ll
     h }
       # FIXME git root might not be here...
+$gits = `git ls-files`.strip.split("\n")
 
 def d_size(path)
   i = File.size(path)
@@ -64,14 +65,17 @@ end
 def d_recent(path)
   (Time.now - File.mtime(path)) < 24 * 60 * 60
 end
+def d_git(path)
+  $gits.include?(path)
+end
   #
 def detail(path)
   $details ||= {}
   $details[path] ||=
     File.directory?(path) ?
-    { dir: true, recent: d_recent(path) } :
+    { dir: true, recent: d_recent(path), git: true } :
     { size: d_size(path), lines: d_lines(path), diff: d_diff(path),
-      recent: d_recent(path) }
+      recent: d_recent(path), git: d_git(path) }
 end
 
 def select(pat, files)
@@ -123,7 +127,13 @@ loop do
 
     print "[#{scol}m/#{color}" if d[:dir]
     print "  [#{tcol}m#{d[:size]} #{d[:lines]}" if d[:size]
-    print "  [#{gcol}m#{d[:diff]}" if d[:diff]
+
+    if d[:diff]
+      print "  [#{gcol}m#{d[:diff]}"
+    elsif ! d[:git]
+      print "  [#{gcol}mng"
+    end
+
     print "  [#{rcol}m#{recent}" if d[:recent]
   end
 
