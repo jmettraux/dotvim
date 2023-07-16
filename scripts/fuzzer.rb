@@ -13,7 +13,7 @@ suffixes = %w[
   js rb ru java pl py c go
   sh fish vim
   txt text md mdown markdown
-  htm html slim
+  htm html slim haml
   css scss
   xml toml json yaml yml conf cnf
   flo ]
