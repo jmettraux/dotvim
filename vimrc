@@ -434,6 +434,11 @@ nnoremap <leader>] :hi ColorColumn ctermbg=16<CR>:echo<CR>
 nnoremap <leader>[ :hi ColorColumn ctermbg=235 guibg=#2c2d27<CR>:echo<CR>
 
 
+nnoremap <leader><BS> 0D
+nnoremap <leader>0 0D
+  " d0 delete from here to col 0...
+
+
 nnoremap <leader>ts :r ! ruby -e "puts '###' + Time.now.strftime('\%Y-\%m-\%d \%H:\%M:\%S')"<CR>
 
 
