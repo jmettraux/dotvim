@@ -24,6 +24,7 @@ fs = (
     ).sort
 
 hi = (lines[1] || '').strip.split('|')
+hishow = false
 
 fi =
   if fi0 && fi0 != ''
@@ -142,8 +143,18 @@ loop do
   print pre || ''
 
   print "[1;1H"
-  print "[0;0m"
-  print fi
+  if hishow
+    print fi + '  '
+    print hi.join(' ')[0, cols - fi.size - 2]
+    print "[1;1H"
+    print "[7m"
+    print fi # ;-)
+    print "[0;0m"
+    hishow = false
+  else
+    print "[0;0m"
+    print fi
+  end
 
   c = $stdin.raw { |io| io.readpartial(4) }
 
@@ -181,7 +192,7 @@ loop do
   elsif c == 'G'
     li = fs1.length - 1
   elsif c == '@' || c == '['
-    hi << fi; fi = hi[0] || ''; hi.uniq!.rotate!
+    hi << fi; fi = hi[0] || ''; hi.uniq!.rotate!; hishow = true
   elsif c == "\t" || c == '/' # Tab / Slash
     if li == fs1.length - 1
       li = 0
@@ -225,7 +236,7 @@ end
 
 print "[2J" # clear
 
-hi = ([ fi ] + hi).take(21).uniq.join('|')
+hi = ([ fi ] + hi).take(7).uniq.join('|')
 
 File.open(ARGV[0], 'wb') { |f| f.puts([ path, hi, li.to_s ].join("\n")) }
 
