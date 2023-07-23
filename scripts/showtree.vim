@@ -52,6 +52,7 @@ function! JmShowTree(start)
   setlocal buftype=nofile
   setlocal bufhidden=hide
   setlocal noswapfile
+  setlocal cursorline
 
   exe '%d'
     " delete all the lines

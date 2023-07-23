@@ -117,6 +117,7 @@ function! s:ListFiles(...)
 
   setlocal syntax=buffers
   setlocal nomodifiable
+  setlocal cursorline
 
   "nmap <buffer> o gF
   "nmap <buffer> <space> gF

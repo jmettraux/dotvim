@@ -49,6 +49,7 @@ function! s:Scan()
   setlocal bufhidden=hide
   setlocal noswapfile
   "setlocal nobuflisted
+  setlocal cursorline
 
   exe '%d_'
   exe "silent r! echo '== :Scan " . path . "'"

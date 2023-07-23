@@ -74,6 +74,7 @@ function! JmVg(args)
   setlocal bufhidden=hide
   setlocal noswapfile
   "setlocal nobuflisted
+  setlocal cursorline
 
   exe '%d_'
   exe "silent r! echo '== :Vg " . pr[0] . " " . rest . "'"
