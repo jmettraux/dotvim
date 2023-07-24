@@ -97,6 +97,7 @@ function! s:OpenCommit(sha)
   setlocal noswapfile
   "setlocal nobuflisted
   "setlocal filetype=ListFiles
+  setlocal cursorline
 
   exe 'silent r! /usr/bin/env python ~/.vim/scripts/gitdiffstat.py ' . sha
   if strlen(sha) > 1
