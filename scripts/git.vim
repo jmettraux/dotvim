@@ -169,6 +169,7 @@ function! s:OpenGitLog(all)
   setlocal syntax=gitlog
   "setlocal filetype=gitlog
   setlocal nomodifiable
+  setlocal cursorline
 
   exe 'normal 1G'
   exe 'normal 4G'
@@ -228,6 +229,7 @@ function! s:OpenGitBlame()
   setlocal bufhidden=hide
   setlocal noswapfile
   "setlocal nobuflisted
+  setlocal cursorline
 
   exe 'silent r! /usr/bin/env python ~/.vim/scripts/gitblame.py ' . path
 
@@ -286,6 +288,7 @@ function! s:OpenGitDiff(path)
   setlocal noswapfile
   "setlocal nobuflisted
   "setlocal filetype=ListFiles
+  setlocal cursorline
 
   exe 'silent r! /usr/bin/env python ~/.vim/scripts/opengitdiff.py ' . a:path
   exe 'Clean'
