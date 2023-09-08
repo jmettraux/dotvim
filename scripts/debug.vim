@@ -4,9 +4,17 @@
 command! Tap :normal o<ESC>0C.tap { |x| pp x }<ESC>013l
 command! Nie :normal o<ESC>0Cfail NotImplementedError<ESC>0
 
-" inject console.log([ 0, 1 ]);
-"
-command! Clo :normal o<ESC>0Cconsole.log([ 0, 1 ]);<ESC>014l
+"command! Clo :normal o<ESC>0Cconsole.log([ 0, 1 ]);<ESC>014l
+  "
+function! <SID>Clo(...)
+  "normal oconsole.log(
+  normal oclog(
+  for arg in a:000
+    execute 'normal! a"' . arg . '", ' . arg . ', '
+  endfor
+  normal 2hC);
+endfunction
+command! -nargs=* Clo call <SID>Clo(<f-args>)
 
 " inject a js throw
 "
