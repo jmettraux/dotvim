@@ -10,9 +10,9 @@ function! <SID>Clo(...)
   "normal oconsole.log(
   normal oclog(
   for arg in a:000
-    execute 'normal! a"' . arg . '", ' . arg . ', '
+    execute "normal! a'" . arg . "', " . arg . ", "
   endfor
-  normal 2hC);
+  normal 1hC);
 endfunction
 command! -nargs=* Clo call <SID>Clo(<f-args>)
 
