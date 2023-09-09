@@ -7,12 +7,16 @@ command! Nie :normal o<ESC>0Cfail NotImplementedError<ESC>0
 "command! Clo :normal o<ESC>0Cconsole.log([ 0, 1 ]);<ESC>014l
   "
 function! <SID>Clo(...)
-  "normal oconsole.log(
-  normal oclog(
+  normal o
+  normal 0Cclog(
   for arg in a:000
     execute "normal! a'" . arg . "', " . arg . ", "
   endfor
-  normal 1hC);
+  if a:000 == []
+    normal a);
+  else
+    normal 1hC);
+  endif
 endfunction
 command! -nargs=* Clo call <SID>Clo(<f-args>)
 
