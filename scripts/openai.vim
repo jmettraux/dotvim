@@ -15,17 +15,27 @@ function! s:OpenAiChatPushLine()
 
   if getline('.') !~ '\v^#+\s+'
     exe 'normal I### 0'
-    exe 'w'
   endif
   let l = getline('.')
   exe 'normal o'
 
   redraw
+  write
 
   call <SID>OpenAiChatComplete(l)
-  exe 'w'
+  write
 endfunction " OpenAiChatPushLine
 
 "command! -nargs=0 Prompt :call <SID>OpenAiChatPushLine()
 nnoremap ?? :call <SID>OpenAiChatPushLine()
+
+
+function! s:OpenAiList()
+
+  let @z = system("/usr/bin/env python ~/.vim/scripts/openai_list.py")
+  silent $put z
+  normal <c-g>
+endfunction " OpenAiList
+
+command! -nargs=0 OpenAiList :call <SID>OpenAiList()
 
