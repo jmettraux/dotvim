@@ -40,7 +40,9 @@ for line in subprocess.Popen(cmd1, shell=True, stdout=subprocess.PIPE).stdout:
   line = line.decode()
   m = re.match(r'^D\s+(.+)$', line)
   if not m: continue
-  paths[m.group(1)][2] = 'D'
+  g1 = m.group(1)
+  if not paths.get(g1): paths[g1] = [ 0, 0, 'X' ]
+  paths[g1][2] = 'D'
 
 if cmd2:
   for line in subprocess.Popen(cmd2, shell=True, stdout=subprocess.PIPE).stdout:
