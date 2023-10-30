@@ -53,6 +53,10 @@ elif re.search(r'\.scad$', fn):
     r'^[^\s]+ = ',
     r'^\s*(function|module)\s+',
       ]
+elif re.search(r'\.s?css$', fn):
+  rs = [
+    r'^[^/]+\s*{',
+      ]
 
 rs.append(r'\bTODO\b')
 rs.append(r'\bFIXME\b')

@@ -7,6 +7,8 @@ function! JmScanSyn(path)
   if a:path =~ "\.js$" | return 'scanout_javascript' | endif
   if a:path =~ "\.md$" | return 'scanout_markdown' | endif
   if a:path =~ "\.scad$" | return 'scanout_scad' | endif
+  if a:path =~ "\.css$" | return 'scanout_css' | endif
+  if a:path =~ "\.scss$" | return 'scanout_css' | endif
   return ''
 endfunction " JmScanSyn
 
