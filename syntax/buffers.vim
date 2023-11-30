@@ -39,7 +39,8 @@ syn match bufLineGrep '\v^  \/ .*$' contains=bufLgRex,bufLgDir
 syn match bufLineComment '\v^[ 	]*#.*$'
 syn match bufEolComment '\v#.*$'
 syn match bufLineGit '\v^[^ 	][^|]+ \| .*$' contains=bufPath,bufLgiStatus
-syn match bufLinePath '\v^[^ #=][^|]+$' contains=bufFilename
+"syn match bufLinePath '\v^[^ #=][^|]+$' contains=bufFilename
+syn match bufLinePath '\v^ *[^ #=][^|]+$' contains=bufFilename
 
 syn match bufSize '\v ([0-9]+\.)?[0-9]+[BKMGTPE]' contained
 syn match bufLines '\v [0-9]+L' contained

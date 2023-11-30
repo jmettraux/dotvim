@@ -94,8 +94,19 @@ for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=FNU
 #  print("%s:" % k)
 #  print(fs[k])
 
+lsimax = 0
 for path in paths:
   f = fs.get(os.path.abspath(path), None)
   if not f: continue
-  print(' '.join(filter(None, [ f['p'], f['s'], f.get('l'), f.get('g') ])))
+  f['i'] = f['p'].rindex('/')
+  if f['i'] > lsimax: lsimax = f['i']
+for path in paths:
+  f = fs.get(os.path.abspath(path), None)
+  if not f: continue
+  f['ip'] = (' ' * (lsimax - f['i'])) + f['p']
+
+for path in paths:
+  f = fs.get(os.path.abspath(path), None)
+  if not f: continue
+  print(' '.join(filter(None, [ f['ip'], f['s'], f.get('l'), f.get('g') ])))
 
