@@ -32,6 +32,7 @@ hi def link bufLgDir bufDir
 hi def link bufComment Comment
 hi def link bufSize Comment
 hi def link bufLines Comment
+hi! bufSlash cterm=NONE ctermfg=darkgray ctermbg=16
 "hi def link bufGit Comment
 
 syn match bufLineTitle '\v^\=\= .+'
@@ -50,8 +51,9 @@ syn match bufLineAndRegister '\v:[0-9]+( +[0-9]+)?' contained
 syn match bufLgiStatusPlus '\v\+\d+' contained
 syn match bufLgiStatusMinus '\v-\d+' contained
 syn match bufLgiStatus '\v\| [MDAR]\+\d+-\d+$' contained contains=bufLgiStatusPlus,bufLgiStatusMinus
-syn match bufFilename '\v(^|\/)@<=[^|]+$' contained contains=bufLineAndRegister,bufSize,bufLines,bufGit,bufEolComment
+syn match bufFilename '\v(^|\/)@<=[^|]+$' contained contains=bufSlash,bufLineAndRegister,bufSize,bufLines,bufGit,bufEolComment
 syn match bufPath '\v[^|]+' contained contains=bufFilename
+syn match bufSlash '\v\/' contained
 
 syn match bufLgRx '\v(\/ ")@<=[^"]+' contained
 syn match bufLgRx '\v(\/ \')@<=[^\']+' contained

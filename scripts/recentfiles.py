@@ -95,11 +95,13 @@ for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=FNU
 #  print(fs[k])
 
 lsimax = 0
+    #
 for path in paths:
   f = fs.get(os.path.abspath(path), None)
   if not f: continue
   f['i'] = f['p'].rfind('/')
   if f['i'] > lsimax: lsimax = f['i']
+    #
 for path in paths:
   f = fs.get(os.path.abspath(path), None)
   if not f: continue
