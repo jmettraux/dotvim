@@ -61,3 +61,93 @@
 " | purple  | `#8B7EC8` | `139, 126, 200` |
 " | magenta | `#CE5D97` | `206, 93, 151`  |
 
+" https://vi.stackexchange.com/questions/9754/how-to-change-vim-background-color-in-hex-code-or-rgb-color-code
+
+
+set background=dark
+syntax enable
+
+let colors_name = "jm_flexoki"
+
+if exists("syntax_on")
+  syntax reset
+endif
+
+hi clear
+
+if has('nvim') || has('termguicolors')
+  let is_truecolor = 1
+else
+  let is_truecolor = has('gui_running')
+endif
+
+if is_truecolor
+
+  "set t_Co=256
+  set termguicolors
+
+  let foki_black = "#100F0F"
+  let foki_950   = "#1C1B1A"
+  let foki_900   = "#282726"
+  let foki_850   = "#343331"
+  let foki_800   = "#403E3C"
+  let foki_700   = "#575653"
+  let foki_600   = "#6F6E69"
+  let foki_500   = "#878580"
+  let foki_300   = "#B7B5AC"
+  let foki_200   = "#CECDC3"
+  let foki_150   = "#DAD8CE"
+  let foki_100   = "#E6E4D9"
+  let foki_50    = "#F2F0E5"
+  let foki_paper = "#FFFCF0"
+
+  let foki_red     = "#AF3029"
+  let foki_orange  = "#BC5215"
+  let foki_yellow  = "#AD8301"
+  let foki_green   = "#66800B"
+  let foki_cyan    = "#24837B"
+  let foki_blue    = "#205EA6"
+  let foki_purple  = "#5E409D"
+  let foki_magenta = "#A02F6F"
+
+  " general
+  "
+  "hi! LineNr cterm=NONE ctermfg=239 ctermbg=235 " #606060 #323232
+  hi! LineNr guifg=foki_150 guibg=foki_700
+  "hi! StatusLine cterm=NONE ctermfg=245 ctermbg=235
+  hi! StatusLine guifg=foki_50 guibg=foki_850
+  hi! StatusLineNC cterm=NONE ctermfg=245 ctermbg=235
+  "hi! StatusLine guifg=foki_ guibg=foki_
+
+  " syntax highlight
+  "
+  hi! Normal cterm=NONE ctermfg=244 ctermbg=16 " #929292 black
+  hi! Comment cterm=bold ctermfg=238 ctermbg=16 " #565656
+  hi! Constant cterm=bold ctermfg=179 ctermbg=16 " #DEBA76
+    hi! String cterm=bold ctermfg=191 ctermbg=16 " #DEF979
+  hi! Identifier cterm=NONE ctermfg=71 ctermbg=16 " #73B874
+    hi! Function cterm=NONE ctermfg=83 ctermbg=16 " #75F877
+  hi! Statement cterm=NONE ctermfg=41 ctermbg=16 " #18D875
+    hi! Keyword cterm=NONE ctermfg=76 ctermbg=16 " #74D822
+  hi! PreProc cterm=NONE ctermfg=29 ctermbg=16 " #0D9672
+  hi! Type cterm=NONE ctermfg=136 ctermbg=16 " #BC961B
+  hi! Special cterm=NONE ctermfg=196 ctermbg=16 " #FD2517
+    hi! Delimiter cterm=NONE ctermfg=196 ctermbg=16
+  hi! Todo cterm=NONE ctermfg=16 ctermbg=41 " black #18D875
+
+  " Quickfix
+  "
+  hi! qfLineNr cterm=NONE ctermfg=136 ctermbg=16
+
+  " Search
+  "
+  hi! Search cterm=NONE ctermfg=29 ctermbg=255
+
+  " NetRw
+  "
+  hi! Directory cterm=NONE ctermfg=136 ctermbg=16
+
+else if match(&term, '-256color$') > -1
+else
+endif
+
