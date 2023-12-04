@@ -57,6 +57,12 @@ def shellquote(s):
 
 fs = {}
 
+home = os.path.expanduser('~')
+  #
+def shorten_path(p):
+  if p.startswith(home): return '~' + p[len(home):]
+  return p
+
 cmd = 'ls -lh ' + ' '.join(map(shellquote, paths))
 
 for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=FNULL).stdout:
@@ -64,9 +70,10 @@ for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=FNU
   m = re.match(
     r'^.+ +.+ +.+ +.+ ([0-9.]+[BKMT]?) +.+ \d+ +[0-9:]+ +(.+)$', line)
   if m:
-    path = escape_path(m.group(2))
-    #d[path] = m.group(2) + ' ' + m.group(1)
-    fs[os.path.abspath(path)] = { 'p': m.group(2), 's': m.group(1) }
+    p = m.group(2)
+    path = escape_path(p)
+    fpath = os.path.abspath(path)
+    fs[fpath] = { 'fp': fpath, 'sp': shorten_path(p), 'p': p, 's': m.group(1) }
 
 cf = open(os.path.join(os.path.dirname(__file__), 'countable.txt'), 'r')
 exts = cf.read().split()
@@ -90,6 +97,8 @@ for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=FNU
   if f == None: continue
   f['g'] = '+' + ss[0] + '-' + ss[1]
 
+  # debugging...
+  #
 #for k in fs:
 #  print("%s:" % k)
 #  print(fs[k])
@@ -99,13 +108,13 @@ lsimax = 0
 for path in paths:
   f = fs.get(os.path.abspath(path), None)
   if not f: continue
-  f['i'] = f['p'].rfind('/')
+  f['i'] = f['sp'].rfind('/')
   if f['i'] > lsimax: lsimax = f['i']
     #
 for path in paths:
   f = fs.get(os.path.abspath(path), None)
   if not f: continue
-  f['ip'] = (' ' * (lsimax - f['i'])) + f['p']
+  f['ip'] = (' ' * (lsimax - f['i'])) + f['sp']
 
 for path in paths:
   f = fs.get(os.path.abspath(path), None)
