@@ -50,6 +50,10 @@ for path in paths:
         current[p] = {}
       current = current[p]
 
+#
+# write header
+# so that errors are printed after it...
+
 print("== recent (%d)" % len(paths))
 
 def shellquote(s):
@@ -103,21 +107,26 @@ for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=FNU
 #  print("%s:" % k)
 #  print(fs[k])
 
+paths = [ os.path.abspath(p) for p in paths ]
+
 lsimax = 0
     #
 for path in paths:
-  f = fs.get(os.path.abspath(path), None)
+  f = fs.get(path, None)
   if not f: continue
   f['i'] = f['sp'].rfind('/')
   if f['i'] > lsimax: lsimax = f['i']
     #
 for path in paths:
-  f = fs.get(os.path.abspath(path), None)
+  f = fs.get(path, None)
   if not f: continue
   f['ip'] = (' ' * (lsimax - f['i'])) + f['sp']
 
+#
+# output
+
 for path in paths:
-  f = fs.get(os.path.abspath(path), None)
+  f = fs.get(path, None)
   if not f: continue
   print(' '.join(filter(None, [ f['ip'], f['s'], f.get('l'), f.get('g') ])))
 
