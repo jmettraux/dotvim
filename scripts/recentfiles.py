@@ -128,5 +128,5 @@ for path in paths:
 for path in paths:
   f = fs.get(path, None)
   if not f: continue
-  print(' '.join(filter(None, [ f['ip'], f['s'], f.get('l'), f.get('g') ])))
+  print(' ' + ' '.join(filter(None, [ f['ip'], f['s'], f.get('l'), f.get('g') ])))
 
