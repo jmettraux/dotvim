@@ -24,6 +24,7 @@ hi! bufLineNumber cterm=NONE ctermfg=darkgrey ctermbg=16
 hi! bufSlash cterm=NONE ctermfg=darkgrey ctermbg=16
 hi! bufDot cterm=NONE ctermfg=darkgrey ctermbg=16
 hi! bufDir cterm=NONE ctermfg=darkgreen ctermbg=16
+hi! bufExt cterm=NONE ctermfg=green ctermbg=16
 
 "syn match bufShort '\v^[^ =].+( [0-9]| ||)@!' contains=bufFileName
 
@@ -44,7 +45,7 @@ syn match bufRecentName '\v^ +.+( [0-9]+(\.[0-9]+)?[PTMKB])@=' contained keepend
 syn match bufRecentSize '\v [0-9]+(\.[0-9]+)?[PTMKB]' contained
 syn match bufRecentGit '\v\+[0-9]+\-[0-9]+' contained
 
-syn match bufFileName '\v^[^:|]+' contained contains=bufSlash,bufDot,bufDir,bufFn
+syn match bufFileName '\v^[^:|]+' contained contains=bufSlash,bufDot,bufDir,bufExt
 syn match bufLineNumber '\v:[0-9]+' contained
 
 syn match bufBufferNumber '\v[0-9]+$' contained
@@ -57,6 +58,7 @@ syn match bufGitLine '\v[^ ][^|]+ \| .+$' contains=bufFileName,bufGitStatus
 syn match bufGitStatus '\v[MAD]\+[0-9]+\-[0-9]+' contained
 syn match bufGitStats '\v^  [0-9]+ .+$'
 
+syn match bufExt '\v\.[a-zA-Z]+' contained
 
 
 let b:current_syntax = "buffers"
