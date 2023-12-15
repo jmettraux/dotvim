@@ -26,7 +26,7 @@ hi! bufDot cterm=NONE ctermfg=darkgrey ctermbg=16
 hi! bufDir cterm=NONE ctermfg=darkgreen ctermbg=16
 hi! bufExt cterm=NONE ctermfg=green ctermbg=16
 
-"syn match bufShort '\v^[^ =].+( [0-9]| ||)@!' contains=bufFileName
+syn match bufShort '\v^[^ =].+$' contains=bufFileName
 
 syn match bufRecentLine '\v +.+$' contains=bufRecentName,bufRecentSize,bufRecentGit
 syn match bufFileAndLine '\v^[^ ][^ :]+:[0-9]+$' contains=bufFileName,bufLineNumber
