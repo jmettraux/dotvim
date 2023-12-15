@@ -13,7 +13,7 @@ hi def link stoSize Comment
 hi def link stoLines Comment
 hi def link stoSummary Comment
 hi! stoGit cterm=NONE ctermfg=white ctermbg=16
-hi! stoExt cterm=NONE ctermfg=lightblue ctermbg=16
+hi! stoExt cterm=NONE ctermfg=grey ctermbg=16
 
 syn match stoTree '\v[├│└─  |`-]+ ' contained
 syn match stoSize '\v[0-9.]+[KMGTPE]?( |$)' contained
