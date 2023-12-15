@@ -12,6 +12,7 @@ hi def link stoTree Comment
 hi def link stoSize Comment
 hi def link stoLines Comment
 hi def link stoSummary Comment
+hi! stoGit cterm=NONE ctermfg=white ctermbg=16
 
 syn match stoTree '\v[├│└─  |`-]+ ' contained
 syn match stoDirname  '\v[-A-Za-z0-9 \(\)_.]+\/' contained
