@@ -58,8 +58,7 @@ syn match bufGitLine '\v[^ ][^|]+ \| .+$' contains=bufFileName,bufGitStatus
 syn match bufGitStatus '\v[MAD]\+[0-9]+\-[0-9]+' contained
 syn match bufGitStats '\v^  [0-9]+ .+$'
 
-  " <match>(<pattern>)@=   ~~~ positive lookahead
-syn match bufExt '\v\.[a-zA-Z]+( |:)@=' contained
+syn match bufExt '\v([a-zA-Z0-9])@<=\.[a-zA-Z]+( |:)@=' contained
 
 
 let b:current_syntax = "buffers"
