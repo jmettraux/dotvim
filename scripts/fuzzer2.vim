@@ -86,16 +86,16 @@ function! JmFuzzer(...)
   nnoremap <buffer> _ :call <SID>FuzzerAddChar('_')<CR>
   nnoremap <buffer> . :call <SID>FuzzerAddChar('.')<CR>
 
-  nnoremap <buffer> 0 :call <SID>FuzzerAddChar('0')<CR>
-  nnoremap <buffer> 1 :call <SID>FuzzerAddChar('1')<CR>
-  nnoremap <buffer> 2 :call <SID>FuzzerAddChar('2')<CR>
-  nnoremap <buffer> 3 :call <SID>FuzzerAddChar('3')<CR>
-  nnoremap <buffer> 4 :call <SID>FuzzerAddChar('4')<CR>
-  nnoremap <buffer> 5 :call <SID>FuzzerAddChar('5')<CR>
-  nnoremap <buffer> 6 :call <SID>FuzzerAddChar('6')<CR>
-  nnoremap <buffer> 7 :call <SID>FuzzerAddChar('7')<CR>
-  nnoremap <buffer> 8 :call <SID>FuzzerAddChar('8')<CR>
-  nnoremap <buffer> 9 :call <SID>FuzzerAddChar('9')<CR>
+  "nnoremap <buffer> 0 :call <SID>FuzzerAddChar('0')<CR>
+  "nnoremap <buffer> 1 :call <SID>FuzzerAddChar('1')<CR>
+  "nnoremap <buffer> 2 :call <SID>FuzzerAddChar('2')<CR>
+  "nnoremap <buffer> 3 :call <SID>FuzzerAddChar('3')<CR>
+  "nnoremap <buffer> 4 :call <SID>FuzzerAddChar('4')<CR>
+  "nnoremap <buffer> 5 :call <SID>FuzzerAddChar('5')<CR>
+  "nnoremap <buffer> 6 :call <SID>FuzzerAddChar('6')<CR>
+  "nnoremap <buffer> 7 :call <SID>FuzzerAddChar('7')<CR>
+  "nnoremap <buffer> 8 :call <SID>FuzzerAddChar('8')<CR>
+  "nnoremap <buffer> 9 :call <SID>FuzzerAddChar('9')<CR>
 
   nnoremap <buffer> <backspace> :call <SID>FuzzerBackspace()<CR>
   nnoremap <buffer> <delete> :call <SID>FuzzerBackspace()<CR>
