@@ -1,6 +1,9 @@
 
 #
 # fuzzer.rb
+#
+# not used anymore, replaced by fuzzer2
+
 
 require 'io/console'
 
