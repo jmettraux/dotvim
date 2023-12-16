@@ -28,6 +28,7 @@ exts = re.split(
 files = glob.glob('**/*', recursive=True)
 files = filter(lambda p: os.path.splitext(p)[1][1:] in exts, files)
 files = filter(lambda p: pat in p, files)
+  # TODO downcase...
 
 #
 # file details
