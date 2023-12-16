@@ -27,14 +27,20 @@ exts = re.split(
     xml toml json yaml yml conf cnf
     flo '''.strip())
 
+sortr = re.compile('^tmp')
+def sortPaths(path):
+  if sortr.search(path): return 'ZZZ/' + path
+  return path
+
 files = filter(
   lambda p: os.path.splitext(p)[1][1:] in exts,
   glob.glob('**/*', recursive=True))
 dirs = glob.glob(
   '**/*/', recursive=True)
-paths = sorted(list(files) + dirs)
+paths = list(files) + dirs
 
 paths = filter(lambda p: patr.search(p), paths)
+paths = sorted(paths, key=sortPaths)
 
 #
 # file details
