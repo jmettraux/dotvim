@@ -98,11 +98,11 @@ function! JmFuzzer()
   nnoremap <buffer> C :call JmFuzzerClear()<CR>
 
   nnoremap <buffer> <CR> :call JmOpenTreeFile()<CR>
+  nnoremap <buffer> <space> :call JmOpenTreeFile()<CR>
+  nnoremap <buffer> T :call JmShowTree(getline(line('.')))<CR>
+  "nnoremap <buffer> E :call JmOpenTreeFile('edit')<CR>
+  "nnoremap <buffer> O :call JmOpenTreeFile()<CR>
 
-"  nnoremap <buffer> o :call JmOpenTreeFile()<CR>
-"  nnoremap <buffer> e :call JmOpenTreeFile('edit')<CR>
-"  nnoremap <buffer> <space> :call JmOpenTreeFile()<CR>
-"
 "  nnoremap <buffer> C :call JmCopyTreeFile()<CR>
 "  nnoremap <buffer> D :call JmDeleteTreeFile()<CR>
 "  nnoremap <buffer> R :call JmRenameTreeFile()<CR>
