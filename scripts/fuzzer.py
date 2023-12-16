@@ -27,11 +27,14 @@ exts = re.split(
     xml toml json yaml yml conf cnf
     flo '''.strip())
 
-files = glob.glob('**/*', recursive=True)
-files = filter(lambda p: os.path.splitext(p)[1][1:] in exts, files)
+files = filter(
+  lambda p: os.path.splitext(p)[1][1:] in exts,
+  glob.glob('**/*', recursive=True))
+dirs = glob.glob(
+  '**/*/', recursive=True)
+paths = sorted(list(files) + dirs)
 
-#files = filter(lambda p: pat in p, files)
-files = filter(lambda p: patr.search(p), files)
+paths = filter(lambda p: patr.search(p), paths)
 
 #
 # file details
@@ -100,11 +103,14 @@ def detail(path):
 
 print(pat)
   #
-for file in files:
-  #print('  ' + file + ' ' + str(detail(file)))
-  d = detail(file)
-  print(('  %s %s %iL %s' % (file, d['size'], d['lines'], d['diff'])).rstrip())
-
+for path in paths:
+  d = detail(path)
+  if d.get('dir'):
+    print(
+      '  %s' % path)
+  else:
+    print((
+      '  %s %s %iL %s' % (path, d['size'], d['lines'], d['diff'])).rstrip())
 
   # keep that in the fridge, but most of the time, the fuzzer is
   # called from a .git level
