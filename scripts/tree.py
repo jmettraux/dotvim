@@ -84,7 +84,7 @@ fs = []
 
 def to_kmgt(s): # https://stackoverflow.com/questions/12523586
   step_unit = 1024.0
-  for x in [ '', 'K', 'M', 'G', 'T' ]:
+  for x in [ '', 'K', 'M', 'G', 'T', 'P' ]:
     #if s < step_unit: return "%3.1f%s" % (s, x)
     if s < step_unit: return "%i%s" % (s, x)
     s /= step_unit
