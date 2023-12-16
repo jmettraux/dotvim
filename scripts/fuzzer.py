@@ -13,6 +13,8 @@ try:
     pat = lines[-1].strip()
 except:
   ''
+  #
+patr = re.compile(pat, re.IGNORECASE);
 
 exts = re.split(
   r"\s+",
@@ -27,8 +29,9 @@ exts = re.split(
 
 files = glob.glob('**/*', recursive=True)
 files = filter(lambda p: os.path.splitext(p)[1][1:] in exts, files)
-files = filter(lambda p: pat in p, files)
-  # TODO downcase...
+
+#files = filter(lambda p: pat in p, files)
+files = filter(lambda p: patr.search(p), files)
 
 #
 # file details
