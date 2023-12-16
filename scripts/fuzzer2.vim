@@ -21,9 +21,13 @@ function! JmFuzzerBackspace()
 endfunction " JmFuzzerBackspace
 
 
-function! JmFuzzer()
+function! JmFuzzer(...)
 
   if &mod == 1 | echoerr "Current buffer has unsaved changes." | return | endif
+
+  if a:0 > 0
+    call writefile([ a:1 ], '.vimfuzz2', 'a')
+  endif
 
   "let fn = '_F___' . JmNtr(a:start)
   let fn = '_F___'
@@ -115,6 +119,7 @@ function! JmFuzzer()
 "  nnoremap <buffer> T :call JmGitCommitTreeFile()<CR>
 endfunction " JmFuzzer
 
-command! -nargs=* FF :silent call JmFuzzer()
+command! -nargs=1 Vf :call JmFuzzer(<q-args>)
+"command! -nargs=* FF :silent call JmFuzzer()
 nnoremap f :silent call JmFuzzer()<CR>
 
