@@ -20,9 +20,17 @@ function! s:FuzzerBackspace()
   call JmFuzzer()
 endfunction " FuzzerBackspace
 
+function! s:FuzzerOptionGet(k, default)
+  let lines = readfile('.vimfuzz2')
+  let lines = filter(lines, 'v:val =~ "^' . a:k . ':"')
+  if len(lines) > 0 | return strpart(lines[0], len(a:k) + 1) | endif
+  return a:default
+endfunction " FuzzerOptionGet
+
 function! s:FuzzerToggleSuffix()
   let s = getline(1)
-  let l = split('.js .rb .scss .css .slim .flo .txt .xml .log .haml', ' ')
+  let l = <SID>FuzzerOptionGet('suffixes', '.js .rb .slim .css')
+  let l = split(l, ' ')
   let i = index(l, s)
   if i < 0
     let s1 = l[0]

@@ -4,13 +4,23 @@
 
 import os, re, sys, glob, time, string, subprocess
 
+max_vimfuzz_lines = 21
 
 pat = ''
   #
 try:
+  lines = None
   with open('.vimfuzz2', 'r') as file:
     lines = file.readlines()
     pat = lines[-1].strip()
+  with open('.vimfuzz2', 'w') as file:
+    c = 0
+    for l in lines:
+      if l.find(':') > 0:
+        file.write(l)
+      elif c < max_vimfuzz_lines:
+        file.write(l)
+        c = c + 1
 except:
   ''
   #
