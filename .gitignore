@@ -8,6 +8,7 @@
 .viminfo
 .vimmarks
 .vimfuzz
+.vimfuzz2
 
 .chat.md
 .openai.*
