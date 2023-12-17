@@ -2,11 +2,13 @@
 
 # fuzzer.py
 
-import os, re, sys, glob, time, string, subprocess
+import os, re, sys, glob, time, string, fnmatch, subprocess
 
 max_vimfuzz_lines = 21
 
 pat = ''
+opts = {}
+keyr = re.compile('^([^:]+):(.+)$')
   #
 try:
   lines = None
@@ -16,8 +18,11 @@ try:
   with open('.vimfuzz2', 'w') as file:
     c = 0
     for l in lines:
-      if l.find(':') > 0:
+      m = keyr.match(l)
+      #if l.find(':') > 0:
+      if m:
         file.write(l)
+        opts[m.group(1)] = m.group(2)
       elif c < max_vimfuzz_lines:
         file.write(l)
         c = c + 1
@@ -37,10 +42,10 @@ exts = re.split(
     xml toml json yaml yml conf cnf
     flo '''.strip())
 
-sortr = re.compile('^tmp')
-def sortPaths(path):
-  if sortr.search(path): return 'ZZZ/' + path
-  return path
+#sortr = re.compile('^tmp')
+#def sortPaths(path):
+#  if sortr.search(path): return 'ZZZ/' + path
+#  return path
 
 files = filter(
   lambda p: os.path.splitext(p)[1][1:] in exts,
@@ -49,8 +54,12 @@ dirs = glob.glob(
   '**/*/', recursive=True)
 paths = list(files) + dirs
 
+for ign in opts.get('ignore', '').split(r'\s+'):
+  paths = filter(lambda p: not(fnmatch.fnmatch(p, ign)), paths)
+
 paths = filter(lambda p: patr.search(p), paths)
-paths = sorted(paths, key=sortPaths)
+#paths = sorted(paths, key=sortPaths)
+paths = sorted(paths)
 
 #
 # file details
