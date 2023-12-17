@@ -20,6 +20,19 @@ function! s:FuzzerBackspace()
   call JmFuzzer()
 endfunction " FuzzerBackspace
 
+function! s:FuzzerToggleSuffix()
+  let s = getline(1)
+  let l = split('.js .rb .scss .css .slim .flo .txt .xml .log .haml', ' ')
+  let i = index(l, s)
+  if i < 0
+    let s1 = l[0]
+  else
+    let s1 = get(l, i + 1, l[0])
+  endif
+  call writefile([ s1 ], '.vimfuzz2', 'a')
+  call JmFuzzer()
+endfunction " FuzzerToggleSuffix
+
 
 function! JmFuzzer(...)
 
@@ -104,6 +117,8 @@ function! JmFuzzer(...)
   nnoremap <buffer> <CR> :call JmOpenTreeFile()<CR>
   nnoremap <buffer> <space> :call JmOpenTreeFile()<CR>
   nnoremap <buffer> T :call JmShowTree(getline(line('.')))<CR>
+
+  nnoremap <buffer> <silent> <leader>f :call <SID>FuzzerToggleSuffix()<CR>
 endfunction " JmFuzzer
 
 command! -nargs=1 Vf :call JmFuzzer(<q-args>)
