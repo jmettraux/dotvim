@@ -59,7 +59,7 @@ syn match bufDot '\v\.' contained
 syn match bufDir '\v[^\/]+(\/)@=' contained
 
 syn match bufGitLine '\v[^ ][^|]+ \| .+$' contains=bufFileName,bufGitStatus
-syn match bufGitStatus '\v[MAD]\+[0-9]+\-[0-9]+' contained contains=bufGitM,bugGitA,bufGitD
+syn match bufGitStatus '\v[MAD]\+[0-9]+\-[0-9]+' contained contains=bufGitM,bufGitA,bufGitD
 syn match bufGitStats '\v^  [0-9]+ .+$'
 
 syn match bufGitM '\vM' contained
