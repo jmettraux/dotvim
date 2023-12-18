@@ -26,9 +26,10 @@ hi! bufDot cterm=NONE ctermfg=darkgrey ctermbg=16
 hi! bufDir cterm=NONE ctermfg=darkgreen ctermbg=16
 hi! bufExt cterm=NONE ctermfg=green ctermbg=16
 
-hi! bufGitM cterm=NONE ctermfg=darkgrey ctermbg=16
-hi! bufGitA cterm=NONE ctermfg=green ctermbg=16
-hi! bufGitD cterm=NONE ctermfg=red ctermbg=16
+hi! bufGitM cterm=bold ctermfg=darkgrey ctermbg=16
+hi! bufGitA cterm=bold ctermfg=green ctermbg=16
+hi! bufGitD cterm=bold ctermfg=red ctermbg=16
+hi! bufGitR cterm=bold ctermfg=darkgreen ctermbg=16
 
 syn match bufShort '\v^[^ =].+$' contains=bufFileName
 
@@ -59,12 +60,13 @@ syn match bufDot '\v\.' contained
 syn match bufDir '\v[^\/]+(\/)@=' contained
 
 syn match bufGitLine '\v[^ ][^|]+ \| .+$' contains=bufFileName,bufGitStatus
-syn match bufGitStatus '\v[MAD]\+[0-9]+\-[0-9]+' contained contains=bufGitM,bufGitA,bufGitD
+syn match bufGitStatus '\v[MADR]\+[0-9]+\-[0-9]+' contained contains=bufGitM,bufGitA,bufGitD,bufGitR
 syn match bufGitStats '\v^  [0-9]+ .+$'
 
 syn match bufGitM '\vM' contained
 syn match bufGitA '\vA' contained
 syn match bufGitD '\vD' contained
+syn match bufGitR '\vR' contained
 
 syn match bufExt '\v([a-zA-Z0-9])@<=\.[a-zA-Z]+( |:)@=' contained
 
