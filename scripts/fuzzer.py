@@ -59,7 +59,7 @@ for ign in opts.get('ignore', '').split(r'\s+'):
 
 paths = filter(lambda p: patr.search(p), paths)
 #paths = sorted(paths, key=sortPaths)
-paths = sorted(paths)
+#paths = sorted(paths)
 
 #
 # file details
@@ -100,8 +100,8 @@ def d_diff(path):
   g = git.get(path)
   return f"+{g[0]}-{g[1]}" if g else ''
 
-def d_recent(path):
-  return (time.time() - os.path.getmtime(path)) < 24 * 60 * 60
+def d_mtime(path):
+  return os.path.getmtime(path)
 
 #def d_git(path):
 #  return path in gits
@@ -113,15 +113,19 @@ def detail(path):
   if d:
     return d
   if os.path.isdir(path):
-    #d = { "dir": True, "recent": d_recent(path), "git": True }
-    d = { "dir": True, "recent": d_recent(path) }
+    d = { "dir": True, "mtime": d_mtime(path) }
   else:
     d = {
       "size": d_size(path), "lines": d_lines(path), "diff": d_diff(path),
-      "recent": d_recent(path) }
-      #"recent": d_recent(path), "git": d_git(path) }
+      "mtime": d_mtime(path) }
   details[path] = d
   return d
+
+def sortPaths(path):
+  d = detail(path)
+  return - d['mtime']
+#paths = sorted(paths)
+paths = sorted(paths, key=sortPaths)
 
 #
 # output
