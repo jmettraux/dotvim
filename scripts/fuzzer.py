@@ -16,16 +16,18 @@ try:
     lines = file.readlines()
     pat = lines[-1].strip()
   with open('.vimfuzz2', 'w') as file:
-    c = 0
+    ls = []
     for l in lines:
       m = keyr.match(l)
-      #if l.find(':') > 0:
       if m:
         file.write(l)
         opts[m.group(1)] = m.group(2)
-      elif c < max_vimfuzz_lines:
-        file.write(l)
-        c = c + 1
+      else:
+        ls.append(l)
+    while len(ls) > max_vimfuzz_lines:
+      ls.pop(0)
+    for l in ls:
+      file.write(l)
 except:
   ''
   #
