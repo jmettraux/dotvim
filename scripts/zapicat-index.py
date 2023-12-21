@@ -8,10 +8,14 @@ CONF_FNAME = '.zapicat'
 INDEX_FNAME = '.zapicat.index'
 
 
+def to_list(x):
+  return x if isinstance(x, list) else [ x ]
+
 def read_lines(path):
   return open(path, 'r').readlines()
 
 CONF_REX = re.compile(r'^\s*([-_.a-zA-Z0-9]+)\s*:\s*(.+)$')
+CONF_ARRAYS = [ 'exclude' ]
   #
 def narrow_conf_value(v):
   v = v.strip()
@@ -28,7 +32,10 @@ def read_conf():
     for l in read_lines(CONF_FNAME):
       m = re.match(CONF_REX, l)
       if not(m): continue
-      h[m.group(1)] = narrow_conf_value(m.group(2))
+      k = m.group(1)
+      v = narrow_conf_value(m.group(2))
+      if k in CONF_ARRAYS: v = to_list(v)
+      h[k] = v
   except:
     1
   return h
@@ -205,6 +212,12 @@ if ('--force' in sys.argv) or (outdated(idx)):
   #glo = sys.argv[1] if len(sys.argv) > 1 else '**/*'
   glo = '**/*'
   paths = glob.glob(glo, recursive=True)
+
+  def is_not_excluded(path):
+    for x in conf.get('exclude', []):
+      if path.startswith(x): return False
+    return True
+  paths = filter(is_not_excluded, paths)
 
   for p in paths: index(idx, p)
 
