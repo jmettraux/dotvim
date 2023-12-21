@@ -7,15 +7,38 @@ import os, re, sys, glob, pickle
 CONF_FNAME = '.zapicat'
 INDEX_FNAME = '.zapicat.index'
 
-#conf = 
+
+def read_lines(path):
+  return open(path, 'r').readlines()
+
+CONF_REX = re.compile(r'^\s*([-_.a-zA-Z0-9]+)\s*:\s*(.+)$')
+  #
+def narrow_conf_value(v):
+  v = v.strip()
+  if v == 'true': return True
+  if v == 'false': return False
+  if v == 'nil': return None
+  if re.match(r'^\d+$', v): return int(v)
+  if re.search(r',', v): return list(map(narrow_conf_value, v.split(',')))
+  return v
+  #
+def read_conf():
+  h = {}
+  try:
+    for l in read_lines(CONF_FNAME):
+      m = re.match(CONF_REX, l)
+      if not(m): continue
+      h[m.group(1)] = narrow_conf_value(m.group(2))
+  except:
+    1
+  return h
+
+conf = read_conf()
 
 
 #import hashlib
 #def shadig(x):
 #  return hashlib.sha256(json.dumps(x).encode()).hexdigest()
-
-def read_lines(path):
-  return open(path, 'r').readlines()
 
 def read_index():
   try:
@@ -134,6 +157,10 @@ def outdated(idx):
 
 #
 # switches
+
+if '--conf' in sys.argv:
+  print(conf)
+  exit(0)
 
 if '--mtime' in sys.argv:
   print(idx.get('mtime'))
