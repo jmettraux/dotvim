@@ -4,9 +4,11 @@
 
 import os, re, sys, glob, pickle
 
+CONF_FNAME = '.zapicat'
+INDEX_FNAME = '.zapicat.index'
+
 #conf = 
 
-INDEX_FNAME = '.zapicat'
 
 #import hashlib
 #def shadig(x):
@@ -141,6 +143,25 @@ if '--outdated' in sys.argv:
 if '--files' in sys.argv:
   for f in idx['files']:
     print(f, idx['files'][f])
+  exit(0)
+
+if '--json' in sys.argv:
+  import json
+  print('{')
+  print('  mtime: ' + str(idx['mtime']) + ',')
+  print('  files: {')
+  for f in idx['files']:
+    print('    "' + f + '": ' + str(idx['files'][f]) + ',')
+  print('  },')
+  print('  lines: {')
+  for l in idx['lines']:
+    print('    "' + l + '": ' + json.dumps(idx['lines'][l]) + ',')
+  print('  },')
+  print('  entries: [')
+  for e in idx['entries']:
+    print('    ' + json.dumps(e) + ',')
+  print('  ],')
+  print('}')
   exit(0)
 
 #
