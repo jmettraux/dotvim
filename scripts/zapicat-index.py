@@ -3,43 +3,23 @@
 # .vim/scripts/zapicat-index.py
 
 import os, re, sys, glob, pickle
-#import os, re, sys, glob, json, hashlib
 
 #conf = 
 
+INDEX_FNAME = '.zapicat'
+
+#import hashlib
 #def shadig(x):
 #  return hashlib.sha256(json.dumps(x).encode()).hexdigest()
+
 def read_lines(path):
   return open(path, 'r').readlines()
 
-#LINE_REX = re.compile(r'^([^:]+):(\d+) > (.+)$')
-#ENTRY_REX = re.compile(r'^([^:]+):(\d+) (.+)$')
-#  #
-#def read_index():
-#  idx = { 'lines': {}, 'entries': [] }
-#  try:
-#    lines = read_lines('.zapicat')
-#    paths = glob.glob('**/*', recursive=True)
-#    for l in lines:
-#      ml = re.match(LINE_REX, l)
-#      me = not(ml) and re.match(ENTRY_REX, l)
-#      m = ml or me
-#      if not(m): continue
-#      f = m.group(1)
-#      if f not in paths: continue
-#      p = f + ':' + m.group(2)
-#      if ml:
-#        idx['lines'][p] = m.group(3).rstrip()
-#      elif me:
-#        ss = m.group(3).rstrip().split(' ')
-#        idx['entries'].append({
-#          'p': p, 't': ss[0], 'tt': ss[1], 'l': ss[2], 'k': ss[3] })
-#  except:
-#    1
-#  return idx
+def read_index():
+  return pickle.load(open(INDEX_FNAME, 'rb'))
 
-idx = { 'mtime': 0, 'files': {}, 'lines': {}, 'entries': [] }
-#idx = read_index()
+#idx = { 'mtime': 0, 'files': {}, 'lines': {}, 'entries': [] }
+idx = read_index()
 
 def index_mtime(idx, path):
   mtime = os.path.getmtime(path)
@@ -135,40 +115,52 @@ def index(idx, path):
     ): return post_index(idx, indexer['fun'](idx, path))
   return {}
 
+def outdated_files(idx):
+  a = []
+  for f in idx['files']:
+    t0 = idx['files'][f]
+    t1 = os.path.getmtime(f)
+    if t1 > t0: a.append(f)
+  return a
+
+def outdated(idx):
+  return len(outdated_files(idx)) > 0
+
+#
+# switches
 
 if '--mtime' in sys.argv:
-  idx = pickle.load(open('.zapicat', 'rb'))
   print(idx.get('mtime'))
   exit(0)
 
 if '--outdated' in sys.argv:
-  idx = pickle.load(open('.zapicat', 'rb'))
-  for f in idx['files']:
-    t0 = idx['files'][f]
-    t1 = os.path.getmtime(f)
-    if t1 > t0: print(f)
+  for f in outdated_files(idx):
+    print(f)
   exit(0)
 
 if '--files' in sys.argv:
-  idx = pickle.load(open('.zapicat', 'rb'))
   for f in idx['files']:
     print(f, idx['files'][f])
   exit(0)
 
-
-glo = sys.argv[1] if len(sys.argv) > 1 else '**/*'
-paths = glob.glob(glo, recursive=True)
-
 #
 # index
 
-for p in paths: index(idx, p)
+if ('--force' in sys.argv) or (outdated(idx)):
 
-#
-# output
+  idx = { 'mtime': 0, 'files': {}, 'lines': {}, 'entries': [] }
 
-#with open('.zapicat', 'w') as file:
-#  json.dump(idx, file)
-with open('.zapicat', 'wb') as file:
-  pickle.dump(idx, file)
+  #glo = sys.argv[1] if len(sys.argv) > 1 else '**/*'
+  glo = '**/*'
+  paths = glob.glob(glo, recursive=True)
+
+  for p in paths: index(idx, p)
+
+  #
+  # output
+
+  #with open(INDEX_FNAME, 'w') as file:
+  #  json.dump(idx, file)
+  with open(INDEX_FNAME, 'wb') as file:
+    pickle.dump(idx, file)
 
