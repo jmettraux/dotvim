@@ -83,11 +83,13 @@ def index_js(idx, path):
     l = l + 1
     index_js_line(idx, path, line, l)
 
+RB_COM_REX = re.compile(r'^\s*#')
 RB_DEF_REX = re.compile(r'\bdef\s+([a-zA-Z0-9.:]+)')
 RB_MOD_REX = re.compile(r'\b(module|class)\s*([a-zA-Z0-9.:]+)')
 #RB_ASS_REX = re.compile(r'\b([^=]+)\s*=\s*[^=>]')
   #
 def index_rb_line(idx, path, line, l):
+  if re.match(RB_COM_REX, line): return
   p = path + ':' + str(l)
   m = re.search(RB_DEF_REX, line)
   if m:
