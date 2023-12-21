@@ -8,8 +8,8 @@ CONF_FNAME = '.zapicat'
 INDEX_FNAME = '.zapicat.index'
 
 
-def to_list(x):
-  return x if isinstance(x, list) else [ x ]
+#def to_list(x):
+#  return x if isinstance(x, list) else [ x ]
 
 def read_lines(path):
   return open(path, 'r').readlines()
@@ -27,10 +27,8 @@ conf = read_conf()
 #  return hashlib.sha256(json.dumps(x).encode()).hexdigest()
 
 def read_index():
-  try:
-    return pickle.load(open(INDEX_FNAME, 'rb'))
-  except:
-    return { 'mtime': 0, 'files': {}, 'lines': {}, 'entries': [] }
+  try: return pickle.load(open(INDEX_FNAME, 'rb'))
+  except: return { 'mtime': 0, 'files': {}, 'lines': {}, 'entries': [] }
 
 #idx = { 'mtime': 0, 'files': {}, 'lines': {}, 'entries': [] }
 idx = read_index()
