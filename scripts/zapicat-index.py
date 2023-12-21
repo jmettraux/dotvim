@@ -15,12 +15,16 @@ def readlines(path):
 idx = { 'lines': {}, 'entries': [] }
   # TODO reload .zapicat.index
 
+JS_COM_REX = re.compile(r'^\s*\/\/')
 JS_MOD_REX = re.compile(r'\b(class)\s+([a-zA-Z0-9_]+)')
 JS_MOJ_REX = re.compile(r'\b\s*var\s+([a-zA-Z0-9_]+)\s*=\s*\(function\(\)\s*\{')
 JS_DEF_REX = re.compile(r'\bthis\.([a-zA-Z0-9_]+)\s*=[^=]')
 JS_D3F_REX = re.compile(r'\bvar\s+([a-zA-Z0-9_]+)\s*=\s*function\(')
+JS_DCF_REX = re.compile(r'\b([#a-zA-Z0-9_]+)\s*\([^)]+\)\s*\{')
+JS_DCF_NOT = [ 'if', 'function', 'forEach' ]
   #
 def index_js_line(idx, path, line, l):
+  if re.match(JS_COM_REX, line): return
   p = path + ':' + str(l)
   m = re.search(JS_MOD_REX, line)
   if m:
@@ -42,6 +46,11 @@ def index_js_line(idx, path, line, l):
     idx['lines'][p] = line.rstrip()
     idx['entries'].append({
       'l': 'js', 'p': p,  't': 'def', 'k': m.group(1), 'tt': 'p' })
+  m = re.search(JS_DCF_REX, line)
+  if m and (m.group(1) not in JS_DCF_NOT):
+    idx['lines'][p] = line.rstrip()
+    idx['entries'].append({
+      'l': 'js', 'p': p,  't': 'def', 'k': m.group(1), 'tt': 'c' })
 
 def index_js(idx, path):
   l = 0
