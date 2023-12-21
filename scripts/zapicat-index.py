@@ -2,7 +2,7 @@
 #
 # .vim/scripts/zapicat-index.py
 
-import os, re, sys, glob
+import os, re, sys, glob, pickle
 #import os, re, sys, glob, json, hashlib
 
 #conf = 
@@ -38,7 +38,7 @@ def read_lines(path):
 #    1
 #  return idx
 
-idx = { 'lines': {}, 'entries': [] }
+idx = { 'mtime': 0, 'lines': {}, 'entries': [] }
 #idx = read_index()
 
 JS_COM_REX = re.compile(r'^\s*\/\/')
@@ -80,6 +80,7 @@ def index_js_line(idx, path, line, l):
 
 def index_js(idx, path):
   if path.endswith('.min.js'): return
+  idx['mtime'] = max(os.path.getmtime(path), idx['mtime'])
   l = 0
   for line in read_lines(path):
     l = l + 1
@@ -103,6 +104,7 @@ def index_rb_line(idx, path, line, l):
       'l': 'ruby', 'p': p,  't': 'mod', 'k': m.group(2), 'tt': m.group(1) })
 
 def index_rb(idx, path):
+  idx['mtime'] = max(os.path.getmtime(path), idx['mtime'])
   l = 0
   for line in read_lines(path):
     l = l + 1
@@ -128,6 +130,12 @@ def index(idx, path):
     ): return post_index(idx, indexer['fun'](idx, path))
   return {}
 
+if '--mtime' in sys.argv:
+  with open('.zapicat', 'rb') as file:
+    idx = pickle.load(file)
+    print(idx.get('mtime'))
+  exit(0)
+
 glo = sys.argv[1] if len(sys.argv) > 1 else '**/*'
 paths = glob.glob(glo, recursive=True)
 
@@ -139,8 +147,8 @@ for p in paths: index(idx, p)
 #
 # output
 
-for e in idx['entries']:
-  print(e['p'], e['t'], e['tt'], e['l'], e['k'])
-for l in idx['lines']:
-  print(l, '>', idx['lines'][l])
+#with open('.zapicat', 'w') as file:
+#  json.dump(idx, file)
+with open('.zapicat', 'wb') as file:
+  pickle.dump(idx, file)
 
