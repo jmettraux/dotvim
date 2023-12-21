@@ -9,11 +9,37 @@ import os, re, sys, glob
 
 #def shadig(x):
 #  return hashlib.sha256(json.dumps(x).encode()).hexdigest()
-def readlines(path):
+def read_lines(path):
   return open(path, 'r').readlines()
 
+#LINE_REX = re.compile(r'^([^:]+):(\d+) > (.+)$')
+#ENTRY_REX = re.compile(r'^([^:]+):(\d+) (.+)$')
+#  #
+#def read_index():
+#  idx = { 'lines': {}, 'entries': [] }
+#  try:
+#    lines = read_lines('.zapicat')
+#    paths = glob.glob('**/*', recursive=True)
+#    for l in lines:
+#      ml = re.match(LINE_REX, l)
+#      me = not(ml) and re.match(ENTRY_REX, l)
+#      m = ml or me
+#      if not(m): continue
+#      f = m.group(1)
+#      if f not in paths: continue
+#      p = f + ':' + m.group(2)
+#      if ml:
+#        idx['lines'][p] = m.group(3).rstrip()
+#      elif me:
+#        ss = m.group(3).rstrip().split(' ')
+#        idx['entries'].append({
+#          'p': p, 't': ss[0], 'tt': ss[1], 'l': ss[2], 'k': ss[3] })
+#  except:
+#    1
+#  return idx
+
 idx = { 'lines': {}, 'entries': [] }
-  # TODO reload .zapicat.index
+#idx = read_index()
 
 JS_COM_REX = re.compile(r'^\s*\/\/')
 JS_MOD_REX = re.compile(r'\b(class)\s+([a-zA-Z0-9_]+)')
@@ -53,8 +79,9 @@ def index_js_line(idx, path, line, l):
       'l': 'js', 'p': p,  't': 'def', 'k': m.group(1), 'tt': 'c' })
 
 def index_js(idx, path):
+  if path.endswith('.min.js'): return
   l = 0
-  for line in readlines(path):
+  for line in read_lines(path):
     l = l + 1
     index_js_line(idx, path, line, l)
 
@@ -77,7 +104,7 @@ def index_rb_line(idx, path, line, l):
 
 def index_rb(idx, path):
   l = 0
-  for line in readlines(path):
+  for line in read_lines(path):
     l = l + 1
     index_rb_line(idx, path, line, l)
 
