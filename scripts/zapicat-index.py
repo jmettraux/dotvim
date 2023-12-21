@@ -38,8 +38,13 @@ def read_lines(path):
 #    1
 #  return idx
 
-idx = { 'mtime': 0, 'lines': {}, 'entries': [] }
+idx = { 'mtime': 0, 'files': {}, 'lines': {}, 'entries': [] }
 #idx = read_index()
+
+def index_mtime(idx, path):
+  mtime = os.path.getmtime(path)
+  idx['mtime'] = max(mtime, idx['mtime'])
+  idx['files'][path] = mtime
 
 JS_COM_REX = re.compile(r'^\s*\/\/')
 JS_MOD_REX = re.compile(r'\b(class)\s+([a-zA-Z0-9_]+)')
@@ -80,7 +85,7 @@ def index_js_line(idx, path, line, l):
 
 def index_js(idx, path):
   if path.endswith('.min.js'): return
-  idx['mtime'] = max(os.path.getmtime(path), idx['mtime'])
+  index_mtime(idx, path)
   l = 0
   for line in read_lines(path):
     l = l + 1
@@ -104,7 +109,7 @@ def index_rb_line(idx, path, line, l):
       'l': 'ruby', 'p': p,  't': 'mod', 'k': m.group(2), 'tt': m.group(1) })
 
 def index_rb(idx, path):
-  idx['mtime'] = max(os.path.getmtime(path), idx['mtime'])
+  index_mtime(idx, path)
   l = 0
   for line in read_lines(path):
     l = l + 1
@@ -130,11 +135,26 @@ def index(idx, path):
     ): return post_index(idx, indexer['fun'](idx, path))
   return {}
 
+
 if '--mtime' in sys.argv:
-  with open('.zapicat', 'rb') as file:
-    idx = pickle.load(file)
-    print(idx.get('mtime'))
+  idx = pickle.load(open('.zapicat', 'rb'))
+  print(idx.get('mtime'))
   exit(0)
+
+if '--outdated' in sys.argv:
+  idx = pickle.load(open('.zapicat', 'rb'))
+  for f in idx['files']:
+    t0 = idx['files'][f]
+    t1 = os.path.getmtime(f)
+    if t1 > t0: print(f)
+  exit(0)
+
+if '--files' in sys.argv:
+  idx = pickle.load(open('.zapicat', 'rb'))
+  for f in idx['files']:
+    print(f, idx['files'][f])
+  exit(0)
+
 
 glo = sys.argv[1] if len(sys.argv) > 1 else '**/*'
 paths = glob.glob(glo, recursive=True)
