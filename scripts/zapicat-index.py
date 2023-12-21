@@ -18,7 +18,10 @@ def read_lines(path):
   return open(path, 'r').readlines()
 
 def read_index():
-  return pickle.load(open(INDEX_FNAME, 'rb'))
+  try:
+    return pickle.load(open(INDEX_FNAME, 'rb'))
+  except:
+    return { 'mtime': 0, 'files': {}, 'lines': {}, 'entries': [] }
 
 #idx = { 'mtime': 0, 'files': {}, 'lines': {}, 'entries': [] }
 idx = read_index()
@@ -126,6 +129,7 @@ def outdated_files(idx):
   return a
 
 def outdated(idx):
+  if idx['mtime'] == 0: return True
   return len(outdated_files(idx)) > 0
 
 #
