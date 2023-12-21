@@ -2,7 +2,7 @@
 #
 # .vim/scripts/zapicat-index.py
 
-import os, re, sys, glob, pickle
+import os, re, sys, glob, json, pickle
 
 CONF_FNAME = '.zapicat'
 INDEX_FNAME = '.zapicat.index'
@@ -67,7 +67,7 @@ JS_MOJ_REX = re.compile(r'\b\s*var\s+([a-zA-Z0-9_]+)\s*=\s*\(function\(\)\s*\{')
 JS_DEF_REX = re.compile(r'\bthis\.([a-zA-Z0-9_]+)\s*=[^=]')
 JS_D3F_REX = re.compile(r'\bvar\s+([a-zA-Z0-9_]+)\s*=\s*function\(')
 JS_DCF_REX = re.compile(r'\b([#a-zA-Z0-9_]+)\s*\([^)]+\)\s*\{')
-JS_DCF_NOT = [ 'if', 'function', 'forEach' ]
+JS_DCF_NOT = [ 'if', 'function', 'forEach', 'for', 'while', 'switch' ]
   #
 def index_js_line(idx, path, line, l):
   if re.match(JS_COM_REX, line): return
@@ -184,7 +184,6 @@ if '--files' in sys.argv:
   exit(0)
 
 if '--json' in sys.argv:
-  import json
   print('{')
   print('  mtime: ' + str(idx['mtime']) + ',')
   print('  files: {')
@@ -200,6 +199,7 @@ if '--json' in sys.argv:
     print('    ' + json.dumps(e) + ',')
   print('  ],')
   print('}')
+  #print(json.dumps(idx, indent=2))
   exit(0)
 
 #
