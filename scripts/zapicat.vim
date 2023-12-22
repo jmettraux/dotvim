@@ -65,11 +65,21 @@ function! JmZapicat(...)
   setlocal noswapfile
   setlocal cursorline
 
+  "let argz = join(a:000, ' ')
+
   exe '%d'
-  "normal O
+  put =join(a:000)
+  "normal o
   let w = winwidth(0)
-  exe 'silent r! /usr/bin/env python ~/.vim/scripts/zapicat-browse.py ' . w
-  "exe 'silent r! /usr/bin/env python ~/.vim/scripts/zapicat-browse.py ' .shellescape(a:1)
+  "exe 'silent r! /usr/bin/env python ~/.vim/scripts/zapicat-browse.py ' . w . ' ' . shellescape(a)
+  let cmd = 'silent r! /usr/bin/env python ~/.vim/scripts/zapicat-browse.py'
+  let cmd = cmd . ' ' . w
+  for aa in a:000
+    let cmd = cmd . ' ' . shellescape(aa, 1)
+  endfor
+
+  exe cmd
+
   normal 1Gdd2G0
   setlocal syntax=zapicat
   setlocal nomodifiable
@@ -127,7 +137,7 @@ function! JmZapicat(...)
   "nnoremap <buffer> <silent> <leader>f :call <SID>FuzzerToggleSuffix()<CR>
 endfunction " JmFuzzer
 
-command! -nargs=1 Vz :call JmZapicat(<q-args>)
+command! -nargs=* Vz :call JmZapicat(<f-args>)
 "command! -nargs=* FF :silent call JmZapicat()
-nnoremap F :silent call JmZapicat()<CR>
+nnoremap F :silent call JmZapicat("")<CR>
 

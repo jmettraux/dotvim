@@ -4,6 +4,7 @@
 
 import os, re, sys, glob, json, pickle, shutil, subprocess
 
+#print(sys.argv)
 
 #W = 80
 W = int(sys.argv[1])
