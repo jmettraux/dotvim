@@ -50,9 +50,8 @@ aliases = {
   'function': 'fun',
     }
 shorts = {
-  'ruby': 'rb',
-  'def': 'df',
-  'module': 'mo',
+  #'def': 'd',
+  #'module': 'm',
     }
 
 key = None
@@ -77,7 +76,6 @@ def count_wspace(string):
 es = []
 fmx = 0
 nmx = 0
-kmx = 0
 ws = 9999
 for e in idx['entries']:
 
@@ -91,16 +89,17 @@ for e in idx['entries']:
   ws = min(ws, count_wspace(e['L']))
   fmx = max(fmx, len(e['F']))
   nmx = max(nmx, len(e['N']))
-  kmx = max(kmx, len(e['k']))
   es.append(e)
+
+fmx = fmx + 2
 
 #
 # render
 
 for e in es:
-  t = shorts.get(e['t'], e['t'][:2])
+  t = shorts.get(e['t'], e['t'][:1])
   #l = shorts.get(e['l'], e['l'][:2])
-  s = f"%{fmx}s:%-{nmx}s %-{kmx}s %s %s" % ( e['F'], e['N'], e['k'], t, e['L'])
+  s = f"%{fmx}s:%-{nmx}s %s %s" % ( e['F'], e['N'], t, e['L'])
   if len(s) > W: s = s[:W-1] + '‣'
   print(s)
 

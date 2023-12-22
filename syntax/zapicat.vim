@@ -31,8 +31,8 @@ syn match zapColon ':' contained
 syn match zapDir '\v[^\/:]+(\/)@=' contained
 syn match zapNumber '\v(:)@<=[0-9]+ +' contained
 syn match zapTail '\v(:[0-9]+ +)@<=(.+)$' contains=zapType,zapLine
-syn match zapType '\v(:[0-9]+ +[^ ]+ +)@<=[a-z]{2} ' contained
-syn match zapLine '\v(:[0-9]+ +[^ ]+ +[a-z]{2} )@<=(.+)$' contained contains=zapMod,zapDef,zapVar
+syn match zapType '\v(:[0-9]+ +)@<=[a-z]{1} ' contained
+syn match zapLine '\v(:[0-9]+ +[a-z]{1} )@<=(.+)$' contained contains=zapMod,zapDef,zapVar
 syn match zapDef '\vdef ' contained
 syn match zapMod '\v(module|class) ' contained
 syn match zapVar '\vvar ' contained
