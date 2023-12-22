@@ -85,7 +85,7 @@ def index_js(idx, path):
 
 RB_COM_REX = re.compile(r'^\s*#')
 RB_DEF_REX = re.compile(r'\bdef\s+([a-zA-Z0-9.:]+)')
-RB_MOD_REX = re.compile(r'\b(module|class)\s*([a-zA-Z0-9.:]+)')
+RB_MOD_REX = re.compile(r'\b(module|class)\s*([a-zA-Z0-9][a-zA-Z0-9.:]*)')
 #RB_ASS_REX = re.compile(r'\b([^=]+)\s*=\s*[^=>]')
   #
 def index_rb_line(idx, path, line, l):
@@ -95,7 +95,7 @@ def index_rb_line(idx, path, line, l):
   if m:
     idx['lines'][p] = line.rstrip()
     idx['entries'].append({
-      'l': 'ruby', 'p': p,  't': 'fun', 'k': m.group(1), 'tt': '-' })
+      'l': 'ruby', 'p': p,  't': 'def', 'k': m.group(1), 'tt': '-' })
   m = re.search(RB_MOD_REX, line)
   if m:
     idx['lines'][p] = line.rstrip()
