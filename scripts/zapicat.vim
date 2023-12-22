@@ -65,13 +65,11 @@ function! JmZapicat(...)
   setlocal noswapfile
   setlocal cursorline
 
-  "let argz = join(a:000, ' ')
-
   exe '%d'
   put =join(a:000)
   "normal o
+
   let w = winwidth(0)
-  "exe 'silent r! /usr/bin/env python ~/.vim/scripts/zapicat-browse.py ' . w . ' ' . shellescape(a)
   let cmd = 'silent r! /usr/bin/env python ~/.vim/scripts/zapicat-browse.py'
   let cmd = cmd . ' ' . w
   for aa in a:000
