@@ -62,9 +62,10 @@ argv = list(map(lambda x: aliases.get(x, x), argv))
 if len(argv) < 1: argv = None
 
 def match(e, key):
-  if key.endswith('%'): return e['k'].startswith(key[:-1])
-  if key.startswith('%'): return e['k'].endswith(key[1:])
-  return e['k'] == key
+  #if key.endswith('%'): return e['k'].startswith(key[:-1])
+  #if key.startswith('%'): return e['k'].endswith(key[1:])
+  #return e['k'] == key
+  return e['k'].find(key) > -1
 
 def count_wspace(string):
   m = re.search(r'^\s+', string)

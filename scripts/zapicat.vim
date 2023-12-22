@@ -4,43 +4,20 @@
 
 
 function! s:ZapiAddChar(c)
-  setlocal modifiable
-  0put= getline(1) . a:c
-  exe '2d'
-  call <SID>ZapiLoad()
-  setlocal nomodifiable
+  let a = getline(1) . a:c
+  call JmZapicat(a)
 endfunction " ZapiAddChar
 
 function! s:ZapiClear()
-  setlocal modifiable
-  0put= ''
-  exe '2d'
-  call <SID>ZapiLoad()
-  setlocal nomodifiable
+  call JmZapicat('')
 endfunction " ZapiClear
 
 function! s:ZapiBackspace()
-  "let as = split(getline(1), ' ')
-  "setlocal modifiable
-  "exe 'normal 1G$x'
-  "call <SID>ZapiLoad()
-  "setlocal nomodifiable
+  let a = getline(1)
+  let a = strpart(a, 0, strlen(a) - 1)
+  call JmZapicat(a)
 endfunction " ZapiBackspace
 
-function! s:ZapiLoad()
-
-  let as = split(getline(1), ' ')
-
-  let cmd = 'silent r! /usr/bin/env python ~/.vim/scripts/zapicat-browse.py'
-  let cmd = cmd . ' ' . winwidth(0)
-  for aa in as
-    let cmd = cmd . ' ' . shellescape(aa, 1)
-  endfor
-
-  exe cmd
-
-  normal 2G
-endfunction " ZapiLoad
 
 function! JmZapicat(...)
 
@@ -67,7 +44,18 @@ function! JmZapicat(...)
 
   exe '%d'
   0put =join(a:000)
-  call <SID>ZapiLoad()
+
+  let as = split(getline(1), ' ')
+
+  let cmd = 'silent r! /usr/bin/env python ~/.vim/scripts/zapicat-browse.py'
+  let cmd = cmd . ' ' . winwidth(0)
+  for aa in as
+    let cmd = cmd . ' ' . shellescape(aa, 1)
+  endfor
+
+  exe cmd
+
+  normal 1Gj
 
   setlocal syntax=zapicat
   setlocal nomodifiable
@@ -99,11 +87,10 @@ function! JmZapicat(...)
   nnoremap <buffer> y :call <SID>ZapiAddChar('y')<CR>
   nnoremap <buffer> z :call <SID>ZapiAddChar('z')<CR>
   nnoremap <buffer> <space> :call <SID>ZapiAddChar(' ')<CR>
-  nnoremap <buffer> % :call <SID>ZapiAddChar('%')<CR>
 
-  "nnoremap <buffer> - :call <SID>FuzzerAddChar('-')<CR>
-  "nnoremap <buffer> _ :call <SID>FuzzerAddChar('_')<CR>
-  "nnoremap <buffer> . :call <SID>FuzzerAddChar('.')<CR>
+  "nnoremap <buffer> - :call <SID>ZapiAddChar('-')<CR>
+  nnoremap <buffer> _ :call <SID>ZapiAddChar('_')<CR>
+  nnoremap <buffer> . :call <SID>ZapiAddChar('.')<CR>
 
   ""nnoremap <buffer> 0 :call <SID>FuzzerAddChar('0')<CR>
   ""nnoremap <buffer> 1 :call <SID>FuzzerAddChar('1')<CR>
@@ -121,7 +108,6 @@ function! JmZapicat(...)
   nnoremap <buffer> C :call <SID>ZapiClear()<CR>
 
   nnoremap <buffer> <CR> :call JmOpenTreeFile()<CR>
-  "nnoremap <buffer> <space> :call JmOpenTreeFile()<CR>
   "nnoremap <buffer> T :call JmShowTree(getline(line('.')))<CR>
 
   "nnoremap <buffer> <silent> <leader>f :call <SID>FuzzerToggleSuffix()<CR>
