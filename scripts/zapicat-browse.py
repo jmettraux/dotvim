@@ -2,7 +2,10 @@
 #
 # .vim/scripts/zapicat-browse.py
 
-import os, re, sys, glob, json, pickle
+import os, re, sys, glob, json, pickle, shutil
+
+
+W, _ = shutil.get_terminal_size()
 
 CONF_FNAME = '.zapicat'
 INDEX_FNAME = '.zapicat.index'
@@ -37,6 +40,11 @@ aliases = {
   'func': 'fun',
   'function': 'fun',
     }
+shorts = {
+  'ruby': 'rb',
+  'fun': 'fn',
+  'module': 'mo',
+    }
 
 key = None
   #
@@ -60,8 +68,6 @@ def count_wspace(string):
 es = []
 fmx = 0
 nmx = 0
-kmx = 0
-lmx = 0
 ws = 9999
 for e in idx['entries']:
 
@@ -75,11 +81,12 @@ for e in idx['entries']:
   ws = min(ws, count_wspace(e['L']))
   fmx = max(fmx, len(e['F']))
   nmx = max(nmx, len(e['N']))
-  kmx = max(kmx, len(e['k']))
-  lmx = max(lmx, len(e['l']))
   es.append(e)
 
 for e in es:
-  print(f"%{fmx}s:%-{nmx}s %-{kmx}s %s %-{lmx}s | %s" % (
-    e['F'], e['N'], e['k'], e['t'], e['l'], e['L'][ws:]))
+  t = shorts.get(e['t'], e['t'][:2])
+  #l = shorts.get(e['l'], e['l'][:2])
+  s = f"%{fmx}s:%-{nmx}s %s %s %s" % (e['F'], e['N'], e['k'], t, e['L'][ws:])
+  if len(s) > W: s = s[:W-1] + '‣'
+  print(s)
 
