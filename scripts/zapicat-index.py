@@ -33,6 +33,9 @@ def read_index():
 #idx = { 'mtime': 0, 'files': {}, 'lines': {}, 'entries': [] }
 idx = read_index()
 
+def mgd(m, i):
+  return m.group(i).lower()
+
 def index_mtime(idx, path):
   mtime = os.path.getmtime(path)
   idx['mtime'] = max(mtime, idx['mtime'])
@@ -53,27 +56,27 @@ def index_js_line(idx, path, line, l):
   if m:
     idx['lines'][p] = line.rstrip()
     idx['entries'].append({
-      'l': 'js', 'p': p,  't': 'mod', 'k': m.group(2), 'tt': m.group(1) })
+      'l': 'js', 'p': p,  't': 'mod', 'k': mgd(m, 2), 'tt': m.group(1) })
   m = re.search(JS_MOJ_REX, line)
   if m:
     idx['lines'][p] = line.rstrip()
     idx['entries'].append({
-      'l': 'js', 'p': p,  't': 'mod', 'k': m.group(1), 'tt': 'j' })
+      'l': 'js', 'p': p,  't': 'mod', 'k': mgd(m, 1), 'tt': 'j' })
   m = re.search(JS_DEF_REX, line)
   if m:
     idx['lines'][p] = line.rstrip()
     idx['entries'].append({
-      'l': 'js', 'p': p,  't': 'def', 'k': m.group(1), 'tt': '-' })
+      'l': 'js', 'p': p,  't': 'def', 'k': mgd(m, 1), 'tt': '-' })
   m = re.search(JS_D3F_REX, line)
   if m:
     idx['lines'][p] = line.rstrip()
     idx['entries'].append({
-      'l': 'js', 'p': p,  't': 'def', 'k': m.group(1), 'tt': 'p' })
+      'l': 'js', 'p': p,  't': 'def', 'k': mgd(m, 1), 'tt': 'p' })
   m = re.search(JS_DCF_REX, line)
   if m and (m.group(1) not in JS_DCF_NOT):
     idx['lines'][p] = line.rstrip()
     idx['entries'].append({
-      'l': 'js', 'p': p,  't': 'def', 'k': m.group(1), 'tt': 'c' })
+      'l': 'js', 'p': p,  't': 'def', 'k': mgd(m, 1), 'tt': 'c' })
 
 def index_js(idx, path):
   if path.endswith('.min.js'): return
@@ -95,12 +98,12 @@ def index_rb_line(idx, path, line, l):
   if m:
     idx['lines'][p] = line.rstrip()
     idx['entries'].append({
-      'l': 'ruby', 'p': p,  't': 'def', 'k': m.group(1), 'tt': '-' })
+      'l': 'ruby', 'p': p,  't': 'def', 'k': mgd(m, 1), 'tt': '-' })
   m = re.search(RB_MOD_REX, line)
   if m:
     idx['lines'][p] = line.rstrip()
     idx['entries'].append({
-      'l': 'ruby', 'p': p,  't': 'mod', 'k': m.group(2), 'tt': m.group(1) })
+      'l': 'ruby', 'p': p,  't': 'mod', 'k': mgd(m, 2), 'tt': m.group(1) })
 
 def index_rb(idx, path):
   index_mtime(idx, path)
