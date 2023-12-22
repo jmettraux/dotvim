@@ -28,7 +28,7 @@ conf = read_conf()
 
 def read_index():
   try: return pickle.load(open(INDEX_FNAME, 'rb'))
-  except: return { 'mtime': 0, 'files': {}, 'lines': {}, 'entries': [] }
+  except: return { 'mtime': 0, 'files': {}, 'entries': [] }
 
 #idx = { 'mtime': 0, 'files': {}, 'lines': {}, 'entries': [] }
 idx = read_index()
@@ -53,30 +53,26 @@ def index_js_line(idx, path, line, l):
   if re.match(JS_COM_REX, line): return
   p = path + ':' + str(l)
   m = re.search(JS_MOD_REX, line)
+  l = line.rstrip().replace('\t', '  ')
   if m:
-    idx['lines'][p] = line.rstrip()
     idx['entries'].append({
-      'l': 'js', 'p': p,  't': 'mod', 'k': mgd(m, 2), 'tt': m.group(1) })
+      'l': 'js', 'p': p,  't': 'mod', 'k': mgd(m, 2), 'tt': m.group(1), 'L': l })
   m = re.search(JS_MOJ_REX, line)
   if m:
-    idx['lines'][p] = line.rstrip()
     idx['entries'].append({
-      'l': 'js', 'p': p,  't': 'mod', 'k': mgd(m, 1), 'tt': 'j' })
+      'l': 'js', 'p': p,  't': 'mod', 'k': mgd(m, 1), 'tt': 'j', 'L': l })
   m = re.search(JS_DEF_REX, line)
   if m:
-    idx['lines'][p] = line.rstrip()
     idx['entries'].append({
-      'l': 'js', 'p': p,  't': 'def', 'k': mgd(m, 1), 'tt': '-' })
+      'l': 'js', 'p': p,  't': 'def', 'k': mgd(m, 1), 'tt': '-', 'L': l })
   m = re.search(JS_D3F_REX, line)
   if m:
-    idx['lines'][p] = line.rstrip()
     idx['entries'].append({
-      'l': 'js', 'p': p,  't': 'def', 'k': mgd(m, 1), 'tt': 'p' })
+      'l': 'js', 'p': p,  't': 'def', 'k': mgd(m, 1), 'tt': 'p', 'L': l })
   m = re.search(JS_DCF_REX, line)
   if m and (m.group(1) not in JS_DCF_NOT):
-    idx['lines'][p] = line.rstrip()
     idx['entries'].append({
-      'l': 'js', 'p': p,  't': 'def', 'k': mgd(m, 1), 'tt': 'c' })
+      'l': 'js', 'p': p,  't': 'def', 'k': mgd(m, 1), 'tt': 'c', 'L': l })
 
 def index_js(idx, path):
   if path.endswith('.min.js'): return
@@ -96,20 +92,18 @@ def index_rb_line(idx, path, line, l):
   if re.match(RB_COM_REX, line): return
   p = path + ':' + str(l)
   m = re.search(RB_DEF_REX, line)
+  l = line.rstrip().replace('\t', '  ')
   if m:
-    idx['lines'][p] = line.rstrip()
     idx['entries'].append({
-      'l': 'ruby', 'p': p,  't': 'def', 'k': mgd(m, 1), 'tt': '-' })
+      'l': 'ruby', 'p': p,  't': 'def', 'k': mgd(m, 1), 'tt': '-', 'L': l })
   m = re.search(RB_MOD_REX, line)
   if m:
-    idx['lines'][p] = line.rstrip()
     idx['entries'].append({
-      'l': 'ruby', 'p': p,  't': 'mod', 'k': mgd(m, 2), 'tt': m.group(1) })
+      'l': 'ruby', 'p': p,  't': 'mod', 'k': mgd(m, 2), 'tt': m.group(1), 'L': l })
   m = re.search(RB_CON_REX, line)
   if m:
-    idx['lines'][p] = line.rstrip()
     idx['entries'].append({
-      'l': 'ruby', 'p': p,  't': 'con', 'k': mgd(m, 1), 'tt': '-' })
+      'l': 'ruby', 'p': p,  't': 'con', 'k': mgd(m, 1), 'tt': '-', 'L': l })
 
 def index_rb(idx, path):
   index_mtime(idx, path)

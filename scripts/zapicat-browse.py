@@ -85,7 +85,6 @@ for e in idx['entries']:
   ss = e['p'].split(':')
   e['F'] = ss[0]
   e['N'] = ss[1]
-  e['L'] = idx['lines'][e['p']].replace('\t', '  ')
   ws = min(ws, count_wspace(e['L']))
   fmx = max(fmx, len(e['F']))
   nmx = max(nmx, len(e['N']))
