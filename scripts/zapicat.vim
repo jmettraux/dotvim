@@ -117,3 +117,12 @@ command! -nargs=* Vz :call JmZapicat(<f-args>)
 "command! -nargs=* FF :silent call JmZapicat()
 nnoremap F :silent call JmZapicat()<CR>
 
+
+function! s:ZapicatIndex()
+
+  exe 'silent ! /usr/bin/env python ~/.vim/scripts/zapicat-index.py --force'
+  exe '! ls -lh .zapicat*'
+endfunction " ZapicatIndex
+
+command! -nargs=0 Zindex :call <SID>ZapicatIndex()
+
