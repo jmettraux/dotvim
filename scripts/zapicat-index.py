@@ -8,9 +8,6 @@ CONF_FNAME = '.zapicat'
 INDEX_FNAME = '.zapicat.index'
 
 
-#def to_list(x):
-#  return x if isinstance(x, list) else [ x ]
-
 def read_lines(path):
   return open(path, 'r').readlines()
 
@@ -22,24 +19,8 @@ def read_conf():
 conf = read_conf()
 
 
-#import hashlib
-#def shadig(x):
-#  return hashlib.sha256(json.dumps(x).encode()).hexdigest()
-
-def read_index():
-  try: return pickle.load(open(INDEX_FNAME, 'rb'))
-  except: return { 'mtime': 0, 'files': {}, 'entries': [] }
-
-#idx = { 'mtime': 0, 'files': {}, 'lines': {}, 'entries': [] }
-idx = read_index()
-
 def mgd(m, i):
   return m.group(i).lower()
-
-def index_mtime(idx, path):
-  mtime = os.path.getmtime(path)
-  idx['mtime'] = max(mtime, idx['mtime'])
-  idx['files'][path] = mtime
 
 JS_COM_REX = re.compile(r'^\s*\/\/')
 JS_MOD_REX = re.compile(r'\b(class)\s+([a-zA-Z0-9_]+)')
@@ -76,7 +57,6 @@ def index_js_line(idx, path, line, l):
 
 def index_js(idx, path):
   if path.endswith('.min.js'): return
-  index_mtime(idx, path)
   l = 0
   for line in read_lines(path):
     l = l + 1
@@ -106,7 +86,6 @@ def index_rb_line(idx, path, line, l):
       'l': 'ruby', 'p': p,  't': 'con', 'k': mgd(m, 1), 'tt': '-', 'L': l })
 
 def index_rb(idx, path):
-  index_mtime(idx, path)
   l = 0
   for line in read_lines(path):
     l = l + 1
@@ -132,18 +111,6 @@ def index(idx, path):
     ): return post_index(idx, indexer['fun'](idx, path))
   return {}
 
-def outdated_files(idx):
-  a = []
-  for f in idx['files']:
-    t0 = idx['files'][f]
-    t1 = os.path.getmtime(f)
-    if t1 > t0: a.append(f)
-  return a
-
-def outdated(idx):
-  if idx['mtime'] == 0: return True
-  return len(outdated_files(idx)) > 0
-
 #
 # switches
 
@@ -151,31 +118,8 @@ if '--conf' in sys.argv:
   print(conf)
   exit(0)
 
-if '--mtime' in sys.argv:
-  print(idx.get('mtime'))
-  exit(0)
-
-if '--outdated' in sys.argv:
-  for f in outdated_files(idx):
-    print(f)
-  exit(0)
-
-if '--files' in sys.argv:
-  for f in idx['files']:
-    print(f, idx['files'][f])
-  exit(0)
-
 if '--json' in sys.argv:
   print('{')
-  print('  mtime: ' + str(idx['mtime']) + ',')
-  print('  files: {')
-  for f in idx['files']:
-    print('    "' + f + '": ' + str(idx['files'][f]) + ',')
-  print('  },')
-  print('  lines: {')
-  for l in idx['lines']:
-    print('    "' + l + '": ' + json.dumps(idx['lines'][l]) + ',')
-  print('  },')
   print('  entries: [')
   for e in idx['entries']:
     print('    ' + json.dumps(e) + ',')
@@ -187,27 +131,23 @@ if '--json' in sys.argv:
 #
 # index
 
-if ('--force' in sys.argv) or (outdated(idx)):
+idx = { 'entries': [] }
 
-  idx = { 'mtime': 0, 'files': {}, 'lines': {}, 'entries': [] }
+#glo = sys.argv[1] if len(sys.argv) > 1 else '**/*'
+glo = '**/*'
+paths = glob.glob(glo, recursive=True)
 
-  #glo = sys.argv[1] if len(sys.argv) > 1 else '**/*'
-  glo = '**/*'
-  paths = glob.glob(glo, recursive=True)
+def is_not_excluded(path):
+  for x in conf.get('exclude', []):
+    if path.startswith(x): return False
+  return True
+paths = filter(is_not_excluded, paths)
 
-  def is_not_excluded(path):
-    for x in conf.get('exclude', []):
-      if path.startswith(x): return False
-    return True
-  paths = filter(is_not_excluded, paths)
+for p in paths: index(idx, p)
 
-  for p in paths: index(idx, p)
+#
+# save
 
-  #
-  # output
-
-  #with open(INDEX_FNAME, 'w') as file:
-  #  json.dump(idx, file)
-  with open(INDEX_FNAME, 'wb') as file:
-    pickle.dump(idx, file)
+with open(INDEX_FNAME, 'wb') as file:
+  pickle.dump(idx, file)
 
