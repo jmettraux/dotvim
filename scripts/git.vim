@@ -14,7 +14,7 @@ function! s:OpenFile(variant)
 
     let l = getline(n)
     let m0 = matchlist(l, '\v^([^:]+) +\| [MDA]\+[0-9]+-[0-9]+$')
-    let m1 = matchlist(l, '\v^([^:]+):([0-9]+) ---\+\+\+\s*.$')
+    let m1 = matchlist(l, '\v^([^:]+):([0-9]+) ---\+\+\+ .+.$')
 
     if empty(m0) == 0 && a:variant == 'o'
 
@@ -99,14 +99,11 @@ function! s:OpenCommit(sha)
   "setlocal filetype=ListFiles
   setlocal cursorline
 
-  exe 'silent r! /usr/bin/env python ~/.vim/scripts/gitdiffstat.py ' . sha
+  exe 'silent r! ' . g:_python . '~/.vim/scripts/gitdiffstat.py ' . sha
   if strlen(sha) > 1
-    "exe 'silent r! echo ' . sha
-    "exe 'silent r! git diff --stat ' . sha . '^ ' . sha . ' | perl ~/.vim/scripts/regitdiffstat.pl'
-    exe 'silent r! git show ' . sha . ' | perl ~/.vim/scripts/regitdiff.pl'
+    exe 'silent r! git show ' . sha .  ' | ' . g:_python . '~/.vim/scripts/regitdiff.py'
   else
-    "exe 'silent r! git diff --stat | perl ~/.vim/scripts/regitdiffstat.pl'
-    exe 'silent r! git diff | perl ~/.vim/scripts/regitdiff.pl'
+    exe 'silent r! git diff | ' . g:_python . '~/.vim/scripts/regitdiff.py'
   endif
 
   setlocal syntax=gitdiff

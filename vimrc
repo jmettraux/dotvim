@@ -11,6 +11,7 @@ let g:isDarwin = g:uname == 'Darwin'
 let g:isOpenBSD = g:uname == 'OpenBSD'
 let g:isOpenBsd = g:isOpenBSD
 
+let g:_python = '/usr/bin/env python '
 
 set nocompatible
 

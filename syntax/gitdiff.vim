@@ -9,15 +9,15 @@ hi! gdiCommit cterm=NONE ctermfg=white ctermbg=darkgrey
 hi! gdiFilename cterm=NONE ctermfg=black ctermbg=darkyellow
 "hi! gdiDiffMinus cterm=NONE ctermfg=red ctermbg=16
 "hi! gdiDiffPlus cterm=NONE ctermfg=green ctermbg=16
-hi! gdiDiffMinus cterm=NONE ctermfg=white ctermbg=red
-hi! gdiDiffPlus cterm=NONE ctermfg=black ctermbg=lightgreen
+hi! gdiDiffMinus cterm=NONE ctermfg=white ctermbg=darkred
+hi! gdiDiffPlus cterm=NONE ctermfg=black ctermbg=darkgreen
 hi! gitPlus cterm=bold ctermfg=green ctermbg=16
 hi! gitMinus cterm=bold ctermfg=red ctermbg=16
 
-syn match gdiCommit /\v^commit [a-fA-F0-9]+ .+/
+syn match gdiCommit /\v^commit [a-fA-F0-9]+/
 syn match gdiCommit /\v^(Author|Date): .+/
 
-syn match gdiFilename /\v^[^:]+:[0-9]+ ---\+\+\+\s*\.$/
+syn match gdiFilename /\v^[^:]+:[0-9]+ ---\+\+\+ .+\.$/
 
 syn region gdiDiffPlus start=/^+/ end="\n" contains=gitPlus
 syn region gdiDiffMinus start=/^-/ end="\n" contains=gitMinus
