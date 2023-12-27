@@ -2,7 +2,7 @@
 #
 # .vim/scripts/zapicat-index.py
 
-import os, re, sys, glob, json, pickle
+import os, re, sys, glob, json, pickle, fnmatch
 
 CONF_FNAME = '.zapicat'
 INDEX_FNAME = '.zapicat.index'
@@ -139,7 +139,8 @@ paths = glob.glob(glo, recursive=True)
 
 def is_not_excluded(path):
   for x in conf.get('exclude', []):
-    if path.startswith(x): return False
+    if x.endswith('/') and path.startswith(x): return False
+    if fnmatch.fnmatch(path, x): return False
   return True
 paths = filter(is_not_excluded, paths)
 
