@@ -6,11 +6,13 @@
 hi! gdiCommit cterm=NONE ctermfg=white ctermbg=darkgrey
 
 "hi! gdiFilename cterm=NONE ctermfg=black ctermbg=lightgrey
-hi! gdiFilename cterm=NONE ctermfg=white ctermbg=darkgrey
-hi! gdiDiffMinus cterm=NONE ctermfg=red ctermbg=16
-hi! gdiDiffPlus cterm=NONE ctermfg=green ctermbg=16
-hi! gitPlus cterm=NONE ctermfg=darkgrey ctermbg=16
-hi! gitMinus cterm=NONE ctermfg=darkgrey ctermbg=16
+hi! gdiFilename cterm=NONE ctermfg=black ctermbg=darkyellow
+"hi! gdiDiffMinus cterm=NONE ctermfg=red ctermbg=16
+"hi! gdiDiffPlus cterm=NONE ctermfg=green ctermbg=16
+hi! gdiDiffMinus cterm=NONE ctermfg=white ctermbg=red
+hi! gdiDiffPlus cterm=NONE ctermfg=black ctermbg=lightgreen
+hi! gitPlus cterm=bold ctermfg=green ctermbg=16
+hi! gitMinus cterm=bold ctermfg=red ctermbg=16
 
 syn match gdiCommit /\v^commit [a-fA-F0-9]+ .+/
 syn match gdiCommit /\v^(Author|Date): .+/
