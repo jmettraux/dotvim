@@ -5,18 +5,17 @@
 "hi! gdiCommit cterm=NONE ctermfg=136 ctermbg=16
 hi! gdiCommit cterm=NONE ctermfg=white ctermbg=darkgrey
 
-hi! gdiFilename cterm=bold ctermfg=black ctermbg=3
+hi! gdiFilename cterm=bold ctermfg=black ctermbg=136
 "hi! gdiDiffMinus cterm=NONE ctermfg=white ctermbg=red
 "hi! gdiDiffPlus cterm=NONE ctermfg=black ctermbg=green
-hi! gdiDiffMinus cterm=bold ctermfg=red ctermbg=16
-hi! gdiDiffPlus cterm=bold ctermfg=green ctermbg=16
+hi! gdiDiffMinus cterm=NONE ctermfg=red ctermbg=16
+hi! gdiDiffPlus cterm=NONE ctermfg=green ctermbg=16
 "hi! gitPlus cterm=bold ctermfg=green ctermbg=16
 "hi! gitMinus cterm=bold ctermfg=red ctermbg=16
 hi! gitPlus cterm=NONE ctermfg=black ctermbg=green
 hi! gitMinus cterm=NONE ctermfg=black ctermbg=red
 
-syn match gdiCommit /\v^commit [a-fA-F0-9]+/
-syn match gdiCommit /\v^(Author|Date): .+/
+syn match gdiCommit /\v^(Commit|Author|Date): .+/
 
 syn match gdiFilename /\v^[^:]+:[0-9]+ ---\+\+\+ .+\.$/
 

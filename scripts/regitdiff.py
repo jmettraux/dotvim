@@ -57,22 +57,30 @@ stat = None
 commit = None
 
 for line in sys.stdin:
+
   l = line.strip()
+
   m = re.match(r'commit ([a-zA-Z0-9]{40})$', l)
   if m:
     commit = m.group(1)
+    print('Commit: ' + commit)
+    continue
+
   m = re.match(r'diff --git a/(.+) b/(.+)$', l)
   if m:
     fname = m.group(2)
     stat = get_log_numstat(commit, fname) if commit else get_numstat(fname)
     continue
+
   m = re.match(r'@@ [-+]\d+([, ]\d+)? [-+](\d+)', l)
   if m:
     print(("%-" + W + "s.") % (fname + ':' + m.group(2) + ' ---+++   ' + stat))
     continue
+
   if re.match(r'--- a/', l): continue
   if re.match(r'\+\+\+ b/', l): continue
   if re.match(r'index [0-9a-fA-F]+\.\.[0-9a-fA-F]+ \d+', l): continue
+
   print(l)
 
 print()
