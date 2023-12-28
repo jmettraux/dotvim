@@ -74,6 +74,7 @@ for line in sys.stdin:
 
   m = re.match(r'@@ [-+]\d+([, ]\d+)? [-+](\d+)', l)
   if m:
+    print()
     print(("%-" + W + "s.") % (fname + ':' + m.group(2) + ' ---+++   ' + stat))
     continue
 
