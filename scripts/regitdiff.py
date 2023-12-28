@@ -29,6 +29,8 @@
 
 import re, sys, subprocess
 
+W = str(int(sys.argv[1]) - 1)
+
 def exec_to_lines(cmd):
   return map(
     lambda l: l.decode().rstrip(),
@@ -66,7 +68,7 @@ for line in sys.stdin:
     continue
   m = re.match(r'@@ [-+]\d+([, ]\d+)? [-+](\d+)', l)
   if m:
-    print("%-79s." % (fname + ':' + m.group(2) + ' ---+++   ' + stat))
+    print(("%-" + W + "s.") % (fname + ':' + m.group(2) + ' ---+++   ' + stat))
     continue
   if re.match(r'--- a/', l): continue
   if re.match(r'\+\+\+ b/', l): continue

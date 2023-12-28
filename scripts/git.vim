@@ -99,11 +99,12 @@ function! s:OpenCommit(sha)
   "setlocal filetype=ListFiles
   setlocal cursorline
 
+  let w = winwidth(0)
   exe 'silent r! ' . g:_python . '~/.vim/scripts/gitdiffstat.py ' . sha
   if strlen(sha) > 1
-    exe 'silent r! git show ' . sha .  ' | ' . g:_python . '~/.vim/scripts/regitdiff.py'
+    exe 'silent r! git show ' . sha .  ' | ' . g:_python . '~/.vim/scripts/regitdiff.py ' . w
   else
-    exe 'silent r! git diff | ' . g:_python . '~/.vim/scripts/regitdiff.py'
+    exe 'silent r! git diff | ' . g:_python . '~/.vim/scripts/regitdiff.py ' . w
   endif
 
   setlocal syntax=gitdiff

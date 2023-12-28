@@ -13,7 +13,7 @@ hi! jolHrCode cterm=NONE ctermfg=green ctermbg=16
 hi! jolHrNotOkCode cterm=NONE ctermfg=red ctermbg=16
 
 
-highlight ColorColumn ctermbg=16
+"highlight ColorColumn ctermbg=16
   " disable > 80 column highlight
 
 

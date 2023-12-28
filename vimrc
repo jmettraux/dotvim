@@ -394,7 +394,8 @@ set wildignore=*.swp
 "set makeprg=bundle\ exec\ rspec\ -f\ QuickfixFormatter
 
 
-let &colorcolumn=join(range(81,999),",")
+"let &colorcolumn = join(range(81, 999), ',')
+let &colorcolumn = '81'
 highlight ColorColumn ctermbg=235 guibg=#2c2d27
   "
 nnoremap <leader>] :hi ColorColumn ctermbg=16<CR>:echo<CR>

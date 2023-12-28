@@ -10,7 +10,7 @@ hi! rsoDiffPlus cterm=NONE ctermfg=green ctermbg=16
 hi! rsoSummary cterm=NONE ctermfg=yellow ctermbg=16
 hi! rsoExample cterm=NONE ctermfg=yellow ctermbg=16
 
-highlight ColorColumn ctermbg=16
+"highlight ColorColumn ctermbg=16
   " disable > 80 column highlight
 
 syn match rsoLocalFilename ' \.\/[^:]\+:[0-9]\+'

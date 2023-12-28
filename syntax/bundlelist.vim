@@ -9,7 +9,7 @@ syn match bulName /\v^[^ ]+/
 syn match bulPath /\v[^ ]+$/
 syn match bulVersion /\v \d[^ ]+/
 
-highlight ColorColumn ctermbg=16
+"highlight ColorColumn ctermbg=16
   " disable > 80 column highlight
 
 let b:current_syntax = "bundlelist"

@@ -6,7 +6,7 @@
   " (<pattern>)@!<match>   ~~~ negative lookbehind
   " <match>(<pattern>)@!   ~~~ negative lookahead
 
-highlight ColorColumn ctermbg=16
+"highlight ColorColumn ctermbg=16
   " disable > 80 column highlight
 
 hi! zapFileName cterm=NONE ctermfg=darkyellow ctermbg=16

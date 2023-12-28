@@ -8,7 +8,7 @@ hi! groPipe cterm=NONE ctermfg=238 ctermbg=16
 hi! groPattern cterm=NONE ctermfg=white ctermbg=16
 hi! groError cterm=NONE ctermfg=darkred ctermbg=16
 
-highlight ColorColumn ctermbg=16
+"highlight ColorColumn ctermbg=16
   " disable > 80 column highlight
 
 syn match groTitle '^== .\+'

@@ -22,7 +22,7 @@ syn match gibLnum /\v^\s{27}\s*\d+/
 syn match gibTitle /\v^.{27}/ contained
 syn match gibLnum /\v^  .{25}\s*\d+/ contains=gibTitle
 
-highlight ColorColumn ctermbg=16
+"highlight ColorColumn ctermbg=16
   " disable > 80 column highlight
 
 let b:current_syntax = "gitblame"

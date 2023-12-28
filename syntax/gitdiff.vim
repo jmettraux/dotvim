@@ -6,7 +6,7 @@
 hi! gdiCommit cterm=NONE ctermfg=white ctermbg=darkgrey
 
 "hi! gdiFilename cterm=NONE ctermfg=black ctermbg=lightgrey
-hi! gdiFilename cterm=NONE ctermfg=black ctermbg=darkyellow
+hi! gdiFilename cterm=NONE ctermfg=black ctermbg=lightgrey
 "hi! gdiDiffMinus cterm=NONE ctermfg=red ctermbg=16
 "hi! gdiDiffPlus cterm=NONE ctermfg=green ctermbg=16
 hi! gdiDiffMinus cterm=NONE ctermfg=white ctermbg=darkred
@@ -37,7 +37,7 @@ syn match gdiStatFileLine /\v^[^|]+\s+\| [MDAR]\+[0-9]+-[0-9]+$/ contains=gdiSta
 syn match gitPlus '\v^\+' contained
 syn match gitMinus '\v^\-' contained
 
-highlight ColorColumn ctermbg=16
+"highlight ColorColumn ctermbg=16
   " disable > 80 column highlight
 
 
