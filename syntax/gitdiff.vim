@@ -5,12 +5,9 @@
 "hi! gdiCommit cterm=NONE ctermfg=136 ctermbg=16
 hi! gdiCommit cterm=NONE ctermfg=white ctermbg=darkgrey
 
-"hi! gdiFilename cterm=NONE ctermfg=black ctermbg=lightgrey
-hi! gdiFilename cterm=NONE ctermfg=black ctermbg=lightgrey
-"hi! gdiDiffMinus cterm=NONE ctermfg=red ctermbg=16
-"hi! gdiDiffPlus cterm=NONE ctermfg=green ctermbg=16
-hi! gdiDiffMinus cterm=NONE ctermfg=white ctermbg=darkred
-hi! gdiDiffPlus cterm=NONE ctermfg=black ctermbg=darkgreen
+hi! gdiFilename cterm=bold ctermfg=black ctermbg=3
+hi! gdiDiffMinus cterm=NONE ctermfg=black ctermbg=red
+hi! gdiDiffPlus cterm=NONE ctermfg=black ctermbg=green
 hi! gitPlus cterm=bold ctermfg=green ctermbg=16
 hi! gitMinus cterm=bold ctermfg=red ctermbg=16
 
