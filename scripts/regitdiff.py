@@ -52,13 +52,18 @@ def get_log_numstat(commit, path):
   m = re.match(r'^(\d+)\s+(\d+)', ls.pop())
   return '+' + m.group(1) + '-' + m.group(2)
 
+
 fname = None
 stat = None
 commit = None
 
+
 for line in sys.stdin:
 
-  l = line.strip()
+  l = line.rstrip()
+
+  if not(fname): l = line.strip()
+    # for the commit message
 
   m = re.match(r'commit ([a-zA-Z0-9]{40})$', l)
   if m:
