@@ -12,3 +12,8 @@ highlight ColorColumn ctermbg=235 guibg=#2c2d27
 command! Col81 :highlight ColorColumn ctermbg=235 guibg=#2c2d27
 command! NoCol81 :hi clear ColorColumn
 
+"command! Col81 :let &colorcolumn= '81'
+"command! NoCol81 :let &colorcolumn= '999'
+
+  " for now show col81 all the time...
+
