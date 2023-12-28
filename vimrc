@@ -394,14 +394,6 @@ set wildignore=*.swp
 "set makeprg=bundle\ exec\ rspec\ -f\ QuickfixFormatter
 
 
-"let &colorcolumn = join(range(81, 999), ',')
-let &colorcolumn = '81'
-highlight ColorColumn ctermbg=235 guibg=#2c2d27
-  "
-nnoremap <leader>] :hi ColorColumn ctermbg=16<CR>:echo<CR>
-nnoremap <leader>[ :hi ColorColumn ctermbg=235 guibg=#2c2d27<CR>:echo<CR>
-
-
 nnoremap <leader><BS> 0D
 nnoremap <leader>0 0D
   " d0 delete from here to col 0...
