@@ -1,10 +1,8 @@
 
-" MIT licensed
-
-  " (<pattern>)@<=<match>  ~~~ positive lookbehind
-  " <match>(<pattern>)@=   ~~~ positive lookahead
-  " (<pattern>)@!<match>   ~~~ negative lookbehind
-  " <match>(<pattern>)@!   ~~~ negative lookahead
+" (<pat>)@<=<match>               ~~~ positive lookbehind
+"           <match>(<pattern>)@=  ~~~ positive lookahead
+"   (<pat)@!<match>               ~~~ negative lookbehind
+"           <match>(<pat>)@!      ~~~ negative lookahead
 
 hi! fuzFileName cterm=NONE ctermfg=darkyellow ctermbg=16
 hi! fuzSlash cterm=NONE ctermfg=darkgrey ctermbg=16
