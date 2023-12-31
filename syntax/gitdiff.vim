@@ -1,19 +1,17 @@
 
-" MIT licensed
+" (<pat>)@<=<match>               ~~~ positive lookbehind
+"           <match>(<pattern>)@=  ~~~ positive lookahead
+"   (<pat)@!<match>               ~~~ negative lookbehind
+"           <match>(<pat>)@!      ~~~ negative lookahead
 
 
-"hi! gdiCommit cterm=NONE ctermfg=136 ctermbg=16
 hi! gdiCommit cterm=NONE ctermfg=white ctermbg=darkgrey
 
 hi! gdiFilename cterm=bold ctermfg=black ctermbg=136
-"hi! gdiDiffMinus cterm=NONE ctermfg=white ctermbg=red
-"hi! gdiDiffPlus cterm=NONE ctermfg=black ctermbg=green
-hi! gdiDiffMinus cterm=NONE ctermfg=red ctermbg=16
+hi! gdiDiffMinus cterm=NONE ctermfg=darkred ctermbg=16
 hi! gdiDiffPlus cterm=NONE ctermfg=green ctermbg=16
-"hi! gitPlus cterm=bold ctermfg=green ctermbg=16
-"hi! gitMinus cterm=bold ctermfg=red ctermbg=16
 hi! gitPlus cterm=NONE ctermfg=black ctermbg=green
-hi! gitMinus cterm=NONE ctermfg=black ctermbg=red
+hi! gitMinus cterm=NONE ctermfg=darkgrey ctermbg=darkgrey
 
 syn match gdiCommit /\v^(Commit|Author|Date): .+/
 
@@ -36,9 +34,6 @@ syn match gdiStatFileLine /\v^[^|]+\s+\| [MDAR]\+[0-9]+-[0-9]+$/ contains=gdiSta
 
 syn match gitPlus '\v^\+' contained
 syn match gitMinus '\v^\-' contained
-
-"highlight ColorColumn ctermbg=16
-  " disable > 80 column highlight
 
 
 let b:current_syntax = "gitdiff"
