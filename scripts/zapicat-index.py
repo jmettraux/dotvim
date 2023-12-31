@@ -96,7 +96,10 @@ indexers = [
   { 'rex': '\.js$', 'fun': index_js },
     ]
 
-def post_index(idx, index):
+def post_index(idx, path, index):
+  fn = os.path.basename(path)
+  idx['entries'].append({
+    'l': 'file', 'p': path + ':0', 't': 'fna', 'k': fn, 'tt': '-', 'L': path })
   return index
 
 def index(idx, path):
@@ -108,7 +111,7 @@ def index(idx, path):
       (rex and re.search(rex, path)) or
       (nam and nam == os.path.basename(path)) or
       (pat and path.ends_with(pat))
-    ): return post_index(idx, indexer['fun'](idx, path))
+    ): return post_index(idx, path, indexer['fun'](idx, path))
   return {}
 
 #
