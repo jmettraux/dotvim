@@ -8,10 +8,10 @@ function! s:FuzzerAddChar(c)
   call JmFuzzer()
 endfunction " FuzzerAddChar
 
-"function! s:FuzzerClear()
-"  call writefile([ '' ], '.vimfuzz2', 'a')
-"  call JmFuzzer()
-"endfunction " FuzzerClear
+function! s:FuzzerClear()
+  call writefile([ '' ], '.vimfuzz2', 'a')
+  call JmFuzzer()
+endfunction " FuzzerClear
 
 function! s:FuzzerChange()
   set modifiable
@@ -135,7 +135,7 @@ function! JmFuzzer(...)
   nnoremap <buffer> <backspace> :call <SID>FuzzerBackspace()<CR>
   nnoremap <buffer> <delete> :call <SID>FuzzerBackspace()<CR>
 
-  "nnoremap <buffer> C :call <SID>FuzzerClear()<CR>
+  nnoremap <buffer> D :call <SID>FuzzerClear()<CR>
   nnoremap <buffer> C :call <SID>FuzzerChange()<CR>
 
   nnoremap <buffer> <CR> :call JmOpenTreeFile()<CR>
