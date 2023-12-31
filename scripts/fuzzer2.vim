@@ -83,11 +83,11 @@ function! JmFuzzer(...)
   nnoremap <buffer> e :call <SID>FuzzerAddChar('e')<CR>
   nnoremap <buffer> f :call <SID>FuzzerAddChar('f')<CR>
   nnoremap <buffer> g :call <SID>FuzzerAddChar('g')<CR>
-  nnoremap <buffer> H :call <SID>FuzzerAddChar('h')<CR>
+  nnoremap <buffer> h :call <SID>FuzzerAddChar('h')<CR>
   nnoremap <buffer> i :call <SID>FuzzerAddChar('i')<CR>
   nnoremap <buffer> J :call <SID>FuzzerAddChar('j')<CR>
   nnoremap <buffer> K :call <SID>FuzzerAddChar('k')<CR>
-  nnoremap <buffer> L :call <SID>FuzzerAddChar('l')<CR>
+  nnoremap <buffer> l :call <SID>FuzzerAddChar('l')<CR>
   nnoremap <buffer> m :call <SID>FuzzerAddChar('m')<CR>
   nnoremap <buffer> n :call <SID>FuzzerAddChar('n')<CR>
   nnoremap <buffer> o :call <SID>FuzzerAddChar('o')<CR>
@@ -102,6 +102,9 @@ function! JmFuzzer(...)
   nnoremap <buffer> x :call <SID>FuzzerAddChar('x')<CR>
   nnoremap <buffer> y :call <SID>FuzzerAddChar('y')<CR>
   nnoremap <buffer> z :call <SID>FuzzerAddChar('z')<CR>
+
+  nnoremap <buffer> H :normal! h<CR>
+  nnoremap <buffer> L :normal! l<CR>
 
   nnoremap <buffer> - :call <SID>FuzzerAddChar('-')<CR>
   nnoremap <buffer> _ :call <SID>FuzzerAddChar('_')<CR>

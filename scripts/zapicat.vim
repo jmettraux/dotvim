@@ -67,11 +67,11 @@ function! JmZapicat(...)
   nnoremap <buffer> e :call <SID>ZapiAddChar('e')<CR>
   nnoremap <buffer> f :call <SID>ZapiAddChar('f')<CR>
   nnoremap <buffer> g :call <SID>ZapiAddChar('g')<CR>
-  nnoremap <buffer> H :call <SID>ZapiAddChar('h')<CR>
+  nnoremap <buffer> h :call <SID>ZapiAddChar('h')<CR>
   nnoremap <buffer> i :call <SID>ZapiAddChar('i')<CR>
   nnoremap <buffer> J :call <SID>ZapiAddChar('j')<CR>
   nnoremap <buffer> K :call <SID>ZapiAddChar('k')<CR>
-  nnoremap <buffer> L :call <SID>ZapiAddChar('l')<CR>
+  nnoremap <buffer> l :call <SID>ZapiAddChar('l')<CR>
   nnoremap <buffer> m :call <SID>ZapiAddChar('m')<CR>
   nnoremap <buffer> n :call <SID>ZapiAddChar('n')<CR>
   nnoremap <buffer> o :call <SID>ZapiAddChar('o')<CR>
@@ -87,6 +87,9 @@ function! JmZapicat(...)
   nnoremap <buffer> y :call <SID>ZapiAddChar('y')<CR>
   nnoremap <buffer> z :call <SID>ZapiAddChar('z')<CR>
   nnoremap <buffer> <space> :call <SID>ZapiAddChar(' ')<CR>
+
+  nnoremap <buffer> H :normal! h<CR>
+  nnoremap <buffer> L :normal! l<CR>
 
   "nnoremap <buffer> - :call <SID>ZapiAddChar('-')<CR>
   nnoremap <buffer> _ :call <SID>ZapiAddChar('_')<CR>
