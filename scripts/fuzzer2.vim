@@ -8,10 +8,21 @@ function! s:FuzzerAddChar(c)
   call JmFuzzer()
 endfunction " FuzzerAddChar
 
-function! s:FuzzerClear()
-  call writefile([ '' ], '.vimfuzz2', 'a')
+"function! s:FuzzerClear()
+"  call writefile([ '' ], '.vimfuzz2', 'a')
+"  call JmFuzzer()
+"endfunction " FuzzerClear
+
+function! s:FuzzerChange()
+  set modifiable
+  normal! 1G0D
+  startinsert!
+endfunction " FuzzerChange
+
+function! s:FuzzerChangeDone()
+  call writefile([ getline(1) ], '.vimfuzz2', 'a')
   call JmFuzzer()
-endfunction " FuzzerClear
+endfunction " FuzzerChangeDone
 
 function! s:FuzzerBackspace()
   let s = getline(1)
@@ -123,13 +134,17 @@ function! JmFuzzer(...)
 
   nnoremap <buffer> <backspace> :call <SID>FuzzerBackspace()<CR>
   nnoremap <buffer> <delete> :call <SID>FuzzerBackspace()<CR>
-  nnoremap <buffer> C :call <SID>FuzzerClear()<CR>
+
+  "nnoremap <buffer> C :call <SID>FuzzerClear()<CR>
+  nnoremap <buffer> C :call <SID>FuzzerChange()<CR>
 
   nnoremap <buffer> <CR> :call JmOpenTreeFile()<CR>
   nnoremap <buffer> <space> :call JmOpenTreeFile()<CR>
   nnoremap <buffer> T :call JmShowTree(getline(line('.')))<CR>
 
   nnoremap <buffer> <silent> <leader>f :call <SID>FuzzerToggleSuffix()<CR>
+
+  autocmd InsertLeave <buffer> :call <SID>FuzzerChangeDone()
 endfunction " JmFuzzer
 
 command! -nargs=1 Vf :call JmFuzzer(<q-args>)
