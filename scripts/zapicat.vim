@@ -12,6 +12,18 @@ function! s:ZapiClear()
   call JmZapicat('')
 endfunction " ZapiClear
 
+function! s:ZapiChange()
+  set modifiable
+  normal! 1G0D
+  startinsert!
+endfunction " ZapiChange
+
+function! s:ZapiChangeDone()
+  "call writefile([ getline(1) ], '.vimfuzz2', 'a')
+  "call JmFuzzer()
+  call JmZapicat(getline(1))
+endfunction " ZapiChangeDone
+
 function! s:ZapiBackspace()
   let a = getline(1)
   let a = strpart(a, 0, strlen(a) - 1)
@@ -108,12 +120,16 @@ function! JmZapicat(...)
 
   nnoremap <buffer> <backspace> :call <SID>ZapiBackspace()<CR>
   nnoremap <buffer> <delete> :call <SID>ZapiBackspace()<CR>
-  nnoremap <buffer> C :call <SID>ZapiClear()<CR>
+
+  nnoremap <buffer> D :call <SID>ZapiClear()<CR>
+  nnoremap <buffer> C :call <SID>ZapiChange()<CR>
 
   nnoremap <buffer> <CR> :call JmOpenTreeFile()<CR>
   "nnoremap <buffer> T :call JmShowTree(getline(line('.')))<CR>
 
   "nnoremap <buffer> <silent> <leader>f :call <SID>FuzzerToggleSuffix()<CR>
+
+  autocmd InsertLeave <buffer> :call <SID>ZapiChangeDone()
 endfunction " JmFuzzer
 
 command! -nargs=* Vz :call JmZapicat(<f-args>)
