@@ -10,7 +10,7 @@ hi! gdiCommit cterm=NONE ctermfg=white ctermbg=darkgrey
 hi! gdiFilename cterm=bold ctermfg=black ctermbg=136
 hi! gdiDiffMinus cterm=NONE ctermfg=darkred ctermbg=16
 hi! gdiDiffPlus cterm=NONE ctermfg=green ctermbg=16
-hi! gitPlus cterm=NONE ctermfg=black ctermbg=green
+hi! gitPlus cterm=NONE ctermfg=green ctermbg=green
 hi! gitMinus cterm=NONE ctermfg=darkgrey ctermbg=darkgrey
 
 syn match gdiCommit /\v^(Commit|Author|Date): .+/
