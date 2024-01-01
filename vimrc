@@ -127,9 +127,9 @@ endfunction
 function! <SID>JmBufAlt()
   exe "buffer " . g:jmAlt
 endfunction
-"
+  "
 au BufLeave * :call <SID>JmBufLeave()
-"
+  "
 nnoremap <silent> <leader>; :call <SID>JmBufAlt()<CR>
 
 "nnoremap <silent> <leader>n :n<CR>
@@ -246,12 +246,12 @@ set wildignore=*.swp
 "set makeprg=bundle\ exec\ rspec\ -f\ QuickfixFormatter
 
 
-nnoremap <leader><BS> 0D
-nnoremap <leader>0 0D
+"nnoremap <leader><BS> 0D
+"nnoremap <leader>0 0D
   " d0 delete from here to col 0...
 
 
-nnoremap <leader>ts :r ! ruby -e "puts '###' + Time.now.strftime('\%Y-\%m-\%d \%H:\%M:\%S')"<CR>
+"nnoremap <leader>ts :r ! ruby -e "puts '###' + Time.now.strftime('\%Y-\%m-\%d \%H:\%M:\%S')"<CR>
 
 
 let g:markdown_fenced_languages = [ 'html', 'js=javascript', 'ruby', 'python', 'c', 'java', 'yaml', 'json' ]
