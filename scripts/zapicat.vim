@@ -129,6 +129,7 @@ function! JmZapicat(...)
 
   "nnoremap <buffer> <silent> <leader>f :call <SID>FuzzerToggleSuffix()<CR>
 
+  inoremap <buffer> <CR> 
   autocmd InsertLeave <buffer> :call <SID>ZapiChangeDone()
 endfunction " JmFuzzer
 

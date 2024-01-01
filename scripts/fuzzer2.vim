@@ -144,6 +144,7 @@ function! JmFuzzer(...)
 
   nnoremap <buffer> <silent> <leader>f :call <SID>FuzzerToggleSuffix()<CR>
 
+  inoremap <buffer> <CR> 
   autocmd InsertLeave <buffer> :call <SID>FuzzerChangeDone()
 endfunction " JmFuzzer
 
