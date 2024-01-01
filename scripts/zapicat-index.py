@@ -101,10 +101,26 @@ def index_flo(idx, path):
   #  index_flo_line(idx, path, line, l)
   None
 
+#SCSS_X_REX = re.compile(r'([.#][^.#{}, ]+)+\s*($|\{)')
+#  #
+#def index_scss_line(idx, path, line, l):
+#  print(line.strip())
+#  for m in re.findall(SCSS_X_REX, line.strip()):
+#    print('mmm:' + m)
+
+def index_scss(idx, path):
+  #l = 0
+  #for line in read_lines(path):
+  #  l = l + 1
+  #  index_scss_line(idx, path, line, l)
+  None
+
 indexers = [
   { 'rex': '\.rb$', 'fun': index_rb },
   { 'rex': '\.js$', 'fun': index_js },
   { 'rex': '\.flo$', 'fun': index_flo },
+  { 'rex': '\.css$', 'fun': index_scss },
+  { 'rex': '\.scss$', 'fun': index_scss },
     ]
 
 def post_index(idx, path, index):
