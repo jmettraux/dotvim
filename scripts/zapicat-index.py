@@ -91,9 +91,20 @@ def index_rb(idx, path):
     l = l + 1
     index_rb_line(idx, path, line, l)
 
+#def index_flo_line(idx, path, line, l):
+#  print(line.strip())
+
+def index_flo(idx, path):
+  #l = 0
+  #for line in read_lines(path):
+  #  l = l + 1
+  #  index_flo_line(idx, path, line, l)
+  None
+
 indexers = [
   { 'rex': '\.rb$', 'fun': index_rb },
   { 'rex': '\.js$', 'fun': index_js },
+  { 'rex': '\.flo$', 'fun': index_flo },
     ]
 
 def post_index(idx, path, index):
