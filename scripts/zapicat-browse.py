@@ -60,6 +60,9 @@ argv = sys.argv[2:]
 if len(argv) > 0: key = argv.pop()
 argv = list(map(lambda x: aliases.get(x, x), argv))
 if len(argv) < 1: argv = None
+  #
+key = key.lower()
+
 
 def match(e, key):
   #if key.endswith('%'): return e['k'].startswith(key[:-1])
