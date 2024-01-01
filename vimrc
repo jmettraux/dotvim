@@ -60,52 +60,6 @@ set cmdwinheight=20
 " disabling the pulldown autocomplete thinggy
 inoremap <C-n> <nop>
 
-au BufRead *.erb set filetype=eruby
-au BufRead *.rake set filetype=ruby
-au BufRead *.rconf set filetype=ruby
-au BufNewFile,BufRead *.go set filetype=go
-au BufNewFile,BufRead *.ru set filetype=ruby
-au BufNewFile,BufRead *.applescript set filetype=applescript
-
-au BufNewFile,BufRead *.slim set filetype=slim
-"au BufNewFile,BufRead *.slim highlight ColorColumn ctermbg=16
-"  " disable > 80 column highlight
-
-au BufNewFile,BufRead *.flo set ft=flor
-au BufNewFile,BufRead *.flor set ft=flor
-au BufNewFile,BufRead *.flon set ft=flor
-au BufNewFile,BufRead *.fln set ft=flor
-
-au BufNewFile,BufRead *.hp41 set ft=hp41
-au BufNewFile,BufRead *.hp42 set ft=hp42
-
-au BufNewFile,BufRead *.json set ft=javascript
-
-au BufNewFile,BufRead *.ino set ft=cpp
-au BufNewFile,BufRead *.scad set ft=openscad
-au BufNewFile,BufRead *.fish set ft=fish
-au BufNewFile,BufRead *.log set ft=jolog
-
-au BufNewFile,BufRead *.liquid set ft=liquid
-au BufNewFile,BufRead */_layouts/*.html set ft=liquid
-
-au BufNewFile,BufRead *.html,*.xml,*.textile
-  \ if getline(1) == '---' | set ft=liquid | endif
-
-au FileType java set shiftwidth=4
-"au FileType java set autoindent
-au FileType java set noexpandtab
-au FileType java set tabstop=4
-au FileType java set shiftwidth=4
-
-au BufNewFile,BufRead Gemfile setlocal ft=ruby
-au FileType ruby set shiftwidth=2
-
-au FileType go set tabstop=2
-
-au BufRead COMMIT_EDITMSG call feedkeys('1G')
-  " go to first line of commit messages
-
 "filetype plugin indent on
 filetype on
 
@@ -215,62 +169,6 @@ nnoremap <silent> <leader>a g'a
 
 inoremap <C-j> <ESC>
 
-function! <SID>JmWriteToVimmarks()
-  let li = line('.')
-  let pa = expand('%') . ':' . li
-  let tx = JmStrip(getline(li))
-  let tx = JmStrip(strpart(tx, 0, 80 - len(pa) - 4))
-  call writefile([ pa . "  # " . tx ], '.vimmarks', 'a')
-  echo "added \"" . pa . "\" to .vimmarks"
-endfunction
-nnoremap <leader>x :call <SID>JmWriteToVimmarks()<CR>
-nnoremap <leader>X :e .vimmarks<CR>
-
-" netrw
-"
-" with lots of help from
-" http://stackoverflow.com/questions/5006950/setting-netrw-like-nerdtree
-
-" absolute width of netrw window
-"let g:netrw_winsize = -28
-
-" do not display info on the top of window
-let g:netrw_banner = 0
-
-" tree-view
-let g:netrw_liststyle = 3
-
-" sort is affecting only: directories on the top, files below
-let g:netrw_sort_sequence = '[\/]$,*'
-
-" use the previous window to open file
-"let g:netrw_browse_split = 4
-"let g:netrw_altv = 1
-
-nnoremap <silent> ff :Explore .<CR>:call NetrwOpenDirs([ 'lib', 'src', 'spec' ])<CR>
-
-function! <SID>NetrwRemap()
-  "nmap <silent><buffer> ff :buffer #<CR>
-  nmap <silent><buffer> ff :call <SID>JmBufAlt()<CR>
-  nmap <buffer> o <CR>
-  nmap <buffer> <space> <CR>
-  nmap <buffer> <leader>; <CR>
-endfunction
-au FileType netrw call <SID>NetrwRemap()
-
-
-function! NetrwOpenDirs(dirs)
-  if w:_netrw_dir_opened
-    return
-  endif
-  let w:_netrw_dir_opened = 1
-  for dir in a:dirs
-    call feedkeys('1G:silent! /^| ' . dir . '\/o')
-  endfor
-  call feedkeys(':nohlsearch')
-  call feedkeys('5G')
-endfunction
-
 
 " pgup / pgdown
 "
@@ -313,22 +211,6 @@ autocmd BufReadPost * if line("'\"") | silent! exe "'\"" | endif
 "endif
 
 
-" Status bar
-"
-set laststatus=2
-set statusline=
-set statusline+=%-3.3n\ " buffer number
-set statusline+=%f\ " filename
-set statusline+=%h%m%r%w " status flags
-set statusline+=\[%{strlen(&ft)?&ft:'none'}] " file type
-"set statusline+=\ %{fugitive#statusline()} " fugitive
-"set statusline+=\ %{rvm#statusline()} " rvm
-set statusline+=%= " right align remainder
-set statusline+=0x%-8B " character value
-set statusline+=\ c%c%V " column
-set statusline+=\ %l/%L " line
-set statusline+=\ %P " file position
-
 " Some Meta
 "
 "nnoremap <leader>ev :e $MYVIMRC<CR>
@@ -337,36 +219,6 @@ set statusline+=\ %P " file position
 "nnoremap <leader>sc :colorscheme jm_green<CR>
 "nnoremap <leader>gd :! cd ~/.vim && git diff<CR>
 
-
-"" from http://vim.wikia.com/wiki/Simple_Macros_to_quote_and_unquote_a_word
-""
-"" 'quote' a word
-"nnoremap qw :silent! normal mpea'<Esc>bi'<Esc>`pl
-"" double "quote" a word
-"nnoremap qd :silent! normal mpea"<Esc>bi"<Esc>`pl
-
-" 'quote' a word
-nnoremap qw :silent! normal yiwi'<ESC>ea'<ESC>
-xnoremap qw c''<ESC>hp
-  "
-" double "quote" a word
-nnoremap qd :silent! normal yiwi"<ESC>ea"<ESC>
-xnoremap qd c""<ESC>hp
-  "
-" `backquote` a word
-nnoremap qb :silent! normal yiwi`<ESC>ea`<ESC>
-xnoremap qb c``<ESC>hp
-
-" surround by _
-nnoremap q_ :silent! normal yiwi_<ESC>ea_<ESC>
-xnoremap q_ c__<ESC>hp
-
-" surround by *
-nnoremap q* :silent! normal yiwi**<ESC>ea**<ESC>
-xnoremap q* c****<ESC>hhp
-
-" remove quotes from a word
-nnoremap wq :silent! normal mpeld bhd `ph<CR>
 
 
 " exrc
@@ -403,10 +255,6 @@ nnoremap <leader>ts :r ! ruby -e "puts '###' + Time.now.strftime('\%Y-\%m-\%d \%
 
 
 let g:markdown_fenced_languages = [ 'html', 'js=javascript', 'ruby', 'python', 'c', 'java', 'yaml', 'json' ]
-
-
-au BufNewFile,BufRead .chat.md  hi ColorColumn ctermbg=16
-  " don't highlight col > 80 for .chat.md
 
 "nnoremap <C-l> 0 39l
 nnoremap <C-l> :silent execute "normal! 0 " . (col("$") / 2) . "l"<CR>:echo<CR>

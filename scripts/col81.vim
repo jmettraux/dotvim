@@ -17,3 +17,8 @@ command! NoCol81 :hi clear ColorColumn
 
   " for now show col81 all the time...
 
+
+
+au BufNewFile,BufRead .chat.md  hi ColorColumn ctermbg=16
+  " don't highlight col > 80 for .chat.md
+
