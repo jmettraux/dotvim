@@ -146,6 +146,8 @@ function! JmFuzzer(...)
 
   inoremap <buffer> <CR> 
   autocmd InsertLeave <buffer> :call <SID>FuzzerChangeDone()
+
+  nnoremap <buffer> @ :call JmZapicat(getline(1))<CR>
 endfunction " JmFuzzer
 
 command! -nargs=1 Vf :call JmFuzzer(<q-args>)

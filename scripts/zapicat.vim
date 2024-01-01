@@ -131,6 +131,8 @@ function! JmZapicat(...)
 
   inoremap <buffer> <CR> 
   autocmd InsertLeave <buffer> :call <SID>ZapiChangeDone()
+
+  nnoremap <buffer> @ :call JmFuzzer(getline(1))<CR>
 endfunction " JmFuzzer
 
 command! -nargs=* Vz :call JmZapicat(<f-args>)
