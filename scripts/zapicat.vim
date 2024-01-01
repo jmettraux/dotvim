@@ -137,7 +137,7 @@ endfunction " JmFuzzer
 
 command! -nargs=* Vz :call JmZapicat(<f-args>)
 "command! -nargs=* FF :silent call JmZapicat()
-nnoremap F :silent call JmZapicat()<CR>
+nnoremap ` :silent call JmZapicat()<CR>
 
 
 function! s:ZapicatIndex()
