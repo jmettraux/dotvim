@@ -27,7 +27,7 @@ syn match stoFilename '\v^[^|` ]+' contains=stoDirname
   " for the top lib/ or whatever...
 
 syn match stoExt '\v\.[a-zA-Z]+( )@=' contained
-syn match stoDirname '\v.+/' contained
+syn match stoDirname '\v[-a-zA-Z0-9_.]+/' contained
 
 let b:current_syntax = "showtreeout"
 
