@@ -108,18 +108,32 @@ def d_mtime(path):
 #def d_git(path):
 #  return path in gits
 
+def d_age(mtime):
+  i = int(time.time() - mtime)
+  if i < 60: return '%is' % i
+  d = int(i / (24 * 3600)); i = i % (24 * 3600)
+  h = int(i / 3600); i = i % 3600
+  m = int(i / 60); i = i % 60
+  r = ''
+  if d > 0: r = '%s%id' % (r, d)
+  if h > 0: r = '%s%ih' % (r, h)
+  if d < 1 and m > 0: r = '%s%im' % (r, m)
+  return r
+
 details = {}
   #
 def detail(path):
   d = details.get(path)
   if d:
     return d
+  mt = d_mtime(path)
+  age = d_age(mt)
   if os.path.isdir(path):
-    d = { "dir": True, "mtime": d_mtime(path) }
+    d = { "dir": True, "mtime": mt, "age": age }
   else:
     d = {
       "size": d_size(path), "lines": d_lines(path), "diff": d_diff(path),
-      "mtime": d_mtime(path) }
+      "mtime": mt, "age": age }
   details[path] = d
   return d
 
@@ -141,7 +155,7 @@ for path in paths:
       '  %s' % path)
   else:
     print((
-      '  %s %s %iL %s' % (path, d['size'], d['lines'], d['diff'])).rstrip())
+      '  %s %s %iL %s%s' % (path, d['size'], d['lines'], d['diff'], d['age'])).rstrip())
 
   # keep that in the fridge, but most of the time, the fuzzer is
   # called from a .git level
