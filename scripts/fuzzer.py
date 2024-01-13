@@ -155,7 +155,7 @@ for path in paths:
 #
 # output
 
-endr = re.compile('^(.+)[0-9]$')
+endr = re.compile('^(.+)[0-9 ]$')
 def endstrip(s):
   s = s[:W-1].rstrip()
   while True:
@@ -171,11 +171,11 @@ for path in paths:
   offset = ' ' * (mdl - d['dirl'])
   if d.get('dir'):
     print(endstrip(
-      '  %s%s' % (
+      ' %s%s' % (
         offset, path)))
   else:
     print(endstrip(
-      '  %s%s %s %iL %s%s' % (
+      ' %s%s %s %iL %s%s' % (
         offset, path, d['size'], d['lines'], d['diff'], d['age'])))
 
   # keep that in the fridge, but most of the time, the fuzzer is
