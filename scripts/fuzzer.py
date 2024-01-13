@@ -155,7 +155,7 @@ for path in paths:
 #
 # output
 
-endr = re.compile('^(.+)[0-9 ]$')
+endr = re.compile('^(.+)[-+0-9 ]$')
 def endstrip(s):
   s = s[:W-1].rstrip()
   while True:

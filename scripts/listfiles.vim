@@ -79,12 +79,12 @@ function! s:ListFiles(...)
     normal G
   end
 
-  "let l = line('.') + 1
+  let cmd = "/usr/bin/env python ~/.vim/scripts/recentfiles.py " . winwidth(0)
   exe 'let @z=""'
   exe 'redir @z'
   exe 'silent oldfiles'
   exe 'redir END'
-  exe 'let @z = system("/usr/bin/env python ~/.vim/scripts/recentfiles.py", @z)'
+  exe 'let @z = system("' . cmd . '", @z)'
   exe 'silent $put z'
 
   "exe '%sno#^' . fnamemodify(expand("."), ":~:.") . '/##'

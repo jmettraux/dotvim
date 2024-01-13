@@ -1,6 +1,8 @@
 # -*- coding: UTF-8 -*-
 
-import os, re, sys, string, subprocess
+import os, re, sys, time, string, subprocess
+
+W = int(sys.argv[1])
 
 FNULL = open(os.devnull, 'w')
 
@@ -84,7 +86,7 @@ exts = cf.read().split()
 cf.close()
 #print exts
 tpaths = filter(lambda x: os.path.splitext(x)[1][1:] in exts, paths)
-cmd = 'wc -l ' + ''.join(map(shellquote, tpaths))
+cmd = 'wc -l ' + ' '.join(map(shellquote, tpaths))
 
 for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=FNULL).stdout:
   line = line.decode()
@@ -101,13 +103,30 @@ for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=FNU
   if f == None: continue
   f['g'] = '+' + ss[0] + '-' + ss[1]
 
+def get_age(path):
+  i = int(time.time() - os.path.getmtime(path))
+  if i < 60: return '%is' % i
+  d = int(i / (24 * 3600)); i = i % (24 * 3600)
+  h = int(i / 3600); i = i % 3600
+  m = int(i / 60); i = i % 60
+  r = ''
+  if d > 0: r = '%s%id' % (r, d)
+  if d < 7 and h > 0: r = '%s%ih' % (r, h)
+  if d < 1 and m > 0: r = '%s%im' % (r, m)
+  return r
+
+paths = [ os.path.abspath(p) for p in paths ]
+
+for path in paths:
+  f = fs.get(path, None)
+  if not f: continue
+  f['ag'] = get_age(path)
+
   # debugging...
   #
 #for k in fs:
 #  print("%s:" % k)
 #  print(fs[k])
-
-paths = [ os.path.abspath(p) for p in paths ]
 
 lsimax = 0
     #
@@ -125,8 +144,19 @@ for path in paths:
 #
 # output
 
+endr = re.compile('^(.+)[-+0-9 ]$')
+def endstrip(s):
+  s = s[:W-1].rstrip()
+  while True:
+    m = endr.match(s)
+    if not(m): break
+    s = m.group(1)
+  return s
+
 for path in paths:
   f = fs.get(path, None)
-  if not f: continue
-  print(' ' + ' '.join(filter(None, [ f['ip'], f['s'], f.get('l'), f.get('g') ])))
+  if f:
+    s = ' ' + ' '.join(
+      filter(None, [ f['ip'], f['s'], f.get('l'), f.get('g'), f.get('ag') ]))
+    print(endstrip(s))
 
