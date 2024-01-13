@@ -129,11 +129,13 @@ def detail(path):
   mt = d_mtime(path)
   age = d_age(mt)
   if os.path.isdir(path):
-    d = { "dir": True, "mtime": mt, "age": age }
+    dl = len(path)
+    d = { "dir": True, "mtime": mt, "age": age, "dirl": dl }
   else:
+    dl = len(os.path.dirname(path))
     d = {
       "size": d_size(path), "lines": d_lines(path), "diff": d_diff(path),
-      "mtime": mt, "age": age }
+      "mtime": mt, "age": age, "dirl": dl }
   details[path] = d
   return d
 
@@ -143,6 +145,11 @@ def sortPaths(path):
 #paths = sorted(paths)
 paths = sorted(paths, key=sortPaths)
 
+mdl = 0
+for path in paths:
+  d = detail(path)
+  mdl = max(mdl, d['dirl'])
+
 #
 # output
 
@@ -150,12 +157,14 @@ print(pat)
   #
 for path in paths:
   d = detail(path)
+  offset = ' ' * (mdl - d['dirl'])
   if d.get('dir'):
     print(
-      '  %s' % path)
+      '  %s%s' % (offset, path))
   else:
     print((
-      '  %s %s %iL %s%s' % (path, d['size'], d['lines'], d['diff'], d['age'])).rstrip())
+      '  %s%s %s %iL %s%s' % (
+        offset, path, d['size'], d['lines'], d['diff'], d['age'])).rstrip())
 
   # keep that in the fridge, but most of the time, the fuzzer is
   # called from a .git level
