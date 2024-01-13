@@ -144,8 +144,9 @@ def detail(path):
 def sortPaths(path):
   d = detail(path)
   return - d['mtime']
-#paths = sorted(paths)
-paths = sorted(paths, key=sortPaths)
+
+paths = sorted(paths)
+#paths = sorted(paths, key=sortPaths)
 
 mdl = 0
 for path in paths:
