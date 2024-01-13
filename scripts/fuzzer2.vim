@@ -82,7 +82,7 @@ function! JmFuzzer(...)
 
   exe '%d'
   "normal O
-  exe 'silent r! /usr/bin/env python ~/.vim/scripts/fuzzer.py'
+  exe 'silent r! /usr/bin/env python ~/.vim/scripts/fuzzer.py ' . winwidth(0)
   normal 1Gdd2G0
   setlocal syntax=fuzzer
   setlocal nomodifiable

@@ -4,6 +4,8 @@
 
 import os, re, sys, glob, time, string, fnmatch, subprocess
 
+W = int(sys.argv[1])
+
 max_vimfuzz_lines = 21
 
 pat = ''
@@ -153,18 +155,28 @@ for path in paths:
 #
 # output
 
+endr = re.compile('^(.+)[0-9]$')
+def endstrip(s):
+  s = s[:W-1].rstrip()
+  while True:
+    m = endr.match(s)
+    if not(m): break
+    s = m.group(1)
+  return s
+
 print(pat)
   #
 for path in paths:
   d = detail(path)
   offset = ' ' * (mdl - d['dirl'])
   if d.get('dir'):
-    print(
-      '  %s%s' % (offset, path))
+    print(endstrip(
+      '  %s%s' % (
+        offset, path)))
   else:
-    print((
+    print(endstrip(
       '  %s%s %s %iL %s%s' % (
-        offset, path, d['size'], d['lines'], d['diff'], d['age'])).rstrip())
+        offset, path, d['size'], d['lines'], d['diff'], d['age'])))
 
   # keep that in the fridge, but most of the time, the fuzzer is
   # called from a .git level
