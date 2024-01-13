@@ -94,7 +94,7 @@ for e in idx['entries']:
   nmx = max(nmx, len(e['N']))
   es.append(e)
 
-fmx = fmx + 2
+fmx = fmx + 1
 
 #
 # render
@@ -102,7 +102,7 @@ fmx = fmx + 2
 for e in es:
   t = shorts.get(e['t'], e['t'][:1])
   #l = shorts.get(e['l'], e['l'][:2])
-  s = f"%{fmx}s:%-{nmx}s %s %s" % ( e['F'], e['N'], t, e['L'][ws:])
+  s = f"%{fmx}s:%-{nmx}s %s %s" % (e['F'], e['N'], t, e['L'][ws:])
   if len(s) > W: s = s[:W-1] + '‣'
   print(s)
 

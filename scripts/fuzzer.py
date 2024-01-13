@@ -118,7 +118,7 @@ def d_age(mtime):
   m = int(i / 60); i = i % 60
   r = ''
   if d > 0: r = '%s%id' % (r, d)
-  if h > 0: r = '%s%ih' % (r, h)
+  if d < 7 and h > 0: r = '%s%ih' % (r, h)
   if d < 1 and m > 0: r = '%s%im' % (r, m)
   return r
 
@@ -177,6 +177,7 @@ for path in paths:
     print(endstrip(
       ' %s%s %s %iL %s%s' % (
         offset, path, d['size'], d['lines'], d['diff'], d['age'])))
+print()
 
   # keep that in the fridge, but most of the time, the fuzzer is
   # called from a .git level
