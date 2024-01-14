@@ -12,7 +12,9 @@ hi! bufBufferNumber cterm=NONE ctermfg=darkgrey ctermbg=16
 hi! bufGrepRex cterm=NONE ctermfg=green ctermbg=16
 hi! bufGrepDir cterm=NONE ctermfg=darkgrey ctermbg=16
 hi! bufGrepSlash cterm=NONE ctermfg=darkgrey ctermbg=16
-hi! bufRecentSize cterm=NONE ctermfg=darkgrey ctermbg=16
+hi! bufRecentSize cterm=NONE ctermfg=238 ctermbg=16
+hi! bufRecentLines cterm=NONE ctermfg=darkgrey ctermbg=16
+hi! bufRecentAge cterm=NONE ctermfg=238 ctermbg=16
 
 hi! bufRecentGit cterm=NONE ctermfg=white ctermbg=16
 hi! bufGitStatus cterm=NONE ctermfg=white ctermbg=16
@@ -33,7 +35,7 @@ hi! bufGitR cterm=bold ctermfg=darkgreen ctermbg=16
 
 syn match bufShort '\v^[^ =].+$' contains=bufFileName
 
-syn match bufRecentLine '\v +.+$' contains=bufRecentName,bufRecentSize,bufRecentGit
+syn match bufRecentLine '\v +.+$' contains=bufRecentName,bufRecentSize,bufRecentLines,bufRecentAge,bufRecentGit
 syn match bufFileAndLine '\v^[^ ][^ :]+:[0-9]+$' contains=bufFileName,bufLineNumber
 
 syn match bufEqualEqual '\v^\=\= .+' contains=bufEqualCount
@@ -48,6 +50,8 @@ syn match bufGrepSlash '\/' contained
 
 syn match bufRecentName '\v^ +.+( [0-9]+(\.[0-9]+)?[PTMKB])@=' contained keepend contains=bufFileName
 syn match bufRecentSize '\v [0-9]+(\.[0-9]+)?[PTMKB]' contained
+syn match bufRecentLines '\v [0-9]+L' contained
+syn match bufRecentAge '\v ([0-9]+[dhms])+' contained
 syn match bufRecentGit '\v\+[0-9]+\-[0-9]+' contained
 
 syn match bufFileName '\v^[^:|]+' contained contains=bufSlash,bufDot,bufDir,bufExt
