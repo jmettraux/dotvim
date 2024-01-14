@@ -131,10 +131,11 @@ def detail(path):
   mt = d_mtime(path)
   age = d_age(mt)
   if os.path.isdir(path):
-    dl = len(path)
+    dl = len(path) - 1
     d = { "dir": True, "mtime": mt, "age": age, "dirl": dl }
   else:
     dl = len(os.path.dirname(path))
+    if os.path.basename(path) == path: dl = dl - 1
     d = {
       "size": d_size(path), "lines": d_lines(path), "diff": d_diff(path),
       "mtime": mt, "age": age, "dirl": dl }
