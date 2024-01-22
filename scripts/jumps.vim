@@ -50,39 +50,19 @@ function! s:Jumps()
 "  exe 'silent! %s/\\/\//g'
 
   setlocal syntax=jumps
-  "setlocal nomodifiable
+  setlocal nomodifiable
   setlocal cursorline
 
 "  "nmap <buffer> o gF
 "  "nmap <buffer> <space> gF
 "  "nmap <buffer> <CR> gF
 "    "
-"  nnoremap <buffer> o :call JmOpenTreeFile()<CR>
-"  nnoremap <buffer> e :call JmOpenTreeFile('edit')<CR>
-"  nnoremap <buffer> <space> :call JmOpenTreeFile()<CR>
-"  nnoremap <buffer> <CR> :call JmOpenTreeFile()<CR>
-"
-"  nnoremap <buffer> d :call <SID>DeleteBuffer()<CR>
-"
-"  nmap <buffer> s /
-"
-"  nmap <buffer> bb :call search('^== buffers', '')<CR>:echo<CR>j
-"  nmap <buffer> rr :call search('^== \.errors', '')<CR>:echo<CR>jll
-"  nmap <buffer> ii :call search('^== git status', '')<CR>:echo<CR>j
-"  nmap <buffer> tt :call search('^== git status', '')<CR>:echo<CR>j
-"  nmap <buffer> vv :call search('^== \.vimgrep', '')<CR>:echo<CR>j
-"  nmap <buffer> ss :call search('^== \.vimshorts', '')<CR>:echo<CR>j
-"  nmap <buffer> cc :call search('^== recent', '')<CR>:echo<CR>j
-"  nmap <buffer> mm :call search('^== \.vimmarks', '')<CR>:echo<CR>j
-"    " silently go to "^== xxx"
-"
-"  nmap <buffer> a :call search('^== ', '')<CR>:echo<CR>0j
-"  nmap <buffer> A :call search('^== ', 'b')<CR>:call search('^== ', 'b')<CR>:echo<CR>j
-"    " silently go to next/previous "== "
-"
-"  nmap <buffer> gl :call search('^== buffers', '')<CR>}k
-"    " silently go to last file in buffer
-"    " reminder type "}" to go to next blank line... See also "{", ")" and "("
+  nnoremap <buffer> o :call JmOpenTreeFile()<CR>
+  nnoremap <buffer> e :call JmOpenTreeFile('edit')<CR>
+  nnoremap <buffer> <space> :call JmOpenTreeFile()<CR>
+  nnoremap <buffer> <CR> :call JmOpenTreeFile()<CR>
+
+  nmap <buffer> s /
 endfunction " Jumps
 
 
