@@ -49,10 +49,6 @@ for line in sys.stdin:
     'jump': ss[1], 'line': int(ss[2]), 'col': int(ss[3]), 'path': ss[4] })
   add_file(ss[4])
 
-lmax = 0
-for j in jumps:
-  lmax = max(lmax, len(j['path']))
-
 def count_wspace(string):
   m = re.search(r'^\s+', string)
   return len(m.group()) if m else 0
@@ -64,6 +60,10 @@ for j in jumps:
   if t: lleft = min(lleft, count_wspace(t))
   j['text'] = t
 jumps = [ j for j in jumps if j['text'] ]
+
+lmax = 0
+for j in jumps:
+  lmax = max(lmax, len(j['path']))
 
 jumps = sorted(
   jumps,
