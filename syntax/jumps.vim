@@ -20,14 +20,14 @@ hi! jmpTail cterm=NONE ctermfg=grey ctermbg=16
 hi! jmpCol cterm=NONE ctermfg=238 ctermbg=16
 
 syn match jmpFileName '\v^ *[^:]+:[0-9]+ +[0-9]+.*$' contains=jmpSlash,jmpDot,jmpExt,jmpColon,jmpDir,jmpCol,jmpTail
-syn match jmpExt '\v(\.)@<=[^:.]+(:[0-9]+ )@=' contained
+syn match jmpExt '\v(\.)@<=.+(:[0-9]+ +[0-9]+)@=' contained
 syn match jmpSlash '/' contained
 syn match jmpDot '\v\.' contained
 syn match jmpColon ':' contained
-syn match jmpDir '\v[^\/:]+(\/)@=' contained
+syn match jmpDir '\v^ [^\/:]+(\/)@=' contained
 syn match jmpLine '\v(:)@<=[0-9]+ +' contained
 syn match jmpCol '\v([0-9])@<= +[0-9]+' contained
-syn match jmpTail '\v([0-9] +[0-9]+)@<=(.+)$' contained
+syn match jmpTail '\v(:[0-9]+ +[0-9]+)@<=(.+)$' contained
 
 let b:current_syntax = "jumps"
 
