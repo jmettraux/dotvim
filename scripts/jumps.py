@@ -3,18 +3,26 @@
 #
 # scripts/jumps.py
 
-#import os, re, sys, time, string, subprocess
-import re, sys
+import os, re, sys
 
 W = int(sys.argv[1])
 
 jumps = []
 files = {}
 
+exts = [ x for x in re.split(r'\s+', '''
+    .js .rb .ru .flo .c
+    .yaml .json
+    .slim .html
+    .css .scss
+    .txt .log
+  ''') if len(x) > 0 ]
+#print(exts)
+
 
 def add_file(path):
 
-  # TODO only load "text" files...
+  if not(os.path.splitext(path)[1] in exts): return
 
   files[path] = \
     files.get(path) or \
