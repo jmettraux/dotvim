@@ -53,6 +53,18 @@ lmax = 0
 for j in jumps:
   lmax = max(lmax, len(j['path']))
 
+def count_wspace(string):
+  m = re.search(r'^\s+', string)
+  return len(m.group()) if m else 0
+
+lleft = 9999
+for j in jumps:
+  f = files.get(j['path'])
+  t = f and f[j['line'] - 1]
+  if t: lleft = min(lleft, count_wspace(t))
+  j['text'] = t
+jumps = [ j for j in jumps if j['text'] ]
+
 jumps = sorted(
   jumps,
   key=lambda e: '%s:%3d' % (e["path"], e["line"]))
@@ -60,11 +72,9 @@ jumps = sorted(
 print()
 
 for j in jumps:
-  f = files.get(j['path'])
-  l = f and f[j['line'] - 1]
-  if not l: continue
-  #if len(l.strip()) < 1: continue
-  s = f' %{lmax}s:%-3d %-2d %s' % (j['path'], j['line'], j['col'], l)
+  t = j['text'][lleft:]
+  if len(t) > 0: t = ' ' + t
+  s = f' %{lmax}s:%-3d %-2d%s' % (j['path'], j['line'], j['col'], t)
   s = s.rstrip()
   if len(s) > W: s = s[:W-1] + '‣'
   print(s)
