@@ -6,6 +6,8 @@
 #import os, re, sys, time, string, subprocess
 import re, sys
 
+W = int(sys.argv[1])
+
 jumps = []
 files = {}
 
@@ -39,15 +41,17 @@ for line in sys.stdin:
     'jump': ss[1], 'line': int(ss[2]), 'col': int(ss[3]), 'path': ss[4] })
   add_file(ss[4])
 
-#for j in jumps:
-#  print(j)
-#  l = int(j['line'])
-#  print(files[j['path']][l - 1])
 lmax = 0
 for j in jumps:
   lmax = max(lmax, len(j['path']))
 
 # TODO sort by "path:line"
+  #
+#sortr = re.compile('^tmp')
+#def sortPaths(path):
+#  if sortr.search(path): return 'ZZZ/' + path
+#  return path
+#paths = sorted(paths, key=sortPaths)
 
 print()
 
@@ -56,7 +60,9 @@ for j in jumps:
   l = f and f[j['line'] - 1]
   if not l: continue
   s = f' %{lmax}s:%-3d %-2d %s' % (j['path'], j['line'], j['col'], l)
-  print(s.rstrip())
+  s = s.rstrip()
+  if len(s) > W: s = s[:W-1] + '‣'
+  print(s)
 
 print()
 

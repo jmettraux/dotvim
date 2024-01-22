@@ -27,36 +27,26 @@ function! s:Jumps()
   setlocal nosmartindent
   setlocal indentexpr=
 
+  let cmd = '/usr/bin/env python ~/.vim/scripts/jumps.py ' . winwidth(0)
+
   normal o== jumps
   exe 'let @z=""'
   exe 'redir @z'
   exe 'silent jumps'
   exe 'redir END'
-  exe 'let @z = system("/usr/bin/env python ~/.vim/scripts/jumps.py", @z)'
+  exe 'let @z = system("' . cmd . '", @z)'
   exe 'silent $put z'
 
   call feedkeys('1G')
-
-"  let ln = get(a:, 1, -1)
-"  if ln > 0
-"    call feedkeys('' . ln . 'G')
-"  else
-"    call feedkeys(":call search('^[\.\/a-zA-Z0-9]', '')\r:echo\r")
-"      " go to first file
-"  end
-"
-"  exe 'silent! %s/$//'
-"  exe 'silent! %s/\( [0-9]\+\)$/\1/'
-"  exe 'silent! %s/\\/\//g'
 
   setlocal syntax=jumps
   setlocal nomodifiable
   setlocal cursorline
 
-"  "nmap <buffer> o gF
-"  "nmap <buffer> <space> gF
-"  "nmap <buffer> <CR> gF
-"    "
+  "nmap <buffer> o gF
+  "nmap <buffer> <space> gF
+  "nmap <buffer> <CR> gF
+    "
   nnoremap <buffer> o :call JmOpenTreeFile()<CR>
   nnoremap <buffer> e :call JmOpenTreeFile('edit')<CR>
   nnoremap <buffer> <space> :call JmOpenTreeFile()<CR>
