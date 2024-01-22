@@ -45,13 +45,9 @@ lmax = 0
 for j in jumps:
   lmax = max(lmax, len(j['path']))
 
-# TODO sort by "path:line"
-  #
-#sortr = re.compile('^tmp')
-#def sortPaths(path):
-#  if sortr.search(path): return 'ZZZ/' + path
-#  return path
-#paths = sorted(paths, key=sortPaths)
+jumps = sorted(
+  jumps,
+  key=lambda e: '%s:%3d' % (e["path"], e["line"]))
 
 print()
 
@@ -59,6 +55,7 @@ for j in jumps:
   f = files.get(j['path'])
   l = f and f[j['line'] - 1]
   if not l: continue
+  #if len(l.strip()) < 1: continue
   s = f' %{lmax}s:%-3d %-2d %s' % (j['path'], j['line'], j['col'], l)
   s = s.rstrip()
   if len(s) > W: s = s[:W-1] + '‣'
