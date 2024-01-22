@@ -131,7 +131,7 @@ function! s:ShowScriptsTree()
     call JmShowTree('src')
   endif
 endfunction " ShowScriptsTree
-nnoremap <silent> <leader>j :call <SID>ShowScriptsTree()<CR>
+"nnoremap <silent> <leader>j :call <SID>ShowScriptsTree()<CR>
 
 function! s:ShowTestTree()
 
