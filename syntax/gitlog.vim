@@ -5,7 +5,7 @@
 "           <match>(<pat>)@!      ~~~ negative lookahead
 
 hi! gilSha cterm=NONE ctermfg=136 ctermbg=16
-hi! gilTags cterm=NONE ctermfg=darkgreen ctermbg=16
+hi! gilTags cterm=NONE ctermfg=green ctermbg=16
 hi! gilDate cterm=NONE ctermfg=grey ctermbg=16
 hi! gilHour cterm=NONE ctermfg=238 ctermbg=16
 hi! gilMonth cterm=NONE ctermfg=darkgrey ctermbg=16
