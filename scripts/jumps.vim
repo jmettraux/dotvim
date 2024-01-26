@@ -29,7 +29,7 @@ function! s:Jumps()
 
   let cmd = '/usr/bin/env python ~/.vim/scripts/jumps.py ' . winwidth(0)
 
-  normal o== jumps
+  normal o== jumps
   exe 'let @z=""'
   exe 'redir @z'
   exe 'silent jumps'
@@ -37,7 +37,7 @@ function! s:Jumps()
   exe 'let @z = system("' . cmd . '", @z)'
   exe 'silent $put z'
 
-  call feedkeys('1G')
+  call feedkeys('4G0')
 
   setlocal syntax=jumps
   setlocal nomodifiable
