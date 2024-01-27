@@ -7,7 +7,8 @@
 
 hi! gdiCommit cterm=NONE ctermfg=white ctermbg=darkgrey
 
-hi! gdiFilename cterm=bold ctermfg=black ctermbg=136
+"hi! gdiFilename cterm=bold ctermfg=black ctermbg=136
+hi! gdiFilename cterm=NONE ctermfg=black ctermbg=darkgreen
 hi! gdiDiffMinus cterm=NONE ctermfg=darkred ctermbg=16
 hi! gdiDiffPlus cterm=NONE ctermfg=green ctermbg=16
 hi! gitPlus cterm=NONE ctermfg=green ctermbg=green

@@ -10,7 +10,7 @@
 "highlight ColorColumn ctermbg=16
   " disable > 80 column highlight
 
-hi! jmpTitle cterm=NONE ctermfg=white ctermbg=16
+hi! jmpTitle cterm=NONE ctermfg=lightgrey ctermbg=16
 hi! jmpFileName cterm=NONE ctermfg=darkyellow ctermbg=16
 hi! jmpSlash cterm=NONE ctermfg=darkgrey ctermbg=16
 hi! jmpExt cterm=NONE ctermfg=green ctermbg=16
