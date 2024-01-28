@@ -19,6 +19,9 @@ exts = [ x for x in re.split(r'\s+', '''
   ''') if len(x) > 0 ]
 #print(exts)
 
+def expand_path(path):
+  if path[0:1] == '~': return os.path.expanduser(path)
+  return path
 
 def add_file(path):
 
@@ -26,7 +29,7 @@ def add_file(path):
 
   files[path] = \
     files.get(path) or \
-    open(path, 'r').readlines()
+    open(expand_path(path), 'r').readlines()
     #[ l.strip() for l in open(path, 'r').readlines() ]
 
 
