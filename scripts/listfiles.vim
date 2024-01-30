@@ -9,6 +9,30 @@ function! s:DeleteBuffer()
   call <SID>ListFiles(line('.'))
 endfunction " DeleteBuffer
 
+function! s:GitAddFile()
+
+  let path = JmDetermineTreePath()
+  if empty(path) | return 0 | endif
+
+  call system('git add ' . path)
+
+  call <SID>ListFiles(line('.'))
+
+  echo 'Added ' . path . ' to Git'
+endfunction " GitAddFile
+
+function! s:GitUnstageFile()
+
+  let path = JmDetermineTreePath()
+  if empty(path) | return 0 | endif
+
+  call system('git restore --staged ' . path)
+
+  call <SID>ListFiles(line('.'))
+
+  echo 'Unstaged ' . path
+endfunction " GitAddFile
+
 
 function! s:ListFiles(...)
 
@@ -128,6 +152,10 @@ function! s:ListFiles(...)
   nnoremap <buffer> <space> :call JmOpenTreeFile()<CR>
   nnoremap <buffer> <CR> :call JmOpenTreeFile()<CR>
 
+  nnoremap <buffer> ga :call <SID>GitAddFile()<CR>
+  nnoremap <buffer> gr :call <SID>GitUnstageFile()<CR>
+  nnoremap <buffer> gu :call <SID>GitUnstageFile()<CR>
+
   nnoremap <buffer> d :call <SID>DeleteBuffer()<CR>
 
   nmap <buffer> s /
@@ -149,6 +177,8 @@ function! s:ListFiles(...)
   nmap <buffer> gl :call search('^== buffers', '')<CR>}k
     " silently go to last file in buffer
     " reminder type "}" to go to next blank line... See also "{", ")" and "("
+
+  nnoremap <buffer> r :call <SID>ListFiles()<CR>
 endfunction " ListFiles
 
 
@@ -156,16 +186,4 @@ command! -nargs=0 ListFiles :call <SID>ListFiles()
 nnoremap <silent> <leader>b :call <SID>ListFiles()<CR>
 
 nnoremap <silent> <leader>B :exe 'bdelete ' . join(range(1, bufnr('$')), ' ')<CR>:call <SID>ListFiles()<CR>
-
-
-function! s:GitAdd()
-
-  let path = JmDetermineTreePathAndLine()[0]
-  let s = system('git add ' . path)
-  call <SID>ListFiles()
-  echo s
-endfunction " GitAdd
-
-command! -nargs=0 GitAdd :call <SID>GitAdd()
-command! -nargs=0 Gadd :call <SID>GitAdd()
 

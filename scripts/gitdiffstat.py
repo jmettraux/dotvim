@@ -45,8 +45,11 @@ for line in subprocess.Popen(cmd1, shell=True, stdout=subprocess.PIPE).stdout:
   paths[g1][2] = 'D'
 
 if cmd2:
+  staged = True
   for line in subprocess.Popen(cmd2, shell=True, stdout=subprocess.PIPE).stdout:
     line = line.decode()
+    if re.match(r'Changes not staged for commit', line):
+      staged = False
     m = re.match(r'^\s+(new file|deleted):\s+(.+)$', line)
     if m:
       #paths[m.group(1)][2] = 'A'
@@ -66,7 +69,15 @@ if cmd2:
         a[2] = c
       else:
         paths[m.group(2)] = [ 0, 0, c ]
-      #continue
+      continue
+    m = staged and re.match(r'^\s+modified:\s+(.+)$', line)
+    if m:
+      a = paths.get(m.group(1))
+      c = 'A'
+      if a:
+        a[2] = c
+      else:
+        paths[m.group(1)] = [ 0, 0, c ]
 
 lmax = 0
 for path in paths.keys():
