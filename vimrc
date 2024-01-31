@@ -167,13 +167,15 @@ nnoremap <silent> <leader>a g'a
 "nnoremap <silent> <leader>y y'a
 "nnoremap <silent> <leader>d d'a
 
-inoremap <C-j> <ESC>
+"inoremap <C-j> <ESC>
 
 
 " pgup / pgdown
 "
 "nnoremap <silent> <space> <C-d>
 "nnoremap <silent> , <C-u>
+nnoremap <C-j> <C-d>
+nnoremap <C-k> <C-u>
 
 " search
 "
