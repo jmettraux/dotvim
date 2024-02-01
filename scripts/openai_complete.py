@@ -80,7 +80,7 @@ ct = response.usage.completion_tokens
 pt = response.usage.prompt_tokens
 #tt = response.usage.total_tokens
 
-print(f"<!--  {model}  i:{i} l:{l} -- pt:{pt} ct:{ct}  -->")
+print(f"<!--  {response.model}  i:{i} l:{l} -- pt:{pt} ct:{ct}  -->")
 print()
 print(response.choices[0].message.content)
 print()
