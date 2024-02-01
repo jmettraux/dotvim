@@ -21,7 +21,8 @@ with open(os.path.expanduser('~') + '/.vim/.openai.key.txt', 'r') as file:
 
 fname_last = '.openai.last.py'
 fname_messages = '.openai.messages.py'
-model = 'gpt-3.5-turbo'
+#model = 'gpt-3.5-turbo'
+model = 'gpt-4'
 temperature = 0.7
 
 whole_tokens = 4096
