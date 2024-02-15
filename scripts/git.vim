@@ -397,6 +397,7 @@ function! s:OpenGitHistory()
   setlocal bufhidden=hide
   setlocal noswapfile
   "setlocal nobuflisted
+  setlocal cursorline
 
   exe 'normal o== version history for ' . path . ''
 
