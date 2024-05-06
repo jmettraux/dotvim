@@ -144,19 +144,13 @@ for path in paths:
 #
 # output
 
-endr = re.compile('^(.+)[-+0-9 ]$')
-def endstrip(s):
-  s = s[:W-1].rstrip()
-  while True:
-    m = endr.match(s)
-    if not(m): break
-    s = m.group(1)
-  return s
-
 for path in paths:
   f = fs.get(path, None)
-  if f:
-    s = ' ' + ' '.join(
-      filter(None, [ f['ip'], f['s'], f.get('l'), f.get('g'), f.get('ag') ]))
-    print(endstrip(s))
+  if not f: next
+  s = f['ip']
+  for p in filter(None, [ f['s'], f.get('l'), f.get('g'), f.get('ag') ]):
+    s1 = s + ' ' + p
+    if len(s1) > W: break
+    s = s1
+  print(s)
 
