@@ -33,7 +33,7 @@ hi! bufGitR cterm=bold ctermfg=darkgreen ctermbg=16
 
 syn match bufShort '\v^[^ =].+$' contains=bufFileName
 
-syn match bufRecentLine '\v +.+$' contains=bufRecentName,bufRecentSize,bufRecentLines,bufRecentAge,bufRecentGit
+syn match bufRecentLine '\v *.+$' contains=bufRecentName,bufRecentSize,bufRecentLines,bufRecentAge,bufRecentGit
 syn match bufFileAndLine '\v^[^ ][^ :]+:[0-9]+$' contains=bufFileName,bufLineNumber
 
 syn match bufEqualEqual '\v^\=\= .+' contains=bufEqualCount
@@ -46,7 +46,8 @@ syn match bufGrepRex '\v^  \/ [''"][^''"]+[''"]' contained contains=bufGrepSlash
 syn match bufGrepDir '\v [^ ]+\/$' contained
 syn match bufGrepSlash '\/' contained
 
-syn match bufRecentName '\v^ +.+( [0-9]+(\.[0-9]+)?[PTMKB])@=' contained keepend contains=bufFileName
+syn match bufRecentName '\v^ *.+( [0-9]+(\.[0-9]+)?[PTMKB])@=' contained keepend contains=bufFileName
+syn match bufRecentName '\v^ *[^ ]+$' contained keepend contains=bufFileName
 syn match bufRecentSize '\v [0-9]+(\.[0-9]+)?[PTMKB]' contained
 syn match bufRecentLines '\v [0-9]+L' contained
 syn match bufRecentAge '\v ([0-9]+[dhms])+' contained
