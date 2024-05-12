@@ -146,8 +146,9 @@ for path in paths:
 
 for path in paths:
   f = fs.get(path, None)
-  if not f: next
+  if not f: continue
   s = f['ip']
+  print(s)
   for p in filter(None, [ f['s'], f.get('l'), f.get('g'), f.get('ag') ]):
     s1 = s + ' ' + p
     if len(s1) > W: break
