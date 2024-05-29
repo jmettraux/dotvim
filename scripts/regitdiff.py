@@ -50,7 +50,8 @@ def get_numstat(path):
 def get_log_numstat(commit, path):
   ls = list(exec_to_lines('git log -1 --numstat ' + commit + ' -- ' + path))
   m = re.match(r'^(\d+)\s+(\d+)', ls.pop())
-  return '+' + m.group(1) + '-' + m.group(2)
+  if m: return '+' + m.group(1) + '-' + m.group(2)
+  return ''
 
 
 fname = None
