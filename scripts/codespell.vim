@@ -27,13 +27,16 @@ function! s:CodeSpell()
   setlocal nosmartindent
   setlocal indentexpr=
 
-  let cs = '/usr/local/bin/codespell'
-
+  let x = 'silent r ! /usr/local/bin/codespell -d'
+    "
   if filereadable('.codespell-ignore')
-    exe 'silent r ! ' . cs . ' -I .codespell-ignore'
-  else
-    exe 'silent r ! ' . cs
+    let x = x . ' -I .codespell-ignore'
   endif
+  if filereadable('.codespell-dirs')
+    let x = x . ' ' . join(readfile('.codespell-dirs'), ' ')
+  endif
+    "
+  exe x
 
   execute '%s/\v^\.\///'
   execute '%s/\v(\d): /\1  /'
