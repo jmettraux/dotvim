@@ -1,4 +1,6 @@
 
+" MIT licensed
+
   " (<pattern>)@<=<match>  ~~~ positive lookbehind
   " <match>(<pattern>)@=   ~~~ positive lookahead
   " (<pattern>)@!<match>   ~~~ negative lookbehind
