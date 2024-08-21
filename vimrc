@@ -263,3 +263,10 @@ nnoremap <C-l> :silent execute "normal! 0 " . (col("$") / 2) . "l"<CR>:echo<CR>
   " got to the middle of the current line
   " the :echo clears the 'command line'
 
+
+" enable :Man ls
+"
+runtime ftplugin/man.vim
+  "
+  " use :only to make the help window fullscreen...
+
