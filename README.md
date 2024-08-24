@@ -6,6 +6,13 @@ Nothing fancy here.
 I don't use gvim or macvim.
 
 
+## deps
+
+```
+# cd /usr/local/bin && ln -s python3 python
+```
+
+
 ## shortcuts
 
 The `<leader>` is `;`.
