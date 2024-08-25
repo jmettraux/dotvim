@@ -32,7 +32,7 @@ nnoremap ?? :call <SID>OpenAiChatPushLine()
 
 function! s:OpenAiList()
 
-  let @z = system(g:_python . " ~/.vim/scripts/openai_list.py", a:prompt)
+  let @z = system(g:_python . ' ~/.vim/scripts/openai_list.py')
   silent $put z
   normal <c-g>
 endfunction " OpenAiList

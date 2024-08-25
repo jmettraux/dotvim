@@ -3,14 +3,17 @@
 
 import os, sys, re
 import json
-import openai
+from openai import OpenAI
 from pathlib import Path
 
+key_path = os.path.expanduser('~') + '/.vim/.openai.key.txt'
+  #
+api_key = None
+with open(key_path, 'r') as file: api_key = file.read().strip()
+  #
+client = OpenAI(api_key=api_key)
 
-with open(os.path.expanduser('~') + '/.vim/.openai.key.txt', 'r') as file:
-  openai.api_key = file.read().strip()
-
-models = openai.Model.list()
+models = client.models.list()
   #
 def id(x):
   return x.id
