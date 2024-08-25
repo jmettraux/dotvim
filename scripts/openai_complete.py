@@ -1,10 +1,13 @@
 
+#
 # scripts/openai.py
 
 import os, sys, re
 import json
-import openai
+from openai import OpenAI
 from pathlib import Path
+
+key_path = os.path.expanduser('~') + '/.vim/.openai.key.txt'
 
 
 # primitive but...
@@ -15,9 +18,7 @@ def count_tokens(s):
     len(re.findall(r'\s', s)) + \
     len(re.findall(r'[^\w\s]', s))
 
-
-with open(os.path.expanduser('~') + '/.vim/.openai.key.txt', 'r') as file:
-  openai.api_key = file.read().strip()
+role = 'user'
 
 fname_last = '.openai.last.py'
 fname_messages = '.openai.messages.py'
@@ -33,7 +34,7 @@ lines = sys.stdin.read().strip()
 m = re.match(r'^(#+\s+)(.*)', lines)
 if m: lines = m.group(2)
 
-prompt = { "role": "user", "content": lines }
+prompt = { "role": role, "content": lines }
 
 Path(fname_messages).touch()
 
@@ -60,25 +61,12 @@ l = count_tokens(json.dumps(messages))
 #
 # call the API...
 
-### import os
-### from openai import OpenAI
-###
-### client = OpenAI(
-###     # This is the default and can be omitted
-###     api_key=os.environ.get("OPENAI_API_KEY"),
-### )
-###
-### chat_completion = client.chat.completions.create(
-###     messages=[
-###         {
-###             "role": "user",
-###             "content": "Say this is a test",
-###         }
-###     ],
-###     model="gpt-3.5-turbo",
-### )
+api_key = None
+with open(key_path, 'r') as file: api_key = file.read().strip()
 
-response = openai.ChatCompletion.create(
+client = OpenAI(api_key=api_key)
+
+response = client.chat.completions.create(
   model = model,
   messages = messages,
   n = 1,
@@ -87,12 +75,12 @@ response = openai.ChatCompletion.create(
   temperature = temperature)
 
 with open(fname_last, 'w') as f:
-  print(response, file=f)
+  print(response.to_json(), file=f)
 
 with open(fname_messages, 'a') as f:
   f.write(json.dumps(prompt))
   f.write("\n")
-  f.write(json.dumps(response.choices[0].message))
+  f.write(response.choices[0].message.to_json(indent=None))
   f.write("\n")
 
 ct = response.usage.completion_tokens

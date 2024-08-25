@@ -12,11 +12,11 @@ I don't use gvim or macvim.
 # cd /usr/local/bin && ln -s python3 python
 ```
 
-## python_venv/
+## ~/.vim_python
 
 ```
-$ mdkir ~/.vim/python_venv
-$ python -m venv ~/.vim/python_venv
+$ mdkir ~/.vim_python
+$ python -m venv ~/.vim_python
 ```
 
 
