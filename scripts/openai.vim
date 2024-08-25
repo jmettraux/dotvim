@@ -6,7 +6,7 @@
 
 function! s:OpenAiChatComplete(prompt)
 
-  let @z = system("/usr/bin/env python ~/.vim/scripts/openai_complete.py", a:prompt)
+  let @z = system(g:_python . " ~/.vim/scripts/openai_complete.py", a:prompt)
   silent $put z
   normal <c-g>
 endfunction " OpenAiChatComplete
@@ -32,7 +32,7 @@ nnoremap ?? :call <SID>OpenAiChatPushLine()
 
 function! s:OpenAiList()
 
-  let @z = system("/usr/bin/env python ~/.vim/scripts/openai_list.py")
+  let @z = system(g:_python . " ~/.vim/scripts/openai_list.py", a:prompt)
   silent $put z
   normal <c-g>
 endfunction " OpenAiList

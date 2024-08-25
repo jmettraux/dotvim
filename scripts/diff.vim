@@ -15,7 +15,7 @@ function! s:DiffPy(dir, path)
   let b = (a:dir == 'from') ? expand('%.') : expand(a:path)
 
   exe ':%d'
-  exe 'silent r! /usr/bin/env python ~/.vim/scripts/diff.py ' . shellescape(a) . ' ' . shellescape(b)
+  exe 'silent r! ' . g:_python . ' ~/.vim/scripts/diff.py ' . shellescape(a) . ' ' . shellescape(b)
 endfunction
 
 command! -nargs=1 -complete=file DiffFrom :call <SID>DiffPy('from', <f-args>)

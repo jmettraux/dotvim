@@ -79,7 +79,7 @@ function! JmVg(args)
   exe '%d_'
   exe "silent r! echo '== :Vg " . pr[0] . " " . rest . "'"
   exe "Clean"
-  exe 'silent r! /usr/bin/env python ~/.vim/scripts/grep.py ' . shellescape(pr[0]) . ' ' . shellescape(rest) . ' ' . g:uname
+  exe 'silent r! ' . g:_python . ' ~/.vim/scripts/grep.py ' . shellescape(pr[0]) . ' ' . shellescape(rest) . ' ' . g:uname
   let g:groPattern = pr[1]
   setlocal syntax=greprout
   setlocal filetype=greprout

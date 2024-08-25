@@ -27,7 +27,7 @@ function! s:Jumps()
   setlocal nosmartindent
   setlocal indentexpr=
 
-  let cmd = '/usr/bin/env python ~/.vim/scripts/jumps.py ' . winwidth(0)
+  let cmd = g:_python . ' ~/.vim/scripts/jumps.py ' . winwidth(0)
 
   normal o== jumps
   exe 'let @z=""'

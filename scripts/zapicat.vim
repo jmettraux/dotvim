@@ -59,7 +59,7 @@ function! JmZapicat(...)
 
   let as = split(getline(1), ' ')
 
-  let cmd = 'silent r! /usr/bin/env python ~/.vim/scripts/zapicat-browse.py'
+  let cmd = 'silent r! ' . g:_python . ' ~/.vim/scripts/zapicat-browse.py'
   let cmd = cmd . ' ' . winwidth(0)
   for aa in as
     let cmd = cmd . ' ' . shellescape(aa, 1)
@@ -142,7 +142,7 @@ nnoremap ` :silent call JmZapicat()<CR>
 
 function! s:ZapicatIndex()
 
-  exe 'sil ! time /usr/bin/env python ~/.vim/scripts/zapicat-index.py --force'
+  exe 'sil ! time ' . g:_python . ' ~/.vim/scripts/zapicat-index.py --force'
   exe '! ls -lh .zapicat*'
 endfunction " ZapicatIndex
 

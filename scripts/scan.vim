@@ -56,7 +56,7 @@ function! s:Scan()
   exe '%d_'
   exe "silent r! echo '== :Scan " . path . "'"
   exe 'r! echo ""'
-  exe 'silent r! /usr/bin/env python ~/.vim/scripts/scan.py ' . path
+  exe 'silent r! ' . g:_python . ' ~/.vim/scripts/scan.py ' . path
   exe 'r! echo ""'
 
   setlocal filetype=Scan

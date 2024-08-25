@@ -159,9 +159,9 @@ function! s:OpenGitLog(all)
   exe 'normal o== git log at ' . getcwd() . ''
 
   if a:all
-    exe 'silent r! git log --graph --branches --pretty=format:"\%h \%an |\%ad \%d \%s" --date=iso-strict | /usr/bin/env python ~/.vim/scripts/regitlog.py'
+    exe 'silent r! git log --graph --branches --pretty=format:"\%h \%an |\%ad \%d \%s" --date=iso-strict | ' . g:_python . ' ~/.vim/scripts/regitlog.py'
   else
-    exe 'silent r! git log --graph --pretty=format:"\%h \%an |\%ad \%d \%s" --date=iso-strict | /usr/bin/env python ~/.vim/scripts/regitlog.py'
+    exe 'silent r! git log --graph --pretty=format:"\%h \%an |\%ad \%d \%s" --date=iso-strict | ' . g:_python . ' ~/.vim/scripts/regitlog.py'
   endif
 
   setlocal syntax=gitlog
@@ -229,7 +229,7 @@ function! s:OpenGitBlame()
   "setlocal nobuflisted
   setlocal cursorline
 
-  exe 'silent r! /usr/bin/env python ~/.vim/scripts/gitblame.py ' . path
+  exe 'silent r! ' . g:_python . ' ~/.vim/scripts/gitblame.py ' . path
 
   setlocal syntax=gitblame
   setlocal nomodifiable
@@ -288,7 +288,7 @@ function! s:OpenGitDiff(path)
   "setlocal filetype=ListFiles
   setlocal cursorline
 
-  exe 'silent r! /usr/bin/env python ~/.vim/scripts/opengitdiff.py ' . a:path
+  exe 'silent r! ' . g:_python . ' ~/.vim/scripts/opengitdiff.py ' . a:path
   exe 'Clean'
 
   exe 'setlocal syntax=' . JmDetermineSyntax(a:path)
@@ -401,7 +401,7 @@ function! s:OpenGitHistory()
 
   exe 'normal o== version history for ' . path . ''
 
-  exe 'silent r! git log --graph --pretty=format:"\%h \%an |\%ad \%d \%s" --date=iso-strict ' . path . ' | /usr/bin/env python ~/.vim/scripts/regitlog.py'
+  exe 'silent r! git log --graph --pretty=format:"\%h \%an |\%ad \%d \%s" --date=iso-strict ' . path . ' | ' . g:_python . ' ~/.vim/scripts/regitlog.py'
 
   setlocal syntax=gitlog
   "setlocal filetype=gitlog

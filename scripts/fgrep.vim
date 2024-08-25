@@ -39,7 +39,7 @@ function! s:Fgrep(rex)
   exe "silent r! echo '== " . path . "'"
   exe "silent r! echo '== :Fgrep " . a:rex . "'"
   exe 'r! echo ""'
-  exe 'silent r! /usr/bin/env python ~/.vim/scripts/fgrep.py ' . shellescape(path) . ' ' . shellescape(a:rex)
+  exe 'silent r! ' . g:_python . ' ~/.vim/scripts/fgrep.py ' . shellescape(path) . ' ' . shellescape(a:rex)
   exe 'r! echo ""'
 
   setlocal filetype=Fgrep

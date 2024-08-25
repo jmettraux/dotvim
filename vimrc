@@ -12,6 +12,9 @@ let g:isOpenBSD = g:uname == 'OpenBSD'
 let g:isOpenBsd = g:isOpenBSD
 
 let g:_python = '/usr/bin/env python '
+if isdirectory($HOME . '/.vim/python_venv/bin')
+  let g:_python = $HOME . '/.vim/python_venv/bin/python '
+endif
 
 set nocompatible
 

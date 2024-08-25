@@ -68,7 +68,7 @@ function! s:ListFiles(...)
   exe 'redir @z'
   exe 'silent buffers'
   exe 'redir END'
-  exe 'let @z = system("/usr/bin/env python ~/.vim/scripts/buffers.py", @z)'
+  exe 'let @z = system(g:_python . " ~/.vim/scripts/buffers.py", @z)'
   exe 'silent $put z'
 
   if filereadable('.errors') && getfsize('.errors') > 0
@@ -79,19 +79,19 @@ function! s:ListFiles(...)
 
   if filereadable('.vimspec') && getfsize('.vimspec') > 0
     normal o== .vimspec
-    exe 'silent r! /usr/bin/env python ~/.vim/scripts/cat.py .vimspec'
+    exe 'silent r! ' . g:_python . ' ~/.vim/scripts/cat.py .vimspec'
     normal G
   end
 
   if filereadable('.vimmarks') && getfsize('.vimmarks') > 0
     normal o== .vimmarks
-    exe 'silent r! /usr/bin/env python ~/.vim/scripts/cat.py .vimmarks'
+    exe 'silent r! ' . g:_python . ' ~/.vim/scripts/cat.py .vimmarks'
     normal G
   end
 
   if isdirectory('.git')
     normal o== git status
-    exe 'r! /usr/bin/env python ~/.vim/scripts/gitdiffstat.py 0'
+    exe 'r! ' . g:_python . ' ~/.vim/scripts/gitdiffstat.py 0'
     normal G
   endif
 
@@ -103,11 +103,11 @@ function! s:ListFiles(...)
 
   if filereadable('.vimshorts') && getfsize('.vimshorts') > 0
     normal o== .vimshorts
-    exe 'silent r! /usr/bin/env python ~/.vim/scripts/cat.py .vimshorts'
+    exe 'silent r! ' . g:_python . ' ~/.vim/scripts/cat.py .vimshorts'
     normal G
   end
 
-  let cmd = "/usr/bin/env python ~/.vim/scripts/recentfiles.py " . winwidth(0)
+  let cmd = g:_python . " ~/.vim/scripts/recentfiles.py " . winwidth(0)
   exe 'let @z=""'
   exe 'redir @z'
   exe 'silent oldfiles'
