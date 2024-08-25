@@ -68,7 +68,9 @@ hi clear
 " let s:green       = "64"
 
 "if &term == 'xterm-256color' || &term == 'st-256color'
-if match(&term, '-256color$') > -1
+"if match(&term, '-256color$') > -1
+if match(&term, '-256color$') > -1 || &term == 'alacritty'
+"if 1 > 0
 
   set t_Co=256
 
