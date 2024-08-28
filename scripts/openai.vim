@@ -28,7 +28,6 @@ function! s:OpenAiChatPushLine()
 endfunction " OpenAiChatPushLine
 
 "command! -nargs=0 Prompt :call <SID>OpenAiChatPushLine()
-nmap <buffer> ?? :call <SID>OpenAiChatPushLine()
 
 
 function! s:OpenAiChatPushBlock() range
@@ -36,8 +35,10 @@ function! s:OpenAiChatPushBlock() range
   let ls = getline(a:firstline, a:lastline)
 
   exe '' . a:firstline . ',' . a:lastline . 'delete'
+  call append(a:firstline - 1 , '### >')
+  call append(a:firstline + 0, '')
     "
-  let ln = a:firstline - 1
+  let ln = a:firstline + 1
   for l in ls
     if trim(l) == ''
       call append(ln, '>')
@@ -46,7 +47,7 @@ function! s:OpenAiChatPushBlock() range
     endif
     let ln = ln + 1
   endfor
-  call append(ln, '')
+  "call append(ln, '')
 
   redraw
   write
@@ -54,10 +55,6 @@ function! s:OpenAiChatPushBlock() range
   call <SID>OpenAiChatComplete(ls)
   write
 endfunction " OpenAiChatPushBlock
-
-"vnoremap ?? :call <SID>OpenAiChatPushBlock()
-vmap <buffer> ?? :call <SID>OpenAiChatPushBlock()
-vmap <buffer> >> :call <SID>OpenAiChatPushBlock()
 
 
 function! s:OpenAiList()
@@ -68,4 +65,12 @@ function! s:OpenAiList()
 endfunction " OpenAiList
 
 command! -nargs=0 OpenAiList :call <SID>OpenAiList()
+
+
+au BufReadPost,BufNewFile .chat.md
+  \ nnoremap <buffer> ?? :call <SID>OpenAiChatPushLine()
+au BufReadPost,BufNewFile .chat.md
+  \ vnoremap <buffer> ?? :call <SID>OpenAiChatPushBlock()
+au BufReadPost,BufNewFile .chat.md
+  \ vnoremap <buffer> >> :call <SID>OpenAiChatPushBlock()
 
