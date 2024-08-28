@@ -11,6 +11,7 @@ function! s:OpenAiChatComplete(prompt)
   normal <c-g>
 endfunction " OpenAiChatComplete
 
+
 function! s:OpenAiChatPushLine()
 
   if getline('.') !~ '\v^#+\s+'
@@ -27,7 +28,36 @@ function! s:OpenAiChatPushLine()
 endfunction " OpenAiChatPushLine
 
 "command! -nargs=0 Prompt :call <SID>OpenAiChatPushLine()
-nnoremap ?? :call <SID>OpenAiChatPushLine()
+nmap <buffer> ?? :call <SID>OpenAiChatPushLine()
+
+
+function! s:OpenAiChatPushBlock() range
+
+  let ls = getline(a:firstline, a:lastline)
+
+  exe '' . a:firstline . ',' . a:lastline . 'delete'
+    "
+  let ln = a:firstline - 1
+  for l in ls
+    if trim(l) == ''
+      call append(ln, '>')
+    else
+      call append(ln, '> ' . l)
+    endif
+    let ln = ln + 1
+  endfor
+  call append(ln, '')
+
+  redraw
+  write
+
+  call <SID>OpenAiChatComplete(ls)
+  write
+endfunction " OpenAiChatPushBlock
+
+"vnoremap ?? :call <SID>OpenAiChatPushBlock()
+vmap <buffer> ?? :call <SID>OpenAiChatPushBlock()
+vmap <buffer> >> :call <SID>OpenAiChatPushBlock()
 
 
 function! s:OpenAiList()
