@@ -136,7 +136,9 @@ au BufLeave * :call <SID>JmBufLeave()
 nnoremap <silent> <leader>; :call <SID>JmBufAlt()<CR>
 
 "nnoremap <silent> <leader>n :n<CR>
+
 "nnoremap <silent> <leader>c :only!<CR>
+nnoremap <leader>o :only!<CR>
 
 "nnoremap <silent> <leader>b :buffers<CR>
 "nnoremap <silent> <leader>1 :e #1<CR>
