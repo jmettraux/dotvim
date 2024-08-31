@@ -9,17 +9,15 @@ hi! stoDirname cterm=NONE ctermfg=darkgreen ctermbg=16
 hi def link stoTree Comment
 hi def link stoSize Comment
 hi def link stoLines Comment
-hi def link stoMtime Comment
 hi def link stoSummary Comment
 hi! stoGit cterm=NONE ctermfg=white ctermbg=16
 hi! stoExt cterm=NONE ctermfg=grey ctermbg=16
 
 syn match stoTree '\v[├│└─  |`-]+ ' contained
 syn match stoSize '\v( )@<=[0-9.]+[KMGTPE]?( |$)' contained
-syn match stoLines '\v[0-9.]+L ' contained
+syn match stoLines '\v[0-9.]+L( |$)' contained
 syn match stoGit '\v(\+\d+-\d+|untracked|new)( |$)' contained
-syn match stoMtime '\v((20[0-9]{2})?-[01][0-9]-[0-3][0-9]|[0-9]{2}:[0-9]{2}:[0-9]{2})( |$)' contained
-syn match stoFilename '\v[-A-Za-z0-9 \(\)_.+]+' contained contains=stoExt,stoSize,stoLines,stoMtime,stoGit,stoDirname
+syn match stoFilename '\v[-A-Za-z0-9 \(\)_.+]+' contained contains=stoExt,stoSize,stoLines,stoGit,stoDirname
 syn match stoLine '\v^[ |│├└`.]([│├└─  |`-]+ )?.+' contains=stoTree,stoFilename
 syn match stoLine '\v^[^ |│├└`]+/ .+$' contains=stoFilename
 
