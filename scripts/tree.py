@@ -2,7 +2,7 @@
 
 # tree.py
 
-import os, re, sys, string, subprocess
+import os, re, sys, string, subprocess, datetime
 
 
 # determine root
@@ -96,6 +96,18 @@ def compute_size(path):
   if os.path.exists(pa) == False: return '-1'
   return to_kmgt(os.path.getsize(pa))
 
+def compute_mtime(path):
+  now = datetime.datetime.now()
+  ts = os.path.getmtime(path)
+  mtime = datetime.datetime.fromtimestamp(ts)
+  if now - mtime > datetime.timedelta(hours=24):
+    if now.year == mtime.year:
+      return mtime.strftime("-%m-%d")
+    else:
+      return mtime.strftime("%Y-%m-%d")
+  else:
+    return mtime.strftime("%H:%M:%S")
+
 def compute_path():
   i = fs[-1]['i'] + 1
   d = []
@@ -135,6 +147,7 @@ def walk(path, i, prefix):
     h['d'] = os.path.isdir(h['p'])
     h['s'] = compute_size(h['p'])
     h['L'] = wcl.get(os.path.abspath(h['p']))
+    h['t'] = compute_mtime(h['p'])
     pre = prefix
     if fn == fns[-1]:
       pre = re.sub('\|-- $', '`-- ', prefix)
@@ -160,6 +173,7 @@ for f in fs:
     ap = os.path.abspath(f['p'])
     g = git.get(ap)
     ls = f['L'] + 'L' if f['L'] else None
+    mt = f['t']
     if g:
       un = g.get('s')
       ad = '+' + g.get('a', '0') + '-' + g.get('d', '0')
@@ -170,7 +184,7 @@ for f in fs:
           ad = 'new'
         else:
           ad = ad + ' new'
-      print(to_s([ f['l'], f['s'], ls, ad ]))
+      print(to_s([ f['l'], f['s'], ls, mt, ad ]))
     else:
-      print(to_s([ f['l'], f['s'], ls ]))
+      print(to_s([ f['l'], f['s'], ls, mt ]))
 
