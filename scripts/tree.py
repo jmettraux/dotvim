@@ -3,6 +3,7 @@
 # tree.py
 
 import os, re, sys, string, time, subprocess
+import _common
 
 
 # determine root
@@ -96,20 +97,6 @@ def compute_size(path):
   if os.path.exists(pa) == False: return '-1'
   return to_kmgt(os.path.getsize(pa))
 
-# see scripts/recentfiles.py
-#
-def compute_mtime(path):
-  i = int(time.time() - os.path.getmtime(path))
-  if i < 60: return '%is' % i
-  d = int(i / (24 * 3600)); i = i % (24 * 3600)
-  h = int(i / 3600); i = i % 3600
-  m = int(i / 60); i = i % 60
-  r = ''
-  if d > 0: r = '%s%id' % (r, d)
-  if d < 7 and h > 0: r = '%s%ih' % (r, h)
-  if d < 1 and m > 0: r = '%s%im' % (r, m)
-  return r
-
 def compute_path():
   i = fs[-1]['i'] + 1
   d = []
@@ -149,7 +136,7 @@ def walk(path, i, prefix):
     h['d'] = os.path.isdir(h['p'])
     h['s'] = compute_size(h['p'])
     h['L'] = wcl.get(os.path.abspath(h['p']))
-    h['t'] = compute_mtime(h['p'])
+    h['t'] = _common.compute_mtime_age(h['p'])
     pre = prefix
     if fn == fns[-1]:
       pre = re.sub('\|-- $', '`-- ', prefix)

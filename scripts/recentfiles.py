@@ -1,6 +1,7 @@
 # -*- coding: UTF-8 -*-
 
 import os, re, sys, time, string, subprocess
+import _common
 
 W = int(sys.argv[1])
 
@@ -103,24 +104,12 @@ for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=FNU
   if f == None: continue
   f['g'] = '+' + ss[0] + '-' + ss[1]
 
-def get_age(path):
-  i = int(time.time() - os.path.getmtime(path))
-  if i < 60: return '%is' % i
-  d = int(i / (24 * 3600)); i = i % (24 * 3600)
-  h = int(i / 3600); i = i % 3600
-  m = int(i / 60); i = i % 60
-  r = ''
-  if d > 0: r = '%s%id' % (r, d)
-  if d < 7 and h > 0: r = '%s%ih' % (r, h)
-  if d < 1 and m > 0: r = '%s%im' % (r, m)
-  return r
-
 paths = [ os.path.abspath(p) for p in paths ]
 
 for path in paths:
   f = fs.get(path, None)
   if not f: continue
-  f['ag'] = get_age(path)
+  f['ag'] = _common.compute_mtime_age(path)
 
   # debugging...
   #
@@ -148,7 +137,7 @@ for path in paths:
   f = fs.get(path, None)
   if not f: continue
   s = f['ip']
-  for p in filter(None, [ f['s'], f.get('l'), f.get('g'), f.get('ag') ]):
+  for p in filter(None, [ f['s'], f.get('l'), f.get('ag'), f.get('g') ]):
     s1 = s + ' ' + p
     if len(s1) > W: break
     s = s1

@@ -3,6 +3,7 @@
 # fuzzer.py
 
 import os, re, sys, glob, time, string, fnmatch, subprocess
+import _common
 
 W = int(sys.argv[1])
 
@@ -110,18 +111,6 @@ def d_mtime(path):
 #def d_git(path):
 #  return path in gits
 
-def d_age(mtime):
-  i = int(time.time() - mtime)
-  if i < 60: return '%is' % i
-  d = int(i / (24 * 3600)); i = i % (24 * 3600)
-  h = int(i / 3600); i = i % 3600
-  m = int(i / 60); i = i % 60
-  r = ''
-  if d > 0: r = '%s%id' % (r, d)
-  if d < 7 and h > 0: r = '%s%ih' % (r, h)
-  if d < 1 and m > 0: r = '%s%im' % (r, m)
-  return r
-
 details = {}
   #
 def detail(path):
@@ -129,7 +118,7 @@ def detail(path):
   if d:
     return d
   mt = d_mtime(path)
-  age = d_age(mt)
+  age = _common.compute_mtime_age(path)
   if os.path.isdir(path):
     dl = len(path) - 1
     d = { "dir": True, "mtime": mt, "age": age, "dirl": dl }
