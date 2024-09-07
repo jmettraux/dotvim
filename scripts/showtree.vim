@@ -183,11 +183,15 @@ function! JmDeleteTreeFile()
   if confirm('Delete ' . path . ' ?', "&No\n&yes") == 1 | return 0 | endif
 
   let cmd = 'rm'
-  if isdirectory('.git') && empty(system('git ls-files ' . path)) == 0
+  "if isdirectory('.git') && empty(system('git ls-files ' . path)) == 0
+  "  let cmd = 'git rm -f'
+  "endif
+  if (JmGitForFile(path) == JmGitForFile('.')) && (empty(system('git ls-files ' . path)) == 0)
     let cmd = 'git rm -f'
   endif
 
   call system(cmd . ' ' . path)
+
   call JmReloadTree(0)
 endfunction " JmDeleteTreeFile
 
@@ -219,13 +223,18 @@ function! JmMoveTreeFile()
   if empty(path) | return 0 | endif
   if isdirectory(path) | return 0 | endif
 
-  let p1 = trim(input('Move to: ', path, 'file'))
+  call JmGreenEcho('Move to:')
+  "let p1 = trim(input('Move to: ', path, 'file'))
+  let p1 = trim(input('', path, 'file'))
     " CTRL-C to interrupt
 
   if empty(p1) | return 0 | endif
 
   let cmd = 'mv'
-  if isdirectory('.git') && empty(system('git ls-files ' . path)) == 0
+  "if isdirectory('.git') && empty(system('git ls-files ' . path)) == 0
+  "  let cmd = 'git mv'
+  "endif
+  if (JmGitForFile(path) == JmGitForFile(p1)) && (empty(system('git ls-files ' . path)) == 0)
     let cmd = 'git mv'
   endif
 

@@ -149,3 +149,30 @@ function! JmDetermineSyntax(path)
   return ''
 endfunction " JmDetermineSyntax
 
+function! JmGitForFile(path)
+
+  let dir = fnamemodify(a:path, ':h')
+
+  let git = trim(system('cd ' . dir . ' && git rev-parse --show-toplevel'))
+  if v:shell_error != 0
+    let git = 'no / ' . a:path
+  endif
+
+  return git
+endfunction " JmGitForFile
+
+
+highlight JmRedEchoHighlight ctermfg=red ctermbg=none
+highlight JmGreyEchoHighlight ctermfg=grey ctermbg=none
+highlight JmGreenEchoHighlight ctermfg=green ctermbg=none
+
+function! JmRedEcho(s)
+  echohl JmRedEchoHighlight | echo a:s | echohl None
+endfunction
+function! JmGreyEcho(s)
+  echohl JmGreyEchoHighlight | echo a:s | echohl None
+endfunction
+function! JmGreenEcho(s)
+  echohl JmGreenEchoHighlight | echo a:s | echohl None
+endfunction
+
