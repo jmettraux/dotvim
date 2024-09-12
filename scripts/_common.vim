@@ -166,13 +166,13 @@ highlight JmRedEchoHighlight ctermfg=red ctermbg=none
 highlight JmGreyEchoHighlight ctermfg=grey ctermbg=none
 highlight JmGreenEchoHighlight ctermfg=green ctermbg=none
 
-function! JmRedEcho(s)
-  echohl JmRedEchoHighlight | echo a:s | echohl None
+function! JmRedEcho(...)
+  echohl JmRedEchoHighlight | echo join(a:000, ' ') | echohl None
 endfunction
-function! JmGreyEcho(s)
-  echohl JmGreyEchoHighlight | echo a:s | echohl None
+function! JmGreyEcho(...)
+  echohl JmGreyEchoHighlight | echo join(a:000, ' ') | echohl None
 endfunction
-function! JmGreenEcho(s)
-  echohl JmGreenEchoHighlight | echo a:s | echohl None
+function! JmGreenEcho(...)
+  echohl JmGreenEchoHighlight | echo join(a:000, ' ') | echohl None
 endfunction
 
