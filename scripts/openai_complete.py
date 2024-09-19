@@ -23,7 +23,8 @@ role = 'user'
 fname_last = '.openai.last.py'
 fname_messages = '.openai.messages.py'
 #model = 'gpt-3.5-turbo'
-model = 'gpt-4'
+#model = 'gpt-4'
+model = 'gpt-4o'
 temperature = 0.7
 
 whole_tokens = 4096
