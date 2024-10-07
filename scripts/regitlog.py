@@ -1,5 +1,12 @@
 
-import sys, re
+import sys, re, subprocess
+
+
+def exec_to_lines(cmd):
+  return map(
+    lambda l: l.decode().rstrip(),
+    subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).stdout)
+W = int(list(exec_to_lines('tput cols'))[0])
 
 
 for line in sys.stdin:
@@ -29,6 +36,8 @@ for line in sys.stdin:
     if tags:
       s = s + re.sub(r' ', '', tags) + ' '
     s = s + text
+
+    if len(s) > W: s = s[:W - 1] + '…'
 
     print(s)
 
