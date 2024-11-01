@@ -486,3 +486,44 @@ command! -nargs=0 Gic :! git commit<CR>
 command! -nargs=0 Gica :! git commit -a<CR>
 command! -nargs=0 Gipu :! git push<CR>
 
+
+function! s:FileGitDiff()
+
+  let fp = expand('%:p')
+  let fn = '_gdf__' . JmNtr(fp)
+  let bn = JmBufferNumber(fn)
+
+  let w = winwidth(0)
+
+  if bn > -1 | exe '' . bn . 'bwipeout!' | endif
+    " close previous GitLog if any
+
+  exe 'new | only'
+    " | only makes it full window
+  exe 'silent file ' . fn
+    " replace buffer name
+  setlocal buftype=nofile
+  setlocal bufhidden=hide
+  setlocal noswapfile
+  "setlocal nobuflisted
+
+  let l = split(system('wc -l ' . shellescape(fp)))[0]
+
+  exe 'silent r! git diff -U' . l . ' ' . fp . ' | ' . g:_python . '~/.vim/scripts/regitdiff.py ' . w
+
+  setlocal syntax=gitdiff
+  setlocal filetype=gitdiff
+  setlocal nomodifiable
+
+  exe 'normal 1G'
+
+  nnoremap <buffer> o :call <SID>OpenFile('o')<CR>
+  nnoremap <buffer> <CR> :call <SID>OpenFile('cr')<CR>
+  nnoremap <buffer> <SPACE> :call <SID>OpenFile('space')<CR>
+
+  nnoremap <buffer> <silent> q :bd<CR>
+endfunction " FileGitDiff
+
+command! -nargs=0 FileGitDiff :call <SID>FileGitDiff()
+nnoremap <silent> <leader>i :call <SID>FileGitDiff()<CR>
+
