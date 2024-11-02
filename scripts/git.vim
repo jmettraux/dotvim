@@ -243,8 +243,8 @@ function! s:OpenGitBlame()
   nnoremap <buffer> <silent> q :bd<CR>
 endfunction " OpenGitBlame
 
-nnoremap <silent> <leader>m :call <SID>OpenGitBlame()<CR>
-command! -nargs=0 Blame :call <SID>OpenGitBlame()
+"nnoremap <silent> <leader>m :call <SID>OpenGitBlame()<CR>
+command! -nargs=0 GitBlame :call <SID>OpenGitBlame()
 
 
 function! s:OpenFileFromDiff()
@@ -524,6 +524,6 @@ function! s:FileGitDiff()
   nnoremap <buffer> <silent> q :bd<CR>
 endfunction " FileGitDiff
 
-command! -nargs=0 FileGitDiff :call <SID>FileGitDiff()
-nnoremap <silent> <leader>i :call <SID>FileGitDiff()<CR>
+"nnoremap <silent> <leader>i :call <SID>FileGitDiff()<CR>
+command! -nargs=0 GitDiff :call <SID>FileGitDiff()
 
