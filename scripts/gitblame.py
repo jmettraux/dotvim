@@ -22,6 +22,8 @@ for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).stdout:
   if len(sha) < 8: sha = sha + ' '
 
   author = m.group(3)[:3]
+  if m.group(3) == 'Not Committed Yet': author = '-.-'
+
   date = m.group(4)
   lnum = m.group(6)
   line = m.group(7) or ''
@@ -30,6 +32,9 @@ for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).stdout:
   date = date[:12]
 
   head = sha + ' ' + author + ' ' + date
+
+  if not(sha in titles) and re.match(r'^0+$', sha):
+    titles[sha] = '(not committed yet)'
 
   if not(sha in titles):
     titles[sha] = os.popen('git show -s --format="%s" ' + sha).read()[:-1]
