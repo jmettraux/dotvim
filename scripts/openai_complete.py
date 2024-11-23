@@ -35,6 +35,10 @@ lines = sys.stdin.read().strip()
 m = re.match(r'^(#+\s+)(.*)', lines)
 if m: lines = m.group(2)
 
+mod = model
+m = re.match(r'([-a-z0-9]+)\s*:\s*(.*)', lines)
+if m: mod, lines = m.group(1), m.group(2)
+
 prompt = { "role": role, "content": lines }
 
 Path(fname_messages).touch()
@@ -67,8 +71,18 @@ with open(key_path, 'r') as file: api_key = file.read().strip()
 
 client = OpenAI(api_key=api_key)
 
+#print([ 0, mod, model ])
+if mod != model:
+  models = client.models.list()
+  #models = sorted(map(lambda x: x.id, models.data))
+  models = map(lambda x: x.id, models.data)
+  mod = next((m for m in models if mod in m), None)
+#print([ 1, mod, model ])
+mod = mod or model
+#print([ 2, mod, model ])
+
 response = client.chat.completions.create(
-  model = model,
+  model = mod,
   messages = messages,
   n = 1,
   max_tokens = max_tokens,

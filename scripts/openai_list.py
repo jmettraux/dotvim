@@ -15,9 +15,7 @@ client = OpenAI(api_key=api_key)
 
 models = client.models.list()
   #
-def id(x):
-  return x.id
-for m in sorted(map(id, models.data)):
+for m in sorted(map(lambda x: x.id, models.data)):
   #print(m, end=' ')
   print(m)
 
