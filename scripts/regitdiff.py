@@ -42,7 +42,7 @@ def exec_to_line(cmd):
     return False
 
 def get_numstat(path):
-  l = exec_to_line('git diff --numstat ' + path)
+  l = exec_to_line('git diff --numstat -- ' + path)
   if not l: return ''
   m = re.match(r'^(\d+)\s+(\d+)', l)
   if m: return '+' + m.group(1) + '-' + m.group(2)
