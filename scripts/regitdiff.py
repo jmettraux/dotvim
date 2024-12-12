@@ -30,11 +30,12 @@
 import re, sys, subprocess
 
 W = str(int(sys.argv[1]) - 1)
+G = subprocess.check_output([ 'git', 'rev-parse', '--show-toplevel' ]).strip()
 
 def exec_to_lines(cmd):
   return map(
     lambda l: l.decode().rstrip(),
-    subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).stdout)
+    subprocess.Popen(cmd, shell=True, cwd=G, stdout=subprocess.PIPE).stdout)
 def exec_to_line(cmd):
   try:
     return list(exec_to_lines(cmd))[0]
