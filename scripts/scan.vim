@@ -2,6 +2,7 @@
 function! JmScanSyn(path)
 
   if a:path =~ "_spec\.rb$" | return 'scanout_ruby_spec' | endif
+  if a:path =~ "_test\.rb$" | return 'scanout_ruby_test' | endif
   if a:path =~ "\.rb$" | return 'scanout_ruby' | endif
   "if a:path =~ "\.py$" | return 'scanout_python' | endif
   if a:path =~ "\.js$" | return 'scanout_javascript' | endif

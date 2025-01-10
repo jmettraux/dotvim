@@ -17,6 +17,12 @@ if re.search(r'_spec\.rb$', fn):
     r'^\s*(describe|context|it)\s*(\s|\().',
     r'^\s*(before|after|around)\s*(\s|\():[a-z]',
       ]
+elif re.search(r'_test\.rb$', fn):
+  rs = [
+    r'^require\s*(\s|\().',
+    r'^\s*(group|test)\s+',
+    r'^\s*(setup|teardown|before|after)\s+',
+      ]
 elif re.search(r'\.rb$', fn):
   rs = [
     r'^require\s*(\s|\().',
