@@ -76,9 +76,15 @@ function! s:ListFiles(...)
     exe 'silent r .errors'
     normal G
   endif
+  if filereadable('.probatio-output.rb') && getfsize('.probatio-output.rb') > 0
+    normal o== .probatio-output.rb
+    exe 'silent r! ' . g:_ruby . ' ~/.vim/scripts/probatio.rb errors'
+    normal G
+  endif
 
   if filereadable('.vimspec') && getfsize('.vimspec') > 0
-    normal o== .vimspec
+    normal o== .test-point / .vimspec
+    exe 'silent r! ' . g:_python . ' ~/.vim/scripts/cat.py .test-point'
     exe 'silent r! ' . g:_python . ' ~/.vim/scripts/cat.py .vimspec'
     normal G
   end

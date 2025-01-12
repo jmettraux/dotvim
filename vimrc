@@ -16,6 +16,8 @@ if isdirectory($HOME . '/.vim_python/bin')
   let g:_python = $HOME . '/.vim_python/bin/python '
 endif
 
+let g:_ruby = glob($HOME . '/.rubies/ruby-3.*', 0, 1)[-1] . '/bin/ruby'
+
 set nocompatible
 
 set modeline
