@@ -20,7 +20,7 @@ if re.search(r'_spec\.rb$', fn):
 elif re.search(r'_test\.rb$', fn):
   rs = [
     r'^require\s*(\s|\().',
-    r'^\s*(group|test)\s+',
+    r'^\s*(group|test|section)\s+',
     r'^\s*(setup|teardown|before|after)\s+',
       ]
 elif re.search(r'\.rb$', fn):

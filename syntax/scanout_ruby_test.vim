@@ -17,7 +17,7 @@ syn match scoTitle '^== .\+'
 " Probatio
 
 syn match scoLine '\v^ *[0-9]+ .*$' contains=scoLineNumber,scoName,scoKeyword,scoString,scoSymbol,scoComment,scoDo
-syn match scoKeyword '\v(group|setup|teardown|before|after|test)' contained
+syn match scoKeyword '\v(group|section|setup|teardown|before|after|test)' contained
 syn region scoString start=+"+ skip=+\\"+ end=+"+ oneline contained
 syn region scoString start=+'+ skip=+\\'+ end=+'+ oneline contained
 syn match scoName '\v[A-Z][a-zA-Z:]*' contained
