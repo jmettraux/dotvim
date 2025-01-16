@@ -82,10 +82,17 @@ function! s:ListFiles(...)
     normal G
   endif
 
-  if filereadable('.vimspec') && getfsize('.vimspec') > 0
+  let vm = filereadable('.vimspec') && getfsize('.vimspec') > 0
+  let tp = filereadable('.test-point') && getfsize('.test-point') > 0
+    "
+  if vm || tp
     normal o== .test-point / .vimspec
-    exe 'silent r! ' . g:_python . ' ~/.vim/scripts/cat.py .test-point'
-    exe 'silent r! ' . g:_python . ' ~/.vim/scripts/cat.py .vimspec'
+    if vm
+      exe 'silent r! ' . g:_python . ' ~/.vim/scripts/cat.py .vimspec'
+    end
+    if tp
+      exe 'silent r! ' . g:_python . ' ~/.vim/scripts/cat.py .test-point'
+    end
     normal G
   end
 
