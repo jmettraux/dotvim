@@ -124,7 +124,7 @@ function! s:OpenCommit(sha)
   nnoremap <buffer> <silent> q :bd<CR>
 endfunction " OpenCommit
 
-command! -nargs=0 Delta :call <SID>OpenCommit(0)
+command! -nargs=0 GitDelta :call <SID>OpenCommit(0)
 nnoremap <silent> <leader>d :call <SID>OpenCommit(0)<CR>
 
 function! s:ExtractSha()
@@ -182,7 +182,7 @@ function! s:OpenGitLog(all)
   nnoremap <buffer> <silent> q :bd<CR>
 endfunction " OpenGitLog
 
-command! -nargs=0 Gil :call <SID>OpenGitLog(0)
+command! -nargs=0 GitLog :call <SID>OpenGitLog(0)
 nnoremap <silent> <leader>l :call <SID>OpenGitLog(0)<CR>
 nnoremap <silent> <leader>L :call <SID>OpenGitLog(1)<CR>
 
@@ -422,8 +422,9 @@ function! s:OpenGitHistory()
   nnoremap <buffer> <silent> q :bd<CR>
 endfunction " OpenGitHistory
 
-command! -nargs=0 Gih :call <SID>OpenGitHistory()
-nnoremap <silent> <leader>Y :call <SID>OpenGitHistory()<CR>
+"command! -nargs=0 Gih :call <SID>OpenGitHistory()
+"nnoremap <silent> <leader>Y :call <SID>OpenGitHistory()<CR>
+command! -nargs=0 GitHistory :call <SID>OpenGitHistory()
 
 nnoremap <silent> <leader>S :call <SID>OpenGitCommits()<CR>
 
@@ -477,14 +478,14 @@ function! s:OpenVersion(path, sha)
 endfunction " OpenVersion
 
 
-command! -nargs=0 Gis :! git status<CR>
-  "
-command! -nargs=0 GitCommitAll :! git commit -a<CR>
-command! -nargs=0 GitPush :! git push<CR>
-  "
-command! -nargs=0 Gic :! git commit<CR>
-command! -nargs=0 Gica :! git commit -a<CR>
-command! -nargs=0 Gipu :! git push<CR>
+"command! -nargs=0 Gis :! git status<CR>
+"  "
+"command! -nargs=0 GitCommitAll :! git commit -a<CR>
+"command! -nargs=0 GitPush :! git push<CR>
+"  "
+"command! -nargs=0 Gic :! git commit<CR>
+"command! -nargs=0 Gica :! git commit -a<CR>
+"command! -nargs=0 Gipu :! git push<CR>
 
 
 function! s:FileGitDiff()
