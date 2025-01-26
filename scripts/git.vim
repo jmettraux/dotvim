@@ -478,14 +478,10 @@ function! s:OpenVersion(path, sha)
 endfunction " OpenVersion
 
 
-"command! -nargs=0 Gis :! git status<CR>
-"  "
-"command! -nargs=0 GitCommitAll :! git commit -a<CR>
-"command! -nargs=0 GitPush :! git push<CR>
-"  "
-"command! -nargs=0 Gic :! git commit<CR>
-"command! -nargs=0 Gica :! git commit -a<CR>
-"command! -nargs=0 Gipu :! git push<CR>
+command! -nargs=0 GitPush :! git push<CR>
+command! -nargs=0 GitStatus :! git status<CR>
+command! -nargs=0 GitCommit :! git commit %:p<CR>
+command! -nargs=0 GitCommitAll :! git commit -a<CR>
 
 
 function! s:FileGitDiff()
