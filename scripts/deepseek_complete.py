@@ -100,7 +100,8 @@ pt = res['usage']['prompt_tokens']
 
 print(f"<!--  {model}  i:{i} l:{l} -- pt:{pt} ct:{ct}  -->")
 print()
-print(cho['content'])
+#print(cho['content'])
+print(re.sub(r'\s+$', '', cho['content'], flags=re.MULTILINE))
 print()
 print("<!-- . -->")
 print()

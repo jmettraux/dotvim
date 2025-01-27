@@ -81,7 +81,7 @@ if mod != model:
 mod = mod or model
 #print([ 2, mod, model ])
 
-response = client.chat.completions.create(
+res = client.chat.completions.create(
   model = mod,
   messages = messages,
   n = 1,
@@ -90,21 +90,22 @@ response = client.chat.completions.create(
   temperature = temperature)
 
 with open(fname_last, 'w') as f:
-  print(response.to_json(), file=f)
+  print(res.to_json(), file=f)
 
 with open(fname_messages, 'a') as f:
   f.write(json.dumps(prompt))
   f.write("\n")
-  f.write(response.choices[0].message.to_json(indent=None))
+  f.write(res.choices[0].message.to_json(indent=None))
   f.write("\n")
 
-ct = response.usage.completion_tokens
-pt = response.usage.prompt_tokens
-#tt = response.usage.total_tokens
+ct = res.usage.completion_tokens
+pt = res.usage.prompt_tokens
+#tt = res.usage.total_tokens
 
-print(f"<!--  {response.model}  i:{i} l:{l} -- pt:{pt} ct:{ct}  -->")
+print(f"<!--  {res.model}  i:{i} l:{l} -- pt:{pt} ct:{ct}  -->")
 print()
-print(response.choices[0].message.content)
+#print(res.choices[0].message.content)
+print(re.sub(r'\s+$', '', res.choices[0].message.content, flags=re.MULTILINE))
 print()
 print("<!-- . -->")
 print()
