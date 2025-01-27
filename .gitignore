@@ -11,7 +11,9 @@
 .vimfuzz2
 
 .chat.md
+.deep.md
 .openai.*
+.deepseek.*
 
 scripts/__pycache__
 
