@@ -4,7 +4,8 @@
 
 function! s:DeepseekChatComplete(prompt)
 
-  let @z = system(g:_python . " ~/.vim/scripts/deepseek_complete.py 2>/dev/null", a:prompt)
+  "let @z = system(g:_python . " ~/.vim/scripts/deepseek_complete.py 2>/dev/null", a:prompt)
+  let @z = system(g:_python . " ~/.vim/scripts/deepseek_complete.py 2>.deepseek.stderr.txt", a:prompt)
   silent $put z
   normal <c-g>
 endfunction " DeepseekChatComplete

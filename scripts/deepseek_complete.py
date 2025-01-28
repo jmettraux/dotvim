@@ -22,13 +22,15 @@ role = 'user'
 url = 'https://api.deepseek.com/chat/completions'
 agent = 'vim-deepseek-jmettraux'
 
-fname_last = '.deepseek.last.py'
-fname_messages = '.deepseek.messages.py'
+fname_last = '.deepseek.last.json'
+fname_messages = '.deepseek.messages.json'
 model = 'deepseek-chat'
-#temperature = 0.7
+#model = 'deepseek-reasoner'
+#temperature = 1
+temperature = 0.7
 
-whole_tokens = 4096
-max_tokens = 1400
+whole_tokens = 8192
+max_tokens = 4096
 rem_tokens = whole_tokens - max_tokens
 
 lines = sys.stdin.read().strip()
@@ -47,7 +49,9 @@ all_messages = []
   #
 with open(fname_messages) as f:
   while line := f.readline():
-    all_messages.append(json.loads(line.strip()))
+    line = line.strip()
+    if line == '': break
+    all_messages.append(json.loads(line))
   #
 all_messages.append(prompt)
 
@@ -61,6 +65,7 @@ while 1:
   if i >= l: break
 
 messages = all_messages[-i:]
+#messages.insert(0, { "role": "user", "content": "ok" })
 l = count_tokens(json.dumps(messages))
 
 #
@@ -72,6 +77,8 @@ with open(key_path, 'r') as file: api_key = file.read().strip()
 data = {
   "model": model,
   "messages": messages,
+  "temperature": temperature,
+  "max_tokens": max_tokens,
   "stream": False }
 
 headers = {
@@ -80,29 +87,43 @@ headers = {
   'Authorization': 'Bearer ' + api_key }
 
 response = requests.post(url, data=json.dumps(data), headers=headers)
-#print(response.status_code)
-#print(response.text)
-res = response.json()
-cho = res['choices'][0]['message']
+suc = response.status_code == 200
+res = response.json() if suc else None
+cho = res['choices'][0]['message'] if suc else None
 
 with open(fname_last, 'w') as f:
+  headers['Authorization'] = 'Bearer {deepseek-api-key}'
+  print('{ headers:', file=f)
+  print(json.dumps(headers, indent=2), file=f)
+  print(', postdata:', file=f)
+  print(json.dumps(data, indent=2), file=f)
+  print(', response:', file=f)
   print(json.dumps(res, indent=2), file=f)
+  print('}', file=f)
 
-with open(fname_messages, 'a') as f:
-  f.write(json.dumps(prompt, indent=None))
-  f.write("\n")
-  f.write(json.dumps(cho, indent=None))
-  f.write("\n")
+if suc:
+  with open(fname_messages, 'a') as f:
+    f.write(json.dumps(prompt, indent=None))
+    f.write("\n")
+    f.write(json.dumps(cho, indent=None))
+    f.write("\n")
 
-ct = res['usage']['completion_tokens']
-pt = res['usage']['prompt_tokens']
+ct = res['usage']['completion_tokens'] if suc else -1
+pt = res['usage']['prompt_tokens'] if suc else -1
 #tt = res['usage']['total_tokens']
 
 print(f"<!--  {model}  i:{i} l:{l} -- pt:{pt} ct:{ct}  -->")
 print()
-#print(cho['content'])
-print(re.sub(r'\s+$', '', cho['content'], flags=re.MULTILINE))
+if suc:
+  print(re.sub(r'\s+$', '', cho['content'], flags=re.MULTILINE))
+else:
+  print('```')
+  print(f'HTTP status code: {response.status_code}')
+  print()
+  print(response.text)
+  print('```')
 print()
-print("<!-- . -->")
+print('<!-- . -->')
+#print(f"<!-- {url} -->")
 print()
 
