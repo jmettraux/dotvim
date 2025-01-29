@@ -178,7 +178,8 @@ function! s:ListFiles(...)
   nmap <buffer> s /
 
   nmap <buffer> bb :call search('^== buffers', '')<CR>:echo<CR>j
-  nmap <buffer> rr :call search('^== \.errors', '')<CR>:echo<CR>jll
+  nmap <buffer> ee :call search('^== \.errors', '')<CR>:echo<CR>j
+  nmap <buffer> rr :call search('^== \.probatio-output', '')<CR>:echo<CR>j
   nmap <buffer> ii :call search('^== git status', '')<CR>:echo<CR>j
   nmap <buffer> tt :call search('^== git status', '')<CR>:echo<CR>j
   nmap <buffer> vv :call search('^== \.vimgrep', '')<CR>:echo<CR>j
