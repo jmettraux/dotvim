@@ -156,12 +156,14 @@ function! s:OpenGitLog(all)
   setlocal noswapfile
   "setlocal nobuflisted
 
+  let w = &columns
+
   exe 'normal o== git log at ' . getcwd() . ''
 
   if a:all
-    exe 'silent r! git log --graph --branches --pretty=format:"\%h \%an |\%ad \%d \%s" --date=iso-strict | ' . g:_python . ' ~/.vim/scripts/regitlog.py'
+    exe 'silent r! git log --graph --branches --pretty=format:"\%h \%an |\%ad \%d \%s" --date=iso-strict | ' . g:_python . ' ~/.vim/scripts/regitlog.py ' . w
   else
-    exe 'silent r! git log --graph --pretty=format:"\%h \%an |\%ad \%d \%s" --date=iso-strict | ' . g:_python . ' ~/.vim/scripts/regitlog.py'
+    exe 'silent r! git log --graph --pretty=format:"\%h \%an |\%ad \%d \%s" --date=iso-strict | ' . g:_python . ' ~/.vim/scripts/regitlog.py ' . w
   endif
 
   setlocal syntax=gitlog
@@ -401,7 +403,9 @@ function! s:OpenGitHistory()
 
   exe 'normal o== version history for ' . path . ''
 
-  exe 'silent r! git log --graph --pretty=format:"\%h \%an |\%ad \%d \%s" --date=iso-strict ' . path . ' | ' . g:_python . ' ~/.vim/scripts/regitlog.py'
+  let w = &columns
+
+  exe 'silent r! git log --graph --pretty=format:"\%h \%an |\%ad \%d \%s" --date=iso-strict ' . path . ' | ' . g:_python . ' ~/.vim/scripts/regitlog.py ' . w
 
   setlocal syntax=gitlog
   "setlocal filetype=gitlog
