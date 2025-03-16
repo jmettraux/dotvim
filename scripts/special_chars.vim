@@ -1,20 +1,20 @@
 
 " scripts/special_chars.vim
 
-command! ScEmdash :normal i—<ESC>
-command! ScGreaterThanOrEqual :normal i≥<ESC>
-command! ScLesserThanOrEqual :normal i≤<ESC>
-command! ScFleuron :normal i❦<ESC>
-command! ScRightArrow :normal i→<ESC>
-command! ScLeftArrow :normal i←<ESC>
-command! ScLongRightArrow :normal i⟶<ESC>
-command! ScLongLeftArrow :normal i⟵<ESC>
-command! ScSmallCross :normal i×<ESC>
-command! ScLargeCross :normal i⨉<ESC>
-command! ScCenterDot :normal i·<ESC>
-command! ScPlusOrMinus :normal i±<ESC>
-command! ScArrowDown :normal i↓<ESC>
-command! ScArrowUp :normal i↑<ESC>
-command! ScEllipsis :normal i…<ESC>
+command! ScEmdash :normal a—<ESC>
+command! ScGreaterThanOrEqual :normal a≥<ESC>
+command! ScLesserThanOrEqual :normal a≤<ESC>
+command! ScFleuron :normal a❦<ESC>
+command! ScRightArrow :normal a→<ESC>
+command! ScLeftArrow :normal a←<ESC>
+command! ScLongRightArrow :normal a⟶<ESC>
+command! ScLongLeftArrow :normal a⟵<ESC>
+command! ScSmallCross :normal a×<ESC>
+command! ScLargeCross :normal a⨉<ESC>
+command! ScCenterDot :normal a·<ESC>
+command! ScPlusOrMinus :normal a±<ESC>
+command! ScArrowDown :normal a↓<ESC>
+command! ScArrowUp :normal a↑<ESC>
+command! ScEllipsis :normal a…<ESC>
 
 
