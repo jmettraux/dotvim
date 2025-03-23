@@ -61,7 +61,8 @@ function! s:ToggleAccent()
   elseif c == 'ü' | exe 'normal! ru' |
   elseif c == 'i' | exe 'normal! rî' |
   elseif c == 'î' | exe 'normal! rì' |
-  elseif c == 'ì' | exe 'normal! ri' |
+  elseif c == 'ì' | exe 'normal! rï' |
+  elseif c == 'ï' | exe 'normal! ri' |
   elseif c == 'c' | exe 'normal! rç' |
   elseif c == 'ç' | exe 'normal! rc' |
   endif
