@@ -277,3 +277,11 @@ runtime ftplugin/man.vim
   "
   " use :only to make the help window fullscreen...
 
+
+"
+" French and Russian
+
+command! -nargs=0 Kru :set keymap=russian-yawerty-jp
+command! -nargs=0 Kno :set keymap=
+command! -nargs=0 Sof :source ~/.vim/fraccents.vim
+
