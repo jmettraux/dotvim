@@ -277,6 +277,12 @@ runtime ftplugin/man.vim
   "
   " use :only to make the help window fullscreen...
 
+"
+" Trees
+
+"command! -nargs=0 Tlib :Vt lib/
+"command! -nargs=0 Tsrc :Vt src/
+"command! -nargs=0 Tpos :Vt posts/
 
 "
 " French and Russian
