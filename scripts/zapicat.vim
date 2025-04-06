@@ -146,5 +146,6 @@ function! s:ZapicatIndex()
   exe '! ls -lh .zapicat*'
 endfunction " ZapicatIndex
 
-command! -nargs=0 Zindex :call <SID>ZapicatIndex()
+command! -nargs=0 ZapIndex :call <SID>ZapicatIndex()
+"command! -nargs=0 Zindex :call <SID>ZapicatIndex()
 
