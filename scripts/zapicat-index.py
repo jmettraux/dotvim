@@ -24,9 +24,9 @@ def mgd(m, i):
 
 JS_COM_REX = re.compile(r'^\s*\/\/')
 JS_MOD_REX = re.compile(r'\b(class)\s+([a-zA-Z0-9_]+)')
-JS_MOJ_REX = re.compile(r'\b\s*var\s+([a-zA-Z0-9_]+)\s*=\s*\(function\(\)\s*\{')
+JS_MOJ_REX = re.compile(r'\b\s*(let|var)\s+([a-zA-Z0-9_]+)\s*=\s*\(function\(\)\s*\{')
 JS_DEF_REX = re.compile(r'\bthis\.([a-zA-Z0-9_]+)\s*=[^=]')
-JS_D3F_REX = re.compile(r'\bvar\s+([a-zA-Z0-9_]+)\s*=\s*function\(')
+JS_D3F_REX = re.compile(r'\b(let|var)\s+([a-zA-Z0-9_]+)\s*=\s*function\(')
 JS_DCF_REX = re.compile(r'\b([#a-zA-Z0-9_]+)\s*\([^)]+\)\s*\{')
 JS_DCF_NOT = [ 'if', 'function', 'forEach', 'for', 'while', 'switch' ]
   #
@@ -41,7 +41,7 @@ def index_js_line(idx, path, line, l):
   m = re.search(JS_MOJ_REX, line)
   if m:
     idx['entries'].append({
-      'l': 'js', 'p': p,  't': 'mod', 'k': mgd(m, 1), 'tt': 'j', 'L': l })
+      'l': 'js', 'p': p,  't': 'mod', 'k': mgd(m, 2), 'tt': 'j', 'L': l })
   m = re.search(JS_DEF_REX, line)
   if m:
     idx['entries'].append({
@@ -49,7 +49,7 @@ def index_js_line(idx, path, line, l):
   m = re.search(JS_D3F_REX, line)
   if m:
     idx['entries'].append({
-      'l': 'js', 'p': p,  't': 'def', 'k': mgd(m, 1), 'tt': 'p', 'L': l })
+      'l': 'js', 'p': p,  't': 'def', 'k': mgd(m, 2), 'tt': 'p', 'L': l })
   m = re.search(JS_DCF_REX, line)
   if m and (m.group(1) not in JS_DCF_NOT):
     idx['entries'].append({
