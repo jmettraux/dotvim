@@ -72,8 +72,10 @@ filetype on
 "
 "nnoremap q :%s/    /  /g<ENTER>
 "nnoremap t :%s/ *$//<ENTER>
-command! -nargs=0 Clean :silent %s/\v\s*$// | nohlsearch
 "command! -nargs=0 Mkd :silent :set filetype=mkd
+
+command! -nargs=0 Clean :silent %s/\v\s*$// | nohlsearch
+command! -nargs=0 Unblank :g/^$/d
 
 " colors
 "
