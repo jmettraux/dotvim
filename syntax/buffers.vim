@@ -33,9 +33,11 @@ hi! bufGitA cterm=bold ctermfg=green ctermbg=16
 hi! bufGitD cterm=bold ctermfg=red ctermbg=16
 hi! bufGitR cterm=bold ctermfg=darkgreen ctermbg=16
 
+hi def link bufComment Comment
+
 syn match bufShort '\v^[^ =].+$' contains=bufFileName
 
-syn match bufRecentLine '\v *.+$' contains=bufRecentName,bufRecentSize,bufRecentLines,bufRecentAge,bufRecentGit
+syn match bufRecentLine '\v *.+$' contains=bufRecentName,bufRecentSize,bufRecentLines,bufRecentAge,bufRecentGit,bufComment
 syn match bufFileAndLine '\v^[^ ][^ :]+:[0-9]+$' contains=bufFileName,bufLineNumber
 
 syn match bufEqualEqual '\v^\=\= .+' contains=bufEqualCount
@@ -49,11 +51,14 @@ syn match bufGrepDir '\v [^ ]+\/$' contained
 syn match bufGrepSlash '\/' contained
 
 syn match bufRecentName '\v^ *.+( [0-9]+(\.[0-9]+)?[PTMKB])@=' contained keepend contains=bufFileName
-syn match bufRecentName '\v^ *[^ ]+$' contained keepend contains=bufFileName
+"syn match bufRecentName '\v^ *[^ ]+$' contained keepend contains=bufFileName
+syn match bufRecentName '\v^ *[^ ]+' contained keepend contains=bufFileName
 syn match bufRecentSize '\v [0-9]+(\.[0-9]+)?[PTMKB]' contained
 syn match bufRecentLines '\v [0-9]+L' contained
 syn match bufRecentAge '\v ([0-9]+[dhms])+' contained
 syn match bufRecentGit '\v\+[0-9]+\-[0-9]+' contained
+
+syn match bufComment '\v#.*$' contained
 
 syn match bufFileName '\v^[^:|]+' contained contains=bufSlash,bufDot,bufDir,bufExt
 syn match bufLineNumber '\v:[0-9]+' contained
