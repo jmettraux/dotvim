@@ -85,8 +85,10 @@ for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=FNU
 cf = open(os.path.join(os.path.dirname(__file__), 'countable.txt'), 'r')
 exts = cf.read().split()
 cf.close()
-#print exts
-tpaths = filter(lambda x: os.path.splitext(x)[1][1:] in exts, paths)
+#print(exts)
+tpaths = filter(
+  lambda x: os.path.splitext(x)[1][1:] in exts or os.path.split(x)[-1] in exts,
+  paths)
 cmd = 'wc -l ' + ' '.join(map(shellquote, tpaths))
 
 for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=FNULL).stdout:
