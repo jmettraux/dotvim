@@ -18,7 +18,9 @@ I don't use gvim or macvim.
 $ mdkir ~/.vim_python
 $ python -m venv ~/.vim_python
 $ cd ~/.vim_python
+
 $ bin/pip install openai
+$ bin/pip install requests
 ```
 
 
