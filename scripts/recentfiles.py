@@ -10,12 +10,12 @@ FNULL = open(os.devnull, 'w')
 
 rejects = [
   'COMMIT_EDITMSG', 'NetrwTreeListing', 'bash-fc-', '==[A-Z]',
-  '\/private\/var\/', '\/mutt-' ]
+  r'\/private\/var\/', r'\/mutt-' ]
 
 
 def expand_path(path):
   p = os.path.relpath(os.path.expanduser(path))
-  if re.match('\.\.\/\.\.\/', p):
+  if re.match(r'\.\.\/\.\.\/', p):
     p = os.path.abspath(p)
   return p
 
@@ -28,7 +28,7 @@ def escape_path(path):
 paths = []
   #
 for line in sys.stdin:
-  m = re.match('\d+: ([^\n]+)', line)
+  m = re.match(r'\d+: ([^\n]+)', line)
   if not m:
     continue
   if next((r for r in rejects if re.search(r, line)), None):
@@ -42,13 +42,13 @@ for line in sys.stdin:
 tree = { '/': [], '..': [], '.': {} }
   #
 for path in paths:
-  if re.match('\/', path):
+  if re.match(r'\/', path):
     tree['/'].append(path)
-  elif re.match('\.\.\/', path):
+  elif re.match(r'\.\.\/', path):
     tree['..'].append(path)
   else:
     current = tree['.']
-    for p in re.split('\/', path):
+    for p in re.split(r'\/', path):
       if not (p in current):
         current[p] = {}
       current = current[p]
@@ -94,7 +94,7 @@ cmd = 'wc -l ' + ' '.join(map(shellquote, tpaths))
 for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=FNULL).stdout:
   line = line.decode()
   if re.match('o such file', line): continue
-  m = re.match('^\s+(\d+) (.+)$', line)
+  m = re.match(r'^\s+(\d+) (.+)$', line)
   if m == None: continue
   if m.group(2) == 'total': continue
   fs[os.path.abspath(m.group(2))]['l'] = m.group(1) + 'L'
