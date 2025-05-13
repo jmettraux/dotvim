@@ -139,8 +139,8 @@ def walk(path, i, prefix):
     h['t'] = _common.compute_mtime_age(h['p'])
     pre = prefix
     if fn == fns[-1]:
-      pre = re.sub('\|-- $', '`-- ', prefix)
-      prefix = re.sub('\|-- $', '    ', prefix)
+      pre = re.sub(r'\|-- $', '`-- ', prefix)
+      prefix = re.sub(r'\|-- $', '    ', prefix)
     h['l'] = pre + fn + ('/' if h['d'] else '')
 
     fs.append(h)
