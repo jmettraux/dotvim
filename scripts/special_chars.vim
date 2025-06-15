@@ -2,6 +2,7 @@
 " scripts/special_chars.vim
 
 command! ScEmdash :normal a—<ESC>
+command! ScEndash :normal a–<ESC>
 command! ScGreaterThanOrEqual :normal a≥<ESC>
 command! ScLesserThanOrEqual :normal a≤<ESC>
 command! ScFleuron :normal a❦<ESC>
