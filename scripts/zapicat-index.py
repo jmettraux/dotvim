@@ -116,11 +116,11 @@ def index_scss(idx, path):
   None
 
 indexers = [
-  { 'rex': '\.rb$', 'fun': index_rb },
-  { 'rex': '\.js$', 'fun': index_js },
-  { 'rex': '\.flo$', 'fun': index_flo },
-  { 'rex': '\.css$', 'fun': index_scss },
-  { 'rex': '\.scss$', 'fun': index_scss },
+  { 'rex': r'\.rb$', 'fun': index_rb },
+  { 'rex': r'\.js$', 'fun': index_js },
+  { 'rex': r'\.flo$', 'fun': index_flo },
+  { 'rex': r'\.css$', 'fun': index_scss },
+  { 'rex': r'\.scss$', 'fun': index_scss },
     ]
 
 def post_index(idx, path, index):
