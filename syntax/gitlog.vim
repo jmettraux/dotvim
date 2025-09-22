@@ -23,8 +23,8 @@ syn match gilNav /\v^[*|\\/ ]+/ contained
 syn match gilSha /\v^[*|\\/ ]+[a-fA-F0-9]+/ contains=gilNav
 syn match gilAuthor /\v^[*|\\/ ]+[a-fA-F0-9]+ [^ ]+/ contains=gilSha
 syn match gilDate /\v^[*|\\/ ]+[a-fA-F0-9]+ [^ ]+ [0-9]{8} [0-9]{4}/ contains=gilAuthor,gilYear,gilMonth,gilHour contained
-syn match gilTags /\v^[*|\\/ ]+[a-fA-F0-9]+ [^ ]+ [0-9]{8} [0-9]{4} (\([^)]+\) )?/ contains=gilDate
-syn match gilLine /\v^[*|\\/ ]+[a-fA-F0-9]+ [^ ]+ [0-9]{8} [0-9]{4} (\([^)]+\) )? .+/ contains=gilTags
+syn match gilTags /\v^[*|\\/ ]+[a-fA-F0-9]+ [^ ]+ [0-9]{8} [0-9]{4} (\([^)]+\))?/ contains=gilDate
+syn match gilLine /\v^[*|\\/ ]+[a-fA-F0-9]+ [^ ]+ [0-9]{8} [0-9]{4} (\([^)]+\))? .+/ contains=gilTags
 syn match gilHour /\v [0-9]{4}( )@=/ contained
 syn match gilMonth /\v( [0-9]{4})@<=[0-9]{2}([0-9]{2} )@=/ contained
 syn match gilYear /\v 20[0-9]{2}([0-9]{4} )@=/ contained
