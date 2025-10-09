@@ -6,6 +6,8 @@
 "
 if g:isWindows
 
+  " TODO bring back
+
   " cygwin
   nnoremap <silent> <C-p> <ESC>:r ! getclip<CR>
   nnoremap <silent> <leader>v <ESC>:r ! getclip<CR>
@@ -17,6 +19,8 @@ else
   if g:isUnix
 
     if g:isDarwin
+
+      " TODO bring back
 
       nnoremap <silent> <C-p> <ESC>:r ! pbpaste<CR>
       nnoremap <silent> <leader>v <ESC>:r ! pbpaste<CR>
@@ -31,21 +35,20 @@ else
       " Ctrl-p
       " ;v      pastes into the current buffer
       "
-      " :C      copies the whole file
-      " ;c      copies the current visual selection
-      " :Cl     copies the current line
-      " :Cr     copies the unamed register "
-      " yc      copies the current line
+      " :CopyFile      copies the whole file
+      " ;c             copies the current visual selection
+      " :CopyLine      copies the current line
+      " :CopyRegister  copies the unamed register "
+      " yc             copies the current line
 
       nnoremap <silent> <C-p> <ESC>:r ! xclip -o -selection c<CR>
       nnoremap <silent> <leader>v <ESC>:r ! xclip -o -selection c<CR>
 
-      command! -nargs=0 C :silent w ! xclip -i -selection c
+      command! -nargs=0 CopyFile :silent w ! xclip -i -selection c
+      command! -nargs=0 CopyLine :silent .w ! xclip -i -selection c
+      command! -nargs=0 CopyRegister :call system('xclip -i -selection c', getreg('"'))
+
       vmap <silent> <leader>c <ESC>:'<,'>:w ! xclip -i -selection c<CR><CR>
-
-      command! -nargs=0 Cl :silent .w ! xclip -i -selection c
-
-      command! -nargs=0 Cr :call system('xclip -i -selection c', getreg('"'))
 
       nnoremap <silent> yc <ESC>yy :call system('xclip -i -selection c', getreg('"'))<CR>:echo "copied line to clipboard."<CR>
     endif
