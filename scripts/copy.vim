@@ -48,6 +48,7 @@ else
       command! -nargs=0 CopyLine :silent .w ! xclip -i -selection c
       command! -nargs=0 CopyRegister :call system('xclip -i -selection c', getreg('"'))
 
+      nnoremap <silent> <leader>c <ESC>:w ! xclip -i -selection c<CR><CR>
       vmap <silent> <leader>c <ESC>:'<,'>:w ! xclip -i -selection c<CR><CR>
 
       nnoremap <silent> yc <ESC>yy :call system('xclip -i -selection c', getreg('"'))<CR>:echo "copied line to clipboard."<CR>
