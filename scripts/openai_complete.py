@@ -23,7 +23,7 @@ role = 'user'
 fname_last = '.openai.last.py'
 fname_messages = '.openai.messages.py'
 #model = 'gpt-3.5-turbo'
-model = 'gpt-4'
+model = 'gpt-5'
 #model = 'gpt-4o'
 temperature = 0.7
 
@@ -85,9 +85,10 @@ res = client.chat.completions.create(
   model = mod,
   messages = messages,
   n = 1,
-  max_tokens = max_tokens,
-  stop = None,
-  temperature = temperature)
+  max_completion_tokens = max_tokens,
+  stop = None)
+  #max_tokens = max_tokens,
+  #temperature = temperature)
 
 with open(fname_last, 'w') as f:
   print(res.to_json(), file=f)
