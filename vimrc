@@ -291,5 +291,6 @@ runtime ftplugin/man.vim
 
 command! -nargs=0 Kru :set keymap=russian-yawerty-jp
 command! -nargs=0 Kno :set keymap=
-command! -nargs=0 Sof :source ~/.vim/fraccents.vim
+"command! -nargs=0 Sof :source ~/.vim/fraccents.vim
+command! -nargs=0 French :source ~/.vim/fraccents.vim
 
