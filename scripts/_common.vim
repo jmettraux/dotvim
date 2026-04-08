@@ -124,7 +124,7 @@ function! JmOpenTreeFile(...)
   if empty(m) == 1
     let pl = JmDetermineTreePathAndLine()
     let ex = tolower(fnamemodify(pl[0], ':e'))
-    if index([ 'jpg', 'jpeg', 'gif', 'png', 'webp', 'bmp' ], ex) > -1
+    if index([ 'jpg', 'jpeg', 'gif', 'png', 'webp', 'bmp', 'heic' ], ex) > -1
       if mode == 'edit'
         call system('gimp ' . pl[0])
       else
