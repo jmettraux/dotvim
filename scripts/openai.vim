@@ -6,7 +6,8 @@
 
 function! s:OpenAiChatComplete(prompt)
 
-  let @z = system(g:_python . " ~/.vim/scripts/openai_complete.py", a:prompt)
+  "let @z = system(g:_python . " ~/.vim/scripts/openai_complete.py", a:prompt)
+  let @z = system(g:_python . " ~/.vim/scripts/openai_complete.py 2>.openai.stderr.txt", a:prompt)
   silent $put z
   normal <c-g>
 endfunction " OpenAiChatComplete
