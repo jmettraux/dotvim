@@ -39,9 +39,16 @@ lines = sys.stdin.read().strip()
 m = re.match(r'^(#+\s+)(.*)', lines)
 if m: lines = m.group(2)
 
-mod = model
+mod = ""
 m = re.match(r'([-a-z0-9]+)\s*:\s*(.*)', lines)
-if m: mod, lines = m.group(1), m.group(2)
+if m: mod, lines = m.group(1).lower(), m.group(2)
+
+if "reasoner" in mod:
+  model = "deepseek-reasoner"
+elif "coder" in mod:
+  model = "deepseek-coder"
+    #
+    # well, it's always deepseek-v4-flash answering...
 
 prompt = { "role": role, "content": lines }
 
