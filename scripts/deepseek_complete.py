@@ -24,8 +24,10 @@ agent = 'vim-deepseek-jmettraux'
 
 fname_last = '.deepseek.last.json'
 fname_messages = '.deepseek.messages.json'
+#model = 'deepseek-v4-flash'
 model = 'deepseek-chat'
 #model = 'deepseek-reasoner'
+#model = 'deepseek-coder'
 #temperature = 1
 temperature = 0.7
 
@@ -108,11 +110,12 @@ if suc:
     f.write(json.dumps(cho, indent=None))
     f.write("\n")
 
+md = res['model']
 ct = res['usage']['completion_tokens'] if suc else -1
 pt = res['usage']['prompt_tokens'] if suc else -1
 #tt = res['usage']['total_tokens']
 
-print(f"<!--  {model}  i:{i} l:{l} -- pt:{pt} ct:{ct}  -->")
+print(f"<!--  {model} .:. {md}  i:{i} l:{l} -- pt:{pt} ct:{ct}  -->")
 print()
 if suc:
   print(re.sub(r'\s+$', '', cho['content'], flags=re.MULTILINE))
