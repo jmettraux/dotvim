@@ -22,8 +22,8 @@ role = 'user'
 url = 'https://api.anthropic.com/v1/messages'
 #agent = 'vim-claude-jmettraux'
 
-fname_last = '.claude.last.json'
-fname_messages = '.claude.messages.json'
+fname_last = '.klaude.last.json'
+fname_messages = '.klaude.messages.json'
 
 aversion = '2023-06-01'
 model = 'claude-sonnet-4-6'

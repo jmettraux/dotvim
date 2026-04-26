@@ -15,6 +15,7 @@
 .openai.*
 .deepseek.*
 .claude.*
+.klaude.*
 
 scripts/__pycache__
 
