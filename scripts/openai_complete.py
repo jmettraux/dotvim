@@ -103,7 +103,7 @@ ct = res.usage.completion_tokens
 pt = res.usage.prompt_tokens
 #tt = res.usage.total_tokens
 
-print(f"<!--  {res.model}  i:{i} l:{l} -- pt:{pt} ct:{ct}  -->")
+print(f"  <!--  {res.model}  i:{i} l:{l} -- pt:{pt} ct:{ct}  -->")
 print()
 #print(res.choices[0].message.content)
 print(re.sub(r'\s+$', '', res.choices[0].message.content, flags=re.MULTILINE))

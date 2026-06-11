@@ -116,7 +116,7 @@ it = res['usage']['input_tokens'] if suc else -1
 ot = res['usage']['output_tokens'] if suc else -1
 #tt = res['usage']['total_tokens']
 
-print(f"<!--  {model}  i:{i} l:{l} -- it:{it} ot:{ot}  -->")
+print(f"  <!--  {model}  i:{i} l:{l} -- it:{it} ot:{ot}  -->")
 print()
 if suc:
   print(re.sub(r'\s+$', '', con[0]['text'], flags=re.MULTILINE))

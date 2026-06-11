@@ -122,7 +122,7 @@ ct = res['usage']['completion_tokens'] if suc else -1
 pt = res['usage']['prompt_tokens'] if suc else -1
 #tt = res['usage']['total_tokens']
 
-print(f"<!--  {model} .:. {md}  i:{i} l:{l} -- pt:{pt} ct:{ct}  -->")
+print(f"  <!--  {model} .:. {md}  i:{i} l:{l} -- pt:{pt} ct:{ct}  -->")
 print()
 if suc:
   print(re.sub(r'\s+$', '', cho['content'], flags=re.MULTILINE))
