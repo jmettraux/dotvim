@@ -14,7 +14,7 @@ endfunction " ClaudeChatComplete
 function! s:ClaudeChatPushLine()
 
   if getline('.') !~ '\v^#+\s+'
-    exe 'normal I### 0'
+    exe 'normal I### 0'
   endif
   let l = getline('.')
   exe 'normal o'

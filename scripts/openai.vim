@@ -16,7 +16,7 @@ endfunction " OpenAiChatComplete
 function! s:OpenAiChatPushLine()
 
   if getline('.') !~ '\v^#+\s+'
-    exe 'normal I### 0'
+    exe 'normal I### 0'
   endif
   let l = getline('.')
   exe 'normal o'
