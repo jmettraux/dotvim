@@ -20,6 +20,7 @@ def count_tokens(s):
 role = 'user'
 
 url = 'http://192.168.1.222:8022/chat/completions'
+#url = 'http://192.168.1.222:3001/api/v1/openai/chat/completions'
 agent = 'vim-local-jmettraux'
 
 fname_last = '.local.last.json'
@@ -119,7 +120,7 @@ if suc:
     f.write(json.dumps(cho, indent=None))
     f.write("\n")
 
-md = res['model']
+md = res['model'] if suc else '(no model)'
 ct = res['usage']['completion_tokens'] if suc else -1
 pt = res['usage']['prompt_tokens'] if suc else -1
 #tt = res['usage']['total_tokens']
