@@ -16,6 +16,7 @@
 .deepseek.*
 .claude.*
 .klaude.*
+.local.*
 
 scripts/__pycache__
 
