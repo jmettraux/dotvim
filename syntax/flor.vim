@@ -14,7 +14,6 @@ if exists("b:current_syntax")
   finish
 endif
 
-
 syn match florSpecial ";"
 syn match florSpecial "|"
 syn match florSpecial "\\"
@@ -27,11 +26,12 @@ syn match florHead /;\@<=[ ]*[^ ;#\[\]{}()]\+/
 syn match florKey /\v\zs[^' ]+\ze[ ]*:/
 syn keyword florKey if unless null
 syn keyword florKex null
+syn keyword florTodo contained FIXME TODO XXX
 
 syn region florString start=+"+  skip=+\\"+  end=+"+
 syn region florString start=+'+  skip=+\\'+  end=+'+
 syn region florString start=+/+  skip=+\\/+  end=+/+
-syn region florComment start="#" end="\n"
+syn region florComment start="#" end="\n" contains=florTodo
 
 hi def link florHead Keyword
 hi def link florString String
@@ -39,6 +39,7 @@ hi def link florComment Comment
 hi def link florSpecial Special
 hi def link florKey Keyword
 hi def link florKex Special
+hi def link florTodo Todo
 "hi def link florOn Keyword
 
 let b:current_syntax = "flor"
