@@ -47,6 +47,7 @@ elif re.search(r'\.js$', fn):
     r'^\s*#[a-z_][a-z_A-Z0-9]+',
     r'^\s*(static\s+)?[a-z_][a-z_A-Z0-9]+\([^(){]*\)\s*{\s*$',
     r'^\s*(static\s+)?(get|set)\s+[a-z_][a-z_A-Z0-9]+',
+    r'^\s*Handlebars.registerHelper\(',
       ]
   c_rex = r'^\s*//'
 elif re.search(r'\.md$', fn):
