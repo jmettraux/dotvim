@@ -28,3 +28,8 @@ syn match aroOutcome '\v(%U27f6)@<=[^\U27f6]+$' contains=aroEndComment
 
 let b:current_syntax = "arrowy"
 
+
+"syn region aroCode start="^[^\s]" end="\%u27f6"me=e-1
+"syn region aroContext start="\%u27f6"ms=e+1 end="\%u27f6"me=e-1
+"syn region aroOutcome start="\%u27f6"ms=e+1 end="$" contains=aroEndComment
+
