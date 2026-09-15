@@ -6,7 +6,7 @@ import os, sys, re
 import requests, json
 from pathlib import Path
 
-key_path = os.path.expanduser('~') + '/.vim/.claude.key.txt'
+key_path = os.path.expanduser('~') + '/.vim/.klaude.key.txt'
 
 
 # primitive but...
