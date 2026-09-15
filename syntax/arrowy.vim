@@ -19,12 +19,12 @@ hi! aroArrow cterm=NONE ctermfg=blue ctermbg=16
 hi! aroOutcome cterm=NONE ctermfg=darkgreen ctermbg=16
 hi! aroContext cterm=NONE ctermfg=darkgrey ctermbg=16
 
-syn match aroComment '\v^ *#[^\n]*\n'
-syn match aroCode '\v^[^\U27f6#]+(%U27f6)@='
+syn match aroCode '\v^[^\U27f6#{]+[^\U27f6#]+(%U27f6)@='
+syn match aroContext '\v\s+\{[^\U27f6#]+\}\s+(%U27f6)@='
 syn match aroArrow '\v%U27f6'
-syn match aroContext '\v(%U27f6)@<=[^\U27f6]+(%U27f6)@='
 syn match aroEndComment '\v#[^\n]*\n' contained
-syn match aroOutcome '\v(%U27f6)@<=[^\U27f6]+$' contains=aroEndComment
+syn match aroOutcome '\v[^\U27f6]+$' contains=aroEndComment
+syn match aroComment '\v^ *#[^\n]*\n'
 
 let b:current_syntax = "arrowy"
 
