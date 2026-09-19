@@ -61,8 +61,10 @@ function! JmFuzzer(...)
     call writefile([ a:1 ], '.vimfuzz2', 'a')
   endif
 
-  "let fn = '_F___' . JmNtr(a:start)
   let fn = '_F___'
+  if a:0 > 0
+    let fn = '_F___' . JmNtr(a:1)
+  endif
 
   "let bn = bufnr(fn)
   let bn = JmBufferNumber(fn)
