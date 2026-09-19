@@ -24,7 +24,7 @@ syn match fuzAge '\v ([0-9]+[dhms])+' contained
 
 syn match fuzDir '\v[^\/]+(\/)@=' contained
 "syn match fuzExt '\v\.[^.]+( [0-9])@=' contained
-syn match fuzExt '\v([a-zA-Z0-9]\.)@<=[a-zA-Z]+( [0-9])@=' contained
+syn match fuzExt '\v([a-zA-Z0-9_]\.)@<=[a-zA-Z]+( [0-9])@=' contained
 syn match fuzSlash '/' contained
 syn match fuzDot '\v\.' contained
 
