@@ -9,7 +9,7 @@ function! s:InsertFrag()
     let l:lines = readfile(l:file)
     if len(l:lines) >= 1
       let l:content = trim(l:lines[0])
-      execute "normal! a" . l:content
+      execute "normal! a " . l:content
     else
       echohl ErrorMsg
       echo "File empty: " . l:file
