@@ -154,5 +154,8 @@ endfunction " JmFuzzer
 
 command! -nargs=1 Vf :call JmFuzzer(<q-args>)
 "command! -nargs=* FF :silent call JmFuzzer()
+
 nnoremap @ :silent call JmFuzzer()<CR>
+"nnoremap ` :silent call JmFuzzer()<CR>
+"nnoremap @ wb"zyw:exe ":call JmFuzzer('" . @z . "')"<CR>
 
