@@ -103,7 +103,7 @@ def d_lines(path):
 
 def d_diff(path):
   g = git.get(path)
-  return f"+{g[0]}-{g[1]}" if g else ''
+  return f" +{g[0]}-{g[1]}" if g else ''
 
 def d_mtime(path):
   return os.path.getmtime(path)
@@ -166,7 +166,7 @@ for path in paths:
         offset, path)))
   else:
     print(endstrip(
-      ' %s%s %s %iL %s%s' % (
+      ' %s%s %s %iL%s %s' % (
         offset, path, d['size'], d['lines'], d['diff'], d['age'])))
 print()
 
