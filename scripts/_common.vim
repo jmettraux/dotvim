@@ -33,6 +33,9 @@ function! JmDetermineTreePathAndLine()
 
     let l = getline(n)
 
+      " trims from the right, successively:
+      "   new|untracked, diff, age, linecount, size
+      "
     let m = matchlist(l, '\v^(.+) (new|untracked)$')
     if empty(m) == 0 | let l = m[1] | endif
       "
