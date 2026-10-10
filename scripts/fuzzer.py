@@ -165,9 +165,8 @@ for path in paths:
       ' %s%s' % (
         offset, path)))
   else:
-    print(endstrip(
-      ' %s%s %s %iL%s %s' % (
-        offset, path, d['size'], d['lines'], d['diff'], d['age'])))
+    print(' %s%s %s %iL %s%s' % (
+      offset, path, d['size'], d['lines'], d['age'], d['diff']))
 print()
 
   # keep that in the fridge, but most of the time, the fuzzer is
