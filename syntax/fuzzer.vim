@@ -15,7 +15,7 @@ hi! fuzExt cterm=NONE ctermfg=grey ctermbg=16
 hi! fuzAge cterm=NONE ctermfg=238 ctermbg=16
 "hi! fuzGit cterm=NONE ctermfg=white ctermbg=16
 hi! fuzGitAdd cterm=NONE ctermfg=white ctermbg=16
-hi! fuzGitRem cterm=NONE ctermfg=red ctermbg=16
+hi! fuzGitRem cterm=NONE ctermfg=white ctermbg=16
 
 syn match fuzFileName '\v .+$' contains=fuzDir,fuzSlash,fuzDot,fuzExt,fuzSize,fuzLines,fuzAge,fuzGit
 
