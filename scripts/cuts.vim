@@ -25,3 +25,19 @@ endfunction " EnterCutsFile
 
 au BufRead,BufNewFile *.cuts call <SID>EnterCutsFile()
 
+
+function! s:GotoCutsBuffer()
+
+  let l:buf = bufnr('*.cuts')
+
+  if l:buf != -1
+    execute "buffer " . l:buf
+  else
+    echohl ErrorMsg
+    echo "No buffer found with .cuts extension"
+    echohl None
+  endif
+endfunction " GotoCutsBuffer
+
+nnoremap <silent> <leader>z :call <SID>GotoCutsBuffer()<CR>
+
