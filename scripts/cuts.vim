@@ -41,3 +41,7 @@ endfunction " GotoCutsBuffer
 
 nnoremap <silent> <leader>z :call <SID>GotoCutsBuffer()<CR>
 
+
+au BufRead .vimshorts setlocal syntax=cuts
+au BufRead .vimshorts setlocal cursorline
+
