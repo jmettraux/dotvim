@@ -28,20 +28,29 @@ au BufRead,BufNewFile *.cuts call <SID>EnterCutsFile()
 
 function! s:GotoCutsBuffer()
 
-  let l:buf = bufnr('*.cuts')
-
-  if l:buf != -1
-    execute "buffer " . l:buf
-  else
-    echohl ErrorMsg
-    echo "No buffer found with .cuts extension"
-    echohl None
+  let l:buffer = bufnr('*.cuts')
+  if l:buffer != -1
+    execute "buffer " . l:buffer
+    return
   endif
+
+  let l:path = glob('*.cuts')
+  if l:path != ''
+    execute "edit " . l:path
+    return
+  endif
+
+  echohl ErrorMsg
+  echo "No buffer or file found with .cuts extension"
+  echohl None
+
 endfunction " GotoCutsBuffer
 
 nnoremap <silent> <leader>z :call <SID>GotoCutsBuffer()<CR>
 
 
+  " ;-)
+  "
 au BufRead .vimshorts setlocal syntax=cuts
 au BufRead .vimshorts setlocal cursorline
 
