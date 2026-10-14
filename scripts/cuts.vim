@@ -12,6 +12,9 @@ function! s:EnterCutsFile()
   execute "1delete_"
   silent update
 
+  "if line('.') == 1 | call cursor(4, 1) | endif
+
+  setlocal cursorline
   setlocal syntax=cuts
 
   nnoremap <buffer> o :call JmOpenTreeFile()<CR>
