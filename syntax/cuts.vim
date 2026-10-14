@@ -22,15 +22,15 @@ hi! ctsGitAdd cterm=NONE ctermfg=white ctermbg=16
 hi! ctsGitRem cterm=NONE ctermfg=white ctermbg=16
 
 syn match ctsFileName '\v *.+$' contains=ctsDir,ctsSlash,ctsDot,ctsExt,ctsSize,ctsLines,ctsAge,ctsGit
-"
-"syn match fuzGitAdd '\v\+[0-9]+' contained
-"syn match fuzGitRem '\v-[0-9]+' contained
-"
-"syn match fuzSize '\v [0-9]+[PTMKB]' contained
-"syn match fuzLines '\v [0-9]+L' contained
-"syn match fuzGit '\v \+[0-9]+\-[0-9]+' contained contains=fuzGitAdd,fuzGitRem
-"syn match fuzAge '\v ([0-9]+[dhms])+' contained
-"
+
+syn match ctsGitAdd '\v\+[0-9]+' contained
+syn match ctsGitRem '\v-[0-9]+' contained
+
+syn match ctsSize '\v [0-9]+[PTMKB]' contained
+syn match ctsLines '\v [0-9]+L' contained
+syn match ctsGit '\v \+[0-9]+\-[0-9]+' contained contains=ctsGitAdd,ctsGitRem
+syn match ctsAge '\v ([0-9]+[dhms])+' contained
+
 syn match ctsDir '\v[^\/]+(\/)@=' contained
 syn match ctsExt '\v([a-zA-Z0-9_]\.)@<=[a-zA-Z]+( [0-9])@=' contained
 syn match ctsSlash '/' contained

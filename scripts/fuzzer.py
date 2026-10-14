@@ -74,16 +74,7 @@ def exec_to_lines(cmd):
     lambda l: l.decode().rstrip(),
     subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).stdout)
 
-git = {}
-  #
-for line in exec_to_lines("git diff --numstat"):
-  ll = line.split("\t")
-  git[ll.pop()] = ll
-for line in exec_to_lines("git diff --cached --numstat"):
-  ll = line.split("\t")
-  git[ll.pop()] = ll
-#gits = exec_to_lines("git ls-files")
-  # FIXME git root might not be here...
+git = _common.compute_git_diff()
 
 def d_size(path):
   size = os.path.getsize(path)
