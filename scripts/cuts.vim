@@ -17,7 +17,7 @@ function! s:EnterCutsFile()
   setlocal cursorline
   setlocal syntax=cuts
 
-  nnoremap <buffer> o :call JmOpenTreeFile()<CR>
+  "nnoremap <buffer> o :call JmOpenTreeFile()<CR>
   nnoremap <buffer> <space> :call JmOpenTreeFile()<CR>
   nnoremap <buffer> <enter> :call JmOpenTreeFile()<CR>
 
