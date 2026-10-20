@@ -67,6 +67,8 @@ endfunction " LocalChatPushBlock
 
 
 au BufReadPost,BufNewFile .local.md
+  \ setlocal colorcolumn=0
+au BufReadPost,BufNewFile .local.md
   \ nnoremap <buffer> ?? :call <SID>LocalChatPushLine()
 au BufReadPost,BufNewFile .local.md
   \ vnoremap <buffer> ?? :call <SID>LocalChatPushBlock()

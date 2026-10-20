@@ -4,7 +4,9 @@
 
 
 "let &colorcolumn = join(range(81, 999), ',')
-let &colorcolumn = '81'
+"let &colorcolumn = '81'
+set colorcolumn=81
+
 highlight ColorColumn ctermbg=235 guibg=#2c2d27
   "
 "nnoremap <leader>] :hi ColorColumn ctermbg=16<CR>:echo<CR>
@@ -18,7 +20,7 @@ command! NoCol81 :hi clear ColorColumn
   " for now show col81 all the time...
 
 
-
-au BufNewFile,BufRead .chat.md  hi ColorColumn ctermbg=16
+"au BufNewFile,BufRead .chat.md  hi ColorColumn ctermbg=16
   " don't highlight col > 80 for .chat.md
+  " 2026 now done in each ai script
 

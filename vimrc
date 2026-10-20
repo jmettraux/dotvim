@@ -31,7 +31,9 @@ set showmatch
 set vb
 "set nu
 set showcmd
+
 "set colorcolumn=80 " vim 7.3
+  " see scripts/col81.vim
 
 set redrawtime=10000 " for vim 8.1.1438 on OpenBSD
 

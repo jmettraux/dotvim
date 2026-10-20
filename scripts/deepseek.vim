@@ -67,6 +67,8 @@ endfunction " DeepseekChatPushBlock
 
 
 au BufReadPost,BufNewFile .deep.md
+  \ setlocal colorcolumn=0
+au BufReadPost,BufNewFile .deep.md
   \ nnoremap <buffer> ?? :call <SID>DeepseekChatPushLine()
 au BufReadPost,BufNewFile .deep.md
   \ vnoremap <buffer> ?? :call <SID>DeepseekChatPushBlock()

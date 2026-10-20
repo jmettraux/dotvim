@@ -67,6 +67,8 @@ endfunction " ClaudeChatPushBlock
 
 
 au BufReadPost,BufNewFile .claude.md
+  \ setlocal colorcolumn=0
+au BufReadPost,BufNewFile .claude.md
   \ nnoremap <buffer> ?? :call <SID>ClaudeChatPushLine()
 au BufReadPost,BufNewFile .claude.md
   \ vnoremap <buffer> ?? :call <SID>ClaudeChatPushBlock()

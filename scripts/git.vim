@@ -231,6 +231,8 @@ function! s:OpenGitBlame()
   "setlocal nobuflisted
   setlocal cursorline
 
+  setlocal colorcolumn=112
+
   exe 'silent r! ' . g:_python . ' ~/.vim/scripts/gitblame.py ' . path
 
   setlocal syntax=gitblame
@@ -296,7 +298,7 @@ function! s:OpenGitDiff(path)
   exe 'setlocal syntax=' . JmDetermineSyntax(a:path)
   "exe 'setlocal filetype=' . JmDetermineSyntax(a:path)
     "
-  hi! ColorColumn ctermbg=16
+  "hi! ColorColumn ctermbg=16
   hi! gsdHeader cterm=NONE ctermfg=238 ctermbg=black
   hi! gsdLineNumber cterm=NONE ctermfg=238 ctermbg=black
   hi! gsdPlus cterm=NONE ctermfg=green ctermbg=black

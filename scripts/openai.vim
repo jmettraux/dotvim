@@ -69,6 +69,8 @@ command! -nargs=0 OpenAiList :call <SID>OpenAiList()
 
 
 au BufReadPost,BufNewFile .chat.md
+  \ setlocal colorcolumn=0
+au BufReadPost,BufNewFile .chat.md
   \ nnoremap <buffer> ?? :call <SID>OpenAiChatPushLine()
 au BufReadPost,BufNewFile .chat.md
   \ vnoremap <buffer> ?? :call <SID>OpenAiChatPushBlock()
