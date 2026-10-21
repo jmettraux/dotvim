@@ -22,9 +22,12 @@ hi! ctsAge cterm=NONE ctermfg=238 ctermbg=16
 "hi! ctsGit cterm=NONE ctermfg=white ctermbg=16
 hi! ctsGitAdd cterm=NONE ctermfg=white ctermbg=16
 hi! ctsGitRem cterm=NONE ctermfg=white ctermbg=16
+hi! ctsRuler cterm=NONE ctermfg=darkred ctermbg=16
 hi! ctsOther cterm=NONE ctermfg=darkgrey ctermbg=16
 
 syn match ctsOther /./
+
+syn match ctsRuler '\v^---'
 
 syn match ctsFileName '\v *.+\/.+$' contains=ctsDir,ctsSlash,ctsDot,ctsExt,ctsSize,ctsLines,ctsAge,ctsGit
   " at least a slash...
