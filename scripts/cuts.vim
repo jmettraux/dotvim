@@ -15,6 +15,12 @@ function! s:EnterCutsFile()
   "if line('.') == 1 | call cursor(4, 1) | endif
 
   setlocal cursorline
+  augroup CursorLine
+      autocmd!
+      autocmd InsertEnter * setlocal nocursorline
+      autocmd InsertLeave * setlocal cursorline
+  augroup END
+
   setlocal syntax=cuts
 
   "nnoremap <buffer> o :call JmOpenTreeFile()<CR>
