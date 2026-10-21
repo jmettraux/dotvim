@@ -24,3 +24,7 @@ command! NoCol81 :hi clear ColorColumn
   " don't highlight col > 80 for .chat.md
   " 2026 now done in each ai script
 
+
+au BufReadPost COMMIT_EDITMSG
+  \ setlocal colorcolumn=51
+
