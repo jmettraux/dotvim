@@ -17,8 +17,8 @@ function! s:EnterCutsFile()
   setlocal cursorline
   augroup CursorLine
       autocmd!
-      autocmd InsertEnter * setlocal nocursorline
-      autocmd InsertLeave * setlocal cursorline
+      autocmd InsertEnter <buffer> setlocal nocursorline
+      autocmd InsertLeave <buffer> setlocal cursorline
   augroup END
 
   setlocal syntax=cuts
