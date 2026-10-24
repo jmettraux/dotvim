@@ -9,7 +9,7 @@ hi! stoDirname cterm=NONE ctermfg=darkgreen ctermbg=16
 hi def link stoTree Comment
 hi! stoSize cterm=NONE ctermfg=238 ctermbg=16
 hi! stoLines cterm=NONE ctermfg=darkgrey ctermbg=16
-hi! stoMtime cterm=NONE ctermfg=238 ctermbg=16
+hi! stoMtime cterm=NONE ctermfg=236 ctermbg=16
 hi def link stoSummary Comment
 hi! stoGit cterm=NONE ctermfg=white ctermbg=16
 hi! stoExt cterm=NONE ctermfg=grey ctermbg=16

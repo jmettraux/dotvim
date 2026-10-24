@@ -83,20 +83,6 @@ for line in subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).stdout:
 
 fs = []
 
-def to_kmgt(s): # https://stackoverflow.com/questions/12523586
-  step_unit = 1024.0
-  for x in [ '', 'K', 'M', 'G', 'T', 'P' ]:
-    #if s < step_unit: return "%3.1f%s" % (s, x)
-    if s < step_unit: return "%i%s" % (s, x)
-    s /= step_unit
-
-def compute_size(path):
-  m = re.match(r'^([^*]+)', path)
-  if m == None: return '-1'
-  pa = m.group(1)
-  if os.path.exists(pa) == False: return '-1'
-  return to_kmgt(os.path.getsize(pa))
-
 def compute_path():
   i = fs[-1]['i'] + 1
   d = []
@@ -134,7 +120,7 @@ def walk(path, i, prefix):
     h = { 'i': i, 'n': fn }
     h['p'] = os.path.join(path, fn)
     h['d'] = os.path.isdir(h['p'])
-    h['s'] = compute_size(h['p'])
+    h['s'] = _common.compute_size(h['p'])
     h['L'] = wcl.get(os.path.abspath(h['p']))
     h['t'] = _common.compute_mtime_age(h['p'])
     pre = prefix
