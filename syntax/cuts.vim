@@ -37,7 +37,7 @@ syn match ctsGitAdd '\v\+[0-9]+' contained
 syn match ctsGitRem '\v-[0-9]+' contained
 
 syn match ctsSize '\v [0-9]+[PTMKB]' contained
-syn match ctsLines '\v [0-9]+L' contained
+syn match ctsLines '\v -?[0-9]+L' contained
 syn match ctsGitZero '\v \+0-0' contained
 syn match ctsGit '\v \+[0-9]+-[0-9]+' contained contains=ctsGitAdd,ctsGitRem,ctsGitZero
 syn match ctsAge '\v ([0-9]+[dhms])+' contained

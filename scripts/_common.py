@@ -36,16 +36,21 @@ def compute_size(path):
     size /= step_unit
 
 
+#def compute_line_count(path):
+#  l = 0
+#  try:
+#    with open(path, 'r') as file:
+#      for line in file: l += 1
+#  except:
+#    l = -1
+#  return f"{l}L"
+
 def compute_line_count(path):
 
-  l = 0
   try:
-    with open(path, 'r') as file:
-      for line in file: l += 1
+    return exec_to_line(f"wc -l {path}").split(' ')[0].strip() + 'L'
   except:
-    l = -1
-
-  return f"{l}L"
+    return '-1L'
 
 
 def exec_to_lines(cmd):
@@ -53,6 +58,12 @@ def exec_to_lines(cmd):
   return map(
     lambda l: l.decode().rstrip(),
     subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).stdout)
+
+def exec_to_line(cmd):
+
+  return subprocess.Popen(
+    cmd, shell=True, stdout=subprocess.PIPE
+      ).stdout.read().decode().strip()
 
 
 def compute_git_diff():
