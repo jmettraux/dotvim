@@ -19,9 +19,10 @@ hi! ctsLines cterm=NONE ctermfg=darkgrey ctermbg=16
 hi! ctsDir cterm=NONE ctermfg=darkgreen ctermbg=16
 hi! ctsExt cterm=NONE ctermfg=grey ctermbg=16
 hi! ctsAge cterm=NONE ctermfg=238 ctermbg=16
-"hi! ctsGit cterm=NONE ctermfg=white ctermbg=16
-hi! ctsGitAdd cterm=NONE ctermfg=white ctermbg=16
-hi! ctsGitRem cterm=NONE ctermfg=white ctermbg=16
+hi! ctsGit cterm=NONE ctermfg=white ctermbg=16
+hi! ctsGitZero cterm=NONE ctermfg=235 ctermbg=16
+"hi! ctsGitAdd cterm=NONE ctermfg=white ctermbg=16
+"hi! ctsGitRem cterm=NONE ctermfg=white ctermbg=16
 hi! ctsRuler cterm=NONE ctermfg=darkred ctermbg=16
 hi! ctsOther cterm=NONE ctermfg=darkgrey ctermbg=16
 
@@ -37,7 +38,8 @@ syn match ctsGitRem '\v-[0-9]+' contained
 
 syn match ctsSize '\v [0-9]+[PTMKB]' contained
 syn match ctsLines '\v [0-9]+L' contained
-syn match ctsGit '\v \+[0-9]+\-[0-9]+' contained contains=ctsGitAdd,ctsGitRem
+syn match ctsGitZero '\v \+0-0' contained
+syn match ctsGit '\v \+[0-9]+-[0-9]+' contained contains=ctsGitAdd,ctsGitRem,ctsGitZero
 syn match ctsAge '\v ([0-9]+[dhms])+' contained
 
 syn match ctsDir '\v[^\/]+(\/)@=' contained

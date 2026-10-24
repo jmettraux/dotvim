@@ -59,6 +59,8 @@ def compute_git_diff():
 
   git = {}
 
+  for line in exec_to_lines("git ls-files"):
+    git[line] = [ 0, 0 ]
   for line in exec_to_lines("git diff --numstat"):
     ll = line.split("\t")
     git[ll.pop()] = ll
