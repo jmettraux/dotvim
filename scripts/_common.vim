@@ -45,7 +45,7 @@ function! JmDetermineTreePathAndLine()
     let m = matchlist(l, '\v^(.+) ([0-9]+[dhms])+$')
     if empty(m) == 0 | let l = m[1] | endif
       "
-    let m = matchlist(l, '\v^(.+) ([0-9]+L)$')
+    let m = matchlist(l, '\v^(.+) (-?[0-9]+L)$')
     if empty(m) == 0 | let l = m[1] | endif
       "
     let m = matchlist(l, '\v^(.+) ([0-9]+(\.[0-9]+)?[BKMGTPE]?)$')
