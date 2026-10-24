@@ -15,7 +15,7 @@ hi! stoGit cterm=NONE ctermfg=white ctermbg=16
 hi! stoExt cterm=NONE ctermfg=grey ctermbg=16
 
 syn match stoTree '\v[├│└─  |`-]+ ' contained
-syn match stoSize '\v( )@<=[0-9.]+[KMGTPE]?( |$)' contained
+syn match stoSize '\v( )@<=[0-9.]+[KMGTPEB]?( |$)' contained
 syn match stoLines '\v[0-9.]+L ' contained
 syn match stoMtime '\v([0-9]+[dhms])+( |$)' contained
 syn match stoGit '\v(\+\d+-\d+|untracked|new)( |$)' contained
