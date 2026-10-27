@@ -161,4 +161,5 @@ for f in fs:
       print(to_s([ f['l'], f['s'], ls, f['t'], ad ]))
     else:
       print(to_s([ f['l'], f['s'], ls, f['t'] ]))
+      #print(to_s([ f['l'], f['s'], ls, f['t'], '+0-0' ]))
 
