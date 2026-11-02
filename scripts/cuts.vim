@@ -2,6 +2,19 @@
 "
 " cuts.vim
 
+function! s:GitAddFile()
+
+  let path = JmDetermineTreePath()
+  if empty(path) | return 0 | endif
+
+  call system('git add ' . path)
+
+  execute ":e"
+
+  echo 'Added ' . path . ' to Git'
+
+endfunction " GitAddFile
+
 function! s:EnterCutsFile()
 
   set filetype=Cuts
@@ -26,6 +39,7 @@ function! s:EnterCutsFile()
   "nnoremap <buffer> o :call JmOpenTreeFile()<CR>
   nnoremap <buffer> <space> :call JmOpenTreeFile()<CR>
   nnoremap <buffer> <enter> :call JmOpenTreeFile()<CR>
+  nnoremap <buffer> ga :call <SID>GitAddFile()<CR>
 
 endfunction " EnterCutsFile
 
