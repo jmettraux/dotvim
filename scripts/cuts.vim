@@ -15,6 +15,14 @@ function! s:GitAddFile()
 
 endfunction " GitAddFile
 
+
+function! s:GoToNextModified()
+
+  call search('\v \+([1-9]\d*-\d+|\d+-[1-9]\d*)$', 'we')
+
+endfunction " GoToNextModified
+
+
 function! s:EnterCutsFile()
 
   set filetype=Cuts
@@ -40,6 +48,7 @@ function! s:EnterCutsFile()
   nnoremap <buffer> <space> :call JmOpenTreeFile()<CR>
   nnoremap <buffer> <enter> :call JmOpenTreeFile()<CR>
   nnoremap <buffer> ga :call <SID>GitAddFile()<CR>
+  nnoremap <buffer> zz :call <SID>GoToNextModified()<CR>
 
 endfunction " EnterCutsFile
 
