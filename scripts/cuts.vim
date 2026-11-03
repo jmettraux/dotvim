@@ -22,6 +22,12 @@ function! s:GoToNextModified()
 
 endfunction " GoToNextModified
 
+function! s:GoToNextSection()
+
+  call search('\v^### .', 'we')
+
+endfunction " GoToNextSection
+
 
 function! s:EnterCutsFile()
 
@@ -49,6 +55,7 @@ function! s:EnterCutsFile()
   nnoremap <buffer> <enter> :call JmOpenTreeFile()<CR>
   nnoremap <buffer> ga :call <SID>GitAddFile()<CR>
   nnoremap <buffer> zz :call <SID>GoToNextModified()<CR>
+  nnoremap <buffer> qq :call <SID>GoToNextSection()<CR>
 
 endfunction " EnterCutsFile
 
