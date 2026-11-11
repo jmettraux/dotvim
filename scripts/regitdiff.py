@@ -61,6 +61,10 @@ stat = None
 commit = None
 
 
+sys.stdin = open(
+  sys.stdin.fileno(),
+  mode='r', encoding='utf-8', errors='replace')
+    #
 for line in sys.stdin:
 
   l = line.rstrip()
