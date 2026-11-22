@@ -33,3 +33,7 @@ xnoremap q* c****<ESC>hhp
 " remove quotes from a word
 nnoremap wq :silent! normal mpeld bhd `ph<CR>
 
+" turn double quotes to single quotes for the current line
+"command! Dequote substitute/"/'/g
+command! -range QuoteSingle <line1>,<line2>substitute/"/'/g | nohlsearch
+
