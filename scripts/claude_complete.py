@@ -26,20 +26,24 @@ fname_last = '.klaude.last.json'
 fname_messages = '.klaude.messages.json'
 
 aversion = '2023-06-01'
-model = 'claude-sonnet-4-6'
-#model = 'claude-opus-5-5'
+model = '' # see below
 
 whole_tokens = 16 * 1024
-max_tokens = 1024
+max_tokens = 8 * 1024
+#budget_tokens = round(max_tokens * 0.75)
 rem_tokens = whole_tokens - max_tokens
 
 lines = sys.stdin.read().strip()
 m = re.match(r'^(#+\s+)(.*)', lines)
 if m: lines = m.group(2)
 
-mod = model
-m = re.match(r'([-a-z0-9]+)\s*:\s*(.*)', lines)
-if m: mod, lines = m.group(1), m.group(2)
+m = re.match(r'(@haiku|@sonnet|@opus)(.*)', lines)
+if m: model, lines = m.group(1), m.group(2)
+match model:
+  case '@haiku': model = 'claude-haiku-5-5'
+  case '@opus': model = 'claude-opus-5-5'
+  case _: model = 'claude-sonnet-5-5'
+  #case _: model = 'claude-sonnet-4-6'
 
 prompt = { "role": role, "content": lines }
 
@@ -77,6 +81,7 @@ with open(key_path, 'r') as file: api_key = file.read().strip()
 data = {
   "model": model,
   "messages": messages,
+  #"budget_tokens": budget_tokens,
   "max_tokens": max_tokens }
 
 headers = {
@@ -93,6 +98,7 @@ suc = response.status_code == 200
 res = response.json() if suc else None
 #print(res)
 con = res['content'] if suc else None
+rmod = res['model'] if suc else None
 
 
 with open(fname_last, 'w') as f:
@@ -115,9 +121,10 @@ if suc:
 
 it = res['usage']['input_tokens'] if suc else -1
 ot = res['usage']['output_tokens'] if suc else -1
+sr = res['stop_reason'] if suc else -1
 #tt = res['usage']['total_tokens']
 
-print(f"  <!--  {model}  i:{i} l:{l} -- it:{it} ot:{ot}  -->")
+print(f"  <!--  {rmod}  i:{i} l:{l} -- it:{it} ot:{ot} sr:{sr}  -->")
 print()
 if suc:
   #t = next((d['text'] for d in con if 'text' in d), None)
