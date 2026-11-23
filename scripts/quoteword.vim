@@ -37,3 +37,6 @@ nnoremap wq :silent! normal mpeld bhd `ph<CR>
 "command! Dequote substitute/"/'/g
 command! -range QuoteSingle <line1>,<line2>substitute/"/'/g | nohlsearch
 
+" turn single quotes to double quotes for the current line
+command! -range QuoteDouble <line1>,<line2>substitute/'/"/g | nohlsearch
+
