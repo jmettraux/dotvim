@@ -27,6 +27,7 @@ fname_messages = '.klaude.messages.json'
 
 aversion = '2023-06-01'
 model = 'claude-sonnet-4-6'
+#model = 'claude-opus-5-5'
 
 whole_tokens = 16 * 1024
 max_tokens = 1024
@@ -119,7 +120,9 @@ ot = res['usage']['output_tokens'] if suc else -1
 print(f"  <!--  {model}  i:{i} l:{l} -- it:{it} ot:{ot}  -->")
 print()
 if suc:
-  print(re.sub(r'\s+$', '', con[0]['text'], flags=re.MULTILINE))
+  #t = next((d['text'] for d in con if 'text' in d), None)
+  t = next((d['text'] for d in con if d.get('text')), None)
+  print(re.sub(r'\s+$', '', t, flags=re.MULTILINE))
 else:
   print('```')
   print(f'HTTP status code: {response.status_code}')
