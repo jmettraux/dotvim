@@ -34,9 +34,15 @@ xnoremap q* c****<ESC>hhp
 nnoremap wq :silent! normal mpeld bhd `ph<CR>
 
 " turn double quotes to single quotes for the current line
+"
 "command! Dequote substitute/"/'/g
 command! -range QuoteSingle <line1>,<line2>substitute/"/'/g | nohlsearch
 
 " turn single quotes to double quotes for the current line
+"
 command! -range QuoteDouble <line1>,<line2>substitute/'/"/g | nohlsearch
+
+" make room around a Ruby HashRocket
+"
+command! -range RocketSpace <line1>,<line2>substitute/[ \t]*=>[ \t]*/ => /g | nohlsearch
 
